@@ -50,5 +50,5 @@ const toulouseSaintCyprienData = {
 };
 
 export default function ToulouseSaintCyprienPage() {
-  return <LocalPage data={toulouseSaintCyprienData} />;
+  return <LocalPage {...toulouseSaintCyprienData} />;
 }

@@ -50,5 +50,5 @@ const toulouseJeanJaursData = {
 };
 
 export default function ToulouseJeanJaursPage() {
-  return <LocalPage data={toulouseJeanJaursData} />;
+  return <LocalPage {...toulouseJeanJaursData} />;
 }

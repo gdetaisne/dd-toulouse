@@ -50,5 +50,5 @@ const toulouseCarmesData = {
 };
 
 export default function ToulouseCarmesPage() {
-  return <LocalPage data={toulouseCarmesData} />;
+  return <LocalPage {...toulouseCarmesData} />;
 }

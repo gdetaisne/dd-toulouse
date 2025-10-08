@@ -50,5 +50,5 @@ const toulouseCompansData = {
 };
 
 export default function ToulouseCompansPage() {
-  return <LocalPage data={toulouseCompansData} />;
+  return <LocalPage {...toulouseCompansData} />;
 }
