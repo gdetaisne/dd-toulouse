@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Host
+Host: https://www.bordeaux-demenageur.fr
+
+# Sitemaps
+Sitemap: https://www.bordeaux-demenageur.fr/sitemap.xml
