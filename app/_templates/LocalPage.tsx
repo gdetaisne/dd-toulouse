@@ -132,6 +132,7 @@ export default function LocalPage({
 
         {/* Stats locales */}
         <div className="container max-w-7xl mx-auto px-4 md:px-6 py-12">
+          {stats && (
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-white/5 backdrop-blur rounded-2xl p-6 border border-white/10 text-center">
               <div className="text-3xl font-bold text-[#6bcfcf] mb-2">{stats.dossiers}</div>
@@ -146,9 +147,11 @@ export default function LocalPage({
               <div className="text-white/80">devis sous 7 j</div>
             </div>
           </div>
+          )}
         </div>
 
         {/* Pourquoi Moverz */}
+        {pourquoiMoverz && (
         <div className="container max-w-4xl mx-auto px-4 md:px-6 py-12">
           <div className="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
             <h2 className="text-2xl font-bold text-white mb-6">
@@ -159,6 +162,7 @@ export default function LocalPage({
             </p>
           </div>
         </div>
+        )}
 
         {/* Parcours J0 → J7 */}
         <div className="container max-w-6xl mx-auto px-4 md:px-6 py-12">
@@ -225,6 +229,7 @@ export default function LocalPage({
         </div>
 
         {/* Accès & stationnement */}
+        {accesStationnement && (
         <div className="container max-w-4xl mx-auto px-4 md:px-6 py-12">
           <div className="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
             <h2 className="text-2xl font-bold text-white mb-6">
@@ -235,6 +240,7 @@ export default function LocalPage({
             </div>
           </div>
         </div>
+        )}
 
         {/* Destinations couvertes */}
         <div className="container max-w-4xl mx-auto px-4 md:px-6 py-12">
@@ -251,6 +257,7 @@ export default function LocalPage({
         </div>
 
         {/* Destinations fréquentes */}
+        {destinationsFrequentes && destinationsFrequentes.length > 0 && (
         <div className="container max-w-6xl mx-auto px-4 md:px-6 py-12">
           <h2 className="text-2xl font-bold text-white mb-8 text-center">
             Destinations fréquentes depuis {zoneDisplay}
@@ -268,8 +275,10 @@ export default function LocalPage({
             ))}
           </div>
         </div>
+        )}
 
         {/* Partenaires */}
+        {partenaires && partenaires.length > 0 && (
         <div className="container max-w-6xl mx-auto px-4 md:px-6 py-12">
           <h2 className="text-2xl font-bold text-white mb-8 text-center">
             Partenaires qui desservent {zoneDisplay}
@@ -301,8 +310,10 @@ export default function LocalPage({
             </Link>
           </div>
         </div>
+        )}
 
         {/* FAQ */}
+        {faq && faq.length > 0 && (
         <div className="container max-w-4xl mx-auto px-4 md:px-6 py-12">
           <h2 className="text-2xl font-bold text-white mb-8 text-center">
             FAQ {zoneDisplay}
@@ -316,6 +327,7 @@ export default function LocalPage({
             ))}
           </div>
         </div>
+        )}
 
         {/* CTA final */}
         <div className="container max-w-4xl mx-auto px-4 md:px-6 py-12">
