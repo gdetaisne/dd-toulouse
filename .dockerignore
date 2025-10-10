@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+.next/cache
+.vercel
+.git
+.gitignore
+.env
+.env.*
+.DS_Store
+**/*.mdx
+content/
+scripts/
+.tools/
+dev.log
+README.md
+

@@ -1,0 +1,18 @@
+{
+  "name": "Déménageurs Toulouse (IA)",
+  "short_name": "Moverz Toulouse",
+  "description": "30 minutes pour votre dossier → 5 devis personnalisés sous 7 jours",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04163a",
+  "theme_color": "#2b7a78",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
+
+
