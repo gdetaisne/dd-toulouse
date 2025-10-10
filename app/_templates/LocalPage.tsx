@@ -49,17 +49,6 @@ export function generateLocalPageMetadata(zone: string, zoneDisplay: string): Me
       type: 'website',
     },
   };
-} (toulouse).`,
-    alternates: {
-      canonical: `https://www.toulouse-demenageur.fr/${zone}`,
-    },
-    openGraph: {
-      title: `Déménageur ${zoneDisplay} — Comparez des devis fiables | Moverz`,
-      description: `Préparez votre dossier en 30 min. Au moins 3 devis personnalisés sous 7 jours pour ${zoneDisplay} (toulouse).`,
-      url: `https://www.toulouse-demenageur.fr/${zone}`,
-      type: 'website',
-    },
-  };
 }
 
 export function generateLocalPageJsonLd(zone: string, zoneDisplay: string) {
