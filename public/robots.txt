@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Host
+Host: https://www.devis-demenageur-toulouse.fr
+
+# Sitemaps
+Sitemap: https://www.devis-demenageur-toulouse.fr/sitemap.xml
