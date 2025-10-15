@@ -92,7 +92,7 @@ function cleanSlug(originalSlug: string, category: string): string {
 }
 
 export function getAllBlogPosts(): BlogPost[] {
-  const blogDirectory = path.join(__dirname, '../', 'content/blog');
+  const blogDirectory = path.join(process.cwd(), 'content/blog');
   const categories = fs.readdirSync(blogDirectory, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
