@@ -1,32 +1,18 @@
-# Dockerfile spécifique pour toulouse - FORCE REBUILD v4 - COPY SELECTIVE
+# Dockerfile spécifique pour toulouse - FORCE REBUILD v3
 FROM node:20-alpine AS base
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-RUN echo "FORCE REBUILD toulouse COPY-SELECTIVE $(date +%s)" > /tmp/force-rebuild-$(date +%s).txt
+RUN echo "FORCE REBUILD toulouse COMPLETE-1760519777-$(date +%s)" > /tmp/force-rebuild-$(date +%s).txt
 
 # Install dependencies
 FROM base AS deps
-COPY sites/toulouse/package.json ./package.json
+COPY package.json ./
 RUN npm install --production=false
 
 # Build application
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
-COPY sites/toulouse/app ./app
-COPY sites/toulouse/components ./components
-COPY sites/toulouse/lib ./lib
-COPY sites/toulouse/public ./public
-COPY sites/toulouse/content ./content
-COPY sites/toulouse/scripts ./scripts
-COPY sites/toulouse/package.json ./package.json
-COPY sites/toulouse/tsconfig.json ./tsconfig.json
-COPY sites/toulouse/next.config.mjs ./next.config.mjs
-COPY sites/toulouse/next-sitemap.config.js ./next-sitemap.config.js
-COPY sites/toulouse/postcss.config.cjs ./postcss.config.cjs
-COPY sites/toulouse/middleware.js ./middleware.js
-COPY sites/toulouse/tailwind.config.ts ./tailwind.config.ts
-COPY sites/toulouse/components.json ./components.json
-COPY sites/toulouse/next-env.d.ts ./next-env.d.ts
+COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
@@ -49,7 +35,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 # Copy public directory
 RUN mkdir -p ./public
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-
+# Copy content directory (CRITICAL: blog articles)
+COPY --from=builder --chown=nextjs:nodejs /app/content ./content
 USER nextjs
 EXPOSE 3000
 
