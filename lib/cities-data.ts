@@ -22,7 +22,7 @@ export interface CityData {
 }
 
 /**
- * Données par ville (source: layouts existants sites/*/app/layout.tsx)
+ * Données par ville (source: layouts existants par ville)
  * Dernière mise à jour: 30 octobre 2025
  */
 export const CITIES_DATA: Record<string, CityData> = {
