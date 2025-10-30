@@ -1,0 +1,36 @@
+# Cursor AI Workflow Rules
+# This file ensures consistent Git workflow across all machines using Cursor
+
+## MANDATORY: Branch Selection Protocol
+- At the start of EVERY Cursor session, AI MUST ask: "Sur quelle branche Git dois-je travailler pour cette session ?"
+- Wait for explicit branch name from user
+- Switch to specified branch: `git checkout [BRANCH_NAME]`
+- Confirm: "✅ Travail sur branche '[BRANCH_NAME]' pour cette session"
+
+## Git Workflow Rules
+- NEVER commit directly to 'main' without explicit confirmation
+- If user says "main", ask: "⚠️ Attention: commit direct sur 'main' (production). Confirmes-tu ?"
+- Always push to origin/[CURRENT_BRANCH], never to other branches
+- For production deployment: ask user to merge to 'main'
+
+## Branch Structure
+- 'main' = Production (CapRover deployment)
+- 'Lucie' = Claude AI development branch  
+- 'Guillaume' = Guillaume development branch
+- Feature branches welcome: 'feature/[name]'
+
+## Safety Checks
+- Before first commit: verify branch with `git branch`
+- If on wrong branch: ask user before proceeding
+- Frequent commits (every 30-60min of work)
+- **MANDATORY**: `git pull origin main` before starting work
+- **MANDATORY**: `git pull origin main` before every commit
+- **MANDATORY**: `git pull origin main` every 30-60min during work
+- **MANDATORY**: `git pull origin main` before switching branches
+
+## Multi-User Support
+This applies to ALL Cursor instances:
+- Claude AI → typically works on 'Lucie'
+- Guillaume → typically works on 'Guillaume'  
+- Boss/Lead → may work on 'main' or feature branches
+- Always ASK, never assume!
