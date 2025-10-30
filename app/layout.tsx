@@ -10,62 +10,20 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import GAListener from "./ga-listener";
 import { env } from "@/lib/env";
 import { getCityDataFromUrl } from "@/lib/cityData";
+import { buildSiteMetadata } from "@/lib/seo-builders";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 // Résoudre les données de ville dynamiquement
 const city = getCityDataFromUrl(env.SITE_URL);
 
-export const metadata: Metadata = {
-  title: {
-    default: `Déménageur Toulouse dès 285€ | Devis Gratuit 2min | -40%`,
-    template: `%s | Déménagement Toulouse`,
-  },
-  description:
-    `Déménagement Toulouse : 5 devis en 2min. Prix dès 285€. Économisez 40%. ✓ 100% gratuit ✓ Déménageurs Haute-Garonne vérifiés ✓ Sans engagement.`,
-  metadataBase: new URL(city.siteUrl),
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'fr_FR',
-    url: city.siteUrl,
-    siteName: `Comparateur Déménagement ${city.nameCapitalized}`,
-    title: `Comparateur Déménagement ${city.nameCapitalized} : 5 Devis Gratuits`,
-    description: `Estimation par photos en 30 min → 5 devis personnalisés de déménageurs. 100% gratuit. Économisez jusqu'à 40% sur votre déménagement à ${city.nameCapitalized}.`,
-    images: [
-      {
-        url: `${city.siteUrl}/og-image.jpg`,
-        width: 1200,
-        height: 630,
-        alt: `Comparateur Déménagement ${city.nameCapitalized} - 5 Devis Gratuits`,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `Comparateur Déménagement ${city.nameCapitalized} : 5 Devis Gratuits`,
-    description: `Estimation par photos en 30 min → 5 devis personnalisés de déménageurs. 100% gratuit. Économisez jusqu'à 40% sur votre déménagement à ${city.nameCapitalized}.`,
-    images: [`${city.siteUrl}/og-image.jpg`],
-  },
-  alternates: {
-    canonical: city.siteUrl,
-  },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/icons/apple-touch-icon.png',
-  },
-};
+// Metadata centralisée avec wording spécifique Toulouse (source unique)
+export const metadata: Metadata = buildSiteMetadata({
+  customTitle: `Déménageur Toulouse dès 285€ | Devis Gratuit 2min | -40%`,
+  customTemplate: `%s | Déménagement Toulouse`,
+  customDescription: `Déménagement Toulouse : 5 devis en 2min. Prix dès 285€. Économisez 40%. ✓ 100% gratuit ✓ Déménageurs Haute-Garonne vérifiés ✓ Sans engagement.`,
+  isMoneyPage: true,
+});
 
 export const viewport: Viewport = {
   width: 'device-width',
