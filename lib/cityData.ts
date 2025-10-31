@@ -115,7 +115,7 @@ export const cityData: Record<string, CityData> = {
     name: 'Bordeaux',
     nameCapitalized: 'Bordeaux',
     region: 'Nouvelle-Aquitaine',
-    siteUrl: 'https://devis-demenageur-bordeaux.fr',
+    siteUrl: 'https://www.bordeaux-demenageur.fr',
     coordinates: {
       latitude: 44.8378,
       longitude: -0.5792
