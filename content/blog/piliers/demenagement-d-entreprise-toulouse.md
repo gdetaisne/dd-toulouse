@@ -2,7 +2,7 @@
 title: "Déménagement d'Entreprise à Toulouse : Expertise et Professionnalisme"
 description: "Déménagement d'entreprise à Toulouse par des professionnels. Gestion de projet, équipe formée, matériel adapté. Devis gratuit et personnalisé."
 date: "2024-01-15"
-category: "entreprise"
+category: "deménagement-entreprise"
 tags: ["déménagement entreprise", "toulouse", "professionnel", "bureau", "relocation"]
 author: "Moverz Toulouse"
 featured: true

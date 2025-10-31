@@ -23,6 +23,8 @@ Notre **self stockage toulouse** vous offre :
 - **Sécurité renforcée** : Vidéosurveillance, alarmes, contrôle d'accès
 - **Flexibilité** : Contrats sans engagement, résiliation possible à tout moment
 
+Si vous combinez stockage et déménagement, consultez notre [guide déménagement pas cher Toulouse](/blog/piliers/demenagement-pas-cher-toulouse) pour optimiser l'ensemble de vos coûts.
+
 ### Conteneurs de stockage extérieurs
 
 Pour les besoins spécifiques, nous proposons des **conteneurs de stockage toulouse** :
@@ -39,6 +41,8 @@ Pour les besoins spécifiques, nous proposons des **conteneurs de stockage toulo
 - **Capacité** : 1-2 cartons de déménagement
 - **Prix** : À partir de 25€/mois
 - **Utilisation** : Archives, vêtements, petits objets
+
+Pour une estimation complète incluant garde-meuble et déménagement, consultez notre [guide prix déménagement Toulouse](/blog/piliers/prix-demenagement-toulouse).
 
 **Box 5m²** : Parfait pour un studio ou un petit appartement
 - **Capacité** : 10-15 cartons + quelques meubles

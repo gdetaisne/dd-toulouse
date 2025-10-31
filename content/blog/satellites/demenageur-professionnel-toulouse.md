@@ -13,7 +13,7 @@ excerpt: "Déménageur professionnel à Toulouse : expertise et fiabilité pour 
 
 Le **déménageur professionnel toulouse** vous offre une expertise et une fiabilité maximales pour tous vos déménagements. Que vous déménagiez un studio, un appartement ou une maison, notre service professionnel vous accompagne avec sérénité. Découvrez nos solutions de **déménageur professionnel toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir toute notre expertise professionnelle à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
+Pour découvrir toute notre expertise professionnelle à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur-toulouse).
 
 ## Pourquoi choisir un déménageur professionnel ?
 

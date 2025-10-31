@@ -13,7 +13,7 @@ excerpt: "Déménagement par escalier à Toulouse : solutions pour les passages 
 
 Le **déménagement escalier toulouse** vous offre des solutions spécialisées pour les passages difficiles et les escaliers étroits. Que vous ayez un appartement au 4ème étage sans ascenseur ou des escaliers particulièrement difficiles, notre équipement spécialisé et notre équipe formée garantissent la sécurité de vos biens. Découvrez nos solutions de **déménagement escalier toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
+Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur-toulouse).
 
 ## Pourquoi faire appel à un spécialiste des escaliers ?
 

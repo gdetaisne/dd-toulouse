@@ -13,7 +13,7 @@ excerpt: "Transport de piano droit à Toulouse : solutions professionnelles et s
 
 Le **transport piano droit toulouse** nécessite une expertise particulière et un équipement spécialisé pour garantir la sécurité de votre instrument. Que vous déménagiez dans Toulouse ou vers une autre ville, notre service professionnel vous accompagne dans cette opération délicate. Découvrez nos solutions de **transport piano droit toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour comprendre tous les aspects du déménagement de piano à Toulouse, consultez notre [guide complet déménagement piano Toulouse](/blog/piano/demenagement-piano-toulouse).
+Pour comprendre tous les aspects du déménagement de piano à Toulouse, consultez notre [guide complet déménagement piano Toulouse](/blog/demenagement-piano-toulouse).
 
 ## Pourquoi faire appel à un spécialiste pour le transport de piano droit ?
 

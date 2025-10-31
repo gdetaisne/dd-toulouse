@@ -2,7 +2,7 @@
 title: "Petit Déménagement à Toulouse : Solutions Économiques et Rapides"
 description: "Besoin d'un petit déménagement à Toulouse ? Obtenez un devis gratuit pour votre transport de meubles ou volume réduit. Services économiques et sur mesure."
 date: "2024-01-15"
-category: "etudiant"
+category: "deménagement-etudiant"
 tags: ["petit déménagement", "toulouse", "étudiant", "économique", "rapide"]
 author: "Moverz Toulouse"
 featured: true
