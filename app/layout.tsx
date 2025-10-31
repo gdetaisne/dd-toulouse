@@ -17,11 +17,8 @@ const inter = Inter({ subsets: ["latin"], display: "swap" });
 // Résoudre les données de ville dynamiquement
 const city = getCityDataFromUrl(env.SITE_URL);
 
-// Metadata centralisée avec wording spécifique Toulouse (source unique)
+// Metadata centralisée - wording intent transactionnel (isMoneyPage: true)
 export const metadata: Metadata = buildSiteMetadata({
-  customTitle: `Déménageur Toulouse dès 285€ | Devis Gratuit 2min | -40%`,
-  customTemplate: `%s | Déménagement Toulouse`,
-  customDescription: `Déménagement Toulouse : 5 devis en 2min. Prix dès 285€. Économisez 40%. ✓ 100% gratuit ✓ Déménageurs Haute-Garonne vérifiés ✓ Sans engagement.`,
   isMoneyPage: true,
 });
 
