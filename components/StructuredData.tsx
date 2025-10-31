@@ -23,7 +23,8 @@ export default function StructuredData() {
           "height": 630
         },
         "description": "Comparateur de devis déménagement avec estimation IA par photos. Service gratuit, 5 devis personnalisés sous 7 jours.",
-        "sameAs": []
+        "sameAs": [],
+        "searchIntent": "transactional"
       },
       {
         "@type": "LocalBusiness",
