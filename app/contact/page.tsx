@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { getCityDataFromUrl } from '@/lib/cityData';
+import { env } from '@/lib/env';
 import { getCanonicalUrl } from '@/lib/canonical-helper';
 
 export const metadata: Metadata = {
@@ -16,6 +18,8 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const city = getCityDataFromUrl(env.SITE_URL);
+  const emailDomain = city.siteUrl.replace(/^https?:\/\//, '').replace(/^www\./, '');
   return (
     <div className="min-h-screen bg-[#04163a]">
       {/* Header avec image de fond */}
@@ -24,7 +28,7 @@ export default function ContactPage() {
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=2000&auto=format&fit=crop"
-            alt="Contactez notre équipe de déménagement à lille"
+            alt={`Contactez notre équipe de déménagement à ${city.nameCapitalized}`}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/95 via-[#2b7a78]/85 to-[#04163a]/90"></div>
@@ -80,8 +84,8 @@ export default function ContactPage() {
             <div className="space-y-4 text-white/80">
               <div>
                 <p className="font-medium text-white mb-2">Email</p>
-                <a href="mailto:contact@devis-demenageur-lille.fr" className="text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
-                  contact@devis-demenageur-lille.fr
+                <a href={`mailto:contact@${emailDomain}`} className="text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                  contact@{emailDomain}
                 </a>
               </div>
               <div>
