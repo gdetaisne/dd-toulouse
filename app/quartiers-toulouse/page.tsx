@@ -1,10 +1,14 @@
 import { QUARTIERS, COMMUNES, urlForQuartier, urlForCommune } from "@/components/NeighborhoodsData";
 import NeighborhoodsIndex from "@/components/NeighborhoodsIndex";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
 
 export const metadata = {
-  title: "Quartiers & communes — Déménagement à Toulouse | IA & transparence",
+  title: "Quartiers & communes — Déménagement à Lille | IA & transparence",
   description:
-    "Trouvez votre page quartier/commune pour estimer votre déménagement à Toulouse : Capitole, Saint-Cyprien, Carmes, Jean Jaurès, Compans… Mérignac, Pessac, Talence, Bègles, Villenave-d’Ornon.",
+    "Trouvez votre page quartier/commune pour estimer votre déménagement à Lille : Vieux Lille, Centre, Wazemmes, Moulins, Lomme… Mérignac, Pessac, Talence, Bègles, Villenave-d'Ornon.",
+  alternates: {
+    canonical: getCanonicalUrl('quartiers-lille'),
+  },
 };
 
 function JsonLd() {
@@ -13,7 +17,7 @@ function JsonLd() {
       "@type": "ListItem",
       position: i + 1,
       url: urlForQuartier(q.slug),
-      name: `Devis de déménagement – ${q.title} (Toulouse)`,
+      name: `Devis de déménagement – ${q.title} (Lille)`,
     })),
     ...COMMUNES.map((c, i) => ({
       "@type": "ListItem",

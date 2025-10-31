@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { getCanonicalUrl } from '@/lib/canonical-helper';
 
 interface BlogPostPageProps {
   params: {
@@ -34,13 +35,19 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  const canonicalUrl = getCanonicalUrl(`blog/${params.category}/${params.slug}`);
+
   return {
     title: post.meta_title || post.title,
     description: post.meta_description,
     keywords: post.keywords.join(', '),
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.meta_description,
+      url: canonicalUrl,
       type: 'article',
       publishedTime: post.publish_date,
     },
@@ -172,7 +179,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             Besoin d'aide pour votre déménagement ?
           </h3>
           <p className="text-white/80 mb-6">
-            Notre équipe de déménageurs professionnels à toulouse est à votre disposition 
+            Notre équipe de déménageurs professionnels à lille est à votre disposition 
             pour vous accompagner dans votre projet.
           </p>
           <Link 

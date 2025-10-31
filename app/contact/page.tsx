@@ -1,8 +1,18 @@
 import { Metadata } from 'next';
+import { getCanonicalUrl } from '@/lib/canonical-helper';
 
 export const metadata: Metadata = {
-  title: 'Contact Déménagement toulouse | Devis Gratuits | Moverz',
-  description: 'Contactez nos experts déménageurs à toulouse. Estimation gratuite en 30 min, 5 devis précis sous 7 jours.',
+  title: 'Contact Déménagement lille | Devis Gratuits | Moverz',
+  description: 'Contactez nos experts déménageurs à lille. Estimation gratuite en 30 min, 5 devis précis sous 7 jours.',
+  alternates: {
+    canonical: getCanonicalUrl('contact'),
+  },
+  openGraph: {
+    title: 'Contact Déménagement Lille',
+    description: 'Contactez nos experts déménageurs à Lille',
+    url: getCanonicalUrl('contact'),
+    type: 'website',
+  },
 };
 
 export default function ContactPage() {
@@ -14,7 +24,7 @@ export default function ContactPage() {
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?q=80&w=2000&auto=format&fit=crop"
-            alt="Contactez notre équipe de déménagement à toulouse"
+            alt="Contactez notre équipe de déménagement à lille"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/95 via-[#2b7a78]/85 to-[#04163a]/90"></div>
@@ -70,8 +80,8 @@ export default function ContactPage() {
             <div className="space-y-4 text-white/80">
               <div>
                 <p className="font-medium text-white mb-2">Email</p>
-                <a href="mailto:contact@devis-demenageur-toulousain.fr" className="text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
-                  contact@devis-demenageur-toulousain.fr
+                <a href="mailto:contact@devis-demenageur-lille.fr" className="text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                  contact@devis-demenageur-lille.fr
                 </a>
               </div>
               <div>

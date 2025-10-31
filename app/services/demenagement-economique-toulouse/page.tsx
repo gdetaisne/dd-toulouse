@@ -1,5 +1,26 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaPrimary from "@/components/CtaPrimary";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
+import { getCityDataFromUrl } from "@/lib/cityData";
+import { env } from "@/lib/env";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = (() => {
+  const city = getCityDataFromUrl(env.SITE_URL);
+  return {
+    title: `Déménagement Économique ${city.nameCapitalized} - Tarifs & Devis | Moverz`,
+    description: `Formule économique pour déménager à ${city.nameCapitalized}. Idéal petits budgets. Estimation IA gratuite, devis sous 7j. À partir de 450€.`,
+    alternates: {
+      canonical: getCanonicalUrl(`services/demenagement-economique-${city.slug}`),
+    },
+    openGraph: {
+      title: `Déménagement Économique ${city.nameCapitalized}`,
+      description: `Formule économique pour déménager à ${city.nameCapitalized}`,
+      url: getCanonicalUrl(`services/demenagement-economique-${city.slug}`),
+      type: 'website',
+    },
+  };
+})();
 
 export default function DemenagementEconomiquePage() {
   return (
@@ -17,18 +38,18 @@ export default function DemenagementEconomiquePage() {
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Services", href: "/services" },
-                { label: "Déménagement Économique", href: "/services/demenagement-economique-toulouse" }
+                { label: "Déménagement Économique", href: "/services/demenagement-economique-lille" }
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Déménagement Économique à toulouse
+              Déménagement Économique à lille
             </h1>
             <p className="mt-4 text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
               La solution la plus abordable pour déménager à petit budget. Idéale pour les étudiants et petits budgets.
             </p>
             <div className="mt-8">
               <a
-                href="/devis-demenagement-toulouse/"
+                href="/devis-demenagement-lille/"
                 className="inline-flex rounded-xl bg-white px-6 py-3 text-lg font-semibold text-[#04163a] hover:bg-white/90 transition duration-300 shadow-lg"
               >
                 Créer mon dossier
@@ -43,7 +64,7 @@ export default function DemenagementEconomiquePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-6">
-              Solution la plus abordable pour déménager à toulouse
+              Solution la plus abordable pour déménager à lille
             </h2>
             <p className="text-lg text-white/80 leading-relaxed">
               Notre formule économique est la solution la plus abordable proposée par nos partenaires. 
@@ -139,7 +160,7 @@ export default function DemenagementEconomiquePage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Déménagement local */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold text-white mb-6 text-center">Déménagement local (toulouse)</h3>
+              <h3 className="text-xl font-semibold text-white mb-6 text-center">Déménagement local (lille)</h3>
               <div className="space-y-6">
                 <div className="text-center">
                   <h4 className="text-lg font-medium text-white mb-2">Studio/T1</h4>

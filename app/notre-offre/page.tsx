@@ -1,5 +1,21 @@
 import React from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
+
+export const metadata: Metadata = {
+  title: "Notre Offre Déménagement Lille - Estimation IA | Moverz",
+  description: "Découvrez notre offre de déménagement à Lille : estimation IA gratuite, 5 devis personnalisés sous 7j, comparaison transparente. Service 100% gratuit.",
+  alternates: {
+    canonical: getCanonicalUrl('notre-offre'),
+  },
+  openGraph: {
+    title: "Notre Offre Déménagement Lille",
+    description: "Estimation IA gratuite, 5 devis sous 7j",
+    url: getCanonicalUrl('notre-offre'),
+    type: 'website',
+  },
+};
 
 export default function NotreOffrePage() {
   return (

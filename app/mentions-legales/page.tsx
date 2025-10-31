@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
 
 export const metadata: Metadata = {
   title: "Mentions légales | Moverz",
   description:
     "Mentions légales de Moverz (GSLV) : éditeur, hébergeur, responsabilité, propriété intellectuelle et données personnelles.",
+  alternates: {
+    canonical: getCanonicalUrl('mentions-legales'),
+  },
 };
 
 export default function MentionsLegalesPage() {

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité | Moverz",
   description:
     "Politique RGPD de Moverz (GSLV) : données collectées, finalités, durées (60 jours), droits et sous-traitants.",
+  alternates: {
+    canonical: getCanonicalUrl('politique-confidentialite'),
+  },
 };
 
 export default function PrivacyPage() {

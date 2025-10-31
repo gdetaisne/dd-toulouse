@@ -1,5 +1,26 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CtaPrimary from "@/components/CtaPrimary";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
+import { getCityDataFromUrl } from "@/lib/cityData";
+import { env } from "@/lib/env";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = (() => {
+  const city = getCityDataFromUrl(env.SITE_URL);
+  return {
+    title: `Déménagement Standard ${city.nameCapitalized} - Tarifs & Devis | Moverz`,
+    description: `Formule standard pour déménager à ${city.nameCapitalized}. Rapport qualité/prix optimal. Estimation IA gratuite, devis sous 7j. À partir de 750€.`,
+    alternates: {
+      canonical: getCanonicalUrl(`services/demenagement-standard-${city.slug}`),
+    },
+    openGraph: {
+      title: `Déménagement Standard ${city.nameCapitalized}`,
+      description: `Formule standard pour déménager à ${city.nameCapitalized}`,
+      url: getCanonicalUrl(`services/demenagement-standard-${city.slug}`),
+      type: 'website',
+    },
+  };
+})();
 
 export default function DemenagementStandardPage() {
   return (
@@ -17,18 +38,18 @@ export default function DemenagementStandardPage() {
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Services", href: "/services" },
-                { label: "Déménagement Standard", href: "/services/demenagement-standard-toulouse" }
+                { label: "Déménagement Standard", href: "/services/demenagement-standard-lille" }
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Déménagement Standard à toulouse
+              Déménagement Standard à lille
             </h1>
             <p className="mt-4 text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
               La formule la plus choisie. Bon équilibre prix/prestations avec protection des meubles et emballage standard.
             </p>
             <div className="mt-8">
               <a
-                href="/devis-demenagement-toulouse/"
+                href="/devis-demenagement-lille/"
                 className="inline-flex rounded-xl bg-white px-6 py-3 text-lg font-semibold text-[#04163a] hover:bg-white/90 transition duration-300 shadow-lg"
               >
                 Créer mon dossier
@@ -143,7 +164,7 @@ export default function DemenagementStandardPage() {
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Déménagement local */}
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold text-white mb-6 text-center">Déménagement local (toulouse)</h3>
+              <h3 className="text-xl font-semibold text-white mb-6 text-center">Déménagement local (lille)</h3>
               <div className="space-y-6">
                 <div className="text-center">
                   <h4 className="text-lg font-medium text-white mb-2">T2/T3</h4>

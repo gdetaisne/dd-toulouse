@@ -1,15 +1,20 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
 
 export const metadata: Metadata = {
   title: "Conditions Générales de Vente (CGV) | Moverz",
   description:
     "CGV Moverz (GSLV) — B2B uniquement: objet, processus, acompte mandataire, responsabilité, pénalités de retard.",
+  alternates: {
+    canonical: getCanonicalUrl('cgv'),
+  },
 };
 
-export default function Page() {
+export default function CGVPage() {
   return (
     <main className="bg-hero min-h-screen">
       <div className="halo" />
+
       <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
           <img
