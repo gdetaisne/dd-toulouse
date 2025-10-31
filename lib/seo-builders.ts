@@ -32,7 +32,7 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
     // Intent Transactionnel (Homepages, services, quartiers)
     // Pain point: Devis incomparables, process long (appels/RDV)
     // USP: Cahier des charges standardisé, sélection minutieuse, 100% en ligne
-    defaultTitle = customTitle || `Déménageurs ${city.nameCapitalized} : 5 Devis Comparables en 7 Jours | 2025`;
+    defaultTitle = customTitle || `Déménageurs ${city.nameCapitalized} : 5 Devis Comparables 7j | 2025`;
     templateTitle = customTemplate || `%s | Déménageurs ${city.nameCapitalized}`;
     defaultDescription =
       customDescription ||
