@@ -1,11 +1,9 @@
 import { Metadata } from 'next';
 import LocalPage from '@/app/_templates/LocalPage';
+import { generateLocalPageMetadata } from '@/app/_templates/LocalPage';
 
-export const metadata: Metadata = {
-  title: `Déménagement à Carmes (Toulouse) | Devis gratuit & IA`,
-  description: `Déménagement à Carmes (Toulouse). Quartier résidentiel de Toulouse, proche du centre. Logements anciens et commerces de proximité. Accès: Rues étroites, parkings limités, immeubles anciens. Devis gratuit avec estimation IA.`,
-  keywords: `déménagement Carmes Toulouse, déménageurs Toulouse, devis déménagement Toulouse, Rues étroites, parkings limités, immeubles anciens`,
-};
+export const metadata: Metadata = generateLocalPageMetadata('carmes', 'Carmes');
+
 
 const toulouseCarmesData = {
   zone: "carmes",

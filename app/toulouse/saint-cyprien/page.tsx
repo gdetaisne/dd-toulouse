@@ -1,11 +1,9 @@
 import { Metadata } from 'next';
 import LocalPage from '@/app/_templates/LocalPage';
+import { generateLocalPageMetadata } from '@/app/_templates/LocalPage';
 
-export const metadata: Metadata = {
-  title: `Déménagement à Saint-Cyprien (Toulouse) | Devis gratuit & IA`,
-  description: `Déménagement à Saint-Cyprien (Toulouse). Quartier populaire de Toulouse, rive gauche de la Garonne. Mixité sociale et accès varié. Accès: Rues normales, parkings de rue, mixité ancien/moderne. Devis gratuit avec estimation IA.`,
-  keywords: `déménagement Saint-Cyprien Toulouse, déménageurs Toulouse, devis déménagement Toulouse, Rues normales, parkings de rue, mixité ancien/moderne`,
-};
+export const metadata: Metadata = generateLocalPageMetadata('saint-cyprien', 'Saint-Cyprien');
+
 
 const toulouseSaintCyprienData = {
   zone: "saint-cyprien",

@@ -1,11 +1,9 @@
 import { Metadata } from 'next';
 import LocalPage from '@/app/_templates/LocalPage';
+import { generateLocalPageMetadata } from '@/app/_templates/LocalPage';
 
-export const metadata: Metadata = {
-  title: `Déménagement à Compans (Toulouse) | Devis gratuit & IA`,
-  description: `Déménagement à Compans (Toulouse). Quartier résidentiel moderne de Toulouse, proche des zones d'activité. Accès facilité. Accès: Boulevards larges, parkings nombreux, immeubles récents. Devis gratuit avec estimation IA.`,
-  keywords: `déménagement Compans Toulouse, déménageurs Toulouse, devis déménagement Toulouse, Boulevards larges, parkings nombreux, immeubles récents`,
-};
+export const metadata: Metadata = generateLocalPageMetadata('compans', 'Compans');
+
 
 const toulouseCompansData = {
   zone: "compans",

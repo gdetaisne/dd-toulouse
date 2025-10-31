@@ -1,6 +1,22 @@
 import Hero from "@/components/Hero";
 import CtaPrimary from "@/components/CtaPrimary";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Nos Services de Déménagement Lille - Comparateur Gratuit",
+  description: "Découvrez nos formules de déménagement à Lille : Économique, Standard, Premium. Estimation IA gratuite, devis personnalisés sous 7j. Comparaison transparente.",
+  alternates: {
+    canonical: getCanonicalUrl('services'),
+  },
+  openGraph: {
+    title: "Services Déménagement Lille",
+    description: "Formules adaptées à tous les budgets. Estimation IA gratuite.",
+    url: getCanonicalUrl('services'),
+    type: 'website',
+  },
+};
 
 export default function ServicesPage() {
   return (
@@ -13,7 +29,7 @@ export default function ServicesPage() {
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=2000&auto=format&fit=crop"
-            alt="Services de déménagement professionnels à Toulouse"
+            alt="Services de déménagement professionnels à Lille"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/95 via-[#2b7a78]/90 to-[#04163a]/90"></div>
@@ -31,7 +47,7 @@ export default function ServicesPage() {
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Nos formules de déménagement depuis Toulouse
+              Nos formules de déménagement depuis Lille
             </h1>
             <p className="mt-4 text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
               Choisissez la formule qui correspond à vos besoins et votre budget. 
@@ -101,9 +117,9 @@ export default function ServicesPage() {
 
               <div className="text-center">
                 <div className="text-2xl font-bold text-white mb-2">À partir de 450€</div>
-                <p className="text-white/60 text-sm mb-6">Local Toulouse</p>
+                <p className="text-white/60 text-sm mb-6">Local Lille</p>
                 <a
-                  href="/services/demenagement-economique-Toulouse"
+                  href="/services/demenagement-economique-Lille"
                   className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition duration-300"
                 >
                   Découvrir cette formule
@@ -172,9 +188,9 @@ export default function ServicesPage() {
 
               <div className="text-center">
                 <div className="text-2xl font-bold text-white mb-2">À partir de 750€</div>
-                <p className="text-white/60 text-sm mb-6">Local Toulouse</p>
+                <p className="text-white/60 text-sm mb-6">Local Lille</p>
                 <a
-                  href="/services/demenagement-standard-Toulouse"
+                  href="/services/demenagement-standard-Lille"
                   className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-[#6bcfcf] text-[#04163a] font-medium hover:bg-[#6bcfcf]/90 transition duration-300"
                 >
                   Découvrir cette formule
@@ -245,9 +261,9 @@ export default function ServicesPage() {
 
               <div className="text-center">
                 <div className="text-2xl font-bold text-white mb-2">À partir de 1200€</div>
-                <p className="text-white/60 text-sm mb-6">Local Toulouse</p>
+                <p className="text-white/60 text-sm mb-6">Local Lille</p>
                 <a
-                  href="/services/demenagement-premium-Toulouse"
+                  href="/services/demenagement-premium-Lille"
                   className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition duration-300"
                 >
                   Découvrir cette formule

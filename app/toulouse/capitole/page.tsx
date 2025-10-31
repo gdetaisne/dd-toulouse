@@ -1,11 +1,9 @@
 import { Metadata } from 'next';
 import LocalPage from '@/app/_templates/LocalPage';
+import { generateLocalPageMetadata } from '@/app/_templates/LocalPage';
 
-export const metadata: Metadata = {
-  title: `Déménagement à Capitole (Toulouse) | Devis gratuit & IA`,
-  description: `Déménagement à Capitole (Toulouse). Cœur historique de Toulouse, place du Capitole et patrimoine rose. Rues commerçantes et accès délicat. Accès: Rues commerçantes, circulation limitée, parkings payants, escaliers anciens. Devis gratuit avec estimation IA.`,
-  keywords: `déménagement Capitole Toulouse, déménageurs Toulouse, devis déménagement Toulouse, Rues commerçantes, circulation limitée, parkings payants, escaliers anciens`,
-};
+export const metadata: Metadata = generateLocalPageMetadata('capitole', 'Capitole');
+
 
 const toulouseCapitoleData = {
   zone: "capitole",

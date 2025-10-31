@@ -1,11 +1,9 @@
 import { Metadata } from 'next';
 import LocalPage from '@/app/_templates/LocalPage';
+import { generateLocalPageMetadata } from '@/app/_templates/LocalPage';
 
-export const metadata: Metadata = {
-  title: `Déménagement à Jean Jaurès (Toulouse) | Devis gratuit & IA`,
-  description: `Déménagement à Jean Jaurès (Toulouse). Quartier étudiant de Toulouse, métro et universités. Logements jeunes et accès facilité. Accès: Avenues principales, parkings limités, immeubles modernes. Devis gratuit avec estimation IA.`,
-  keywords: `déménagement Jean Jaurès Toulouse, déménageurs Toulouse, devis déménagement Toulouse, Avenues principales, parkings limités, immeubles modernes`,
-};
+export const metadata: Metadata = generateLocalPageMetadata('jean-jaures', 'Jean Jaurès');
+
 
 const toulouseJeanJaursData = {
   zone: "jean-jaures",
