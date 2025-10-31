@@ -156,6 +156,9 @@ Consultez notre **carte interactive** pour :
 ### Sophie, entreprise à Blagnac
 *"Nous stockons nos archives dans un box 20m². Sécurité parfaite, accès 24h/24, tarif très compétitif. Service professionnel !"*
 
+
+**Besoin d'un déménagement à Toulouse ?** Découvrez notre [comparateur de déménageurs Toulouse](/) pour obtenir 5 devis personnalisés en 2 minutes. Déménageurs vérifiés, tarifs transparents, économie moyenne de 40%.
+
 ## FAQ - Questions fréquentes sur le garde meuble
 
 ### Quels objets puis-je stocker dans mon box ?

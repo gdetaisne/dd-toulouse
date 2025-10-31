@@ -13,7 +13,7 @@ excerpt: "Déménagement de train à Toulouse : transport ferroviaire sécurisé
 
 Le **déménagement train toulouse** vous offre un transport ferroviaire sécurisé pour tous vos besoins de déménagement. Que vous ayez un train de tourisme, un train de collection ou un train de sport, notre équipement spécialisé et notre équipe formée garantissent la sécurité de votre matériel roulant. Découvrez nos solutions de **déménagement train toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur-toulouse).
+Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
 
 ## Pourquoi faire appel à un spécialiste du transport de train ?
 

@@ -23,6 +23,9 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
   const city = getCityDataFromUrl(env.SITE_URL);
   const cityData = getCityData(city.slug);
 
+  // Forcer le slash final pour TOUT (metadataBase ET canonical)
+  const siteUrlWithSlash = city.siteUrl.endsWith('/') ? city.siteUrl : `${city.siteUrl}/`;
+
   // Wording intent-first selon type de page
   let defaultTitle: string;
   let templateTitle: string;
@@ -52,7 +55,7 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
       template: templateTitle,
     },
     description: defaultDescription,
-    metadataBase: new URL(city.siteUrl),
+    metadataBase: new URL(siteUrlWithSlash),
     robots: {
       index: true,
       follow: true,
@@ -67,13 +70,13 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
     openGraph: {
       type: 'website',
       locale: 'fr_FR',
-      url: city.siteUrl,
+      url: siteUrlWithSlash,
       siteName: `Comparateur Déménagement ${city.nameCapitalized}`,
       title: defaultTitle,
       description: defaultDescription,
       images: [
         {
-          url: `${city.siteUrl}/og-image.jpg`,
+          url: `${siteUrlWithSlash}og-image.jpg`,
           width: 1200,
           height: 630,
           alt: `Comparateur Déménagement ${city.nameCapitalized} - 5 Devis Gratuits`,
@@ -84,11 +87,10 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
       card: 'summary_large_image',
       title: defaultTitle,
       description: defaultDescription,
-      images: [`${city.siteUrl}/og-image.jpg`],
+      images: [`${siteUrlWithSlash}og-image.jpg`],
     },
-    alternates: {
-      canonical: city.siteUrl,
-    },
+    // Note: Ne pas définir canonical ici - Next.js le génère automatiquement depuis metadataBase
+    // et ajoute le slash final correctement grâce à trailingSlash: true dans next.config.mjs
     icons: {
       icon: '/favicon.ico',
       shortcut: '/favicon.ico',

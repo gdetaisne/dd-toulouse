@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 
 // Mapping des catégories pour URLs courtes
 const CATEGORY_MAPPING = {
-  'déménagement-economique': 'pas-cher',
+  // Variantes sans accent
   'demenagement-economique': 'pas-cher',
   'demenagement-etudiant': 'etudiant',
   'demenagement-entreprise': 'entreprise', 
@@ -18,6 +18,14 @@ const CATEGORY_MAPPING = {
   'prix-demenagement': 'prix',
   'piliers': 'general',
   'satellites': 'conseils',
+  // Variantes avec accent
+  'déménagement-economique': 'pas-cher',
+  'déménagement-etudiant': 'etudiant',
+  'déménagement-entreprise': 'entreprise',
+  'deménageur-professionnel': 'demenageur',
+  'aide-deménagement': 'aide',
+  'prix-déménagement': 'prix',
+  'location-camion': 'location-camion',
   // Gestion des catégories avec espaces (fallback)
   'Déménagement entreprise': 'entreprise',
   'Déménagement étudiant': 'etudiant',
@@ -59,30 +67,30 @@ function cleanSlug(originalSlug: string, category: string): string {
   // Patterns de nettoyage spécifiques (ordre important!)
     const cleanPatterns = [
     // D'abord, retirer les préfixes de catégorie complets
-    { from: /^demenagement-etudiant-bordeaux-/, to: '' },
-    { from: /^demenagement-entreprise-bordeaux-/, to: '' },
-    { from: /^demenagement-piano-bordeaux-/, to: '' },
-    { from: /^demenagement-international-bordeaux-/, to: '' },
-    { from: /^demenagement-longue-distance-bordeaux-/, to: '' },
-    { from: /^demenagement-pas-cher-bordeaux-/, to: '' },
-    { from: /^demenagement-urgent-bordeaux-/, to: '' },
-    { from: /^devis-demenagement-bordeaux-/, to: '' },
-    { from: /^garde-meuble-bordeaux-/, to: '' },
-    { from: /^prix-demenagement-bordeaux-/, to: '' },
-    { from: /^prix-demenagement-piano-bordeaux-/, to: '' },
-    { from: /^prix-garde-meuble-bordeaux-/, to: '' },
+    { from: /^demenagement-etudiant-toulouse-/, to: '' },
+    { from: /^demenagement-entreprise-toulouse-/, to: '' },
+    { from: /^demenagement-piano-toulouse-/, to: '' },
+    { from: /^demenagement-international-toulouse-/, to: '' },
+    { from: /^demenagement-longue-distance-toulouse-/, to: '' },
+    { from: /^demenagement-pas-cher-toulouse-/, to: '' },
+    { from: /^demenagement-urgent-toulouse-/, to: '' },
+    { from: /^devis-demenagement-toulouse-/, to: '' },
+    { from: /^garde-meuble-toulouse-/, to: '' },
+    { from: /^prix-demenagement-toulouse-/, to: '' },
+    { from: /^prix-demenagement-piano-toulouse-/, to: '' },
+    { from: /^prix-garde-meuble-toulouse-/, to: '' },
     // Ensuite, retirer les patterns partiels en début
-    { from: /^stockage-etudiant-bordeaux/, to: 'stockage-etudiant' },
-    { from: /^cartons-gratuits-bordeaux/, to: 'cartons-gratuits' },
-    { from: /^camion-demenagement-etudiant-bordeaux/, to: 'camion-demenagement-etudiant' },
-    { from: /^assurance-demenagement-international-bordeaux/, to: 'assurance-demenagement-international' },
-    { from: /^prix-demenagement-international-bordeaux/, to: 'prix-demenagement-international' },
-    { from: /^emballage-demenagement-international-bordeaux/, to: 'emballage-demenagement-international' },
-    { from: /^formalites-douanieres-demenagement-international-bordeaux/, to: 'formalites-douanieres-demenagement-international' },
-    // Retirer "-bordeaux" en milieu de slug
-    { from: /-bordeaux-/, to: '-' },
-    // Retirer "-bordeaux" en fin
-    // { from: /-bordeaux$/, to: '' },  // ✅ Option B: Garder ville dans slug (SEO local)
+    { from: /^stockage-etudiant-toulouse/, to: 'stockage-etudiant' },
+    { from: /^cartons-gratuits-toulouse/, to: 'cartons-gratuits' },
+    { from: /^camion-demenagement-etudiant-toulouse/, to: 'camion-demenagement-etudiant' },
+    { from: /^assurance-demenagement-international-toulouse/, to: 'assurance-demenagement-international' },
+    { from: /^prix-demenagement-international-toulouse/, to: 'prix-demenagement-international' },
+    { from: /^emballage-demenagement-international-toulouse/, to: 'emballage-demenagement-international' },
+    { from: /^formalites-douanieres-demenagement-international-toulouse/, to: 'formalites-douanieres-demenagement-international' },
+    // Retirer "-toulouse" en milieu de slug
+    { from: /-toulouse-/, to: '-' },
+    // Retirer "-toulouse" en fin
+    // { from: /-toulouse$/, to: '' },  // ✅ Option B: Garder ville dans slug (SEO local)
     // Simplifications uniformes
     { from: /-guide-complet$/, to: '-guide' },
     { from: /-reperes-2025$/, to: '' },  // Retirer complètement pour éviter duplicates
@@ -96,7 +104,7 @@ function cleanSlug(originalSlug: string, category: string): string {
 }
 
 export function getAllBlogPosts(): BlogPost[] {
-  const monorepoDir = path.join(process.cwd(), 'sites/rouen/content/blog');
+  const monorepoDir = path.join(process.cwd(), 'sites/toulouse/content/blog');
   const standaloneDir = path.join(process.cwd(), 'content/blog');
   const blogDirectory = fs.existsSync(monorepoDir)
     ? monorepoDir

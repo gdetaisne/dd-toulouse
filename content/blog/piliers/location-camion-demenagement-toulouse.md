@@ -167,6 +167,9 @@ Vous préférez gérer vous-même votre déménagement mais avez besoin d'un vé
 ### Sophie, jeune actif à Purpan
 *"Location d'un camion pour déménager ma colocation. Véhicule parfait, chauffeur professionnel, prix imbattable. Excellent service !"*
 
+
+**Besoin d'un déménagement à Toulouse ?** Découvrez notre [comparateur de déménageurs Toulouse](/) pour obtenir 5 devis personnalisés en 2 minutes. Déménageurs vérifiés, tarifs transparents, économie moyenne de 40%.
+
 ## FAQ - Questions fréquentes
 
 ### Quel permis faut-il pour louer un camion ?

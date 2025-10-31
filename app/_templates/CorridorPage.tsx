@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { getCanonicalUrl } from '@/lib/canonical-helper';
 
 interface CorridorPageProps {
   destination: string;
@@ -20,16 +21,17 @@ interface CorridorPageProps {
 }
 
 export function generateCorridorPageMetadata(destination: string): Metadata {
+  const canonicalUrl = getCanonicalUrl(`nice-vers-${destination.toLowerCase()}`);
   return {
-    title: `Déménagement toulouse → ${destination} — Comparez des devis | Moverz`,
-    description: `Un seul dossier, 20 déménageurs qualifiés. 3 devis sous 7 jours pour toulouse → ${destination}.`,
+    title: `Déménagement nice → ${destination} — Comparez des devis | Moverz`,
+    description: `Un seul dossier, 20 déménageurs qualifiés. 3 devis sous 7 jours pour nice → ${destination}.`,
     alternates: {
-      canonical: `https://www.toulouse-demenageur.fr/toulouse-vers-${destination.toLowerCase()}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
-      title: `Déménagement toulouse → ${destination} — Comparez des devis | Moverz`,
-      description: `Un seul dossier, 20 déménageurs qualifiés. 3 devis sous 7 jours pour toulouse → ${destination}.`,
-      url: `https://www.toulouse-demenageur.fr/toulouse-vers-${destination.toLowerCase()}`,
+      title: `Déménagement nice → ${destination} — Comparez des devis | Moverz`,
+      description: `Un seul dossier, 20 déménageurs qualifiés. 3 devis sous 7 jours pour nice → ${destination}.`,
+      url: canonicalUrl,
       type: 'website',
     },
   };
@@ -39,12 +41,12 @@ export function generateCorridorPageJsonLd(destination: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": `Déménagement toulouse → ${destination} — comparaison de devis`,
+    "name": `Déménagement nice → ${destination} — comparaison de devis`,
     "provider": {
       "@type": "Organization",
       "name": "Moverz"
     },
-    "areaServed": `toulouse → ${destination}`,
+    "areaServed": `nice → ${destination}`,
     "serviceType": "Mise en relation et comparaison de devis"
   };
 }
@@ -74,7 +76,7 @@ export default function CorridorPage({
           <div className="container max-w-7xl mx-auto px-4 md:px-6 py-12">
             <div className="text-center">
               <h1 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Déménagement toulouse → {destination} : comparez des devis fiables
+                Déménagement nice → {destination} : comparez des devis fiables
               </h1>
               <p className="text-xl text-white/80 mb-8 max-w-3xl mx-auto">
                 30 min pour préparer votre dossier • ≥ 3 devis personnalisés sous 7 jours
@@ -115,7 +117,7 @@ export default function CorridorPage({
         {/* Prix indicatifs corridor */}
         <div className="container max-w-6xl mx-auto px-4 md:px-6 py-12">
           <h2 className="text-2xl font-bold text-white mb-8 text-center">
-            Prix indicatifs toulouse → {destination}
+            Prix indicatifs nice → {destination}
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {prixIndicatifs.map((prix, index) => (
@@ -200,17 +202,17 @@ export default function CorridorPage({
         <div className="container max-w-4xl mx-auto px-4 md:px-6 py-12">
           <div className="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10 text-center">
             <h2 className="text-xl font-semibold text-white mb-4">
-              Vous déménagez depuis toulouse ?
+              Vous déménagez depuis nice ?
             </h2>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                href="/toulouse"
+                href="/nice"
                 className="bg-[#6bcfcf]/20 text-[#6bcfcf] px-6 py-3 rounded-full hover:bg-[#6bcfcf]/30 transition-colors"
               >
-                Voir toulouse
+                Voir nice
               </Link>
               <Link
-                href="/services/demenagement-standard-toulouse"
+                href="/services/demenagement-standard-nice"
                 className="bg-[#6bcfcf]/20 text-[#6bcfcf] px-6 py-3 rounded-full hover:bg-[#6bcfcf]/30 transition-colors"
               >
                 Service Standard
@@ -222,7 +224,7 @@ export default function CorridorPage({
         {/* FAQ corridor */}
         <div className="container max-w-4xl mx-auto px-4 md:px-6 py-12">
           <h2 className="text-2xl font-bold text-white mb-8 text-center">
-            FAQ toulouse → {destination}
+            FAQ nice → {destination}
           </h2>
           <div className="space-y-6">
             {faq.map((item, index) => (

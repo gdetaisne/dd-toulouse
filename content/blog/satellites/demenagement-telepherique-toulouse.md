@@ -13,7 +13,7 @@ excerpt: "Déménagement de téléphérique à Toulouse : transport de véhicule
 
 Le **déménagement téléphérique toulouse** vous offre un transport de véhicule de transport public sécurisé pour tous vos besoins de déménagement. Que vous ayez un téléphérique de tourisme, un téléphérique de collection ou un téléphérique de sport, notre équipement spécialisé et notre équipe formée garantissent la sécurité de votre véhicule. Découvrez nos solutions de **déménagement téléphérique toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur-toulouse).
+Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
 
 ## Pourquoi faire appel à un spécialiste du transport de téléphérique ?
 

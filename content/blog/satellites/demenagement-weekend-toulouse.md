@@ -13,7 +13,7 @@ excerpt: "Déménagement week-end à Toulouse : service 7j/7 adapté à vos cont
 
 Le **déménagement week-end toulouse** vous offre un service 7j/7 adapté à vos contraintes professionnelles et personnelles. Que vous ayez des obligations en semaine ou que vous préfériez déménager le week-end, notre service vous accompagne avec flexibilité et efficacité. Découvrez nos solutions de **déménagement week-end toulouse** pour organiser votre déménagement selon vos disponibilités.
 
-Pour découvrir tous nos services express et urgents à Toulouse, consultez notre [expertise déménageur Toulouse](/blog/demenageur-toulouse).
+Pour découvrir tous nos services express et urgents à Toulouse, consultez notre [expertise déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
 
 ## Pourquoi déménager le week-end ?
 

@@ -59,7 +59,7 @@ export const cityData: Record<string, CityData> = {
     name: 'Toulouse',
     nameCapitalized: 'Toulouse',
     region: 'Occitanie',
-    siteUrl: 'https://devis-demenageur-toulousain.fr',
+    siteUrl: 'https://devis-demenageur-toulousain.fr/',
     coordinates: {
       latitude: 43.6047,
       longitude: 1.4442

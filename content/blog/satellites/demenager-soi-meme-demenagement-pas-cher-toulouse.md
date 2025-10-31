@@ -13,7 +13,7 @@ excerpt: "Déménager soi-même à Toulouse : guide complet pour économiser. Co
 
 Déménager soi-même à Toulouse peut vous faire économiser jusqu'à 60% du coût total de votre déménagement. Que vous soyez étudiant, jeune actif ou que vous souhaitiez simplement réduire les frais, notre guide complet vous accompagne dans cette aventure. Découvrez comment organiser un **déménagement pas cher toulouse** en autonomie, avec tous les conseils pratiques et le matériel nécessaire pour réussir votre projet.
 
-Pour comprendre tous les aspects du déménagement économique à Toulouse, consultez notre [guide complet déménagement pas cher Toulouse](/blog/demenagement-pas-cher-toulouse).
+Pour comprendre tous les aspects du déménagement économique à Toulouse, consultez notre [guide complet déménagement pas cher Toulouse](/blog/pas-cher/demenagement-pas-cher-toulouse).
 
 ## Pourquoi déménager soi-même à Toulouse ?
 

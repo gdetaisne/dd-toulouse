@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { env } from '@/lib/env'
 import { getCityDataFromUrl } from '@/lib/cityData'
+import { getCanonicalUrl } from '@/lib/canonical-helper'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -44,8 +45,7 @@ function getCityBlogPosts() {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = env.SITE_URL
-  const city = getCityDataFromUrl(baseUrl)
+  const city = getCityDataFromUrl(env.SITE_URL)
   
   // Récupérer les articles de blog de la ville
   const blogPosts = getCityBlogPosts()
@@ -53,55 +53,55 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Pages statiques principales
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: getCanonicalUrl(),
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/services`,
+      url: getCanonicalUrl('services'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services/demenagement-economique-${city.slug}`,
+      url: getCanonicalUrl(`services/demenagement-economique-${city.slug}`),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/services/demenagement-standard-${city.slug}`,
+      url: getCanonicalUrl(`services/demenagement-standard-${city.slug}`),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/services/demenagement-premium-${city.slug}`,
+      url: getCanonicalUrl(`services/demenagement-premium-${city.slug}`),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/partenaires`,
+      url: getCanonicalUrl('partenaires'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/faq`,
+      url: getCanonicalUrl('faq'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: getCanonicalUrl('contact'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/inventaire-ia`,
+      url: getCanonicalUrl('inventaire-ia'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
@@ -111,13 +111,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Pages de quartiers (dynamique selon cityData)
   const neighborhoodPages: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/${city.slug}`,
+      url: getCanonicalUrl(city.slug),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     ...city.neighborhoods.map(neighborhood => ({
-      url: `${baseUrl}/${city.slug}/${neighborhood.slug}`,
+      url: getCanonicalUrl(`${city.slug}/${neighborhood.slug}`),
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
@@ -126,7 +126,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Pages corridors (dynamique selon cityData)
   const corridorPages: MetadataRoute.Sitemap = city.corridors.map(corridor => ({
-    url: `${baseUrl}/${corridor.slug}`,
+    url: getCanonicalUrl(corridor.slug),
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
@@ -135,7 +135,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Page principale du blog
   const blogMainPage: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/blog`,
+      url: getCanonicalUrl('blog'),
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -144,7 +144,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Articles de blog
   const blogPages: MetadataRoute.Sitemap = blogPosts.map(post => ({
-    url: `${baseUrl}/blog/${post.category}/${post.slug}`,
+    url: getCanonicalUrl(`blog/${post.category}/${post.slug}`),
     lastModified: new Date(post.publish_date || new Date()),
     changeFrequency: 'monthly' as const,
     priority: post.type === 'pilier' ? 0.9 : 0.7,

@@ -1,6 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getCanonicalUrl } from '@/lib/canonical-helper';
+import { getCityDataFromUrl } from '@/lib/cityData';
+import { env } from '@/lib/env';
 
 interface LocalPageProps {
   zone: string;
@@ -36,13 +39,23 @@ interface LocalPageProps {
 }
 
 export function generateLocalPageMetadata(zone: string, zoneDisplay: string): Metadata {
+  const city = getCityDataFromUrl(env.SITE_URL);
+  const canonicalUrl = getCanonicalUrl(`${city.slug}/${zone}`);
   return {
-    title: `Déménagement ${zoneDisplay} Toulouse - Tarifs & Devis Gratuit | Moverz`,
-    description: `Déménageur local ${zoneDisplay} à Toulouse : tarifs détaillés, disponibilités immédiates. Devis personnalisé gratuit sous 7j. Équipe locale expérimentée. Réservation en ligne simple.`,
+    title: `Déménagement ${zoneDisplay} Nice - Tarifs & Devis Gratuit | Moverz`,
+    description: `Déménageur local ${zoneDisplay} à Nice : tarifs détaillés, disponibilités immédiates. Devis personnalisé gratuit sous 7j. Équipe locale expérimentée. Réservation en ligne simple.`,
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title: `Déménagement ${zoneDisplay} Nice`,
+      description: `Déménageur local ${zoneDisplay} à Nice`,
+      url: canonicalUrl,
+      type: 'website',
+    },
   };
 }
 
 export function generateLocalPageJsonLd(zone: string, zoneDisplay: string) {
+  const city = getCityDataFromUrl(env.SITE_URL);
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -51,7 +64,7 @@ export function generateLocalPageJsonLd(zone: string, zoneDisplay: string) {
       "@type": "Organization",
       "name": "Moverz"
     },
-    "areaServed": `toulouse — ${zoneDisplay}`,
+    "areaServed": `${city.nameCapitalized} — ${zoneDisplay}`,
     "serviceType": "Mise en relation et comparaison de devis"
   };
 }

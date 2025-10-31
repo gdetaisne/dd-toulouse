@@ -1,6 +1,6 @@
 # Dockerfile multi-sites Moverz - toulouse
-# Version canonique: 2025-10-31 (fixed SITE_URL default)
-# Cache invalidation: 2025-10-31-11h55
+# Version canonique: 2025-10-31 (fixed SITE_URL default + trailing slash)
+# Cache invalidation: 2025-10-31-15h00
 #
 # ⚠️  WARNING: Ce fichier est généré depuis .templates/Dockerfile.template
 # ⚠️  NE PAS MODIFIER CE FICHIER DIRECTEMENT
@@ -9,9 +9,9 @@
 FROM node:20-alpine AS base
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-ARG SITE_URL=https://www.toulouse-demenageur.fr
+ARG SITE_URL=https://devis-demenageur-toulousain.fr/
 ENV SITE_URL=${SITE_URL}
-RUN echo "Build timestamp: 2025-10-31-11h55"
+RUN echo "Build timestamp: 2025-10-31-15h00"
 
 # Install dependencies
 FROM base AS deps
@@ -22,7 +22,7 @@ RUN npm install --production=false
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ARG SITE_URL=https://www.toulouse-demenageur.fr
+ARG SITE_URL=https://devis-demenageur-toulousain.fr/
 ENV SITE_URL=${SITE_URL}
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
@@ -34,9 +34,10 @@ RUN apk add --no-cache dumb-init && \
     adduser --system --uid 1001 nextjs
 
 WORKDIR /app
-ARG SITE_URL=https://www.toulouse-demenageur.fr
+ARG SITE_URL=https://devis-demenageur-toulousain.fr/
 ENV NODE_ENV=production
 ENV PORT=3000
+ENV SITE_URL=${SITE_URL}
 ENV SITE_URL=${SITE_URL}
 ENV NEXT_TELEMETRY_DISABLED=1
 

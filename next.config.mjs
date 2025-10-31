@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   output: 'standalone',
+
+  // SEO: Force trailing slash sur toutes les URLs (y compris homepage)
+  trailingSlash: true,
   
   // Optimisations pour build CapRover
   typescript: {

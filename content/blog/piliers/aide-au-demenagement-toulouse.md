@@ -176,6 +176,9 @@ Notre **équipe de porteurs toulouse** vous offre :
 ### Sophie, entreprise à Blagnac
 *"Nous avons fait appel à eux pour le déménagement de nos bureaux. Équipe très compétente, matériel professionnel, tarif très correct. Parfait !"*
 
+
+**Besoin d'un déménagement à Toulouse ?** Découvrez notre [comparateur de déménageurs Toulouse](/) pour obtenir 5 devis personnalisés en 2 minutes. Déménageurs vérifiés, tarifs transparents, économie moyenne de 40%.
+
 ## FAQ - Questions fréquentes
 
 ### Combien coûte l'aide au déménagement à Toulouse ?

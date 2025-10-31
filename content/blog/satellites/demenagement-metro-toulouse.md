@@ -13,7 +13,7 @@ excerpt: "Déménagement de métro à Toulouse : transport de véhicule de trans
 
 Le **déménagement métro toulouse** vous offre un transport de véhicule de transport public sécurisé pour tous vos besoins de déménagement. Que vous ayez un métro de tourisme, un métro de collection ou un métro de sport, notre équipement spécialisé et notre équipe formée garantissent la sécurité de votre véhicule. Découvrez nos solutions de **déménagement métro toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur-toulouse).
+Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
 
 ## Pourquoi faire appel à un spécialiste du transport de métro ?
 

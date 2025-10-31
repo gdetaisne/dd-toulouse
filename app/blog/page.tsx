@@ -2,17 +2,18 @@ import type { Metadata } from 'next'
 import { getAllBlogPosts, getPilierPosts } from '@/lib/blog';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/Breadcrumbs';
+import { getCanonicalUrl } from '@/lib/canonical-helper';
 
 export const metadata: Metadata = {
-  title: "Blog Déménagement Toulouse - Guides & Conseils Experts | Moverz",
-  description: "Guides complets et conseils d'experts pour réussir votre déménagement à Toulouse. Astuces budget, checklist, comparatifs, conseils pratiques. Articles rédigés par des professionnels.",
+  title: "Blog Déménagement Nice - Guides & Conseils Experts | Moverz",
+  description: "Guides complets et conseils d'experts pour réussir votre déménagement à Nice. Astuces budget, checklist, comparatifs, conseils pratiques. Articles rédigés par des professionnels.",
   alternates: {
-    canonical: `https://devis-demenageur-toulouse.fr/blog`,
+    canonical: getCanonicalUrl('blog'),
   },
   openGraph: {
-    title: "Blog Déménagement Toulouse - Tous nos guides pratiques",
-    description: "Conseils d'experts, guides détaillés et astuces pour déménager sereinement à Toulouse.",
-    url: `https://devis-demenageur-toulouse.fr/blog`,
+    title: "Blog Déménagement Nice - Tous nos guides pratiques",
+    description: "Conseils d'experts, guides détaillés et astuces pour déménager sereinement à Nice.",
+    url: getCanonicalUrl('blog'),
     type: 'website',
   },
 }
@@ -98,7 +99,7 @@ export default function BlogPage() {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-white">
-              Guides Déménagement <span className="text-[#6bcfcf]">Toulouse</span>
+              Guides Déménagement <span className="text-[#6bcfcf]">Nice</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light">
               Conseils d'experts, astuces pratiques et guides complets pour un déménagement réussi
@@ -332,7 +333,7 @@ export default function BlogPage() {
             <div className="relative p-12 md:p-16 text-center">
               <div className="text-6xl mb-6">🚀</div>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Prêt à déménager à Toulouse ?
+                Prêt à déménager à Nice ?
               </h2>
               <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
                 Comparez gratuitement les devis de déménageurs professionnels. 
