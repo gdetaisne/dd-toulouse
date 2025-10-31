@@ -89,8 +89,10 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
       description: defaultDescription,
       images: [`${siteUrlWithSlash}og-image.jpg`],
     },
-    // Note: Ne pas définir canonical ici - Next.js le génère automatiquement depuis metadataBase
-    // et ajoute le slash final correctement grâce à trailingSlash: true dans next.config.mjs
+    alternates: {
+      // FORCER le slash final (Next.js l'enlève parfois sur homepage)
+      canonical: siteUrlWithSlash,
+    },
     icons: {
       icon: '/favicon.ico',
       shortcut: '/favicon.ico',
