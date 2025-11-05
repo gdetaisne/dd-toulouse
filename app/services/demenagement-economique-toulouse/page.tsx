@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
-    title: `Déménagement Économique ${city.nameCapitalized} - Tarifs & Devis | Moverz`,
+    title: `Déménagement Économique ${city.nameCapitalized} — Dès 280€`,
     description: `Formule économique pour déménager à ${city.nameCapitalized}. Idéal petits budgets. Estimation IA gratuite, devis sous 7j. À partir de 450€.`,
     alternates: {
       canonical: getCanonicalUrl(`services/demenagement-economique-${city.slug}`),
@@ -24,7 +24,6 @@ export const metadata: Metadata = (() => {
 
 export default function DemenagementEconomiquePage() {
   const city = getCityDataFromUrl(env.SITE_URL);
-  
   return (
     <main className="bg-hero">
       <div className="halo" />
@@ -40,7 +39,7 @@ export default function DemenagementEconomiquePage() {
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Services", href: "/services" },
-                { label: "Déménagement Économique", href: `/services/demenagement-economique-${city.slug}` }
+                { label: "Déménagement Économique", href: "/services/demenagement-economique-${city.slug}" }
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">

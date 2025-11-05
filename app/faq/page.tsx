@@ -272,14 +272,44 @@ function JsonLd() {
 
 export default function FAQPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Toutes");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [showScrollTop, setShowScrollTop] = useState<boolean>(false);
+  
+  // Scroll to top handler
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  // Emojis par catégorie
+  const categoryEmojis: Record<string, string> = {
+    "Toutes": "📋",
+    "Constitution du dossier (photos & inventaire)": "📸",
+    "Processus & délais": "⏱️",
+    "Prestations & logistique": "🚚",
+    "Tarifs & paiement": "💰",
+    "Fonctionnement & partenaires": "🤝",
+    "Assurances & données": "🔒"
+  };
   
   // Récupérer toutes les catégories uniques
   const categories = ["Toutes", ...Array.from(new Set(faqs.map(faq => faq.category)))];
   
-  // Filtrer les FAQs selon la catégorie sélectionnée
-  const filteredFaqs = selectedCategory === "Toutes" 
-    ? faqs 
-    : faqs.filter(faq => faq.category === selectedCategory);
+  // Filtrer les FAQs selon la catégorie ET la recherche
+  const filteredFaqs = faqs.filter(faq => {
+    const matchesCategory = selectedCategory === "Toutes" || faq.category === selectedCategory;
+    const matchesSearch = searchQuery === "" || 
+      faq.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      faq.a.some(answer => answer.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <main className="bg-hero min-h-screen">
@@ -327,23 +357,66 @@ export default function FAQPage() {
       <div className="section">
         <div className="container">
 
+        {/* Barre de recherche */}
+        <div className="mt-8 max-w-2xl mx-auto">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Rechercher une question... (ex: prix, cartons, assurance)"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-5 py-4 pl-12 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#6bcfcf] focus:border-transparent transition-all"
+            />
+            <svg 
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/50"
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+          {searchQuery && (
+            <p className="text-sm text-white/60 mt-2 text-center">
+              {filteredFaqs.length} résultat{filteredFaqs.length > 1 ? 's' : ''} trouvé{filteredFaqs.length > 1 ? 's' : ''}
+            </p>
+          )}
+        </div>
+
         {/* Filtres par catégorie */}
         <div className="mt-8">
           <h2 className="text-lg font-medium text-white/90 mb-4">Filtrer par catégorie :</h2>
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  selectedCategory === category
-                    ? "bg-accent text-white shadow-lg"
-                    : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+            {categories.map((category) => {
+              const count = faqs.filter(faq => category === "Toutes" || faq.category === category).length;
+              return (
+                <button
+                  key={category}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setSearchQuery(""); // Reset search when changing category
+                  }}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    selectedCategory === category
+                      ? "bg-[#6bcfcf] text-[#04163a] shadow-lg"
+                      : "bg-white/10 text-white/70 hover:bg-white/20 hover:text-white"
+                  }`}
+                >
+                  <span className="mr-1">{categoryEmojis[category] || "📄"}</span>
+                  {category} <span className="text-xs opacity-70">({count})</span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -439,6 +512,70 @@ export default function FAQPage() {
           )}
         </div>
 
+        {/* Ressources complémentaires */}
+        <div className="mt-16 mb-10">
+          <h2 className="text-2xl font-semibold text-white mb-8 text-center">
+            Ressources utiles pour votre déménagement
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Services */}
+            <div className="card-glass rounded-2xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                📦 Nos formules
+              </h3>
+              <div className="space-y-3">
+                <a href="/services/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Comparer les 3 formules
+                </a>
+                <a href="/services/demenagement-economique-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Formule Économique (dès 280€)
+                </a>
+                <a href="/services/demenagement-standard-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Formule Standard (dès 600€)
+                </a>
+              </div>
+            </div>
+
+            {/* Blog */}
+            <div className="card-glass rounded-2xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                📚 Guides pratiques
+              </h3>
+              <div className="space-y-3">
+                <a href="/blog/demenagement-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Guide complet déménagement
+                </a>
+                <a href="/blog/cartons-demenagement/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Combien de cartons prévoir ?
+                </a>
+                <a href="/blog/prix-demenagement-2025/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Prix 2025 : tout comprendre
+                </a>
+              </div>
+            </div>
+
+            {/* Local */}
+            <div className="card-glass rounded-2xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                📍 Infos locales
+              </h3>
+              <div className="space-y-3">
+                <a href={`/${city.slug}/`} className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Déménagement {city.nameCapitalized}
+                </a>
+                <a href="/quartiers-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Tous les quartiers
+                </a>
+                <a href="/estimation-rapide/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                  → Estimation rapide
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Final */}
         <div className="mt-10 text-center">
           <h2 className="text-xl font-semibold text-white mb-4">
             Prêt à déménager ?
@@ -449,6 +586,20 @@ export default function FAQPage() {
         </div>
         </div>
       </div>
+
+      {/* Bouton Scroll to Top */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-[#6bcfcf] text-[#04163a] shadow-lg hover:bg-[#6bcfcf]/90 transition-all duration-300 transform hover:scale-110"
+          aria-label="Retour en haut"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      )}
+
       <JsonLd />
     </main>
   );

@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
-    title: `Déménagement Standard ${city.nameCapitalized} - Tarifs & Devis | Moverz`,
+    title: `Déménagement Standard ${city.nameCapitalized} — Dès 600€`,
     description: `Déménagement standard à ${city.nameCapitalized} : rapport qualité/prix optimal, déménageurs vérifiés. Estimation IA gratuite, recevez 5 devis personnalisés sous 7j. Dès 750€.`,
     alternates: {
       canonical: getCanonicalUrl(`services/demenagement-standard-${city.slug}`),

@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
-    title: `Déménagement Premium ${city.nameCapitalized} - Service Haut de Gamme | Moverz`,
+    title: `Déménagement Premium ${city.nameCapitalized} — Dès 1200€`,
     description: `Formule premium pour déménager à ${city.nameCapitalized}. Service tout compris haut de gamme. Estimation IA gratuite, devis sous 7j. À partir de 1200€.`,
     alternates: {
       canonical: getCanonicalUrl(`services/demenagement-premium-${city.slug}`),
@@ -24,7 +24,6 @@ export const metadata: Metadata = (() => {
 
 export default function DemenagementPremiumPage() {
   const city = getCityDataFromUrl(env.SITE_URL);
-  
   return (
     <main className="bg-hero">
       <div className="halo" />
@@ -40,7 +39,7 @@ export default function DemenagementPremiumPage() {
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Services", href: "/services" },
-                { label: "Déménagement Premium", href: `/services/demenagement-premium-${city.slug}` }
+                { label: "Déménagement Premium", href: "/services/demenagement-premium-${city.slug}" }
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
