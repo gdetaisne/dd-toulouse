@@ -2,8 +2,23 @@
 
 import React from 'react';
 import { getBuildInfo } from '@/lib/buildInfo';
+import { event as gaEvent } from '@/lib/ga4';
 
 export default function InventaireIAPage() {
+  
+  const handleEstimateClick = () => {
+    gaEvent('estimate_cost_click', {
+      button_text: 'Calculer mon devis gratuit',
+      destination: '/estimation-rapide/',
+    });
+  };
+
+  const handleIaToolClick = () => {
+    gaEvent('access_ia_tool_click', {
+      button_text: 'Accéder à l\'outil',
+      destination: 'https://movers-test.gslv.cloud/',
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[#04163a]">
@@ -81,7 +96,8 @@ export default function InventaireIAPage() {
               
               <div className="space-y-4">
                 <a 
-                  href="/estimation-rapide/" 
+                  href="/estimation-rapide/"
+                  onClick={handleEstimateClick}
                   className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#6bcfcf] px-6 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
                 >
                   Calculer mon devis gratuit
@@ -114,6 +130,7 @@ export default function InventaireIAPage() {
                   href="https://movers-test.gslv.cloud/" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  onClick={handleIaToolClick}
                   className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#6bcfcf] px-6 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
                 >
                   Accéder à l'outil (nouvelle fenêtre)
@@ -191,7 +208,7 @@ export default function InventaireIAPage() {
             Commencez dès maintenant votre analyse automatique
           </p>
           <a 
-            href="/devis-demenagement-toulouse/" 
+            href="/devis-demenagement-nice/" 
             className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
           >
             Créer mon dossier
