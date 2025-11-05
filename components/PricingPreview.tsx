@@ -1,8 +1,8 @@
 export default function PricingPreview() {
   const pricing = [
-    { type: "Studio/T1", price: "280–700€", volume: "8–15 m³", formula: "Économique" },
-    { type: "T2–T3", price: "600–1200€", volume: "18–28 m³", formula: "Standard" },
-    { type: "Maison", price: "1200€+", volume: "≥35 m³", formula: "Premium" }
+    { type: "Studio/T1", price: "280–450€", volume: "8–12 m³", formula: "Économique" },
+    { type: "T2–T3", price: "600–1000€", volume: "18–28 m³", formula: "Standard" },
+    { type: "Maison", price: "1200–1800€", volume: "30–40 m³", formula: "Premium" }
   ];
 
   return (

@@ -48,12 +48,12 @@ export function generateLocalPageMetadata(zone: string, zoneDisplay: string): Me
   const canonicalUrl = getCanonicalUrl(canonicalPath);
 
   const titleText = isCityPage
-    ? `Déménagement ${city.nameCapitalized} — Devis en 7j | Moverz`
-    : `Déménagement ${zoneDisplay} ${city.nameCapitalized} — Devis en 7j | Moverz`;
+    ? `Déménagement ${city.nameCapitalized} — 5 Devis IA Gratuits`
+    : `Déménagement ${zoneDisplay} ${city.nameCapitalized} — Devis Gratuits`;
 
   const descriptionText = isCityPage
-    ? `Déménageur local à ${city.nameCapitalized} : tarifs détaillés, disponibilités immédiates. Devis personnalisé gratuit sous 7j. Équipe locale expérimentée. Réservation en ligne simple.`
-    : `Déménageur local ${zoneDisplay} à ${city.nameCapitalized} : tarifs détaillés, disponibilités immédiates. Devis personnalisé gratuit sous 7j. Équipe locale expérimentée. Réservation en ligne simple.`;
+    ? `Déménagez à ${city.nameCapitalized} dès 280€. IA analyse vos photos → 5 devis comparables sous 7j. Gratuit, sans appels. 1200+ clients ⭐4.9/5`
+    : `Déménagement ${zoneDisplay} (${city.nameCapitalized}) dès 280€. 5 devis comparables sous 7j via IA. Gratuit, sans harcèlement. 1200+ clients satisfaits.`;
 
   return {
     title: titleText,
