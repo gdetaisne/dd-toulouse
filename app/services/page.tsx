@@ -360,7 +360,7 @@ export default function ServicesPage() {
                 📚 Guides pratiques
               </h3>
               <div className="space-y-4">
-                <a href="/blog/demenagement-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/blog/demenagement-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Guide complet du déménagement à {city.nameCapitalized}
                 </a>
                 <a href="/blog/cartons-demenagement/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
@@ -384,7 +384,7 @@ export default function ServicesPage() {
                 <a href={`/${city.slug}/`} className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Déménagement {city.nameCapitalized} (vue d'ensemble)
                 </a>
-                <a href="/quartiers-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/quartiers-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Tous les quartiers de {city.nameCapitalized}
                 </a>
                 <a href="/faq/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">

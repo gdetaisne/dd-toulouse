@@ -528,10 +528,10 @@ export default function FAQPage() {
                 <a href="/services/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Comparer les 3 formules
                 </a>
-                <a href="/services/demenagement-economique-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/services/demenagement-economique-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Formule Économique (dès 280€)
                 </a>
-                <a href="/services/demenagement-standard-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/services/demenagement-standard-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Formule Standard (dès 600€)
                 </a>
               </div>
@@ -543,7 +543,7 @@ export default function FAQPage() {
                 📚 Guides pratiques
               </h3>
               <div className="space-y-3">
-                <a href="/blog/demenagement-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/blog/demenagement-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Guide complet déménagement
                 </a>
                 <a href="/blog/cartons-demenagement/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
@@ -564,7 +564,7 @@ export default function FAQPage() {
                 <a href={`/${city.slug}/`} className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Déménagement {city.nameCapitalized}
                 </a>
-                <a href="/quartiers-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/quartiers-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Tous les quartiers
                 </a>
                 <a href="/estimation-rapide/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
