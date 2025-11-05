@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { event as gaEvent } from '@/lib/ga4';
 
 type LeadPayload = {
   name: string;
@@ -70,6 +71,12 @@ export default function LeadForm() {
         if (!res.ok || !data?.ok) {
           throw new Error(data?.error || `Erreur d'envoi (${res.status})`);
         }
+
+        // Track conversion GA4
+        gaEvent('lead_submit', {
+          pickup: payload.pickup,
+          dropoff: payload.dropoff,
+        });
 
         router.push("/merci");
       } catch (err) {
