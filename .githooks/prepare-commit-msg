@@ -1,0 +1,18 @@
+#!/bin/sh
+# Prepend a reminder if MAKE_WEBHOOK_URL is not configured
+
+MSG_FILE="$1"
+REMINDER="# Reminder: Configure MAKE_WEBHOOK_URL in .env.local to enable /api/lead"
+
+if [ ! -f ".env.local" ] || ! grep -qE '^MAKE_WEBHOOK_URL=.+$' .env.local; then
+  # Only add once per message
+  if ! grep -qF "$REMINDER" "$MSG_FILE" 2>/dev/null; then
+    {
+      echo "$REMINDER"
+      echo
+      cat "$MSG_FILE"
+    } > "$MSG_FILE.tmp" && mv "$MSG_FILE.tmp" "$MSG_FILE"
+  fi
+fi
+
+

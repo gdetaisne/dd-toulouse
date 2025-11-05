@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+# Host
+Host: https://devis-demenageur-toulousain.fr/
+
+# Sitemaps
+Sitemap: https://devis-demenageur-toulousain.fr/sitemap.xml
