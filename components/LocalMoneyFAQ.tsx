@@ -43,14 +43,11 @@ export default function LocalMoneyFAQ({ citySlug, cityName }: LocalMoneyFAQProps
     <section className="py-16 md:py-20 bg-gradient-to-br from-[#2b7a78]/10 to-[#04163a]/20 border-y border-white/10">
       <div className="container max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
-            <span className="text-2xl">❓</span>
-            <span className="text-sm font-medium text-white">Questions Fréquentes</span>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 flex items-center justify-center gap-3">
+            <span className="text-3xl">❓</span>
             Questions Fréquentes {cityName}
           </h2>
-          <p className="text-white/70 text-sm">
+          <p className="text-white/70 text-sm md:text-base">
             Les réponses essentielles sur les prix et devis
           </p>
         </div>

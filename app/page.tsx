@@ -38,7 +38,7 @@ export default function Home() {
       </section>
       
       {/* 3. Testimonials - Preuve sociale */}
-      <section className="section py-16 md:py-20 bg-gradient-to-br from-white/5 to-white/10 border-y border-white/10">
+      <section className="section py-16 md:py-20 bg-gradient-to-br from-[#2b7a78]/15 to-[#04163a]/30 border-y border-white/20">
         <div className="container">
           <Testimonials />
         </div>
@@ -48,54 +48,37 @@ export default function Home() {
       <section className="section py-16 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-4">
               Pourquoi choisir Moverz ?
             </h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <p className="text-white/80 max-w-2xl mx-auto text-base md:text-lg">
               La première plateforme qui compare vraiment les devis de déménagement
             </p>
           </div>
 
-          {/* Différenciation */}
+          {/* Différenciation - Card simple et claire */}
           <div className="max-w-3xl mx-auto mb-12">
-            <div className="card-glass rounded-2xl p-8 border-2 border-white/20">
+            <div className="card-glass rounded-2xl p-8 border-2 border-[#6bcfcf]/30">
               <div className="flex items-start gap-4">
-                <div className="text-4xl">💡</div>
+                <div className="text-4xl flex-shrink-0">💡</div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
                     La différence Moverz
                   </h3>
                   <p className="text-white/80 leading-relaxed">
-                    Contrairement aux comparateurs classiques, notre IA analyse vos photos pour créer un inventaire précis. 
-                    Résultat : tous les déménageurs chiffrent le <strong className="text-[#6bcfcf]">même volume exact</strong>, 
-                    vous pouvez enfin comparer ce qui est comparable.
+                    Notre IA analyse vos photos pour créer <strong className="text-[#6bcfcf]">un inventaire unique</strong>. 
+                    Tous les déménageurs chiffrent le même volume → vous comparez enfin ce qui est comparable.
                   </p>
+                  <div className="mt-4 inline-flex items-center gap-2 text-sm text-[#6bcfcf]">
+                    <span>✓</span>
+                    <span>Fini les devis incomparables</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Chiffres clés */}
-          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto mb-16">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#6bcfcf] mb-2">90%</div>
-              <div className="text-white/70 text-sm">Précision estimation IA</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#6bcfcf] mb-2">5</div>
-              <div className="text-white/70 text-sm">Devis comparables</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#6bcfcf] mb-2">7j</div>
-              <div className="text-white/70 text-sm">Délai de réponse</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#6bcfcf] mb-2">0€</div>
-              <div className="text-white/70 text-sm">Service 100% gratuit</div>
-            </div>
-          </div>
-
-          {/* Garanties intégrées */}
+          {/* Garanties - FOCUS principal */}
           <div>
             <ValueTriad />
           </div>
@@ -103,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* 5. Tarifs indicatifs */}
-      <section className="section py-16 md:py-20 bg-gradient-to-br from-[#2b7a78]/20 to-[#04163a]/40 border-y border-white/10">
+      <section className="section py-16 md:py-20 bg-gradient-to-br from-[#2b7a78]/25 to-[#6bcfcf]/10 border-y border-[#6bcfcf]/20">
         <div className="container">
           <PricingPreview />
         </div>
@@ -113,10 +96,10 @@ export default function Home() {
       <section className="section py-16 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-4">
               Pourquoi ne pas déménager seul ?
             </h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <p className="text-white/80 max-w-2xl mx-auto text-base md:text-lg">
               Comparez les avantages avant de décider
             </p>
           </div>
@@ -178,7 +161,7 @@ export default function Home() {
                   <div className="text-[#6bcfcf] text-xl mt-1">✓</div>
                   <div>
                     <div className="text-white font-medium">Zéro risque</div>
-                    <div className="text-white/70 text-sm">Pros assurés + formés</div>
+                    <div className="text-white/70 text-sm">Pros assurés + vérifiés</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
@@ -216,7 +199,7 @@ export default function Home() {
       </section>
 
       {/* 8. Guides photos */}
-      <section className="section py-16 md:py-20 bg-gradient-to-br from-white/5 to-white/10 border-y border-white/10">
+      <section className="section py-16 md:py-20 bg-gradient-to-br from-[#04163a]/60 to-[#2b7a78]/20 border-y border-white/20">
         <div className="container">
           <PhotoGuidelines />
         </div>
@@ -230,13 +213,13 @@ export default function Home() {
       </section>
 
       {/* 10. Ressources SEO - Maillage interne */}
-      <section className="section py-16 md:py-20 bg-gradient-to-br from-white/5 to-white/10 border-y border-white/10">
+      <section className="section py-16 md:py-20 bg-gradient-to-br from-[#2b7a78]/15 to-[#6bcfcf]/10 border-y border-white/20">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-4">
               Tout pour préparer votre déménagement
             </h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <p className="text-white/80 max-w-2xl mx-auto text-base md:text-lg">
               Guides pratiques, informations tarifaires et conseils d'experts
             </p>
           </div>
@@ -273,10 +256,10 @@ export default function Home() {
                 <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm font-medium">
                   → Voir tous les guides
                 </a>
-                <a href="/blog/cartons-demenagement/" className="block text-white/70 hover:text-white transition-colors text-sm">
+                <a href="/blog/" className="block text-white/70 hover:text-white transition-colors text-sm">
                   Combien de cartons ?
                 </a>
-                <a href="/blog/prix-demenagement-2025/" className="block text-white/70 hover:text-white transition-colors text-sm">
+                <a href="/blog/" className="block text-white/70 hover:text-white transition-colors text-sm">
                   Prix 2025
                 </a>
               </div>
