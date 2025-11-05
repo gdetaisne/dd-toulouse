@@ -12,7 +12,7 @@ const ToulouseData = {
     demenageurs: "20",
     delai: "3-5"
   },
-  pourquoiMoverz: "Toulouse se classe en tête des villes françaises où il fait bon vivre en famille avec une note de 19/20 selon Le Figaro. Notre équipe d'experts déménageurs connaît parfaitement les spécificités de la ville : rues étroites du centre historique, contraintes de stationnement, immeubles anciens avec escaliers. Nous vous accompagnons dans votre projet de déménagement avec des déménageurs locaux certifiés qui maîtrisent les accès et les particularités de chaque quartier bordelais.",
+  pourquoiMoverz: "Toulouse se classe en tête des villes françaises où il fait bon vivre en famille avec une note de 19/20 selon Le Figaro. Notre équipe d'experts déménageurs connaît parfaitement les spécificités de la ville : rues étroites du centre historique, contraintes de stationnement, immeubles anciens avec escaliers. Nous vous accompagnons dans votre projet de déménagement avec des déménageurs locaux certifiés qui maîtrisent les accès et les particularités de chaque quartier toulousain.",
   accesStationnement: "Toulouse présente des défis spécifiques pour les déménagements : rues étroites dans le centre historique, stationnement limité, immeubles anciens avec escaliers. Nos partenaires déménageurs connaissent parfaitement les créneaux autorisés, les zones de déchargement et les contraintes de circulation. Ils s'adaptent aux gabarits de camions selon les rues et optimisent les horaires pour éviter les embouteillages.",
   destinationsFrequentes: [
     {
@@ -81,7 +81,7 @@ const ToulouseData = {
     },
     {
       question: "Comment se déroule l'accès au logement à Toulouse ?",
-      answer: "Nos déménageurs connaissent parfaitement les contraintes bordelaises : rues étroites, stationnement limité, immeubles anciens. Ils s'adaptent aux créneaux autorisés et optimisent les horaires."
+      answer: "Nos déménageurs connaissent parfaitement les contraintes toulousaines : rues étroites, stationnement limité, immeubles anciens. Ils s'adaptent aux créneaux autorisés et optimisent les horaires."
     },
     {
       question: "Quels sont les tarifs pour un déménagement à Toulouse ?",

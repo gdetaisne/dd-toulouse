@@ -14,19 +14,28 @@ export default function LocalMoneyFAQ({ citySlug, cityName }: LocalMoneyFAQProps
   
   if (faqs.length === 0) return null;
 
-  // JSON-LD FAQPage
+  // JSON-LD Questions standalone (pas FAQPage pour éviter duplicate avec /faq)
   const JsonLd = () => {
-    const qas = faqs.map(faq => ({
-      question: faq.question,
-      answer: faq.answer,
+    const questions = faqs.map(faq => ({
+      '@context': 'https://schema.org',
+      '@type': 'Question',
+      'name': faq.question,
+      'acceptedAnswer': {
+        '@type': 'Answer',
+        'text': faq.answer,
+      },
     }));
-    const schema = buildFaqPageSchema(qas);
     
     return (
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      <>
+        {questions.map((q, idx) => (
+          <script
+            key={idx}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(q) }}
+          />
+        ))}
+      </>
     );
   };
 
