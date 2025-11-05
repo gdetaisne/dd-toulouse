@@ -62,6 +62,10 @@ export default function Hero() {
                 <span className="text-yellow-300">⭐⭐⭐⭐⭐</span>
                 <span>Note moyenne 4,9/5</span>
               </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xl">⚡</span>
+                <span>23 devis demandés aujourd'hui</span>
+              </div>
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[560px] lg:mx-0">
