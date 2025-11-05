@@ -23,9 +23,6 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
   const city = getCityDataFromUrl(env.SITE_URL);
   const cityData = getCityData(city.slug);
 
-  // Forcer le slash final pour TOUT (metadataBase ET canonical)
-  const siteUrlWithSlash = city.siteUrl.endsWith('/') ? city.siteUrl : `${city.siteUrl}/`;
-
   // Wording intent-first selon type de page
   let defaultTitle: string;
   let templateTitle: string;
@@ -35,18 +32,20 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
     // Intent Transactionnel (Homepages, services, quartiers)
     // Pain point: Devis incomparables, process long (appels/RDV)
     // USP: Cahier des charges standardisé, sélection minutieuse, 100% en ligne
-    defaultTitle = customTitle || `Déménageurs ${city.nameCapitalized} : 5 Devis Comparables 7j | 2025`;
+    // Optimisé CTR: 50-60 car + bénéfice clair + chiffre
+    defaultTitle = customTitle || `Déménagement ${city.nameCapitalized} : 5 Devis en 7j | 2025`;
     templateTitle = customTemplate || `%s | Déménageurs ${city.nameCapitalized}`;
     defaultDescription =
       customDescription ||
-      `Cahier des charges précis en quelques clics → 5 devis comparables en 7j. 100% en ligne. Sélection minucieuse. Service 100% gratuit`;
+      `Comparez 5 devis de déménageurs ${city.nameCapitalized} en 7 jours. Cahier des charges en ligne, sélection rigoureuse, 100% gratuit. Économisez jusqu'à 40% sur votre déménagement.`;
   } else {
     // Wording par défaut (racine, autres pages)
-    defaultTitle = customTitle || `Comparateur Déménagement ${city.nameCapitalized} : 5 Devis Gratuits`;
-    templateTitle = customTemplate || `%s | Comparateur Déménagement ${city.nameCapitalized}`;
+    // Optimisé CTR: 50-60 car + formule claire
+    defaultTitle = customTitle || `Déménagement ${city.nameCapitalized} : 5 Devis Gratuits`;
+    templateTitle = customTemplate || `%s | Déménagement ${city.nameCapitalized}`;
     defaultDescription =
       customDescription ||
-      `Estimation par photos en 30 min → 5 devis personnalisés de déménageurs. 100% gratuit. Économisez jusqu'à 40% sur votre déménagement à ${city.nameCapitalized}.`;
+      `5 devis de déménageurs ${city.nameCapitalized} en 7 jours. Estimation par photos en 30 min, 100% gratuit. Économisez jusqu'à 40% avec des professionnels sélectionnés.`;
   }
 
   return {
@@ -55,7 +54,7 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
       template: templateTitle,
     },
     description: defaultDescription,
-    metadataBase: new URL(siteUrlWithSlash),
+    metadataBase: new URL(city.siteUrl),
     robots: {
       index: true,
       follow: true,
@@ -70,13 +69,13 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
     openGraph: {
       type: 'website',
       locale: 'fr_FR',
-      url: siteUrlWithSlash,
+      url: city.siteUrl,
       siteName: `Comparateur Déménagement ${city.nameCapitalized}`,
       title: defaultTitle,
       description: defaultDescription,
       images: [
         {
-          url: `${siteUrlWithSlash}og-image.jpg`,
+          url: `${city.siteUrl}/og-image.jpg`,
           width: 1200,
           height: 630,
           alt: `Comparateur Déménagement ${city.nameCapitalized} - 5 Devis Gratuits`,
@@ -87,11 +86,10 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
       card: 'summary_large_image',
       title: defaultTitle,
       description: defaultDescription,
-      images: [`${siteUrlWithSlash}og-image.jpg`],
+      images: [`${city.siteUrl}/og-image.jpg`],
     },
     alternates: {
-      // FORCER le slash final (Next.js l'enlève parfois sur homepage)
-      canonical: siteUrlWithSlash,
+      canonical: city.siteUrl.endsWith('/') ? city.siteUrl : `${city.siteUrl}/`,
     },
     icons: {
       icon: '/favicon.ico',
