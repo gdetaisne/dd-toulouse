@@ -4,7 +4,6 @@ import { env } from "@/lib/env";
 import Hero from "@/components/Hero";
 import ValueTriad from "@/components/ValueTriad";
 import HowItWorks from "@/components/HowItWorks";
-import ProofStrip from "@/components/ProofStrip";
 import PhotoGuidelines from "@/components/PhotoGuidelines";
 import PricingPreview from "@/components/PricingPreview";
 import Testimonials from "@/components/Testimonials";
@@ -42,11 +41,6 @@ export default function Home() {
       </section>
       <section className="section">
         <div className="container">
-          <ProofStrip />
-        </div>
-      </section>
-      <section className="section">
-        <div className="container">
           <PhotoGuidelines className="my-12 md:my-16" />
         </div>
       </section>
@@ -56,7 +50,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Chiffres clés - Social Proof */}
+      {/* Pourquoi choisir Moverz - Chiffres clés + Différenciation */}
       <section className="section bg-white/5">
         <div className="container">
           <div className="text-center mb-12">
@@ -68,6 +62,26 @@ export default function Home() {
             </p>
           </div>
 
+          {/* Différenciation en premier */}
+          <div className="max-w-3xl mx-auto mb-12">
+            <div className="card-glass rounded-2xl p-8">
+              <div className="flex items-start gap-4">
+                <div className="text-4xl">💡</div>
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    La différence Moverz
+                  </h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Contrairement aux comparateurs classiques, notre IA analyse vos photos pour créer un inventaire précis. 
+                    Résultat : tous les déménageurs chiffrent le <strong className="text-[#6bcfcf]">même volume exact</strong>, 
+                    vous pouvez enfin comparer ce qui est comparable.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Chiffres clés ensuite */}
           <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-[#6bcfcf] mb-2">90%</div>
@@ -84,24 +98,6 @@ export default function Home() {
             <div className="text-center">
               <div className="text-4xl md:text-5xl font-bold text-[#6bcfcf] mb-2">0€</div>
               <div className="text-white/70 text-sm">Service 100% gratuit</div>
-            </div>
-          </div>
-
-          <div className="mt-12 max-w-3xl mx-auto">
-            <div className="card-glass rounded-2xl p-8">
-              <div className="flex items-start gap-4">
-                <div className="text-4xl">💡</div>
-                <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    La différence Moverz
-                  </h3>
-                  <p className="text-white/80 leading-relaxed">
-                    Contrairement aux comparateurs classiques, notre IA analyse vos photos pour créer un inventaire précis. 
-                    Résultat : tous les déménageurs chiffrent le <strong className="text-[#6bcfcf]">même volume exact</strong>, 
-                    vous pouvez enfin comparer ce qui est comparable.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>

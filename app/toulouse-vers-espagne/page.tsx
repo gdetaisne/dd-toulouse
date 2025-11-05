@@ -12,7 +12,7 @@ const espagneData = {
     {
       type: "Studio/T1",
       prix: "600-900€",
-      description: "Déménagement toulouse → Espagne : 150-500 km, variable. Studio/T1 (10-15 m³) dès 600-900€. Devis gratuit sous 7j. Équipe pro, emballage inclus."
+      description: "Déménagement Toulouse → Espagne : 200-400 km, variable. Studio/T1 (10-15 m³) dès 600-900€. Devis gratuit sous 7j. Équipe pro, emballage inclus."
     },
     {
       type: "T2/T3",
