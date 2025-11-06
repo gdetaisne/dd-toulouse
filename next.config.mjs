@@ -73,6 +73,15 @@ const nextConfig = {
 
       // CATÉGORIES BLOG RÉELLEMENT VIDES → /blog (Fix CSV 30/10/2025)
       { source: '/blog/devis', destination: '/blog', permanent: true },
+      
+      // LEADGEN-02: Redirections 404 prioritaires (Toulouse - 06/11/2025)
+      { source: '/blog/international/prix-demenagement-international', destination: '/blog/international/prix-demenagement-international/', permanent: true },
+      { source: '/blog/international/demenagement-international-toulouse', destination: '/blog/international/demenagement-international-toulouse/', permanent: true },
+      { source: '/blog/international/demenagement-france-angleterre', destination: '/blog/international/demenagement-france-angleterre/', permanent: true },
+      { source: '/blog/demenagement-piano/monte-charge-piano', destination: '/blog/demenagement-piano-toulouse/monte-charge-piano/', permanent: true },
+      { source: '/blog/location-camion/location-utilitaire', destination: '/blog/location-camion-toulouse/location-utilitaire/', permanent: true },
+      { source: '/blog/garde-meuble/box-stockage', destination: '/blog/garde-meuble-toulouse/box-stockage/', permanent: true },
+
       // WILDCARDS CATCH-ALL (TASK-LEADGEN-02 - COMPLETS)
       { source: '/blog/garde-meuble/:slug*', destination: '/blog/garde-meuble-toulouse/:slug*', permanent: true },
       { source: '/blog/pas-cher/:slug*', destination: '/blog/demenagement-pas-cher-toulouse/:slug*', permanent: true },
