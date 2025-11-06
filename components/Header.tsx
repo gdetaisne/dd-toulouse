@@ -1,35 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isZonesDropdownOpen, setIsZonesDropdownOpen] = useState(false);
-  const zonesDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Fermer les dropdowns quand on clique ailleurs
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (zonesDropdownRef.current && !zonesDropdownRef.current.contains(event.target as Node)) {
-        setIsZonesDropdownOpen(false);
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  // Gestion du clavier pour les dropdowns
-  const handleKeyDown = (event: React.KeyboardEvent, dropdownType: 'zones') => {
-    if (event.key === 'Escape') {
-      if (dropdownType === 'zones') {
-        setIsZonesDropdownOpen(false);
-      }
-    }
-  };
 
   // Tracking des clics
   const trackClick = (label: string) => {
@@ -40,13 +16,6 @@ export default function Header() {
     }
   };
 
-  const zonesItems = [
-    { href: '/toulouse', label: 'Toulouse' },
-    { href: '/toulouse/capitole', label: 'Capitole' },
-    { href: '/toulouse/saint-cyprien', label: 'Saint-Cyprien' },
-    { href: '/toulouse/carmes', label: 'Carmes' },
-    { href: '/toulouse/jean-jaures', label: 'Jean Jaurès' },
-    { href: '/toulouse/compans', label: 'Compans' },  ];
 
 
   return (
@@ -90,105 +59,12 @@ export default function Header() {
             Services
           </Link>
 
-          {/* Zones Desservies Dropdown */}
-          <div 
-            ref={zonesDropdownRef}
-            className="relative"
-            onKeyDown={(e) => handleKeyDown(e, 'zones')}
-          >
-            <button
-              className="hover:text-brand-secondary transition-colors flex items-center gap-1"
-              onClick={() => setIsZonesDropdownOpen(!isZonesDropdownOpen)}
-              onKeyDown={(e) => e.key === 'Enter' && setIsZonesDropdownOpen(!isZonesDropdownOpen)}
-              aria-haspopup="menu"
-              aria-expanded={isZonesDropdownOpen}
-            >
-              Zones desservies
-              <svg 
-                className={`w-4 h-4 transition-transform ${isZonesDropdownOpen ? 'rotate-180' : ''}`} 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {isZonesDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur rounded-lg shadow-lg border border-white/20 py-2">
-                <div className="px-4 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide">
-                  Zones de départ
-                </div>
-                {zonesItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
-                    onClick={() => {
-                      setIsZonesDropdownOpen(false);
-                      trackClick(`zones-${item.label.toLowerCase()}`);
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-                <div className="border-t border-gray-200 my-2"></div>
-                <div className="px-4 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide">
-                  Destinations fréquentes
-                </div>
-                <Link
-                  href="/toulouse-vers-paris"
-                  className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
-                  onClick={() => {
-                    setIsZonesDropdownOpen(false);
-                    trackClick('corridor-paris');
-                  }}
-                >
-                  Toulouse → Paris
-                </Link>
-                <Link
-                  href="/toulouse-vers-lyon"
-                  className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
-                  onClick={() => {
-                    setIsZonesDropdownOpen(false);
-                    trackClick('corridor-lyon');
-                  }}
-                >
-                  Toulouse → Lyon
-                </Link>
-                <Link
-                  href="/toulouse-vers-Toulouse"
-                  className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
-                  onClick={() => {
-                    setIsZonesDropdownOpen(false);
-                    trackClick('corridor-Toulouse');
-                  }}
-                >
-                  Toulouse → Toulouse
-                </Link>
-              </div>
-            )}
-          </div>
-
-          <Link 
-            href="/partenaires" 
-            className="hover:text-brand-secondary transition-colors"
-            onClick={() => trackClick('partenaires')}
-          >
-            Partenaires
-          </Link>
-          <Link 
+          <Link
             href="/blog" 
             className="hover:text-brand-secondary transition-colors"
             onClick={() => trackClick('blog')}
           >
             Blog
-          </Link>
-          <Link 
-            href="/faq" 
-            className="hover:text-brand-secondary transition-colors"
-            onClick={() => trackClick('faq')}
-          >
-            FAQ
           </Link>
         </nav>
 
@@ -248,59 +124,17 @@ export default function Header() {
               Services
             </Link>
 
-            {/* Zones desservies */}
-            <div>
-              <div className="text-sm font-semibold text-gray-800 mb-2">Zones desservies</div>
-              <div className="space-y-2 ml-4">
-                {zonesItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block text-sm text-gray-600 hover:text-gray-800 transition-colors"
-                    onClick={() => {
-                      setIsMobileMenuOpen(false);
-                      trackClick(`mobile-zones-${item.label.toLowerCase()}`);
-                    }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Autres liens */}
-            <div className="space-y-2">
-              <Link
-                href="/partenaires"
-                className="block text-sm font-semibold text-gray-800 hover:text-gray-600 transition-colors"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  trackClick('mobile-partenaires');
-                }}
-              >
-                Partenaires
-              </Link>
-              <Link
-                href="/blog"
-                className="block text-sm font-semibold text-gray-800 hover:text-gray-600 transition-colors"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  trackClick('mobile-blog');
-                }}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/faq"
-                className="block text-sm font-semibold text-gray-800 hover:text-gray-600 transition-colors"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  trackClick('mobile-faq');
-                }}
-              >
-                FAQ
-              </Link>
-            </div>
+            {/* Blog */}
+            <Link
+              href="/blog"
+              className="block text-sm font-semibold text-gray-800 hover:text-gray-600 transition-colors"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                trackClick('mobile-blog');
+              }}
+            >
+              Blog
+            </Link>
 
             {/* CTA Mobile */}
             <div className="pt-4 border-t border-gray-200">

@@ -9,13 +9,13 @@ export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
     title: `Déménagement Premium ${city.nameCapitalized} — Dès 1200€`,
-    description: `Formule premium pour déménager à ${city.nameCapitalized}. Service tout compris haut de gamme. Estimation IA gratuite, devis sous 7j. À partir de 1200€.`,
+    description: `Déménagement premium ${city.nameCapitalized} dès 1200-2000€ : service haut de gamme tout compris. Estimation IA gratuite, 5 devis sous 7j. Volume identique, déménageurs premium. Soigné..`,
     alternates: {
       canonical: getCanonicalUrl(`services/demenagement-premium-${city.slug}`),
     },
     openGraph: {
       title: `Déménagement Premium ${city.nameCapitalized}`,
-      description: `Formule premium pour déménager à ${city.nameCapitalized}`,
+      description: `Déménagement premium ${city.nameCapitalized} dès 1200-2000€ : haut de gamme tout compris. Estimation IA gratuite, 5 devis sous 7j. Volume identique, déménageurs premium. Soigné.`,
       url: getCanonicalUrl(`services/demenagement-premium-${city.slug}`),
       type: 'website',
     },
