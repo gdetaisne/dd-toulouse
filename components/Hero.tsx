@@ -30,14 +30,8 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden text-white">
       <div className="absolute inset-0">
-        {/* Image de fond évocatrice */}
-        <img 
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop"
-          alt="Déménagement professionnel - Équipe de déménageurs"
-          className="w-full h-full object-cover"
-        />
-        {/* Overlay gradient fort pour lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/95 via-[#2b7a78]/90 to-[#04163a]/95" />
+        <div className="h-full w-full bg-hero" />
+        <div className="absolute inset-0 bg-white/0" />
         <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5" />
       </div>
       <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24 lg:py-28">

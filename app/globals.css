@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Animations pour homepage */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-on-scroll {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
 :root {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
