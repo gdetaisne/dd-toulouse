@@ -1,6 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import { getCityData } from '@/lib/cityData';
+
+// Fonction client-side pour résoudre la ville depuis hostname
+function getCityFromHostname(): string {
+  if (typeof window === 'undefined') return 'toulouse';
+  const hostname = window.location.hostname.toLowerCase();
+  // Cas spéciaux
+  if (hostname.includes('toulousain')) return 'toulouse';
+  if (hostname.includes('bordeaux-demenageur')) return 'bordeaux';
+  // Pattern standard: devis-demenageur-ville.fr
+  const cities = ['strasbourg', 'nice', 'lyon', 'marseille', 'nantes', 'lille', 'rennes', 'rouen', 'montpellier', 'toulouse', 'bordeaux'];
+  const found = cities.find(city => hostname.includes(city));
+  return found || 'toulouse';
+}
 
 interface CtaPrimaryProps {
   placement: "hero" | "inline" | "footer";
@@ -12,6 +26,14 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Résoudre cityData dynamiquement
+  const city = useMemo(() => {
+    const citySlug = getCityFromHostname();
+    return getCityData(citySlug);
+  }, []);
+
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,7 +81,7 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
       case "inline":
         return "Notre équipe vous accompagne dans votre projet de déménagement";
       case "footer":
-        return "Rejoignez plus de 1200 clients satisfaits à Toulouse";
+        return `Rejoignez plus de 1200 clients satisfaits à ${city.nameCapitalized}`;
       default:
         return "Estimation gratuite et sans engagement";
     }
@@ -114,7 +136,7 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
                   <svg className="w-6 h-6 text-[#6bcfcf] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Partenaires certifiés à Toulouse</span>
+                  <span>Partenaires certifiés à {city.nameCapitalized}</span>
                 </li>
               </ul>
             </div>

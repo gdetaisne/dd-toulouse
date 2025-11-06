@@ -1,12 +1,52 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { getCityData } from '@/lib/cityData';
+
+// Fonction client-side pour résoudre la ville depuis hostname
+function getCityFromHostname(): string {
+  if (typeof window === 'undefined') return 'toulouse';
+  const hostname = window.location.hostname.toLowerCase();
+  // Cas spéciaux
+  if (hostname.includes('toulousain')) return 'toulouse';
+  if (hostname.includes('bordeaux-demenageur')) return 'bordeaux';
+  // Pattern standard: devis-demenageur-ville.fr
+  const cities = ['strasbourg', 'nice', 'lyon', 'marseille', 'nantes', 'lille', 'rennes', 'rouen', 'montpellier', 'toulouse', 'bordeaux'];
+  const found = cities.find(city => hostname.includes(city));
+  return found || 'toulouse';
+}
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isZonesDropdownOpen, setIsZonesDropdownOpen] = useState(false);
   const zonesDropdownRef = useRef<HTMLDivElement>(null);
+  // Résoudre cityData dynamiquement
+  const city = useMemo(() => {
+    const citySlug = getCityFromHostname();
+    return getCityData(citySlug);
+  }, []);
+
+  // Construire zonesItems dynamiquement depuis cityData
+  const zonesItems = useMemo(() => {
+    return [
+      { href: `/${city.slug}`, label: city.nameCapitalized },
+      ...city.neighborhoods.slice(0, 5).map(n => ({
+        href: `/${city.slug}/${n.slug}`,
+        label: n.name
+      }))
+    ];
+  }, [city]);
+
+  // Construire corridors dynamiquement depuis cityData
+  const corridors = useMemo(() => {
+    return city.corridors.slice(0, 3).map(c => ({
+      href: `/${city.slug}-vers-${c.slug}`,
+      label: `${city.nameCapitalized} → ${c.destination}`
+    }));
+  }, [city]);
+
+
 
   // Fermer les dropdowns quand on clique ailleurs
   useEffect(() => {
@@ -40,13 +80,7 @@ export default function Header() {
     }
   };
 
-  const zonesItems = [
-    { href: '/toulouse', label: 'Toulouse' },
-    { href: '/toulouse/capitole', label: 'Capitole' },
-    { href: '/toulouse/saint-cyprien', label: 'Saint-Cyprien' },
-    { href: '/toulouse/carmes', label: 'Carmes' },
-    { href: '/toulouse/jean-jaures', label: 'Jean Jaurès' },
-    { href: '/toulouse/compans', label: 'Compans' },  ];
+
 
 
   return (
@@ -66,7 +100,7 @@ export default function Header() {
           <div className="text-white font-semibold tracking-wide text-sm md:text-base leading-tight flex flex-col w-28 md:w-32">
             <span>Devis</span>
             <span>Déménageur</span>
-            <span>Toulouse</span>
+            <span>{city.nameCapitalized}</span>
           </div>
         </Link>
 
@@ -135,36 +169,19 @@ export default function Header() {
                 <div className="px-4 py-2 text-xs font-semibold text-gray-600 uppercase tracking-wide">
                   Destinations fréquentes
                 </div>
-                <Link
-                  href="/toulouse-vers-paris"
-                  className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
-                  onClick={() => {
-                    setIsZonesDropdownOpen(false);
-                    trackClick('corridor-paris');
-                  }}
-                >
-                  Toulouse → Paris
-                </Link>
-                <Link
-                  href="/toulouse-vers-lyon"
-                  className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
-                  onClick={() => {
-                    setIsZonesDropdownOpen(false);
-                    trackClick('corridor-lyon');
-                  }}
-                >
-                  Toulouse → Lyon
-                </Link>
-                <Link
-                  href="/toulouse-vers-Toulouse"
-                  className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
-                  onClick={() => {
-                    setIsZonesDropdownOpen(false);
-                    trackClick('corridor-Toulouse');
-                  }}
-                >
-                  Toulouse → Toulouse
-                </Link>
+                {corridors.map((corridor) => (
+                  <Link
+                    key={corridor.href}
+                    href={corridor.href}
+                    className="block px-4 py-2 text-gray-800 hover:bg-white/50 transition-colors"
+                    onClick={() => {
+                      setIsZonesDropdownOpen(false);
+                      trackClick(`corridor-${corridor.href.split('-vers-')[1]}`);
+                    }}
+                  >
+                    {corridor.label}
+                  </Link>
+                ))}
               </div>
             )}
           </div>
