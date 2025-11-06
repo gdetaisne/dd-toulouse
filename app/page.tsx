@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getCityDataFromUrl } from "@/lib/cityData";
 import { env } from "@/lib/env";
+import { getCanonicalAlternates } from "@/lib/canonical-helper";
 import Hero from "@/components/Hero";
 import ValueTriad from "@/components/ValueTriad";
 import HowItWorks from "@/components/HowItWorks";
@@ -17,6 +18,7 @@ export const metadata: Metadata = (() => {
     title: `Déménagement ${city.nameCapitalized} — 5 Devis IA Comparables Gratuits`,
     description:
       `Déménagez à ${city.nameCapitalized} dès 280€. IA analyse vos photos → 5 devis comparables sous 7j. Gratuit, sans appels. 1200+ clients ⭐4.9/5`,
+    ...getCanonicalAlternates(''),
   };
 })();
 
