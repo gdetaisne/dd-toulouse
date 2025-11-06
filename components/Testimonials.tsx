@@ -1,22 +1,46 @@
+"use client";
+
+import { useMemo } from 'react';
+import { getCityData } from '@/lib/cityData';
+
+// Fonction client-side pour résoudre la ville depuis hostname
+function getCityFromHostname(): string {
+  if (typeof window === 'undefined') return 'toulouse';
+  const hostname = window.location.hostname.toLowerCase();
+  if (hostname.includes('toulousain')) return 'toulouse';
+  if (hostname.includes('bordeaux-demenageur')) return 'bordeaux';
+  const cities = ['strasbourg', 'nice', 'lyon', 'marseille', 'nantes', 'lille', 'rennes', 'rouen', 'montpellier', 'toulouse', 'bordeaux'];
+  const found = cities.find(city => hostname.includes(city));
+  return found || 'toulouse';
+}
+
 import Image from "next/image";
 
 export default function Testimonials() {
+  const city = useMemo(() => {
+    const citySlug = getCityFromHostname();
+    return getCityData(citySlug);
+  }, []);
+
+  // Utiliser les 3 premiers quartiers de la ville
+  const neighborhoods = city.neighborhoods.slice(0, 3);
+
   const testimonials = [
     {
       name: "Marie L.",
-      location: "Vieux Nice",
+      location: neighborhoods[0]?.name || city.nameCapitalized,
       text: "Estimation très précise, équipe pro. Déménagement sans stress.",
       avatar: "/images/testimonials/avatar-1.jpg"
     },
     {
       name: "Thomas B.", 
-      location: "Cimiez",
+      location: neighborhoods[1]?.name || city.nameCapitalized,
       text: "L'IA a bien évalué le volume. Prix correct, service impeccable.",
       avatar: "/images/testimonials/avatar-2.jpg"
     },
     {
       name: "Sophie M.",
-      location: "Promenade des Anglais", 
+      location: neighborhoods[2]?.name || city.nameCapitalized, 
       text: "Gain de temps énorme avec l'estimation photo. Recommande.",
       avatar: "/images/testimonials/avatar-3.jpg"
     }

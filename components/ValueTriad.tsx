@@ -1,4 +1,25 @@
+"use client";
+
+import { useMemo } from 'react';
+import { getCityData } from '@/lib/cityData';
+
+// Fonction client-side pour résoudre la ville depuis hostname
+function getCityFromHostname(): string {
+  if (typeof window === 'undefined') return 'toulouse';
+  const hostname = window.location.hostname.toLowerCase();
+  if (hostname.includes('toulousain')) return 'toulouse';
+  if (hostname.includes('bordeaux-demenageur')) return 'bordeaux';
+  const cities = ['strasbourg', 'nice', 'lyon', 'marseille', 'nantes', 'lille', 'rennes', 'rouen', 'montpellier', 'toulouse', 'bordeaux'];
+  const found = cities.find(city => hostname.includes(city));
+  return found || 'toulouse';
+}
+
 export default function ValueTriad() {
+  const city = useMemo(() => {
+    const citySlug = getCityFromHostname();
+    return getCityData(citySlug);
+  }, []);
+
   const values = [
     {
       icon: "🎯",
@@ -22,7 +43,7 @@ export default function ValueTriad() {
       icon: "🏆",
       iconBg: "from-amber-500/20 to-yellow-500/20",
       title: "Experts locaux",
-      description: "Déménageurs qualifiés (ex. Nice & Gironde)"
+      description: `Déménageurs qualifiés (ex. ${city.nameCapitalized} & Gironde)`
     }
   ];
 
