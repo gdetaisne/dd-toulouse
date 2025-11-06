@@ -13,7 +13,7 @@ excerpt: "Déménagement de voiture à Toulouse : transport de véhicule sécuri
 
 Le **déménagement voiture toulouse** vous offre un transport de véhicule sécurisé pour tous vos besoins de déménagement. Que vous ayez une voiture particulière, un véhicule utilitaire ou un camion, notre équipement spécialisé et notre équipe formée garantissent la sécurité de votre véhicule. Découvrez nos solutions de **déménagement voiture toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
+Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/general/demenageur-toulouse).
 
 ## Pourquoi faire appel à un spécialiste du transport de voiture ?
 

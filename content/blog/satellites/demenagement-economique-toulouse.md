@@ -13,7 +13,7 @@ excerpt: "Déménagement économique à Toulouse : solutions pas chères et effi
 
 Le **déménagement économique toulouse** vous offre des solutions pas chères et efficaces pour tous les budgets. Que vous soyez étudiant, jeune actif ou famille, notre service économique vous propose des formules adaptées à vos contraintes financières. Découvrez nos solutions de **déménagement économique toulouse** pour déménager sans vous ruiner.
 
-Pour comprendre tous les aspects du déménagement économique à Toulouse, consultez notre [guide complet déménagement pas cher Toulouse](/blog/pas-cher/demenagement-pas-cher-toulouse).
+Pour comprendre tous les aspects du déménagement économique à Toulouse, consultez notre [guide complet déménagement pas cher Toulouse](/blog/general/demenagement-pas-cher-toulouse).
 
 ## Pourquoi choisir un déménagement économique à Toulouse ?
 

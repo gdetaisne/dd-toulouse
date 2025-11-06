@@ -3,6 +3,8 @@ import CtaPrimary from "@/components/CtaPrimary";
 import { getCanonicalUrl } from "@/lib/canonical-helper";
 import { getCityDataFromUrl } from "@/lib/cityData";
 import { env } from "@/lib/env";
+import { buildServiceSchema } from "@/lib/schema/service";
+import { buildFaqPageSchema } from "@/lib/schema/faq";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = (() => {
@@ -39,7 +41,7 @@ export default function DemenagementEconomiquePage() {
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Services", href: "/services" },
-                { label: "Déménagement Économique", href: "/services/demenagement-economique-${city.slug}" }
+                { label: "Déménagement Économique", href: `/services/demenagement-economique-${city.slug}/` }
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
@@ -273,6 +275,49 @@ export default function DemenagementEconomiquePage() {
 
       {/* CTA Section */}
       <CtaPrimary placement="inline" label="Prêt pour votre déménagement économique ?" />
+
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            ...buildServiceSchema({
+              name: `Déménagement Économique ${city.nameCapitalized}`,
+              serviceType: "Déménagement Économique",
+              url: getCanonicalUrl(`services/demenagement-economique-${city.slug}`),
+              areaServed: [city.nameCapitalized],
+              priceRange: "€",
+            }),
+            provider: {
+              "@type": "Organization",
+              "@id": `${city.siteUrl}/#organization`,
+              "name": `Déménageurs ${city.nameCapitalized} (IA)`,
+              "url": city.siteUrl,
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            buildFaqPageSchema([
+              {
+                question: "Est-ce que je dois préparer mes cartons moi-même ?",
+                answer: "Oui, dans la formule économique, vous devez préparer vos cartons vous-même. C'est ce qui permet de maintenir des tarifs aussi attractifs. Nous nous chargeons uniquement du chargement, transport et livraison.",
+              },
+              {
+                question: "Y a-t-il une assurance de base incluse ?",
+                answer: "Oui, l'assurance responsabilité civile du déménageur est incluse. Elle couvre les dommages causés lors du transport. Pour une protection renforcée, nous recommandons la formule standard.",
+              },
+              {
+                question: "Puis-je ajouter des services à la carte ?",
+                answer: "Oui, vous pouvez ajouter des services complémentaires comme l'emballage d'objets fragiles ou le démontage de meubles. Ces options sont facturées en supplément et peuvent être ajoutées lors de votre devis.",
+              },
+            ])
+          ),
+        }}
+      />
     </main>
   );
 }

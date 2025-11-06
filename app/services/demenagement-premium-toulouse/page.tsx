@@ -3,6 +3,8 @@ import CtaPrimary from "@/components/CtaPrimary";
 import { getCanonicalUrl } from "@/lib/canonical-helper";
 import { getCityDataFromUrl } from "@/lib/cityData";
 import { env } from "@/lib/env";
+import { buildServiceSchema } from "@/lib/schema/service";
+import { buildFaqPageSchema } from "@/lib/schema/faq";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = (() => {
@@ -39,7 +41,7 @@ export default function DemenagementPremiumPage() {
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Services", href: "/services" },
-                { label: "Déménagement Premium", href: "/services/demenagement-premium-${city.slug}" }
+                { label: "Déménagement Premium", href: `/services/demenagement-premium-${city.slug}/` }
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
@@ -297,6 +299,49 @@ export default function DemenagementPremiumPage() {
 
       {/* CTA Section */}
       <CtaPrimary placement="inline" label="Prêt pour votre déménagement premium ?" />
+
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            ...buildServiceSchema({
+              name: `Déménagement Premium ${city.nameCapitalized}`,
+              serviceType: "Déménagement Premium",
+              url: getCanonicalUrl(`services/demenagement-premium-${city.slug}`),
+              areaServed: [city.nameCapitalized],
+              priceRange: "€€€",
+            }),
+            provider: {
+              "@type": "Organization",
+              "@id": `${city.siteUrl}/#organization`,
+              "name": `Déménageurs ${city.nameCapitalized} (IA)`,
+              "url": city.siteUrl,
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            buildFaqPageSchema([
+              {
+                question: "Est-ce que je peux ne rien faire moi-même ?",
+                answer: "Oui, absolument ! Dans la formule premium, vous n'avez rien à faire. L'équipe s'occupe de tout : emballage, démontage, transport, installation, nettoyage. C'est un déménagement clé-en-main complet.",
+              },
+              {
+                question: "Y a-t-il un suivi personnalisé ?",
+                answer: "Oui, un chef d'équipe dédié coordonne tout le déménagement. Il est votre interlocuteur unique et vous tient informé à chaque étape. Vous avez aussi accès à un support dédié 24/7.",
+              },
+              {
+                question: "Que se passe-t-il si j'ai des objets très fragiles ?",
+                answer: "La formule premium inclut l'emballage spécialisé pour tous les objets fragiles : vaisselle, électronique, objets d'art, instruments de musique. Nos équipes sont formées aux techniques de protection haut de gamme.",
+              },
+            ])
+          ),
+        }}
+      />
     </main>
   );
 }
