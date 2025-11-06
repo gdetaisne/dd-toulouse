@@ -197,7 +197,7 @@ export default function Home() {
 
       {/* 7. FAQ locales */}
       <section className="py-12 md:py-16">
-        <LocalMoneyFAQ citySlug="nice" cityName="Nice" />
+        <LocalMoneyFAQ citySlug={city.slug} cityName={city.nameCapitalized} />
       </section>
 
       {/* 8. Guides photos */}
