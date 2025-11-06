@@ -360,13 +360,13 @@ export default function ServicesPage() {
                 📚 Guides pratiques
               </h3>
               <div className="space-y-4">
-                <a href="/blog/demenagement-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Guide complet du déménagement à {city.nameCapitalized}
                 </a>
-                <a href="/blog/cartons-demenagement/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Combien de cartons prévoir ?
                 </a>
-                <a href="/blog/prix-demenagement-2025/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/blog/prix/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Prix déménagement 2025 : tout comprendre
                 </a>
                 <a href="/blog/" className="block text-white/70 hover:text-white text-sm transition-colors mt-6">

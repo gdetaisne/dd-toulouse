@@ -543,13 +543,13 @@ export default function FAQPage() {
                 📚 Guides pratiques
               </h3>
               <div className="space-y-3">
-                <a href="/blog/demenagement-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Guide complet déménagement
                 </a>
-                <a href="/blog/cartons-demenagement/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Combien de cartons prévoir ?
                 </a>
-                <a href="/blog/prix-demenagement-2025/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/blog/prix/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Prix 2025 : tout comprendre
                 </a>
               </div>
