@@ -13,7 +13,7 @@ excerpt: "Transport de meubles à l'international depuis Toulouse : solutions pr
 
 Le **transport meuble international toulouse** nécessite une expertise particulière et un équipement spécialisé pour garantir la sécurité de vos biens précieux. Que vous déménagiez vers l'Europe, l'Amérique ou l'Asie, notre service professionnel vous accompagne dans cette aventure. Découvrez nos solutions de **transport meuble international toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour comprendre tous les aspects du déménagement international depuis Toulouse, consultez notre [guide complet déménagement international Toulouse](/blog/general/demenagement-international-toulouse).
+Pour comprendre tous les aspects du déménagement international depuis Toulouse, consultez notre [guide complet déménagement international Toulouse](/blog/international/demenagement-international-toulouse).
 
 ## Pourquoi faire appel à un spécialiste du transport de meubles ?
 

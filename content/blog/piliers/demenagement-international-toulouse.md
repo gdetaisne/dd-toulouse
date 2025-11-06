@@ -18,23 +18,23 @@ Déménager à l'international depuis Toulouse représente un défi complexe qui
 Dans ce guide, nous couvrons tous les aspects du déménagement international depuis Toulouse. Retrouvez nos articles détaillés sur chaque sujet :
 
 **Formalités et Administratif :**
-- [Formalités Déménagement International Toulouse](/blog/conseils/formalites-demenagement-international-toulouse) - Tous les documents et démarches
-- [Douane Déménagement International Toulouse](/blog/conseils/douane-demenagement-international-toulouse) - Réglementations et dédouanement
+- [Formalités Déménagement International Toulouse](/blog/international/formalites-demenagement-international-toulouse) - Tous les documents et démarches
+- [Douane Déménagement International Toulouse](/blog/international/douane-demenagement-international-toulouse) - Réglementations et dédouanement
 
 **Prix et Budget :**
-- [Prix Déménagement International Toulouse](/blog/conseils/prix-demenagement-international-toulouse) - Tarifs détaillés selon destination
+- [Prix Déménagement International Toulouse](/blog/international/prix-demenagement-international-toulouse) - Tarifs détaillés selon destination
 
 **Protection et Assurance :**
-- [Assurance Déménagement International Toulouse](/blog/conseils/assurance-demenagement-international-toulouse) - Couverture complète de vos biens
+- [Assurance Déménagement International Toulouse](/blog/international/assurance-demenagement-international-toulouse) - Couverture complète de vos biens
 
 **Transport et Logistique :**
-- [Transport Meuble International Toulouse](/blog/conseils/transport-meuble-international-toulouse) - Solutions maritime, aérien, routier
-- [Garde-Meuble International Toulouse](/blog/conseils/garde-meuble-international-toulouse) - Stockage temporaire pendant transit
+- [Transport Meuble International Toulouse](/blog/international/transport-meuble-international-toulouse) - Solutions maritime, aérien, routier
+- [Garde-Meuble International Toulouse](/blog/international/garde-meuble-international-toulouse) - Stockage temporaire pendant transit
 
 **Destinations Principales :**
-- [Déménagement France Angleterre depuis Toulouse](/blog/conseils/demenagement-france-angleterre-toulouse) - Guide complet UK
-- [Déménagement Toulouse USA](/blog/conseils/demenagement-toulouse-usa) - Expatriation États-Unis
-- [Déménager au Canada depuis Toulouse](/blog/conseils/demenager-au-canada-depuis-toulouse) - Guide expatriation Canada
+- [Déménagement France Angleterre depuis Toulouse](/blog/international/demenagement-france-angleterre-toulouse) - Guide complet UK
+- [Déménagement Toulouse USA](/blog/international/demenagement-toulouse-usa) - Expatriation États-Unis
+- [Déménager au Canada depuis Toulouse](/blog/international/demenager-au-canada-depuis-toulouse) - Guide expatriation Canada
 
 ---
 
@@ -240,16 +240,16 @@ Certains objets ne peuvent pas être transportés :
 **Si vous préparez votre expatriation :**
 
 **Budget et Coûts :**
-Consultez notre [guide des prix déménagement international](/blog/conseils/prix-demenagement-international-toulouse) pour connaître les tarifs détaillés selon votre destination et anticiper votre budget.
+Consultez notre [guide des prix déménagement international](/blog/international/prix-demenagement-international-toulouse) pour connaître les tarifs détaillés selon votre destination et anticiper votre budget.
 
 **Administratif et Douanes :**
-Découvrez nos guides pratiques sur les [formalités déménagement international](/blog/conseils/formalites-demenagement-international-toulouse) et la [gestion douanière](/blog/conseils/douane-demenagement-international-toulouse) pour préparer sereinement vos démarches.
+Découvrez nos guides pratiques sur les [formalités déménagement international](/blog/international/formalites-demenagement-international-toulouse) et la [gestion douanière](/blog/international/douane-demenagement-international-toulouse) pour préparer sereinement vos démarches.
 
 **Protection de vos Biens :**
-Protégez vos biens avec notre [guide assurance déménagement international](/blog/conseils/assurance-demenagement-international-toulouse) qui compare toutes les formules de couverture.
+Protégez vos biens avec notre [guide assurance déménagement international](/blog/international/assurance-demenagement-international-toulouse) qui compare toutes les formules de couverture.
 
 **Destinations Spécifiques :**
-Consultez nos guides par destination : [déménagement vers le UK](/blog/conseils/demenagement-france-angleterre-toulouse), [expatriation aux USA](/blog/conseils/demenagement-toulouse-usa), ou [déménager au Canada](/blog/conseils/demenager-au-canada-depuis-toulouse).
+Consultez nos guides par destination : [déménagement vers le UK](/blog/international/demenagement-france-angleterre-toulouse), [expatriation aux USA](/blog/international/demenagement-toulouse-usa), ou [déménager au Canada](/blog/international/demenager-au-canada-depuis-toulouse).
 
 ---
 

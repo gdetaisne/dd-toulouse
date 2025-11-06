@@ -13,7 +13,7 @@ excerpt: "Déménagement d'hélicoptère à Toulouse : transport aérien spécia
 
 Le **déménagement hélicoptère toulouse** vous offre un transport aérien spécialisé pour tous vos besoins de déménagement. Que vous ayez un hélicoptère de tourisme, un hélicoptère de collection ou un hélicoptère de sport, notre équipement spécialisé et notre équipe formée garantissent la sécurité de votre aéronef. Découvrez nos solutions de **déménagement hélicoptère toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/general/demenageur-toulouse).
+Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
 
 ## Pourquoi faire appel à un spécialiste du transport d'hélicoptère ?
 

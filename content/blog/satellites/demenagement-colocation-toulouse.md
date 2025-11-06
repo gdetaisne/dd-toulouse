@@ -13,7 +13,7 @@ excerpt: "Déménagement de colocation à Toulouse : solutions économiques et p
 
 Le **déménagement colocation toulouse** nécessite des solutions économiques et pratiques adaptées aux contraintes budgétaires et logistiques des colocations. Que vous changiez de logement ou que vous arriviez à Toulouse, notre service spécialisé vous propose des formules adaptées. Découvrez nos solutions de **déménagement colocation toulouse** pour déménager sans vous ruiner.
 
-Pour découvrir toutes nos solutions petit déménagement à Toulouse, consultez notre [guide complet petit déménagement Toulouse](/blog/general/petit-demenagement-toulouse).
+Pour découvrir toutes nos solutions petit déménagement à Toulouse, consultez notre [guide complet petit déménagement Toulouse](/blog/etudiant/petit-demenagement-toulouse).
 
 ## Pourquoi un service spécialisé pour les colocations ?
 

@@ -13,7 +13,7 @@ excerpt: "Équipe déménagement à Toulouse : professionnels expérimentés et 
 
 L'**équipe déménagement toulouse** est composée de professionnels expérimentés et qualifiés. Que vous déménagiez un studio ou une maison, notre **équipe professionnelle toulouse** vous garantit un service de qualité. Découvrez notre **équipe déménagement toulouse** adaptée à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services de déménagement à Toulouse, consultez notre [guide complet déménageur Toulouse](/blog/general/demenageur-toulouse).
+Pour découvrir tous nos services de déménagement à Toulouse, consultez notre [guide complet déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
 
 ## Pourquoi choisir notre équipe ?
 

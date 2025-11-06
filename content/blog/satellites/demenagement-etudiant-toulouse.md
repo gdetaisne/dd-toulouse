@@ -13,7 +13,7 @@ excerpt: "Déménagement étudiant à Toulouse : solutions économiques et adapt
 
 Déménager pendant ses études à Toulouse peut représenter un défi budgétaire important. Que vous arriviez pour la rentrée, que vous changiez de logement, ou que vous partiez en stage, notre service de **déménagement étudiant toulouse** vous propose des solutions adaptées à votre budget et à vos contraintes. Découvrez nos formules spéciales, nos conseils pratiques, et nos astuces pour un **déménagement pas cher toulouse** réussi pendant vos études.
 
-Pour découvrir toutes nos solutions petit déménagement à Toulouse, consultez notre [guide complet petit déménagement Toulouse](/blog/general/petit-demenagement-toulouse).
+Pour découvrir toutes nos solutions petit déménagement à Toulouse, consultez notre [guide complet petit déménagement Toulouse](/blog/etudiant/petit-demenagement-toulouse).
 
 ## Pourquoi un service spécialisé pour les étudiants ?
 

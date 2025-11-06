@@ -13,7 +13,7 @@ excerpt: "Entraide déménagement à Toulouse : échangez vos services, trouvez 
 
 L'entraide déménagement à Toulouse est une solution économique et solidaire pour réduire les coûts de votre déménagement. Que vous ayez besoin d'aide pour porter vos meubles ou que vous souhaitiez rendre service à d'autres, l'entraide vous permet d'économiser tout en créant du lien social. Découvrez comment organiser un **déménagement pas cher toulouse** grâce à l'entraide et à la solidarité entre voisins, amis et membres de la communauté.
 
-Pour comprendre tous les aspects du déménagement économique à Toulouse, consultez notre [guide complet déménagement pas cher Toulouse](/blog/general/demenagement-pas-cher-toulouse).
+Pour comprendre tous les aspects du déménagement économique à Toulouse, consultez notre [guide complet déménagement pas cher Toulouse](/blog/pas-cher/demenagement-pas-cher-toulouse).
 
 ## Qu'est-ce que l'entraide déménagement ?
 

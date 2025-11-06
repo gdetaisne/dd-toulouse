@@ -13,7 +13,7 @@ excerpt: "Monte-charge piano à Toulouse : solutions pour transporter votre pian
 
 Le **monte-charge piano toulouse** vous offre des solutions sécurisées pour transporter votre piano aux étages. Que vous ayez un piano droit ou un piano à queue, notre équipement spécialisé et notre équipe formée garantissent la sécurité de votre instrument. Découvrez nos solutions de **monte-charge piano toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour comprendre tous les aspects du déménagement de piano à Toulouse, consultez notre [guide complet déménagement piano Toulouse](/blog/general/demenagement-piano-toulouse).
+Pour comprendre tous les aspects du déménagement de piano à Toulouse, consultez notre [guide complet déménagement piano Toulouse](/blog/piano/demenagement-piano-toulouse).
 
 ## Pourquoi utiliser un monte-charge pour le piano ?
 

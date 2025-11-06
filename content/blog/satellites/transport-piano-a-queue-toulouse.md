@@ -13,7 +13,7 @@ excerpt: "Transport de piano à queue à Toulouse : expertise et sécurité maxi
 
 Le **transport piano à queue toulouse** représente le défi le plus complexe et délicat de notre métier. Avec un poids de 300 à 500 kg et des dimensions imposantes, le piano à queue nécessite une expertise particulière et un équipement spécialisé. Découvrez nos solutions de **transport piano à queue toulouse** pour garantir la sécurité de votre instrument le plus précieux.
 
-Pour comprendre tous les aspects du déménagement de piano à Toulouse, consultez notre [guide complet déménagement piano Toulouse](/blog/general/demenagement-piano-toulouse).
+Pour comprendre tous les aspects du déménagement de piano à Toulouse, consultez notre [guide complet déménagement piano Toulouse](/blog/piano/demenagement-piano-toulouse).
 
 ## Pourquoi le piano à queue est-il si délicat à transporter ?
 
