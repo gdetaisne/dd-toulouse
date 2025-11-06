@@ -75,9 +75,9 @@ const nextConfig = {
       { source: '/blog/devis', destination: '/blog', permanent: true },
       
       // LEADGEN-02: Redirections 404 prioritaires (Toulouse - 06/11/2025)
-      { source: '/blog/international/prix-demenagement-international', destination: '/blog/international/', permanent: true },
-      { source: '/blog/international/demenagement-international-toulouse', destination: '/blog/international/', permanent: true },
-      { source: '/blog/international/demenagement-france-angleterre', destination: '/blog/international/', permanent: true },
+      { source: '/blog/international/prix-demenagement-international', destination: '/blog/demenagement-international-toulouse/', permanent: true },
+      { source: '/blog/international/demenagement-international-toulouse', destination: '/blog/demenagement-international-toulouse/', permanent: true },
+      { source: '/blog/international/demenagement-france-angleterre', destination: '/blog/demenagement-international-toulouse/', permanent: true },
       { source: '/blog/demenagement-piano/monte-charge-piano', destination: '/blog/demenagement-piano-toulouse/', permanent: true },
       { source: '/blog/location-camion/location-utilitaire', destination: '/blog/location-camion-toulouse/', permanent: true },
       { source: '/blog/garde-meuble/box-stockage', destination: '/blog/garde-meuble-toulouse/', permanent: true },
