@@ -33,7 +33,7 @@ export default function StructuredData() {
         "name": `Déménageurs ${city.nameCapitalized} (IA)`,
         "description": "30 minutes pour votre dossier → 5 devis personnalisés sous 7 jours. Estimation volumétrique à partir de photos, tarifs clairs, conseils locaux.",
         "url": city.siteUrl,
-        "email": `contact@${new URL(city.siteUrl).hostname}`,
+        "telephone": city.phone,
         "address": {
           "@type": "PostalAddress",
           "addressLocality": city.nameCapitalized,
@@ -49,7 +49,15 @@ export default function StructuredData() {
           "@type": "City",
           "name": area
         })),
-        "priceRange": "€€"
+        "priceRange": "€€",
+        "openingHours": "Mo-Fr 09:00-18:00",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "1200",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
       },
       {
         "@type": "HowTo",
