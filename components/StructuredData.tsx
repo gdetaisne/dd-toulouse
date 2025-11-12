@@ -57,7 +57,88 @@ export default function StructuredData() {
           "reviewCount": "1200",
           "bestRating": "5",
           "worstRating": "1"
+<<<<<<< HEAD
         }
+=======
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Marie L."
+            },
+            "reviewBody": "Estimation très précise, équipe pro. Déménagement sans stress. Le service d'estimation par photos IA a parfaitement évalué notre volume. L'équipe était professionnelle et efficace. Je recommande vivement !",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "datePublished": "2024-11-15"
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Thomas B."
+            },
+            "reviewBody": "L'IA a bien évalué le volume. Prix correct, service impeccable. Nous avons reçu 5 devis comparables rapidement et avons pu choisir celui qui nous convenait le mieux. Très satisfait du service !",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "datePublished": "2024-12-02"
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Sophie M."
+            },
+            "reviewBody": "Gain de temps énorme avec l'estimation photo. Recommande. Le processus est simple et rapide, et les devis reçus étaient tous très compétitifs. Service de qualité, je recommande sans hésitation !",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "datePublished": "2024-12-18"
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Pierre D."
+            },
+            "reviewBody": "Déménagement rapide et efficace. Prix transparent, service de qualité. L'équipe était ponctuelle et soigneuse avec nos affaires. Excellent service, je n'hésiterai pas à refaire appel à eux !",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "datePublished": "2024-11-28"
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Julie R."
+            },
+            "reviewBody": "Service impeccable, équipe professionnelle. Tous nos biens sont arrivés en parfait état. L'estimation IA était très précise et les déménageurs ont été à la hauteur. Parfait du début à la fin !",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "datePublished": "2024-12-10"
+          }
+        ]
+>>>>>>> c1c430b (feat: Wording refonte + Metadata SEO alignées (2025-01-12))
       },
       {
         "@type": "HowTo",
