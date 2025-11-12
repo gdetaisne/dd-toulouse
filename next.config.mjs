@@ -92,7 +92,8 @@ const nextConfig = {
       { source: '/blog/aide/:slug*', destination: '/blog/aide-demenagement-toulouse/:slug*', permanent: true },
       { source: '/blog/demenagement/:slug*', destination: '/blog/demenagement-toulouse/:slug*', permanent: true },
       { source: '/blog/prix/:slug*', destination: '/blog/prix-demenagement-toulouse/:slug*', permanent: true },
-      { source: '/blog/satellites/:slug*', destination: '/blog/satellites/:slug*', permanent: true },
+      // NOTE: Redirection /blog/satellites/:slug* → /blog/satellites/:slug* supprimée (TASK-060)
+      // Cette redirection vers soi-même causait une erreur d'indexation dans GSC
     ];
   }
 };

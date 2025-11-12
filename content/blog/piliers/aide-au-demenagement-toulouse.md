@@ -16,7 +16,7 @@ Vous gérez vous-même votre déménagement mais avez besoin d'un **coup de main
 ## 📚 Notre Dossier Complet : Aide au Déménagement Toulouse
 
 **Services d'Assistance :**
-- [Porteurs Déménagement Toulouse](/blog/aide/porteurs-demenagement-toulouse) - Aide professionnelle pour le portage
+- [Porteurs Déménagement Toulouse](/blog/piliers/porteurs-demenagement-toulouse) - Aide professionnelle pour le portage
 
 ---
 

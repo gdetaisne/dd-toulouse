@@ -57,9 +57,6 @@ export default function StructuredData() {
           "reviewCount": "1200",
           "bestRating": "5",
           "worstRating": "1"
-<<<<<<< HEAD
-        }
-=======
         },
         "review": [
           {
@@ -138,7 +135,6 @@ export default function StructuredData() {
             "datePublished": "2024-12-10"
           }
         ]
->>>>>>> c1c430b (feat: Wording refonte + Metadata SEO alignées (2025-01-12))
       },
       {
         "@type": "HowTo",

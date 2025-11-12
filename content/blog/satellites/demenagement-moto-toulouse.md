@@ -13,7 +13,7 @@ excerpt: "Déménagement de moto à Toulouse : transport de deux-roues sécuris�
 
 Le **déménagement moto toulouse** vous offre un transport de deux-roues sécurisé pour tous vos besoins de déménagement. Que vous ayez une moto, un scooter ou un vélo, notre équipement spécialisé et notre équipe formée garantissent la sécurité de votre véhicule. Découvrez nos solutions de **déménagement moto toulouse** adaptées à tous vos besoins et contraintes.
 
-Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/demenageur/demenageur-toulouse).
+Pour découvrir tous nos services spécialisés à Toulouse, consultez notre [guide déménageur Toulouse](/blog/piliers/demenageur-toulouse).
 
 ## Pourquoi faire appel à un spécialiste du transport de moto ?
 
