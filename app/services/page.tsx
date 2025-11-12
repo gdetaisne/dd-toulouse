@@ -384,7 +384,7 @@ export default function ServicesPage() {
                 <a href={`/${city.slug}/`} className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Déménagement {city.nameCapitalized} (vue d'ensemble)
                 </a>
-                <a href="/quartiers-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/quartiers-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Tous les quartiers de {city.nameCapitalized}
                 </a>
                 <a href="/faq/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
