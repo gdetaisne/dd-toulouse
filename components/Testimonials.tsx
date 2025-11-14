@@ -27,7 +27,7 @@ export default function Testimonials() {
     <div>
       <div className="text-center mb-10">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-4">
-          Ils nous ont fait confiance
+          Ils nous ont fait confiance à {city.nameCapitalized}
         </h2>
         <div className="flex items-center justify-center gap-2 text-yellow-300 text-xl">
           ⭐⭐⭐⭐⭐<span className="text-white/70 text-sm md:text-base ml-2">{ratingLabel} sur 1200+ avis</span>
@@ -58,7 +58,6 @@ export default function Testimonials() {
                   <div className="text-sm text-white/60">
                     {location ?? city.nameCapitalized}
                   </div>
-                  <div className="text-xs text-white/50 mt-1">{review.role}</div>
                 </div>
               </div>
               <p className="text-white/85 italic leading-relaxed text-sm md:text-base">{review.body}</p>
