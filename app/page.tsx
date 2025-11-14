@@ -68,8 +68,8 @@ export default function Home() {
                     La différence Moverz
                   </h3>
                   <p className="text-white/80 leading-relaxed">
-                    Notre IA analyse vos photos pour créer <strong className="text-[#6bcfcf]">un inventaire unique</strong>. 
-                    Tous les déménageurs chiffrent le même volume → vous comparez enfin ce qui est comparable.
+                    Notre IA analyse vos photos pour créer <strong className="text-[#6bcfcf]">UN inventaire unique</strong>. 
+                    Minimum 5 pros contrôlés chiffrent LE MÊME volume → vous comparez enfin ce qui est comparable.
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2 text-sm text-[#6bcfcf]">
                     <span>✓</span>
