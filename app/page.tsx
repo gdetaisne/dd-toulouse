@@ -15,9 +15,9 @@ import LocalMoneyFAQ from "@/components/LocalMoneyFAQ";
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
-    title: `Déménagement ${city.nameCapitalized} — Devis Vraiment Comparables`,
+    title: `Déménagement ${city.nameCapitalized} — 5 Devis IA Comparables Gratuits`,
     description:
-      `Le seul comparateur où vous comparez vraiment. IA calcule votre volume → 3-5 devis sur la même base sous 7j. Dossier anonyme, gratuit. 1200+ clients ⭐4.9/5`,
+      `Déménagez à ${city.nameCapitalized} dès 280€. IA analyse vos photos → 5 devis comparables sous 7j. Gratuit, sans appels. 1200+ clients ⭐4.9/5`,
     ...getCanonicalAlternates(''),
   };
 })();

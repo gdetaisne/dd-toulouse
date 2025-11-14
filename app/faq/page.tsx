@@ -549,7 +549,7 @@ export default function FAQPage() {
                 <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Combien de cartons prévoir ?
                 </a>
-                <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/blog/prix/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Prix 2025 : tout comprendre
                 </a>
               </div>

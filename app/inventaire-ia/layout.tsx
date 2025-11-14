@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
 import { getCanonicalAlternates } from "@/lib/canonical-helper";
-import { getCityDataFromUrl } from "@/lib/cityData";
-import { env } from "@/lib/env";
 
-export const metadata: Metadata = (() => {
-  const city = getCityDataFromUrl(env.SITE_URL);
-  return {
-    title: `Devis Précis ${city.nameCapitalized} — Volume IA Identique Pour Tous`,
-    description: "Comparez des devis vraiment comparables grâce à l'IA. Volume identique envoyé à tous les déménageurs → 3-5 devis précis sous 7j. Gratuit.",
-    ...getCanonicalAlternates('inventaire-ia'),
-  };
-})();
+export const metadata: Metadata = {
+  title: "Inventaire IA — Analyse Automatique de vos Objets",
+  description: "Analyse automatique de vos objets pour un inventaire précis et optimisé. Obtenez un inventaire détaillé avec dimensions et volumes.",
+  ...getCanonicalAlternates('inventaire-ia'),
+};
 
 export default function InventaireIALayout({
   children,

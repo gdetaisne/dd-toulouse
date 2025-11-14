@@ -3,12 +3,8 @@
 import React from 'react';
 import { getBuildInfo } from '@/lib/buildInfo';
 import { event as gaEvent } from '@/lib/ga4';
-import { getCityDataFromUrl } from '@/lib/cityData';
-import { env } from '@/lib/env';
-import PhotoGuidelines from '@/components/PhotoGuidelines';
 
 export default function InventaireIAPage() {
-  const city = getCityDataFromUrl(env.SITE_URL);
   
   const handleEstimateClick = () => {
     gaEvent('estimate_cost_click', {
@@ -32,17 +28,17 @@ export default function InventaireIAPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-white">
-                Devis précis
+                Inventaire IA
               </h1>
               <p className="mt-2 text-lg text-white/80">
-                Comparez des devis vraiment comparables grâce à l'IA
+                Analyse automatique de vos objets pour un déménagement optimisé
               </p>
             </div>
             <div className="hidden sm:block">
               <div className="flex flex-col items-end space-y-2">
                 <div className="flex items-center space-x-4">
                   <span className="text-sm text-white/70">Propulsé par</span>
-                  <span className="text-lg font-semibold text-[#6bcfcf]">Moverz IA</span>
+                  <span className="text-lg font-semibold text-[#6bcfcf]">Moverz AI</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -71,7 +67,7 @@ export default function InventaireIAPage() {
                   <svg className="flex-shrink-0 h-5 w-5 text-white/40" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="ml-4 text-sm font-medium text-white/80">Devis précis</span>
+                  <span className="ml-4 text-sm font-medium text-white/80">Inventaire IA</span>
                 </div>
               </li>
             </ol>
@@ -94,7 +90,7 @@ export default function InventaireIAPage() {
                   Estimer rapidement le coût de mon déménagement
                 </h2>
                 <p className="text-white/80 mb-6">
-                  Estimation personnalisée en quelques clics grâce à notre calculateur intelligent.
+                  Obtenez une estimation personnalisée en quelques clics grâce à notre calculateur intelligent.
                 </p>
               </div>
               
@@ -114,7 +110,7 @@ export default function InventaireIAPage() {
             </div>
           </div>
 
-          {/* Bloc 2: Devis précis (anciennement Inventaire IA) */}
+          {/* Bloc 2: Inventaire IA */}
           <div className="bg-white/5 backdrop-blur rounded-2xl shadow-marketing-xl overflow-hidden border border-white/10">
             <div className="p-8 text-center">
               <div className="mb-6">
@@ -122,10 +118,10 @@ export default function InventaireIAPage() {
                   <span className="text-2xl">🤖</span>
                 </div>
                 <h2 className="text-2xl font-bold text-white mb-2">
-                  Devis précis avec IA
+                  Inventaire IA
                 </h2>
                 <p className="text-white/80 mb-6">
-                  Volume IA identique pour tous → devis vraiment comparables
+                  Analyse automatique de vos objets pour un inventaire précis et optimisé.
                 </p>
               </div>
               
@@ -141,7 +137,7 @@ export default function InventaireIAPage() {
                 </a>
                 
                 <div className="text-sm text-white/60">
-                  <p>30 minutes • 3-5 devis garantis sous 7j</p>
+                  <p>Version beta disponible</p>
                 </div>
               </div>
             </div>
@@ -158,7 +154,7 @@ export default function InventaireIAPage() {
               Comment ça marche ?
             </h2>
             <p className="text-xl text-white/80 mb-12">
-              Une solution simple et efficace pour comparer des devis vraiment comparables
+              Une solution simple et efficace pour votre inventaire de déménagement
             </p>
           </div>
           
@@ -168,10 +164,10 @@ export default function InventaireIAPage() {
                 <span className="text-2xl">📸</span>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">
-                1. Prenez vos photos
+                1. Prenez des photos
               </h3>
               <p className="text-white/80">
-                3-5 photos par pièce depuis votre smartphone (30 minutes)
+                Photographiez vos pièces et objets depuis votre smartphone
               </p>
             </div>
             
@@ -180,32 +176,25 @@ export default function InventaireIAPage() {
                 <span className="text-2xl">🤖</span>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">
-                2. IA calcule votre volume
+                2. Analyse IA
               </h3>
               <p className="text-white/80">
-                Notre IA calcule votre volume exact (ex: 28 m³)
+                Notre IA détecte et analyse automatiquement tous vos objets
               </p>
             </div>
             
             <div className="text-center">
               <div className="bg-[#6bcfcf]/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📤</span>
+                <span className="text-2xl">📋</span>
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">
-                3. Envoyé aux pros vérifiés
+                3. Inventaire complet
               </h3>
               <p className="text-white/80">
-                Volume identique pour tous → devis vraiment comparables
+                Obtenez un inventaire détaillé avec dimensions et volumes
               </p>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Photo Guidelines Section */}
-      <div className="bg-gradient-to-br from-[#04163a]/60 to-[#2b7a78]/20 py-16">
-        <div className="container max-w-7xl mx-auto px-4 md:px-6">
-          <PhotoGuidelines />
         </div>
       </div>
 
@@ -213,20 +202,17 @@ export default function InventaireIAPage() {
       <div className="bg-gradient-to-r from-[#2b7a78] to-[#6bcfcf] py-16">
         <div className="container max-w-7xl mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Prêt pour des devis vraiment comparables ?
+            Prêt pour votre inventaire IA ?
           </h2>
           <p className="text-xl text-white/90 mb-8">
-            30 minutes pour créer votre dossier → 3-5 devis sous 7 jours
+            Commencez dès maintenant votre analyse automatique
           </p>
           <a 
-            href={`/devis-demenagement-${city.slug}/`} 
-            className="inline-flex h-11 items-center justify-center rounded-2xl bg-white px-8 text-sm font-medium text-[#2b7a78] shadow-marketing-xl hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
+            href="/devis-demenagement-nice/" 
+            className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
           >
-            Créer mon dossier gratuit
+            Créer mon dossier
           </a>
-          <div className="mt-6 text-sm text-white/80">
-            <p>100% gratuit • Dossier anonyme • Aucun engagement</p>
-          </div>
         </div>
       </div>
     </div>

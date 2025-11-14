@@ -4,226 +4,221 @@ import CtaPrimary from "@/components/CtaPrimary";
 import Section from "@/components/Section";
 import PartnerCard from "@/components/PartnerCard";
 import PartnersList from "@/components/PartnersList";
-import { getCanonicalUrl } from "@/lib/canonical-helper";
-import { getCityDataFromUrl } from "@/lib/cityData";
-import { env } from "@/lib/env";
-
-const city = getCityDataFromUrl(env.SITE_URL);
 
 export const metadata: Metadata = {
-  title: `Partenaires déménageurs - Déménageurs ${city.nameCapitalized} (IA)`,
-  description: `Découvrez nos partenaires déménageurs certifiés à ${city.nameCapitalized}. Qualité garantie, tarifs transparents, service client premium.`,
+  title: "Partenaires déménageurs - Déménageurs toulouse (IA)",
+  description: "Découvrez nos partenaires déménageurs certifiés à toulouse. Qualité garantie, tarifs transparents, service client premium.",
   alternates: {
-    canonical: getCanonicalUrl('partenaires'),
+    canonical: "https://www.toulouse-demenageur.fr/partenaires/",
   },
   openGraph: {
-    title: `Partenaires déménageurs - Déménageurs ${city.nameCapitalized} (IA)`,
-    description: `Découvrez nos partenaires déménageurs certifiés à ${city.nameCapitalized}. Qualité garantie, tarifs transparents, service client premium.`,
-    url: getCanonicalUrl('partenaires'),
+    title: "Partenaires déménageurs - Déménageurs toulouse (IA)",
+    description: "Découvrez nos partenaires déménageurs certifiés à toulouse. Qualité garantie, tarifs transparents, service client premium.",
+    url: "https://www.toulouse-demenageur.fr/partenaires/",
     type: "website",
   },
 };
 
 const partners = [
   {
-    name: "Déménageurs Côte d'Azur Pro",
-    city: "Cannes",
+    name: "Déménageurs Occitanie Pro",
+    city: "Blagnac",
     rating: 4.8,
     reviews: 366,
     specialties: ["Déménagements sur mesure", "Service personnalisé"],
   },
   {
-    name: "Les Déménageurs Niçois",
-    city: "Antibes",
+    name: "Les Déménageurs Toulousains",
+    city: "Colomiers",
     rating: 4.8,
     reviews: 69,
-    specialties: ["Déménagements locaux", "Gironde et Provence-Alpes-Côte d'Azur"],
+    specialties: ["Déménagements locaux", "Gironde et Occitanie"],
   },
   {
-    name: "Déménageur Nice Express",
-    city: "Nice",
+    name: "Déménageur Toulouse Express",
+    city: "Toulouse",
     rating: 4.8,
     reviews: 69,
     specialties: ["Déménagements particuliers", "Déménagements professionnels"],
   },
   {
-    name: "Méditerranée Déménagements Nice",
-    city: "Nice",
+    name: "Garonne Déménagements Toulouse",
+    city: "Toulouse",
     rating: 4.5,
     reviews: 66,
     specialties: ["Garde-meuble", "Stockage d'archives"],
   },
   {
-    name: "Les Déménageurs de la Riviera",
-    city: "Grasse",
+    name: "Les Déménageurs du Sud-Ouest",
+    city: "Tournefeuille",
     rating: 5.0,
     reviews: 81,
     specialties: ["Déménagements qualifiés", "Tout le sud-ouest"],
   },
   {
-    name: "Les Déménageurs Azuréens",
-    city: "Menton",
+    name: "Les Déménageurs Occitans",
+    city: "Ramonville-Saint-Agne",
     rating: 4.5,
     reviews: 50,
     specialties: ["Déménagements nationaux", "Réseau national"],
   },
   {
     name: "Alex Déménagement",
-    city: "nice",
+    city: "toulouse",
     rating: 4.7,
     reviews: 45,
     specialties: ["Déménagements express", "Emballage professionnel"],
   },
   {
-    name: "nice Déménagement",
-    city: "nice",
+    name: "toulouse Déménagement",
+    city: "toulouse",
     rating: 4.0,
     reviews: 32,
     specialties: ["Déménagements résidentiels", "Déménagements commerciaux"],
   },
   {
     name: "Hontas Déménagements",
-    city: "nice",
+    city: "toulouse",
     rating: 4.0,
     reviews: 1,
     specialties: ["Déménagements longue distance", "Équipe professionnelle"],
   },
   {
     name: "Déménageurs Bretons",
-    city: "nice",
+    city: "toulouse",
     rating: 5.0,
     reviews: 1,
     specialties: ["Déménagements complets", "Services nationaux"],
   },
   {
     name: "SAM'DÉMÉNAGE",
-    city: "nice",
+    city: "toulouse",
     rating: 4.6,
     reviews: 28,
     specialties: ["Déménagements efficaces", "Équipe bienveillante"],
   },
   {
     name: "Rachid Chaty (GÈRE FOR YOU)",
-    city: "nice",
+    city: "toulouse",
     rating: 4.8,
     reviews: 15,
     specialties: ["Manutention", "Nettoyage avant état des lieux"],
   },
   {
     name: "Ben Ben",
-    city: "nice",
+    city: "toulouse",
     rating: 4.9,
     reviews: 12,
     specialties: ["Aide au déménagement", "Livraison", "Retrait de colis"],
   },
   {
     name: "Phone Course",
-    city: "nice",
+    city: "toulouse",
     rating: 4.5,
     reviews: 8,
     specialties: ["Transport routier", "Livraison"],
   },
   {
     name: "Burdigala Déménagement",
-    city: "nice",
+    city: "toulouse",
     rating: 4.3,
     reviews: 6,
     specialties: ["Déménagements locaux", "Services adaptés"],
   },
   {
     name: "Larnaudie Déménagements",
-    city: "nice",
+    city: "toulouse",
     rating: 4.7,
     reviews: 5,
     specialties: ["Déménagements familiaux", "Garde-meuble"],
   },
   {
     name: "Déménagements Grée",
-    city: "nice",
+    city: "toulouse",
     rating: 4.4,
     reviews: 4,
     specialties: ["Services personnalisés", "Particuliers et professionnels"],
   },
   {
     name: "Air Déménagement",
-    city: "nice",
+    city: "toulouse",
     rating: 4.6,
     reviews: 3,
     specialties: ["Solutions adaptées", "Besoins spécifiques"],
   },
   {
     name: "Alexandre Meigne-Sakr",
-    city: "nice",
+    city: "toulouse",
     rating: 4.8,
     reviews: 2,
     specialties: ["Services sur mesure", "Déménagements particuliers"],
   },
   {
     name: "Alain Lagache",
-    city: "nice",
+    city: "toulouse",
     rating: 4.5,
     reviews: 2,
     specialties: ["Déménagements locaux", "Services de qualité"],
   },
   {
     name: "A À Z Service",
-    city: "nice",
+    city: "toulouse",
     rating: 4.2,
     reviews: 1,
     specialties: ["Déménagements", "Nettoyage"],
   },
   {
     name: "Sédégo",
-    city: "nice",
+    city: "toulouse",
     rating: 4.0,
     reviews: 1,
     specialties: ["Solutions adaptées", "Services complets"],
   },
   {
     name: "Transport Joël Latrille",
-    city: "nice",
+    city: "toulouse",
     rating: 4.3,
     reviews: 1,
     specialties: ["Transport", "Déménagements professionnels"],
   },
   {
     name: "Adema",
-    city: "nice",
+    city: "toulouse",
     rating: 4.1,
     reviews: 1,
     specialties: ["Services complets", "Particuliers et professionnels"],
   },
   {
     name: "Les Déménageurs Girondins",
-    city: "Vence",
+    city: "Balma",
     rating: 4.4,
     reviews: 8,
     specialties: ["Déménagements locaux", "Services adaptés"],
   },
   {
     name: "Bouexpress",
-    city: "Cagnes-sur-Mer",
+    city: "Cugnaux",
     rating: 4.6,
     reviews: 6,
     specialties: ["Déménagements rapides", "Satisfaction client"],
   },
   {
     name: "TTD Turbo Transport Déménagement",
-    city: "Villefranche-sur-Mer",
+    city: "L'Union",
     rating: 4.5,
     reviews: 4,
     specialties: ["Solutions rapides", "Particuliers et entreprises"],
   },
   {
     name: "Déménagement Transport 33",
-    city: "Saint-Laurent-du-Var",
+    city: "Muret",
     rating: 4.3,
     reviews: 3,
     specialties: ["Transport", "Services personnalisés"],
   },
   {
     name: "Transport Gironde",
-    city: "Le Cannet",
+    city: "Castanet-Tolosan",
     rating: 4.2,
     reviews: 2,
     specialties: ["Transport", "Solutions sur mesure"],
@@ -241,7 +236,7 @@ export default function PartenairesPage() {
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2000&auto=format&fit=crop"
-            alt="Partenaires déménageurs certifiés à nice"
+            alt="Partenaires déménageurs certifiés à toulouse"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/95 via-[#2b7a78]/88 to-[#04163a]/92"></div>
@@ -269,7 +264,7 @@ export default function PartenairesPage() {
             </h1>
             <p className="text-lg md:text-xl text-white/90">
               Nous travaillons exclusivement avec des déménageurs locaux certifiés et expérimentés. 
-              Chaque partenaire est sélectionné pour sa qualité de service, sa transparence tarifaire et sa connaissance du terrain niçois.
+              Chaque partenaire est sélectionné pour sa qualité de service, sa transparence tarifaire et sa connaissance du terrain toulousain.
             </p>
           </div>
         </div>
@@ -309,7 +304,7 @@ export default function PartenairesPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Connaissance locale</h3>
               <p className="text-white/80">
-                Expertise du terrain niçois : accès, stationnement, contraintes spécifiques à chaque quartier.
+                Expertise du terrain toulousain : accès, stationnement, contraintes spécifiques à chaque quartier.
               </p>
             </div>
           </div>
@@ -323,7 +318,7 @@ export default function PartenairesPage() {
               Devenir partenaire Moverz
             </h2>
             <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-              Vous êtes déménageur à nice et souhaitez rejoindre notre réseau ? 
+              Vous êtes déménageur à toulouse et souhaitez rejoindre notre réseau ? 
               Bénéficiez de notre technologie IA et de notre visibilité en ligne.
             </p>
             <a 

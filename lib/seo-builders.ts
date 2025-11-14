@@ -75,7 +75,7 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
       description: defaultDescription,
       images: [
         {
-          url: '/og-image.jpg', // URL relative (metadataBase gère l'absolu)
+          url: `${city.siteUrl}/og-image.jpg`,
           width: 1200,
           height: 630,
           alt: `Comparateur Déménagement ${city.nameCapitalized} - 5 Devis Gratuits`,
@@ -86,7 +86,7 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
       card: 'summary_large_image',
       title: defaultTitle,
       description: defaultDescription,
-      images: ['/og-image.jpg'], // URL relative (metadataBase gère l'absolu)
+      images: [`${city.siteUrl}/og-image.jpg`],
     },
     alternates: {
       canonical: city.siteUrl.endsWith('/') ? city.siteUrl : `${city.siteUrl}/`,

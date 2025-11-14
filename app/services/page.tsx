@@ -9,8 +9,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
-    title: `Services Déménagement ${city.nameCapitalized} — Devis Comparables Dès 280€`,
-    description: `Volume IA identique pour tous → devis vraiment comparables. Dossier anonyme jusqu'à votre choix. 3-5 devis garantis sous 7j. À partir de 280€.`,
+    title: `Services Déménagement ${city.nameCapitalized} — 3 Formules`,
+    description: `Découvrez nos formules de déménagement à ${city.nameCapitalized} : Économique, Standard, Premium. Estimation IA gratuite, devis personnalisés sous 7j. Comparaison transparente.`,
     alternates: {
       canonical: getCanonicalUrl('services'),
     },
@@ -366,7 +366,7 @@ export default function ServicesPage() {
                 <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Combien de cartons prévoir ?
                 </a>
-                <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/blog/prix/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Prix déménagement 2025 : tout comprendre
                 </a>
                 <a href="/blog/" className="block text-white/70 hover:text-white text-sm transition-colors mt-6">
