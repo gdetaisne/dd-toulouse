@@ -10,6 +10,9 @@ export default function StructuredData() {
   const reviews = getReviewsForCity(city, 3);
   const averageRating = getAverageRating(reviews);
 
+  const businessName = `Comparateur déménageurs ${city.nameCapitalized} — 5+ devis fiables, zéro harcèlement`;
+  const businessDescription = `IA calcule votre volume, 5+ devis vraiment comparables sous 7 jours. Dossier anonyme, démarchage stoppé. Déménageurs contrôlés et tarifs transparents pour ${city.nameCapitalized}.`;
+
   const structuredData = {
     "@context": 'https://schema.org',
     searchIntent: 'transactional',
@@ -17,7 +20,7 @@ export default function StructuredData() {
       {
         "@type": 'Organization',
         "@id": `${siteUrl}/#organization`,
-        name: `Déménageurs ${city.nameCapitalized} (IA)`,
+        name: businessName,
         url: siteUrl,
         logo: {
           "@type": 'ImageObject',
@@ -25,15 +28,15 @@ export default function StructuredData() {
           width: 512,
           height: 512
         },
-        description: 'Comparateur de devis déménagement avec estimation IA par photos. Service gratuit, 5 devis personnalisés sous 7 jours.',
+        description: businessDescription,
         sameAs: [],
         searchIntent: 'transactional'
       },
       {
         "@type": 'LocalBusiness',
         "@id": `${siteUrl}/#localbusiness`,
-        name: `Déménageurs ${city.nameCapitalized} (IA)`,
-        description: '30 minutes pour votre dossier → 5 devis personnalisés sous 7 jours. Estimation volumétrique à partir de photos, tarifs clairs, conseils locaux.',
+        name: businessName,
+        description: businessDescription,
         url: siteUrl,
         telephone: city.phone,
         address: {
