@@ -89,10 +89,12 @@ function Footer() {
               <span>{city.nameCapitalized}</span>
             </div>
           </div>
-          <p className="mt-3 text-white/90 max-w-xs">30 minutes pour votre dossier → 5 devis personnalisés sous 7 jours. Simple, précis, transparent.</p>
+          <p className="mt-3 text-white/90 max-w-xs">
+            Notre IA calcule votre volume exact et l'envoie à 5+ déménageurs contrôlés (solvabilité vérifiée, 0 litige). 100% gratuit, sans harcèlement.
+          </p>
           <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs text-white">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
-            Propulsé par l'IA
+            Comparateur anti-arnaque
           </div>
         </div>
         <div>

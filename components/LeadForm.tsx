@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { event as gaEvent } from '@/lib/ga4';
 
 type LeadPayload = {
   name: string;
@@ -71,6 +72,12 @@ export default function LeadForm() {
           throw new Error(data?.error || `Erreur d'envoi (${res.status})`);
         }
 
+        // Track conversion GA4
+        gaEvent('lead_submit', {
+          pickup: payload.pickup,
+          dropoff: payload.dropoff,
+        });
+
         router.push("/merci");
       } catch (err) {
         const message = err instanceof Error ? err.message : "Une erreur est survenue.";
@@ -135,7 +142,7 @@ export default function LeadForm() {
         disabled={submitting}
         className="inline-flex h-11 w-full items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300 disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
       >
-        {submitting ? "Envoi..." : "Obtenez vos devis précis gratuitement"}
+        {submitting ? "Envoi..." : "Recevez 5+ devis fiables gratuitement"}
       </button>
     </form>
   );
