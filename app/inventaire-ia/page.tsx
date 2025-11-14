@@ -5,6 +5,7 @@ import { getBuildInfo } from '@/lib/buildInfo';
 import { event as gaEvent } from '@/lib/ga4';
 import { getCityDataFromUrl } from '@/lib/cityData';
 import { env } from '@/lib/env';
+import PhotoGuidelines from '@/components/PhotoGuidelines';
 
 export default function InventaireIAPage() {
   const city = getCityDataFromUrl(env.SITE_URL);
@@ -198,6 +199,13 @@ export default function InventaireIAPage() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Conseils photos */}
+      <div className="bg-white/5 border-t border-white/10">
+        <div className="container max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-16">
+          <PhotoGuidelines />
         </div>
       </div>
 

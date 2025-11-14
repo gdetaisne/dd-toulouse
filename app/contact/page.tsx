@@ -54,10 +54,10 @@ export default function ContactPage() {
               </div>
               
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Contactez-nous
+                Besoin d’un humain ? On vous répond en 24h
               </h1>
               <p className="text-lg md:text-xl text-white/90">
-                Préparez votre déménagement en 30 minutes → recevez 5 devis précis gratuitement sous 7 jours
+                Questions, suivi dossier ou arbitrage de devis : notre équipe vérifie les infos et vous aide à comparer des déménageurs vraiment fiables.
               </p>
             </div>
           </div>
@@ -73,19 +73,19 @@ export default function ContactPage() {
             <ul className="space-y-3 text-white/80">
               <li className="flex items-start gap-3">
                 <span className="text-[#6bcfcf] mt-1">✓</span>
-                <span>100% gratuit, sans engagement</span>
+                <span>Inventaire IA en 30 min, dossier anonyme</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-[#6bcfcf] mt-1">✓</span>
-                <span>Estimation précise par IA</span>
+                <span>5+ déménageurs contrôlés (solvabilité, litiges, avis)</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-[#6bcfcf] mt-1">✓</span>
-                <span>Partenaires qualifiés et assurés</span>
+                <span>Devis comparables sur le même cahier des charges</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-[#6bcfcf] mt-1">✓</span>
-                <span>Prix transparents, aucun frais caché</span>
+                <span>0 appel intempestif : vous décidez quand échanger</span>
               </li>
             </ul>
           </div>
@@ -103,6 +103,10 @@ export default function ContactPage() {
                 <p className="font-medium text-white mb-2">Horaires</p>
                 <p className="text-white/80">Lun-Ven : 9h-18h</p>
               </div>
+              <div>
+                <p className="font-medium text-white mb-2">Envie de parler ?</p>
+                <p className="text-white/70 text-sm">On rappelle sur demande pour éviter les harcèlements téléphoniques.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -114,10 +118,10 @@ export default function ContactPage() {
               href="/inventaire-ia" 
               className="inline-flex h-12 items-center justify-center rounded-2xl bg-[#6bcfcf] px-8 text-lg font-semibold text-[#04163a] shadow-lg hover:bg-[#6bcfcf]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6bcfcf]/50 transition duration-300"
             >
-              Obtenez vos devis précis gratuitement
+              Recevez 5+ devis fiables gratuitement
             </a>
             <p className="text-sm text-white/60 mt-4">
-              ⚡ Estimation en 30 minutes • 🔒 100% sécurisé • 💰 Gratuit et sans engagement
+              ⚡ Inventaire IA en 30 min • 🔍 5+ pros contrôlés • 💬 Zéro harcèlement tel
             </p>
           </div>
         </div>

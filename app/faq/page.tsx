@@ -1,3 +1,11 @@
+  {
+    q: "Comment sélectionnez-vous les déménageurs ?",
+    a: [
+      "Nous auditons 20+ critères : solvabilité, historique de litiges, avis clients vérifiés, assurances à jour, respect RGPD.",
+      "Seuls les déménageurs qui passent nos contrôles reçoivent votre dossier. Vous restez anonyme tant que vous n’acceptez pas d’échanger."
+    ],
+    category: "Processus & délais",
+  },
 "use client";
 
 import React, { useState } from "react";
@@ -41,9 +49,9 @@ const faqs: QA[] = [
     category: "Constitution du dossier (photos & inventaire)",
   },
   {
-    q: "Pourquoi ne me demandez-vous pas mon adresse au dépôt du dossier ?",
+    q: "Pourquoi ne me demandez-vous pas mon adresse complète au départ ?",
     a: [
-      "L'adresse exacte n'impacte pas le coût de la prestation à ce stade. Nous n'en avons donc pas besoin pour obtenir des devis."
+      "Nous anonymisons votre dossier tant que vous n'avez pas choisi un déménageur. Cela évite les appels intempestifs et protège vos données. L'adresse exacte est partagée uniquement au moment où vous validez une proposition."
     ],
     category: "Constitution du dossier (photos & inventaire)",
   },
@@ -92,7 +100,7 @@ const faqs: QA[] = [
   {
     q: "Dois-je fournir mes cartons?",
     a: [
-      "Souvent oui pour l'option économique. Des options \"emballage inclus\" existent dans les devis."
+      "Souvent oui pour l'option économique. Des formules \"emballage inclus\" existent dans les devis. Dans tous les cas, le devis précise clairement qui gère quoi pour éviter les mauvaises surprises."
     ],
     category: "Constitution du dossier (photos & inventaire)",
   },
@@ -100,21 +108,21 @@ const faqs: QA[] = [
   {
     q: "Puis-je obtenir un devis sans visite technique ?",
     a: [
-      "Oui. Dans la plupart des cas, les déménageurs établissent un devis sans visite. Pour se couvrir en cas d'informations incomplètes, ils ajoutent souvent une marge de sécurité ce qui peut conduire à une légère surfacturation pour le client. À l'inverse, si le volume est sous-estimé, le professionnel peut être en perte et demander un ajustement. Certaines entreprises réalisent des visites techniques, mais leur coût (temps, déplacement) est généralement répercuté dans le prix final. Avec Moverz, vous obtenez le meilleur des deux mondes: un dossier photo complet (30 min) qui offre la précision d'une visite, sans en supporter le coût; les déménageurs reçoivent des informations standardisées et comparables, ce qui limite les marges d'incertitude."
+      "Oui, et c'est même recommandé. Les visites sont coûteuses et souvent répercutées dans le prix. Avec notre dossier photo + inventaire IA, les déménageurs disposent d'informations aussi précises qu'une visite et n'ont plus besoin d'ajouter de marge de sécurité inutile."
     ],
     category: "Processus & délais",
   },
   {
     q: "Quand vais-je recevoir des devis ?",
     a: [
-      "Nous laissons une semaine à nos partenaires pour répondre. Dans 90% des cas, vous recevez 3 à 5 devis sous une semaine."
+      "Nous laissons une semaine à nos déménageurs partenaires pour répondre. Dans 95% des cas, vous recevez 5+ devis fiables sous 7 jours, tous basés sur le même inventaire IA."
     ],
     category: "Processus & délais",
   },
   {
-    q: "Que se passe-t-il si je n'ai pas 3 devis après une semaine ?",
+    q: "Que se passe-t-il si je n'ai pas 5 devis après une semaine ?",
     a: [
-      "Nous vous informons de l'état des retours et vous proposons gratuitement d'étendre le délai et/ou d'élargir la recherche de partenaires."
+      "Notre équipe vous informe de l’état des retours, relance les déménageurs et peut élargir gratuitement la recherche à d'autres pros contrôlés jusqu’à atteindre 5+ propositions comparables."
     ],
     category: "Processus & délais",
   },
@@ -528,10 +536,10 @@ export default function FAQPage() {
                 <a href="/services/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Comparer les 3 formules
                 </a>
-                <a href="/services/demenagement-economique-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/services/demenagement-economique-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Formule Économique (dès 280€)
                 </a>
-                <a href="/services/demenagement-standard-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/services/demenagement-standard-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Formule Standard (dès 600€)
                 </a>
               </div>
@@ -564,7 +572,7 @@ export default function FAQPage() {
                 <a href={`/${city.slug}/`} className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Déménagement {city.nameCapitalized}
                 </a>
-                <a href="/quartiers-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
+                <a href="/quartiers-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">
                   → Tous les quartiers
                 </a>
                 <a href="/estimation-rapide/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors text-sm">

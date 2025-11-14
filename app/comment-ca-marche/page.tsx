@@ -1,22 +1,18 @@
 import React from "react";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { getCanonicalUrl } from "@/lib/canonical-helper";
-import { getCityDataFromUrl } from "@/lib/cityData";
-import { env } from "@/lib/env";
 
 import type { Metadata } from 'next'
 
-const city = getCityDataFromUrl(env.SITE_URL);
-
 export const metadata: Metadata = {
-  title: `Comment ça marche ? Déménagement ${city.nameCapitalized} en 3 étapes | Moverz`,
-  description: `Découvrez notre processus simple pour déménager à ${city.nameCapitalized} : 1) Inventaire IA gratuit en 30 min 2) Recevez 3 devis sous 7j 3) Choisissez votre déménageur. 100% gratuit, sans engagement.`,
+  title: "Comment ça marche ? Déménagement Nice en 3 étapes | Moverz",
+  description: "Créez un inventaire IA unique en 30 min, recevez 5+ devis de déménageurs contrôlés (solvabilité vérifiée, 0 litige) et choisissez sans harcèlement. 100% gratuit.",
   alternates: {
     canonical: getCanonicalUrl('comment-ca-marche'),
   },
   openGraph: {
-    title: `Comment ça marche ? Déménagement ${city.nameCapitalized} simplifié | Moverz`,
-    description: `Processus simple et transparent : photos + IA + devis personnalisés. Déménagez sereinement à ${city.nameCapitalized}.`,
+    title: "Processus IA anti-arnaque : 5+ devis comparables à Nice | Moverz",
+    description: "Notre IA calcule votre volume exact et l'envoie à 5+ déménageurs contrôlés. Recevez des devis comparables en 7 jours, sans appels intrusifs.",
     url: getCanonicalUrl('comment-ca-marche'),
     type: 'website',
   },
@@ -52,11 +48,10 @@ export default function CommentCaMarchePage() {
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Comment ça marche : votre déménagement simplifié
+              Comment recevoir 5+ devis comparables en 30 minutes
             </h1>
             <p className="mt-4 text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
-              Un processus simple et transparent. Prenez vos photos, notre IA calcule votre volume, 
-              vous recevez vos devis précis gratuitement. Nous nous occupons de tout le reste. Sans stress, sans engagement.
+              Vous nous envoyez vos photos, notre IA calcule un inventaire unique et l'envoie à 5+ déménageurs contrôlés (solvabilité & litiges vérifiés). Résultat : des devis comparables, sans appels intempestifs, 100% gratuit.
             </p>
           </div>
         </div>
@@ -67,7 +62,7 @@ export default function CommentCaMarchePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-semibold text-white text-center mb-12">
-              Le processus complet de votre déménagement
+              Le process anti-arnaque en 3 étapes
             </h2>
             
             <div className="space-y-12">
@@ -77,14 +72,14 @@ export default function CommentCaMarchePage() {
                   1
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-white mb-4">Prenez vos photos</h3>
+                  <h3 className="text-2xl font-semibold text-white mb-4">1. Vous filmez vos pièces (15 min)</h3>
                   <p className="text-white/80 leading-relaxed mb-6">
                     Photographiez tous vos biens depuis votre smartphone. Il faut viser 3 à 5 photos par pièce 
                     pour une estimation optimale. Pas besoin d'être photographe professionnel !
                   </p>
                   
                   <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-6">
-                    <h4 className="text-lg font-semibold text-white mb-3">Conseils pour de bonnes photos :</h4>
+                      <h4 className="text-lg font-semibold text-white mb-3">Pour un inventaire précis :</h4>
                     <ul className="space-y-2 text-white/80">
                       <li className="flex items-start gap-2">
                         <span className="text-[#6bcfcf] mt-1">•</span>
@@ -116,14 +111,14 @@ export default function CommentCaMarchePage() {
                   2
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-white mb-4">Notre IA calcule votre volume</h3>
+                  <h3 className="text-2xl font-semibold text-white mb-4">2. Notre IA calcule votre volume exact</h3>
                   <p className="text-white/80 leading-relaxed mb-6">
                     Notre intelligence artificielle analyse vos photos et calcule le volume que représentent 
                     vos biens dans le cadre d'un déménagement, en tenant compte de l'emballage nécessaire.
                   </p>
                   
                   <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-6">
-                    <h4 className="text-lg font-semibold text-white mb-3">Ce que fait notre IA :</h4>
+                      <h4 className="text-lg font-semibold text-white mb-3">Ce que fait notre IA :</h4>
                     <ul className="space-y-2 text-white/80">
                       <li className="flex items-start gap-2">
                         <span className="text-[#6bcfcf] mt-1">•</span>
@@ -159,18 +154,20 @@ export default function CommentCaMarchePage() {
                   3
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-white mb-4">Dites-nous vers où vous déménagez et le type de prestation</h3>
+                  <h3 className="text-2xl font-semibold text-white mb-4">3. Recevez 5+ devis comparables sur le même inventaire</h3>
                   <p className="text-white/80 leading-relaxed mb-6">
-                    Indiquez votre destination et précisez le type de service souhaité (économique, standard, premium) 
-                    pour que nous puissions vous proposer les meilleures options.
+                    Sous 7 jours max, sélection de 5+ déménageurs contrôlés (solvabilité vérifiée, 0 litige). Tous utilisent le même inventaire IA → devis comparables ligne par ligne. Vous choisissez sans pression, dossier anonyme jusqu'à votre OK.
                   </p>
                   
-                  <div className="flex items-center gap-4 mb-8">
-                    <span className="bg-[#6bcfcf] text-[#04163a] px-4 py-2 rounded-full text-sm font-bold">
-                      ⏱️ 5 minutes
-                    </span>
-                    <span className="text-white/60 text-sm">Temps nécessaire</span>
-                  </div>
+              <div className="flex flex-col gap-3 mt-12 text-white/80">
+                <h3 className="text-2xl font-semibold text-white">Ce qui nous rend différents :</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2"><span className="text-[#6bcfcf] mt-1">✓</span><span>5+ déménageurs contrôlés (finances, litiges, avis clients)</span></li>
+                  <li className="flex items-start gap-2"><span className="text-[#6bcfcf] mt-1">✓</span><span>UN inventaire identique pour tous → devis comparables</span></li>
+                  <li className="flex items-start gap-2"><span className="text-[#6bcfcf] mt-1">✓</span><span>Zéro harcèlement : dossier anonyme, vous gardez la main</span></li>
+                  <li className="flex items-start gap-2"><span className="text-[#6bcfcf] mt-1">✓</span><span>Service gratuit, sans engagement. Vous ne payez qu'au déménagement.</span></li>
+                </ul>
+              </div>
                 </div>
               </div>
 

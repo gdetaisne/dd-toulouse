@@ -6,7 +6,7 @@ import { getCityData } from '@/lib/cityData';
 
 // Fonction client-side pour résoudre la ville depuis hostname
 function getCityFromHostname(): string {
-  if (typeof window === 'undefined') return 'toulouse';
+  if (typeof window === 'undefined') return 'nice';
   const hostname = window.location.hostname.toLowerCase();
   // Cas spéciaux
   if (hostname.includes('toulousain')) return 'toulouse';
@@ -14,13 +14,14 @@ function getCityFromHostname(): string {
   // Pattern standard: devis-demenageur-ville.fr
   const cities = ['strasbourg', 'nice', 'lyon', 'marseille', 'nantes', 'lille', 'rennes', 'rouen', 'montpellier', 'toulouse', 'bordeaux'];
   const found = cities.find(city => hostname.includes(city));
-  return found || 'toulouse';
+  return found || 'nice';
 }
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isZonesDropdownOpen, setIsZonesDropdownOpen] = useState(false);
   const zonesDropdownRef = useRef<HTMLDivElement>(null);
+
   // Résoudre cityData dynamiquement
   const city = useMemo(() => {
     const citySlug = getCityFromHostname();
@@ -45,8 +46,6 @@ export default function Header() {
       label: `${city.nameCapitalized} → ${c.destination}`
     }));
   }, [city]);
-
-
 
   // Fermer les dropdowns quand on clique ailleurs
   useEffect(() => {
@@ -79,8 +78,6 @@ export default function Header() {
       }));
     }
   };
-
-
 
 
   return (
@@ -216,7 +213,7 @@ export default function Header() {
             className="hidden sm:inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
             onClick={() => trackClick('cta-header')}
           >
-            Obtenir 5 devis gratuits
+            Comparez 5+ devis fiables gratuitement
           </Link>
           
           {/* Mobile Menu Button */}
@@ -329,7 +326,7 @@ export default function Header() {
                   trackClick('mobile-cta');
                 }}
               >
-                Obtenir 5 devis gratuits
+                Comparez 5+ devis fiables gratuitement
               </Link>
             </div>
           </div>

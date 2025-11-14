@@ -8,8 +8,8 @@ import { env } from "@/lib/env";
 const city = getCityDataFromUrl(env.SITE_URL);
 
 export const metadata: Metadata = {
-  title: `Notre Offre Déménagement ${city.nameCapitalized} - Estimation IA | Moverz`,
-  description: `Découvrez notre offre de déménagement à ${city.nameCapitalized} : estimation IA gratuite, 5 devis personnalisés sous 7j, comparaison transparente. Service 100% gratuit.`,
+  title: `Notre Offre Déménagement ${city.nameCapitalized} - Inventaire IA & 5+ devis | Moverz`,
+  description: `Notre IA crée un inventaire unique et l'envoie à 5+ déménageurs contrôlés (solvabilité vérifiée, 0 litige). Recevez des devis comparables en 7 jours, 100% gratuit et sans harcèlement.`,
   alternates: {
     canonical: getCanonicalUrl('notre-offre'),
   },
@@ -50,11 +50,10 @@ export default function NotreOffrePage() {
               ]}
             />
             <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Simplifiez votre déménagement avec nos outils
+              L'offre Moverz : 5+ devis comparables ou rien
             </h1>
             <p className="mt-4 text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
-              Estimez votre volume en m³ en quelques photos, comparez plusieurs devis de déménageurs 
-              et réservez en toute sécurité avec 30% de dépôt (norme de marché imposée par nos partenaires déménageurs).
+              Notre IA transforme vos photos en inventaire unique, puis l’envoie à 5+ déménageurs contrôlés (solvabilité, litiges, avis clients). Vous recevez des devis alignés sur le même cahier des charges, sans appels intempestifs.
             </p>
           </div>
         </div>
@@ -65,7 +64,7 @@ export default function NotreOffrePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-6">
-              Le déménagement, une source de stress pour tous
+              Pourquoi la majorité des devis sont incomparables (et risqués)
             </h2>
             <p className="text-lg text-white/80 leading-relaxed">
               Organiser un déménagement représente souvent un véritable casse-tête. Entre l'estimation 
@@ -83,7 +82,7 @@ export default function NotreOffrePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-semibold text-white text-center mb-12">
-              Les difficultés d'un déménagement
+              Pourquoi notre méthode change tout
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
@@ -156,7 +155,7 @@ export default function NotreOffrePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-6">
-              Notre solution : nos outils
+              Notre solution : IA + contrôles humains
             </h2>
             <p className="text-lg text-white/80 leading-relaxed mb-8">
               Notre approche innovante couplée d'une multitude d'outils d'IA et de traitement d'image 
@@ -174,8 +173,8 @@ export default function NotreOffrePage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Simplicité</h3>
-                <p className="text-white/70 text-sm">Photos → Inventaire automatique en quelques minutes</p>
+                <h3 className="text-lg font-semibold text-white mb-2">Inventaire IA</h3>
+                <p className="text-white/70 text-sm">Photos → inventaire unique partagé à tous les déménageurs</p>
               </div>
 
               <div className="text-center">
@@ -184,8 +183,8 @@ export default function NotreOffrePage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Transparence</h3>
-                <p className="text-white/70 text-sm">Comparaison claire et anonymat jusqu'à la validation</p>
+                <h3 className="text-lg font-semibold text-white mb-2">Comparables enfin</h3>
+                <p className="text-white/70 text-sm">UN cahier des charges → devis ligne par ligne identiques</p>
               </div>
 
               <div className="text-center">
@@ -194,8 +193,8 @@ export default function NotreOffrePage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Sécurité</h3>
-                <p className="text-white/70 text-sm">Paiement sécurisé en ligne, 30% de dépôt (norme de marché)</p>
+                <h3 className="text-lg font-semibold text-white mb-2">Pros contrôlés</h3>
+                <p className="text-white/70 text-sm">Audit solvabilité, historique litiges, avis clients vérifiés</p>
               </div>
             </div>
           </div>

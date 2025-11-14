@@ -5,7 +5,6 @@ import { getCanonicalAlternates } from "@/lib/canonical-helper";
 import Hero from "@/components/Hero";
 import ValueTriad from "@/components/ValueTriad";
 import HowItWorks from "@/components/HowItWorks";
-import PhotoGuidelines from "@/components/PhotoGuidelines";
 import PricingPreview from "@/components/PricingPreview";
 import Testimonials from "@/components/Testimonials";
 import NeighborhoodsTeaser from "@/components/NeighborhoodsTeaser";
@@ -198,13 +197,6 @@ export default function Home() {
       {/* 7. FAQ locales */}
       <section className="py-12 md:py-16">
         <LocalMoneyFAQ citySlug={city.slug} cityName={city.nameCapitalized} />
-      </section>
-
-      {/* 8. Guides photos */}
-      <section className="section py-16 md:py-20 bg-gradient-to-br from-[#04163a]/60 to-[#2b7a78]/20 border-y border-white/20">
-        <div className="container">
-          <PhotoGuidelines />
-        </div>
       </section>
 
       {/* 9. Zones couvertes */}
