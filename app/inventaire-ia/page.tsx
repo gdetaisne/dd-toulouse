@@ -3,8 +3,11 @@
 import React from 'react';
 import { getBuildInfo } from '@/lib/buildInfo';
 import { event as gaEvent } from '@/lib/ga4';
+import { getCityDataFromUrl } from '@/lib/cityData';
+import { env } from '@/lib/env';
 
 export default function InventaireIAPage() {
+  const city = getCityDataFromUrl(env.SITE_URL);
   
   const handleEstimateClick = () => {
     gaEvent('estimate_cost_click', {
@@ -208,7 +211,7 @@ export default function InventaireIAPage() {
             Commencez dès maintenant votre analyse automatique
           </p>
           <a 
-            href="/devis-demenagement-nice/" 
+            href={`/devis-demenagement-${city.slug}/`}
             className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
           >
             Créer mon dossier
