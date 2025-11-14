@@ -6,6 +6,7 @@ import Hero from "@/components/Hero";
 import ValueTriad from "@/components/ValueTriad";
 import HowItWorks from "@/components/HowItWorks";
 import PricingPreview from "@/components/PricingPreview";
+import ProofStrip from "@/components/ProofStrip";
 import Testimonials from "@/components/Testimonials";
 import NeighborhoodsTeaser from "@/components/NeighborhoodsTeaser";
 import StickyCTA from "@/components/StickyCTA";
@@ -31,14 +32,21 @@ export default function Home() {
       {/* 1. Hero (inclut déjà social proof) */}
       <Hero />
 
-      {/* 2. Comment ça marche */}
-      <section className="section py-16 md:py-20">
+      {/* 2. Preuves instantanées */}
+      <section className="section section-light">
+        <div className="container">
+          <ProofStrip />
+        </div>
+      </section>
+
+      {/* 3. Comment ça marche */}
+      <section className="section section-light">
         <div className="container">
           <HowItWorks />
         </div>
       </section>
       
-      {/* 3. Testimonials - Preuve sociale */}
+      {/* 4. Testimonials - Preuve sociale */}
       <section className="section py-16 md:py-20 bg-gradient-to-br from-[#2b7a78]/15 to-[#04163a]/30 border-y border-white/20">
         <div className="container">
           <Testimonials />
