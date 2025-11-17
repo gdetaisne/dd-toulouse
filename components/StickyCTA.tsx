@@ -37,9 +37,9 @@ export default function StickyCTA() {
               <a
                 href="/inventaire-ia/"
                 className="btn-accent text-center text-sm"
-                aria-label="Calculer mon volume (gratuit)"
+                aria-label="Recevez 5+ devis fiables gratuitement"
               >
-                Calculer mon volume
+                Recevez 5+ devis fiables gratuitement
               </a>
             </div>
           </div>
