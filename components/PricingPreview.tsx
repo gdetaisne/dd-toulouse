@@ -26,11 +26,11 @@ export default function PricingPreview() {
     <div className="space-y-8">
       <div className="text-center space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
-          Tarifs indicatifs
+        Tarifs indicatifs
         </p>
         <h2 className="text-2xl md:text-3xl font-semibold text-[#04163a]">
           Des prix transparents, alignés sur votre volume
-        </h2>
+      </h2>
         <p className="text-[#04163a]/70 max-w-3xl mx-auto">
           Plages de prix observées pour un déménagement local, à volume équivalent. Pour les
           options (emballage, garde-meuble, etc.), voyez le détail dans nos formules.

@@ -27,7 +27,7 @@ export default function StickyCTA() {
                 Passez à l’action
               </p>
               <h3 className="text-sm sm:text-base font-semibold text-[#04163a]">
-                Comparez 5+ devis gratuitement
+                Calcul de volume (gratuit)
               </h3>
               <p className="text-[11px] sm:text-xs text-[#04163a]/55">
                 Estimation rapide sans photos ou avec photos grâce à l’IA, c’est vous qui décidez.
@@ -37,9 +37,9 @@ export default function StickyCTA() {
               <a
                 href="/inventaire-ia/"
                 className="btn-accent text-center text-sm"
-                aria-label="Recevez 5+ devis fiables gratuitement"
+                aria-label="Calculer mon volume (gratuit)"
               >
-                Recevez 5+ devis fiables gratuitement
+                Calculer mon volume
               </a>
             </div>
           </div>
