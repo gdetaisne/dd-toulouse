@@ -1,12 +1,4 @@
-  {
-    q: "Comment sélectionnez-vous les déménageurs ?",
-    a: [
-      "Nous auditons 20+ critères : solvabilité, historique de litiges, avis clients vérifiés, assurances à jour, respect RGPD.",
-      "Seuls les déménageurs qui passent nos contrôles reçoivent votre dossier. Vous restez anonyme tant que vous n’acceptez pas d’échanger."
-    ],
-    category: "Processus & délais",
-  },
-"use client";
+'use client';
 
 import React, { useState } from "react";
 import { getCityDataFromUrl } from "@/lib/cityData";
