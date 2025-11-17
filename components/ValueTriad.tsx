@@ -2,30 +2,31 @@ export default function ValueTriad() {
   const items = [
     {
       icon: "🛡️",
-      title: "5+ déménageurs contrôlés",
-      punchline: "Les meilleurs dossiers seulement",
-      description: "Solvabilité vérifiée, 0 litige, contrats pros. Vous ne parlez qu’aux partenaires filtrés.",
+      title: "Pros vérifiés",
+      punchline: "0 déménageur douteux dans votre dossier",
+      description:
+        "Solvabilité, assurances, historique de litiges : on filtre les dossiers pour ne garder que les déménageurs sérieux.",
     },
     {
-      icon: "📸",
-      title: "Calcul de volume en photos",
-      punchline: "Même volume pour tout le monde",
+      icon: "📂",
+      title: "Dossier prêt pour devis",
+      punchline: "5 minutes, pas 5 rendez-vous",
       description:
-        "Volume identique (ex : 28 m³) envoyé à tous les déménageurs → devis comparables ligne par ligne.",
+        "Photos ou infos rapides : un seul dossier standardisé remplace les visites techniques répétées.",
     },
     {
       icon: "🔒",
-      title: "Dossier anonyme",
-      punchline: "Pas d’appels tant que vous ne l’avez pas décidé",
+      title: "Anonymat garanti",
+      punchline: "Vous gardez la main sur les échanges",
       description:
-        "Vos coordonnées restent confidentielles jusqu’à ce que vous choisissiez le déménageur à contacter.",
+        "Les déménageurs ne voient que votre dossier. Ils ne peuvent pas vous appeler tant que vous n’avez pas décidé.",
     },
     {
       icon: "💶",
-      title: "Service 100% gratuit",
-      punchline: "Jamais de frais cachés pour vous",
+      title: "Comparaison claire",
+      punchline: "Pas de petites lignes surprises",
       description:
-        "Nous sommes rémunérés par les partenaires, jamais sur votre devis. Vous payez uniquement le déménagement.",
+        "Devis structurés de la même façon pour voir les écarts de prix et de services en un coup d’œil.",
     },
   ];
 
@@ -36,12 +37,11 @@ export default function ValueTriad() {
           Nos garanties
         </p>
         <h2 className="text-2xl md:text-3xl font-semibold text-white">
-          Nos garanties pour un comparatif fiable
+          Nos garanties anti-arnaque
         </h2>
         <p className="text-white/80 max-w-3xl mx-auto text-sm md:text-base">
-          En clair : des pros vérifiés, un volume calculé de façon neutre, un dossier anonyme et un
-          service gratuit pour vous. Tout est fait pour éviter les arnaques et les mauvaises
-          surprises.
+          Pros vérifiés, dossier prêt pour devis, anonymat et devis comparables : tout est fait pour
+          éviter les arnaques et les mauvaises surprises.
         </p>
       </div>
 

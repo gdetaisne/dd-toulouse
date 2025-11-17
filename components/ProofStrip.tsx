@@ -8,12 +8,12 @@ export default function ProofStrip() {
     {
       value: "4,9/5",
       label: "note moyenne vérifiée",
-      caption: "Avis authentifiés sur 11 villes",
+      caption: "Avis authentifiés sur les dossiers comparés",
     },
     {
       value: "5+ devis",
       label: "fiables à comparer",
-      caption: "Tous reçoivent le même inventaire (28 m³)",
+      caption: "Tous chiffrés sur le même dossier, ligne par ligne.",
     },
     {
       value: "-18%",
@@ -25,7 +25,6 @@ export default function ProofStrip() {
   const chips = [
     "Déménageurs contrôlés",
     "Dossier anonyme",
-    "IA volume identique",
   ];
 
   return (
@@ -33,13 +32,13 @@ export default function ProofStrip() {
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
-            Chiffres clés Moverz
+            Chiffres clés de notre comparateur de déménageurs
           </p>
           <h2 className="mt-3 text-2xl md:text-3xl font-semibold text-[#04163a]">
             1200+ déménagements pilotés sans arnaques
           </h2>
           <p className="mt-2 text-[#04163a]/70">
-            Volumes calculés, avis et contrôles pros consolidés sur nos 11 villes.
+            Données issues de dossiers réellement comparés sur votre ville et les alentours.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

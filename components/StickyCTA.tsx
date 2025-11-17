@@ -27,7 +27,7 @@ export default function StickyCTA() {
                 Passez à l’action
               </p>
               <h3 className="text-sm sm:text-base font-semibold text-[#04163a]">
-                Calcul de volume (gratuit)
+                Comparez 5+ devis gratuitement
               </h3>
               <p className="text-[11px] sm:text-xs text-[#04163a]/55">
                 Estimation rapide sans photos ou avec photos grâce à l’IA, c’est vous qui décidez.

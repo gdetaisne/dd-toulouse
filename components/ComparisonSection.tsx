@@ -49,7 +49,7 @@ export default function ComparisonSection() {
       ],
     },
     {
-      title: "Avec Moverz (dès 280€)",
+      title: "Avec le comparateur Moverz (dès 280€)",
       icon: "✨",
       highlights: [
         "Processus 100% en ligne",
@@ -59,7 +59,7 @@ export default function ComparisonSection() {
       positives: [
         "Devis comparables ligne par ligne",
         "Assurances et contrats pros",
-        "Support Moverz jusqu’au jour J",
+        "Support de notre équipe jusqu’au jour J",
       ],
     },
   ];
