@@ -1,29 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
+
 export default function Hero() {
-  const [stage, setStage] = useState(0); // 0 idle, 1 photos, 2 analyse, 3 devis
+  // 0 = Photos / estimation, 1 = Dossier anonyme, 2 = 5+ devis fiables
+  const [stage, setStage] = useState(0);
 
   useEffect(() => {
-    let t1: ReturnType<typeof setTimeout> | undefined;
-    let t2: ReturnType<typeof setTimeout> | undefined;
-    let t3: ReturnType<typeof setTimeout> | undefined;
-    let t4: ReturnType<typeof setTimeout> | undefined;
-    const run = () => {
-      setStage(1);
-      // Faster, smoother sequence: Photos (quick complete) -> IA -> Devis
-      t1 = setTimeout(() => setStage(2), 600);
-      t2 = setTimeout(() => setStage(3), 1300);
-      // small pause after stage 3, then loop
-      t3 = setTimeout(() => setStage(0), 2000);
-      t4 = setTimeout(run, 2300);
-    };
-    run();
-    return () => {
-      if (t1) clearTimeout(t1);
-      if (t2) clearTimeout(t2);
-      if (t3) clearTimeout(t3);
-      if (t4) clearTimeout(t4);
-    };
+    const interval = setInterval(() => {
+      setStage((prev) => (prev + 1) % 3);
+    }, 2600);
+
+    return () => clearInterval(interval);
   }, []);
   return (
     <section className="relative overflow-hidden text-white">
@@ -39,12 +26,12 @@ export default function Hero() {
               <span className="h-2 w-2 rounded-full bg-emerald-300 animate-pulse" />
               Processus IA anti-arnaque
             </div>
-            <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
               Le seul comparateur où vous comparez
               <span className="text-[#6bcfcf]"> vraiment</span>
             </h1>
-            <p className="mt-4 text-lg md:text-xl text-white/90">
-              Enfin des devis comparables : notre IA crée un inventaire unique (ex : 28 m³) et l’envoie à des déménageurs vérifiés, sans partager vos coordonnées tant que vous ne l’avez pas décidé.
+            <p className="mt-4 text-base md:text-lg text-white/85 max-w-xl mx-auto lg:mx-0">
+              En 3 étapes : calcul de votre volume, dossier anonyme, puis 5+ devis fiables à comparer.
             </p>
             <ul className="mt-6 space-y-3 text-base md:text-lg text-white/90">
               {[
@@ -76,25 +63,15 @@ export default function Hero() {
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
-              <a href="/inventaire-ia/" className="btn-primary" aria-label="Calculer mon volume en photos (gratuit) (gratuit)">
-                Calculer mon volume en photos (gratuit)
+            <div className="mt-8 flex flex-col items-center justify-center sm:flex-row lg:justify-start">
+              <a
+                href="/inventaire-ia/"
+                className="btn-primary inline-flex items-center gap-2 px-7 py-3 text-base md:text-lg"
+                aria-label="Comparez 5+ devis gratuitement"
+              >
+                Comparez 5+ devis gratuitement
+                <span className="text-xl leading-none">→</span>
               </a>
-              <span className="text-sm text-white/70">Processus express – 100% gratuit</span>
-            </div>
-            <div className="mt-6 flex flex-col items-center gap-4 text-sm text-white/80 sm:flex-row lg:justify-start">
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-white/20 border-2 border-white flex items-center justify-center text-xs">👤</div>
-                  <div className="w-8 h-8 rounded-full bg-white/20 border-2 border-white flex items-center justify-center text-xs">👤</div>
-                  <div className="w-8 h-8 rounded-full bg-white/20 border-2 border-white flex items-center justify-center text-xs">👤</div>
-                </div>
-                <span>+1200 clients satisfaits</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-yellow-300">⭐⭐⭐⭐⭐</span>
-                <span>Note moyenne 4,9/5</span>
-              </div>
             </div>
           </div>
           <div className="relative mx-auto w-full max-w-[560px] lg:mx-0">
@@ -102,51 +79,127 @@ export default function Hero() {
             <div className="relative rounded-2xl border border-white/20 bg-white/10 p-4 shadow-2xl backdrop-blur-md md:p-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 animate-pulse" />
-                Processus IA anti-arnaque
+                Votre dossier en 3 étapes
               </div>
-              <div className="mt-4 space-y-4">
-                <div className="rounded-xl border border-white/15 bg-white/5 p-4 md:p-5">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">📷</div>
-                    <div className="flex-1">
-                      <div className="text-white font-medium">Photos uploadées</div>
-                      <div className="text-xs text-white/70">48 photos analysées</div>
-                      <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white/10">
-                        <div
-                          className={`h-2 rounded-full transition-all duration-500 ${stage >= 3 ? "bg-emerald-400" : "bg-[#6bcfcf]"}`}
-                          style={{ width: stage === 0 ? "8%" : stage === 1 ? "60%" : stage === 2 ? "90%" : "100%" }}
-                        />
+
+              {/* Stepper header */}
+              <div className="mt-4 flex items-center justify-between text-[11px] font-medium text-white/70">
+                {["1. Calcul de volume", "2. Dossier anonyme", "3. 5+ devis fiables"].map(
+                  (label, index) => (
+                    <div
+                      key={label}
+                      className={`flex flex-1 items-center gap-2 ${
+                        index === 0 ? "" : "justify-center"
+                      }`}
+                    >
+                      <div
+                        className={`flex h-6 w-6 items-center justify-center rounded-full border text-[10px] transition-all ${
+                          stage === index
+                            ? "border-emerald-300 bg-emerald-300 text-[#04163a] shadow-lg shadow-emerald-500/40"
+                            : "border-white/30 bg-white/5 text-white/80"
+                        }`}
+                      >
+                        {index + 1}
                       </div>
+                      <span
+                        className={`hidden sm:inline transition-colors ${
+                          stage === index ? "text-white" : "text-white/70"
+                        }`}
+                      >
+                        {label}
+                      </span>
                     </div>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-white/15 bg-white/5 p-4 md:p-5">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">🤖</div>
-                    <div className="flex-1">
-                      <div className="text-white font-medium">IA calcule votre volume</div>
-                      <div className="text-xs text-white/70">Volume identique : 28 m³</div>
-                      <div className="text-xs text-white/70">Inventaire unique partagé aux pros</div>
-                      <div className="mt-3 flex items-center gap-2">
-                        {[0, 1, 2, 3].map((d) => (
-                          <span
-                            key={d}
-                            className={`h-2 w-2 rounded-full ${stage >= 3 ? "bg-emerald-400" : stage === 2 && d === 0 ? "bg-[#6bcfcf] animate-pulse" : "bg-white/30"}`}
+                  )
+                )}
+              </div>
+
+              <div className="mt-4">
+                {/* Carte principale : étape active uniquement, version minimaliste */}
+                {stage === 0 && (
+                  <div className="rounded-xl border border-white/50 bg-white/15 p-4 md:p-5 shadow-xl shadow-black/40 scale-[1.02] transition-all">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
+                        📷
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-white font-medium">Calcul de volume</div>
+                        <div className="mt-1 text-xs text-white/70">
+                          48 photos analysées ou estimation rapide sans photos — c’est vous qui décidez.
+                        </div>
+                        <div className="mt-2 inline-flex items-center gap-1 rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-white/80">
+                          <span>Avec photos</span>
+                          <span className="text-white/40">•</span>
+                          <span>Ou estimation rapide sans photos</span>
+                        </div>
+                        <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                          <div
+                            className="h-1.5 rounded-full bg-[#6bcfcf] transition-all duration-700"
+                            style={{
+                              width: "80%",
+                            }}
                           />
-                        ))}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="rounded-xl border border-white/15 bg-white/5 p-4 md:p-5">
-                  <div className="flex items-start gap-3">
-                    <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${stage === 3 ? "bg-emerald-400 text-[#04163a]" : "bg-white/10 text-white/70"}`}>{stage === 3 ? "✓" : "…"}</div>
-                    <div>
-                      <div className="text-white font-medium">Dossier anonyme envoyé</div>
-                      <div className="text-xs text-white/70">5+ devis fiables à comparer</div>
+                )}
+
+                {stage === 1 && (
+                  <div className="rounded-xl border border-white/50 bg-white/15 p-4 md:p-5 shadow-xl shadow-black/40 scale-[1.02] transition-all">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10">
+                        🤖
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-white font-medium">Dossier anonyme</div>
+                        <div className="mt-1 text-xs text-white/70">
+                          IA calcule un inventaire unique envoyé aux pros, sans partager vos coordonnées.
+                        </div>
+                        <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-white/5 px-2 py-0.5 text-[11px] text-emerald-200">
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
+                          <span>Volume figé : 28 m³ (le même pour tous)</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
+
+                {stage === 2 && (
+                  <div className="rounded-xl border border-emerald-300 bg-emerald-300/15 p-4 md:p-5 shadow-xl shadow-emerald-500/30 scale-[1.02] transition-all">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-300 text-sm text-[#04163a]">
+                        ✓
+                      </div>
+                      <div className="flex-1">
+                        <div className="text-white font-medium">5+ devis fiables à comparer</div>
+                        <div className="mt-1 text-xs text-white/70">
+                          Tous les déménageurs chiffrent sur le même volume. Vous comparez enfin ligne par
+                          ligne.
+                        </div>
+                        <div className="mt-3 grid grid-cols-2 gap-2 text-[11px]">
+                          {["Déménageur A", "Déménageur B"].map((label, index) => (
+                            <div
+                              key={label}
+                              className={`rounded-lg border bg-white/5 px-2 py-2 ${
+                                index === 1
+                                  ? "border-emerald-300 bg-white text-[#04163a]"
+                                  : "border-white/15 text-white/80"
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="font-medium text-[11px]">{label}</span>
+                                <span className="text-[10px] text-white/60">28 m³</span>
+                              </div>
+                              <div className="mt-1 text-[11px]">
+                                {index === 1 ? "Économie moyenne -18%" : "Offre comparable"}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

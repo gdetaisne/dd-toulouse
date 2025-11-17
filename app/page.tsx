@@ -71,7 +71,7 @@ export default function Home() {
         <div className="container space-y-8">
           <div className="text-center space-y-4">
             <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#6bcfcf]">Comparatif</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white">Pourquoi faire appel à Moverz ?</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-white">Pourquoi utiliser ce comparateur ?</h2>
             <p className="text-white/80 max-w-3xl mx-auto">
               Comparez le déménagement “DIY” avec notre process IA. Vous gagnez du temps, vous évitez les arnaques
               et vous recevez des devis enfin comparables.

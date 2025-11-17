@@ -56,9 +56,6 @@ export default function NeighborhoodsTeaser({
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <p className="text-sm text-white/70 hidden md:block">
-            Voir la carte complète des quartiers desservis.
-          </p>
           <Link href={quartiersLink} className="btn-secondary px-5 py-3 text-sm">
             Voir tous les quartiers
           </Link>

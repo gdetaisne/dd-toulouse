@@ -23,7 +23,7 @@ export default function ValueTriad() {
     {
       icon: "💶",
       title: "Service 100% gratuit",
-      punchline: "Jamais de frais cachés Moverz",
+      punchline: "Jamais de frais cachés pour vous",
       description:
         "Nous sommes rémunérés par les partenaires, jamais sur votre devis. Vous payez uniquement le déménagement.",
     },
@@ -36,7 +36,7 @@ export default function ValueTriad() {
           Nos garanties
         </p>
         <h2 className="text-2xl md:text-3xl font-semibold text-white">
-          Ce qui rend Moverz fiable (et différent)
+          Nos garanties pour un comparatif fiable
         </h2>
         <p className="text-white/80 max-w-3xl mx-auto text-sm md:text-base">
           En clair : des pros vérifiés, un volume calculé de façon neutre, un dossier anonyme et un
@@ -52,7 +52,7 @@ export default function ValueTriad() {
             className="rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-black/30 backdrop-blur-sm"
           >
             <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-xl">
+              <div className="text-2xl md:text-3xl leading-none">
                 {item.icon}
               </div>
               <div>
