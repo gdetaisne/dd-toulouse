@@ -1,20 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { getCityData } from '@/lib/cityData';
-
-// Fonction client-side pour résoudre la ville depuis hostname
-function getCityFromHostname(): string {
-  if (typeof window === 'undefined') return 'nice';
-  const hostname = window.location.hostname.toLowerCase();
-  // Cas spéciaux
-  if (hostname.includes('toulousain')) return 'toulouse';
-  if (hostname.includes('bordeaux-demenageur')) return 'bordeaux';
-  // Pattern standard: devis-demenageur-ville.fr
-  const cities = ['strasbourg', 'nice', 'lyon', 'marseille', 'nantes', 'lille', 'rennes', 'rouen', 'montpellier', 'toulouse', 'bordeaux'];
-  const found = cities.find(city => hostname.includes(city));
-  return found || 'nice';
-}
+import { useState } from "react";
 
 interface CtaPrimaryProps {
   placement: "hero" | "inline" | "footer";
@@ -26,14 +12,6 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Résoudre cityData dynamiquement
-  const city = useMemo(() => {
-    const citySlug = getCityFromHostname();
-    return getCityData(citySlug);
-  }, []);
-
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,26 +42,26 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
   const getTitle = () => {
     switch (placement) {
       case "hero":
-        return "Recevez 5+ devis fiables";
+        return "Créez votre dossier en 30 minutes";
       case "inline":
-        return "Recevez 5+ devis fiables";
+        return "Prêt pour votre déménagement ?";
       case "footer":
-        return "Prêt à comparer ce qui est comparable ?";
+        return "Démarrez votre projet dès maintenant";
       default:
-        return "Recevez 5+ devis fiables";
+        return "Obtenez votre devis";
     }
   };
 
   const getSubtitle = () => {
     switch (placement) {
       case "hero":
-        return "5+ déménageurs contrôlés chiffrent votre inventaire IA. Sous 7 jours, 100% gratuit, sans harcèlement.";
+        return "5 devis personnalisés sous 7 jours grâce à notre réseau de partenaires";
       case "inline":
-        return "Notre IA calcule votre volume et l'envoie à 5+ déménageurs contrôlés (solvabilité vérifiée, 0 litige).";
+        return "Notre équipe vous accompagne dans votre projet de déménagement";
       case "footer":
-        return `5+ déménageurs contrôlés à ${city.nameCapitalized} → devis comparables, 100% gratuits, zéro appel intempestif.`;
+        return "Rejoignez plus de 1200 clients satisfaits à Toulouse";
       default:
-        return "Service gratuit et sans engagement.";
+        return "Estimation gratuite et sans engagement";
     }
   };
 
@@ -108,7 +86,7 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
             <div className="text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6">
                 <span className="text-2xl">🚚</span>
-                <span className="text-sm font-medium text-white">Comparateur anti-arnaque</span>
+                <span className="text-sm font-medium text-white">Démarrez votre projet</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
@@ -124,19 +102,19 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
                   <svg className="w-6 h-6 text-[#6bcfcf] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>5+ devis de déménageurs contrôlés (solvabilité vérifiée, 0 litige)</span>
+                  <span>Jusqu'à 5 devis personnalisés sous 7 jours</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/90">
                   <svg className="w-6 h-6 text-[#6bcfcf] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>UN inventaire unique → volume identique pour tous</span>
+                  <span>100% gratuit et sans engagement</span>
                 </li>
                 <li className="flex items-start gap-3 text-white/90">
                   <svg className="w-6 h-6 text-[#6bcfcf] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>100% gratuit, dossier anonyme jusqu'à votre choix</span>
+                  <span>Partenaires certifiés à Toulouse</span>
                 </li>
               </ul>
             </div>
@@ -186,7 +164,7 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
                     disabled={isSubmitting}
                     className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-[#2b7a78] to-[#6bcfcf] text-white font-semibold hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#6bcfcf] focus:ring-offset-2 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
                   >
-                    {isSubmitting ? "Envoi en cours..." : "Recevez 5+ devis fiables gratuitement →"}
+                    {isSubmitting ? "Envoi en cours..." : "Obtenir mes devis gratuits →"}
                   </button>
                 </form>
                 
@@ -234,13 +212,13 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
               disabled={isSubmitting}
               className="px-6 py-3 rounded-xl bg-[#2b7a78] text-white font-medium hover:bg-[#2b7a78]/90 focus:outline-none focus:ring-2 focus:ring-[#6bcfcf] focus:ring-offset-2 focus:ring-offset-transparent transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Envoi..." : "Recevez 5+ devis fiables gratuitement"}
+              {isSubmitting ? "Envoi..." : "Obtenez vos devis précis gratuitement"}
             </button>
           </form>
         </div>
         
         <p className="text-sm text-white/60 mt-4">
-          * Service 100% gratuit, sans engagement. Vous recevrez 5+ devis de déménageurs contrôlés sous 7 jours.
+          * Service 100% gratuit, sans engagement. Vous recevrez jusqu'à 5 devis précis gratuitement sous 7 jours.
         </p>
       </div>
     </section>

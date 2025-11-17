@@ -15,6 +15,11 @@ export default function ProofStrip() {
       label: "fiables à comparer",
       caption: "Tous reçoivent le même inventaire (28 m³)",
     },
+    {
+      value: "-18%",
+      label: "économies moyennes",
+      caption: "Écart moyen vs devis le plus cher grâce à la comparaison",
+    },
   ];
 
   const chips = [
@@ -28,21 +33,20 @@ export default function ProofStrip() {
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
-            Preuves instantanées
+            Chiffres clés Moverz
           </p>
           <h2 className="mt-3 text-2xl md:text-3xl font-semibold text-[#04163a]">
             1200+ déménagements pilotés sans arnaques
           </h2>
           <p className="mt-2 text-[#04163a]/70">
-            Notes, volumes et garanties mis à jour en temps réel sur nos 11
-            villes.
+            Volumes calculés, avis et contrôles pros consolidés sur nos 11 villes.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           {chips.map((chip) => (
             <span
               key={chip}
-              className="inline-flex items-center gap-2 rounded-full border border-[#d8ecec] bg-white px-4 py-2 text-sm font-medium text-[#1a3c3c]"
+              className="inline-flex items-center gap-2 rounded-full border border-[#0f2c46]/20 bg-white px-4 py-2 text-sm font-medium text-[#1a3c3c]"
             >
               <span className="h-1.5 w-1.5 rounded-full bg-[#2b7a78]" />
               {chip}
@@ -51,19 +55,19 @@ export default function ProofStrip() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-4">
         {stats.map((stat) => (
           <div
             key={stat.value}
-            className="rounded-2xl border border-[#dfeaea] bg-white/90 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            className="rounded-2xl border border-[#0c243a] bg-[#082038] p-6 text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#04163a]/30"
           >
-            <div className="text-sm font-semibold uppercase tracking-wide text-[#2b7a78]/80">
+            <div className="text-sm font-semibold uppercase tracking-wide text-[#6bcfcf]/90">
               {stat.label}
             </div>
-            <div className="mt-3 text-4xl font-bold text-[#04163a]">
+            <div className="mt-3 text-4xl font-bold text-white">
               {stat.value}
             </div>
-            <p className="mt-3 text-sm text-[#04163a]/70">{stat.caption}</p>
+            <p className="mt-3 text-sm text-white/80">{stat.caption}</p>
           </div>
         ))}
       </div>

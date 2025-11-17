@@ -134,6 +134,30 @@ body {
   @apply py-16 md:py-24;
 }
 
+.section-light {
+  @apply py-16 md:py-24;
+  background: linear-gradient(180deg, #f6fbfb 0%, #ffffff 100%);
+  color: #04163a;
+}
+
+.section-gray {
+  @apply py-16 md:py-24;
+  background: #eef3f4;
+  color: #04163a;
+}
+
+.section-contrast {
+  @apply py-16 md:py-24;
+  background: linear-gradient(160deg, #04163a 0%, #072d47 55%, #093b4b 100%);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 0 rgba(255,255,255,0.03);
+}
+
+.bg-texture {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0);
+  background-size: 30px 30px;
+}
+
 /* Container utility */
 .container {
   @apply max-w-7xl mx-auto px-4 md:px-6;

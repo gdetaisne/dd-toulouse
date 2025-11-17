@@ -18,8 +18,8 @@ export default function HowItWorks() {
     },
     {
       number: "3",
-      title: "Recevez au moins 5 devis sur LE MÊME inventaire",
-      description: "Sous 7 jours, minimum 5 pros contrôlés → enfin comparable !",
+      title: "Vous recevez vos devis précis gratuitement",
+      description: "5 offres adaptées sous 7 jours",
       image: "/images/how-it-works/step-3-loading.jpg",
       alt: "Équipe de déménagement chargeant des cartons dans un camion"
     }
@@ -40,12 +40,7 @@ export default function HowItWorks() {
                 fill
                 sizes="(min-width: 768px) 33vw, 100vw"
                 className="object-cover"
-                quality={i === 0 ? 65 : 60}
-                priority={i === 0}
-                loading={i === 0 ? "eager" : "lazy"}
-                fetchPriority={i === 0 ? "high" : "auto"}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWEREiMxUf/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                quality={85}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#04163a]/40 to-transparent"></div>
               <div className="absolute top-3 left-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#6bcfcf] text-[#04163a] text-sm font-bold ring-1 ring-white/40">
@@ -59,7 +54,7 @@ export default function HowItWorks() {
       </div>
       
       <div className="text-center mt-10 md:mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href="/inventaire-ia/" className="btn-primary" aria-label="Recevez 5+ devis fiables gratuitement">Recevez 5+ devis fiables gratuitement</a>
+        <a href="/inventaire-ia/" className="btn-primary" aria-label="Obtenez vos devis précis gratuitement">Obtenez vos devis précis gratuitement</a>
         <a href="/comment-ca-marche/" className="btn-secondary">Comment ça marche</a>
       </div>
     </div>

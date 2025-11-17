@@ -73,7 +73,7 @@ export default function ContactPage() {
             <ul className="space-y-3 text-white/80">
               <li className="flex items-start gap-3">
                 <span className="text-[#6bcfcf] mt-1">✓</span>
-                <span>Inventaire IA en 30 min, dossier anonyme</span>
+                <span>Calcul de volume en photos, dossier anonyme</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-[#6bcfcf] mt-1">✓</span>
@@ -121,7 +121,7 @@ export default function ContactPage() {
               Recevez 5+ devis fiables gratuitement
             </a>
             <p className="text-sm text-white/60 mt-4">
-              ⚡ Inventaire IA en 30 min • 🔍 5+ pros contrôlés • 💬 Zéro harcèlement tel
+              ⚡ Calcul en photos rapide • 🔍 5+ pros contrôlés • 💬 Zéro harcèlement tel
             </p>
           </div>
         </div>

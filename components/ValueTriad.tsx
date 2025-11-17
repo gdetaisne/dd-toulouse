@@ -1,65 +1,66 @@
-"use client";
-
-import { useMemo } from 'react';
-import { getCityData } from '@/lib/cityData';
-
-// Fonction client-side pour résoudre la ville depuis hostname
-function getCityFromHostname(): string {
-  if (typeof window === 'undefined') return 'nice';
-  const hostname = window.location.hostname.toLowerCase();
-  if (hostname.includes('toulousain')) return 'toulouse';
-  if (hostname.includes('bordeaux-demenageur')) return 'bordeaux';
-  const cities = ['strasbourg', 'nice', 'lyon', 'marseille', 'nantes', 'lille', 'rennes', 'rouen', 'montpellier', 'toulouse', 'bordeaux'];
-  const found = cities.find(city => hostname.includes(city));
-  return found || 'nice';
-}
-
 export default function ValueTriad() {
-  const city = useMemo(() => {
-    const citySlug = getCityFromHostname();
-    return getCityData(citySlug);
-  }, []);
-
-  const values = [
+  const items = [
     {
-      icon: "✅",
-      iconBg: "from-green-500/20 to-emerald-500/20",
+      icon: "🛡️",
       title: "5+ déménageurs contrôlés",
-      description: "Minimum 5 pros → Solidité financière vérifiée + Historique litiges analysé"
+      punchline: "Les meilleurs dossiers seulement",
+      description: "Solvabilité vérifiée, 0 litige, contrats pros. Vous ne parlez qu’aux partenaires filtrés.",
     },
     {
-      icon: "🎯",
-      iconBg: "from-blue-500/20 to-cyan-500/20",
-      title: "Devis vraiment comparables",
-      description: "L'IA crée UN inventaire unique → tous chiffrent le même volume"
+      icon: "📏",
+      title: "Calcul de volume en photos",
+      punchline: "Même volume pour tout le monde",
+      description:
+        "Volume identique (ex : 28 m³) envoyé à tous les déménageurs → devis comparables ligne par ligne.",
     },
     {
-      icon: "🆓",
-      iconBg: "from-purple-500/20 to-pink-500/20",
-      title: "100% gratuit, sans engagement",
-      description: "Comparez en toute liberté, décidez sans pression"
+      icon: "🙈",
+      title: "Dossier anonyme",
+      punchline: "Pas d’appels tant que vous ne l’avez pas décidé",
+      description:
+        "Vos coordonnées restent confidentielles jusqu’à ce que vous choisissiez le déménageur à contacter.",
     },
     {
-      icon: "🚫",
-      iconBg: "from-amber-500/20 to-yellow-500/20",
-      title: "Sans harcèlement téléphonique",
-      description: "Zéro appel intempestif, vous recevez tout par email"
-    }
+      icon: "💶",
+      title: "Service 100% gratuit",
+      punchline: "Jamais de frais cachés Moverz",
+      description:
+        "Nous sommes rémunérés par les partenaires, jamais sur votre devis. Vous payez uniquement le déménagement.",
+    },
   ];
 
   return (
-    <div>
-      <h2 className="text-2xl md:text-3xl font-semibold text-white text-center mb-8">
-        Nos garanties
-      </h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {values.map((value, i) => (
-          <div key={i} className="card-glass rounded-2xl p-6 text-center hover:scale-105 hover:shadow-xl transition-all duration-300 group">
-            <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${value.iconBg} flex items-center justify-center text-3xl group-hover:scale-110 transition-transform`}>
-              {value.icon}
+    <div className="space-y-8">
+      <div className="text-center space-y-3">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#6bcfcf]">
+          Nos garanties
+        </p>
+        <h2 className="text-2xl md:text-3xl font-semibold text-white">
+          Ce qui rend Moverz fiable (et différent)
+        </h2>
+        <p className="text-white/80 max-w-3xl mx-auto text-sm md:text-base">
+          En clair : des pros vérifiés, un volume calculé de façon neutre, un dossier anonyme et un
+          service gratuit pour vous. Tout est fait pour éviter les arnaques et les mauvaises
+          surprises.
+        </p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        {items.map((item) => (
+          <div
+            key={item.title}
+            className="rounded-2xl border border-white/15 bg-white/5 p-6 shadow-lg shadow-black/30 backdrop-blur-sm"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-xl">
+                {item.icon}
+              </div>
+              <div>
+                <h3 className="text-lg md:text-xl font-semibold text-white">{item.title}</h3>
+                <p className="mt-1 text-sm font-medium text-[#6bcfcf]">{item.punchline}</p>
+                <p className="mt-2 text-sm text-white/80">{item.description}</p>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2">{value.title}</h3>
-            <p className="text-white/70 text-sm leading-relaxed">{value.description}</p>
           </div>
         ))}
       </div>

@@ -81,7 +81,7 @@ export default function Header() {
 
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/5 border-b border-white/10">
+    <header className="sticky top-0 z-50 bg-[#04163a] border-b border-white/10 shadow-md">
       <div className="container max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-between">
         {/* Logo */}
         <Link 

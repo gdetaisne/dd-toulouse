@@ -52,15 +52,33 @@ export default function Hero() {
                 "Dossier anonyme jusqu’à votre choix",
                 "5+ devis fiables à comparer (gratuit)",
               ].map((text) => (
-                <li key={text} className="flex items-start gap-2 justify-center lg:justify-start">
-                  <span className="text-[#6bcfcf] mt-1">✓</span>
+                <li
+                  key={text}
+                  className="flex items-start gap-3 justify-center lg:justify-start"
+                >
+                  <span className="mt-1 flex h-7 w-7 items-center justify-center rounded-full border border-[#6bcfcf]/50 bg-white/5 text-[#6bcfcf] shadow-sm">
+                    <svg
+                      className="h-3.5 w-3.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 13.5L9.5 18L19 7"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
                   <span>{text}</span>
                 </li>
               ))}
             </ul>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
-              <a href="/inventaire-ia/" className="btn-primary" aria-label="Commencer l’inventaire IA">
-                Commencer l’inventaire IA
+              <a href="/inventaire-ia/" className="btn-primary" aria-label="Calculer mon volume en photos (gratuit) (gratuit)">
+                Calculer mon volume en photos (gratuit)
               </a>
               <span className="text-sm text-white/70">Processus express – 100% gratuit</span>
             </div>

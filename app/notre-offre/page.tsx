@@ -8,7 +8,7 @@ import { env } from "@/lib/env";
 const city = getCityDataFromUrl(env.SITE_URL);
 
 export const metadata: Metadata = {
-  title: `Notre Offre Déménagement ${city.nameCapitalized} - Inventaire IA & 5+ devis | Moverz`,
+  title: `Notre Offre Déménagement ${city.nameCapitalized} - Calcul de volume en photos & 5+ devis | Moverz`,
   description: `Notre IA crée un inventaire unique et l'envoie à 5+ déménageurs contrôlés (solvabilité vérifiée, 0 litige). Recevez des devis comparables en 7 jours, 100% gratuit et sans harcèlement.`,
   alternates: {
     canonical: getCanonicalUrl('notre-offre'),
@@ -173,7 +173,7 @@ export default function NotreOffrePage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">Inventaire IA</h3>
+                <h3 className="text-lg font-semibold text-white mb-2">Calcul de volume en photos</h3>
                 <p className="text-white/70 text-sm">Photos → inventaire unique partagé à tous les déménageurs</p>
               </div>
 
