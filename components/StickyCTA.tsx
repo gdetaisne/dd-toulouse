@@ -20,26 +20,24 @@ export default function StickyCTA() {
       }`}
     >
       <div className="mx-auto max-w-3xl px-4 md:px-6">
-        <div className="rounded-2xl border border-[#d0dfe0] bg-white p-3 sm:p-4 shadow-2xl shadow-black/15">
+        <div className="rounded-2xl border border-[#d0dfe0] bg-white/95 p-3 sm:p-4 shadow-2xl shadow-black/15 backdrop-blur">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
                 Passez à l’action
               </p>
-              <h3 className="text-sm sm:text-base font-semibold text-[#04163a]">
-                Calcul de volume (gratuit)
-              </h3>
-              <p className="text-[11px] sm:text-xs text-[#04163a]/55">
-                Estimation rapide sans photos ou avec photos grâce à l’IA, c’est vous qui décidez.
+              <p className="text-[11px] sm:text-xs text-[#04163a]/60">
+                Estimation rapide, avec ou sans photos, c’est vous qui décidez.
               </p>
             </div>
             <div className="flex sm:flex-row sm:items-center sm:justify-end">
               <a
                 href="/inventaire-ia/"
-                className="btn-accent text-center text-sm"
-                aria-label="Calculer mon volume (gratuit)"
+                className="inline-flex w-full items-center justify-center rounded-full bg-[#2b7a78] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#0b2730]/40 transition hover:bg-[#245f5f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2b7a78] focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:w-auto"
+                aria-label="Recevez 5+ devis fiables gratuitement"
               >
-                Calculer mon volume
+                Recevez 5+ devis fiables gratuitement
+                <span className="ml-2 text-base leading-none">→</span>
               </a>
             </div>
           </div>
