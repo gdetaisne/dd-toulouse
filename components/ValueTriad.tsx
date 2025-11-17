@@ -7,14 +7,14 @@ export default function ValueTriad() {
       description: "Solvabilité vérifiée, 0 litige, contrats pros. Vous ne parlez qu’aux partenaires filtrés.",
     },
     {
-      icon: "📏",
+      icon: "📸",
       title: "Calcul de volume en photos",
       punchline: "Même volume pour tout le monde",
       description:
         "Volume identique (ex : 28 m³) envoyé à tous les déménageurs → devis comparables ligne par ligne.",
     },
     {
-      icon: "🙈",
+      icon: "🔒",
       title: "Dossier anonyme",
       punchline: "Pas d’appels tant que vous ne l’avez pas décidé",
       description:

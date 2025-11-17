@@ -60,7 +60,7 @@ export default function Home() {
       </section>
 
       {/* 5. Tarifs indicatifs */}
-      <section className="section section-light">
+      <section className="section section-gray">
         <div className="container">
           <PricingPreview />
         </div>
