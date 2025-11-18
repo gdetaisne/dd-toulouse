@@ -15,7 +15,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       role: 'Consultante',
       rating: 4.9,
       summary: '5 devis comparables sous 5 jours',
-      body: "J'ai reçu cinq devis alignés sur le même cahier des charges, sans un seul appel intrusif. L'IA a bouclé mon dossier en 30 minutes et j'ai pu comparer sereinement."
+      body: "J'ai reçu cinq devis alignés sur le même cahier des charges, sans un seul appel intrusif. La plateforme a bouclé mon dossier en 30 minutes et j'ai pu comparer sereinement."
     },
     {
       author: 'Nicolas — Prado',
@@ -28,8 +28,8 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       author: 'Karima — Euromed',
       role: 'Responsable RH',
       rating: 5,
-      summary: "Process IA ultra rapide",
-      body: "J'ai juste pris des photos de mon T3. L'IA a calculé le volume, et j'ai reçu 5 devis fiables pile sur mes contraintes en moins d'une semaine."
+      summary: 'Process ultra rapide',
+      body: "J'ai juste pris des photos de mon T3. Le dossier a estimé le volume, et j'ai reçu 5 devis fiables pile sur mes contraintes en moins d'une semaine."
     }
   ],
   nice: [
@@ -51,8 +51,8 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       author: 'Laura — Cimiez',
       role: 'Coach sportive',
       rating: 5,
-      summary: 'IA qui comprend les volumes',
-      body: "J'ai téléchargé 10 photos depuis mon mobile. L'IA a estimé 38 m³ et chaque devis proposait la bonne taille de camion du premier coup."
+      summary: 'Estimation de volume très précise',
+      body: "J'ai téléchargé 10 photos depuis mon mobile. L'estimation fournie m'a donné 38 m³ et chaque devis proposait la bonne taille de camion du premier coup."
     }
   ],
   lyon: [
@@ -61,7 +61,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       role: 'Entrepreneur',
       rating: 4.9,
       summary: 'Devis comparables sur la même base',
-      body: "Les 5 propositions reçues utilisaient toutes le cahier des charges IA, donc comparer les options premium a été un jeu d'enfant."
+      body: "Les 5 propositions reçues utilisaient toutes le même cahier des charges, donc comparer les options premium a été un jeu d'enfant."
     },
     {
       author: 'Émilie — Croix-Rousse',
@@ -84,7 +84,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       role: 'UX designer',
       rating: 4.9,
       summary: 'Comparaison claire des formules',
-      body: "Les devis reçus étaient alignés sur le même dossier IA. J'ai choisi la formule standard en confiance."
+      body: "Les devis reçus étaient alignés sur le même dossier. J'ai choisi la formule standard en confiance."
     },
     {
       author: 'Julien — Capitole',
@@ -120,7 +120,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       author: 'Marc — Caudéran',
       role: 'Responsable supply chain',
       rating: 5,
-      summary: 'IA bluffante',
+      summary: 'Estimation bluffante',
       body: "Les photos ont suffi pour dimensionner mon déménagement Bordeaux vers Lyon. Les pros proposés étaient déjà briefés."
     }
   ],
@@ -153,7 +153,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       role: 'Chef de projet digital',
       rating: 4.9,
       summary: 'Devis comparables tout de suite',
-      body: "Les 5 propositions étaient structurées pareil, avec le même volume estimé par IA. J'ai pu arbitrer rapidement."
+      body: "Les 5 propositions étaient structurées pareil, avec le même volume estimé à partir de mon dossier. J'ai pu arbitrer rapidement."
     },
     {
       author: 'Claire — Neudorf',
@@ -176,7 +176,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       role: 'Responsable marketing',
       rating: 4.9,
       summary: 'Comparaison claire des offres',
-      body: "Les 5 devis suivent le même cahier des charges IA. Je compare les options premium facilement."
+      body: "Les 5 devis suivent le même cahier des charges. Je compare les options premium facilement."
     },
     {
       author: 'Romain — Saint-Hélier',
@@ -189,7 +189,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       author: 'Camille — Beaulieu',
       role: 'Enseignante',
       rating: 5,
-      summary: 'IA efficace',
+      summary: 'Process efficace',
       body: "En 30 minutes j'ai obtenu un volume précis, et les devis reçus étaient parfaitement adaptés à mon trajet Rennes - Brest."
     }
   ],
@@ -222,7 +222,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       role: 'UX researcher',
       rating: 4.9,
       summary: 'Comparaison instantanée des devis',
-      body: "Les 5 propositions alignées sur le cahier des charges IA m'ont permis de choisir une formule premium sans stress."
+      body: "Les 5 propositions alignées sur le même cahier des charges m'ont permis de choisir une formule premium sans stress."
     },
     {
       author: 'Vincent — Talensac',
@@ -235,7 +235,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       author: 'Julie — Trentemoult',
       role: 'Photographe',
       rating: 5,
-      summary: 'IA ultra pratique',
+      summary: 'Plateforme ultra pratique',
       body: "Mes photos envoyées sur mobile ont suffi. Les déménageurs avaient tous préparé un devis précis et adapté."
     }
   ],
@@ -245,7 +245,7 @@ const reviewProfiles: Record<string, ReviewProfile[]> = {
       role: 'Freelance',
       rating: 4.9,
       summary: '5 devis calibrés sur mon volume',
-      body: "L'IA a estimé 34 m³, et les 5 devis reçus respectaient exactement ce volume. Choix facile."
+      body: "Le dossier a estimé 34 m³, et les 5 devis reçus respectaient exactement ce volume. Choix facile."
     },
     {
       author: 'Paul — Antigone',
@@ -276,7 +276,7 @@ function buildFallbackReviews(city: CityData): ReviewProfile[] {
       role: 'Utilisateur Moverz',
       rating: 4.9,
       summary: '5 devis comparables, zéro stress',
-      body: `Les 5 devis reçus suivaient le même cahier des charges IA. Comparer les options pour ${city.nameCapitalized} devient simple.`
+      body: `Les 5 devis reçus suivaient le même cahier des charges. Comparer les options pour ${city.nameCapitalized} devient simple.`
     },
     {
       author: `${city.nameCapitalized} — ${pickNeighborhood(1)}`,
@@ -289,7 +289,7 @@ function buildFallbackReviews(city: CityData): ReviewProfile[] {
       author: `${city.nameCapitalized} — ${pickNeighborhood(2)}`,
       role: 'Utilisateur',
       rating: 5,
-      summary: 'IA efficace en 30 minutes',
+      summary: 'Estimation volume en 30 minutes',
       body: `Quelques photos suffisent pour calculer le volume. Les devis reçus sont fiables et adaptés à ${city.nameCapitalized}.`
     }
   ];

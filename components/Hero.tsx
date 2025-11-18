@@ -21,14 +21,15 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden text-white">
+    <section className="relative overflow-hidden text-white font-sans">
       <div className="absolute inset-0">
         <div className="h-full w-full bg-hero" />
         <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/90 via-[#06263a]/80 to-[#0b3b46]/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/5" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/12 via-transparent to-white/5" />
+        <div className="pointer-events-none absolute -top-24 right-[-120px] h-[260px] w-[260px] rounded-full bg-[radial-gradient(circle_at_center,_rgba(107,207,207,0.28),_transparent_65%)] blur-2xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24 lg:py-28">
+      <div className="relative mx-auto max-w-6xl px-4 py-16 md:px-8 md:py-24 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* Colonne gauche – texte */}
           <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
@@ -86,174 +87,114 @@ export default function Hero() {
           </div>
 
           {/* Colonne droite – mockup comparateur statique */}
-          <div className="relative mx-auto w-full max-w-[580px] lg:mx-0">
-            <div className="absolute -inset-6 hidden rounded-[32px] bg-black/60 blur-3xl lg:block" />
-            <div className="relative overflow-hidden rounded-[32px] border border-white/30 bg-white/18 p-5 shadow-[0_32px_90px_rgba(0,0,0,0.65)] backdrop-blur-2xl text-[#04163a] md:p-6">
-              {/* Header minimal – uniquement le pill */}
-              <div className="flex items-center justify-end">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1ad5d5] px-3 py-1.5 text-[10px] font-semibold text-[#043a3a] shadow-sm shadow-black/30">
+          <div className="relative mx-auto w-full max-w-[560px] lg:mx-0">
+            <div className="absolute -inset-6 hidden rounded-3xl bg-black/60 blur-3xl lg:block" />
+            <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#F8F9FA]/95 p-5 shadow-2xl shadow-black/60 text-[#04163a] md:p-6">
+              {/* Header minimal – badge baseline aligné à gauche */}
+              <div className="flex items-center justify-start">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#6BCFCF] px-3 py-1.5 text-[10px] font-semibold text-[#043a3a] shadow-sm shadow-black/20">
                   3 étapes. 0 spam. 5+ devis fiables.
                 </span>
               </div>
 
-              {/* Carte process en 3 étapes – style fenêtre 2025 */}
-              <div className="mt-5 space-y-3 text-[11px]">
-                {/* Étape 1 : Dossier unique */}
-                <div
-                  className={`rounded-3xl border px-4 py-3 md:px-5 md:py-4 backdrop-blur-sm transition-all duration-500 ${
-                    stage === 0
-                      ? "border-white/45 bg-white/20 opacity-100 translate-y-0 shadow-lg shadow-black/40 scale-[1.01]"
-                      : "border-white/10 bg-white/5 opacity-55 translate-y-0.5 shadow-sm shadow-black/20"
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
+              {/* Pipeline en 3 étapes équilibrées */}
+              <div className="mt-5 space-y-2.5 text-[11px]">
+                {[
+                  {
+                    id: 0,
+                    label: "Dossier unique",
+                    description:
+                      "Un seul dossier envoyé à 5+ déménageurs contrôlés.",
+                  },
+                  {
+                    id: 1,
+                    label: "Pros filtrés",
+                    description:
+                      "On ne garde que les déménageurs fiables, bien notés et assurés.",
+                  },
+                  {
+                    id: 2,
+                    label: "Comparaison claire",
+                    description:
+                      "5+ devis alignés sur le même volume et les mêmes options.",
+                  },
+                ].map((step, index) => (
+                  <div
+                    key={step.label}
+                    className={`rounded-2xl border px-4 py-3.5 md:px-5 md:py-4 transition-all duration-500 ${
+                      stage === step.id
+                        ? "border-[#6BCFCF] bg-white/90 shadow-md shadow-black/25 translate-y-0 scale-[1.01]"
+                        : "border-white/30 bg-white/65 shadow-sm shadow-black/15 translate-y-0 hover:scale-[1.01] hover:shadow-md hover:shadow-black/25"
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
                       <div
-                        className={`flex h-9 w-9 items-center justify-center rounded-2xl border text-[12px] font-semibold transition-all duration-500 ${
-                          stage === 0
-                            ? "border-[#6bcfcf] bg-white text-[#043a3a] shadow-sm shadow-black/40"
-                            : "border-white/30 bg-white/12 text-[#7fa5a5]"
+                        className={`flex h-8 w-8 items-center justify-center rounded-xl border text-[11px] font-semibold transition-all duration-500 ${
+                          stage === step.id
+                            ? "border-[#2B7A78] bg-[#2B7A78] text-white animate-soft-pulse"
+                            : "border-[#E3E5E8] bg-white text-[#7fa5a5]"
                         }`}
                       >
-                        1
+                        {index + 1}
                       </div>
-                      <div>
-                          <p className="text-[11px] md:text-[13px] font-semibold text-white/85 tracking-[0.14em] uppercase">
-                          Dossier unique
+                      <div className="flex-1">
+                        <p className="text-[11px] md:text-[13px] font-semibold tracking-[0.16em] text-[#0E0E0E] uppercase">
+                          {step.label}
                         </p>
-                          <p className="mt-0.5 text-[11px] md:text-[12px] text-white/60">
-                          Un seul dossier envoyé à 5+ déménageurs contrôlés.
+                        <p className="mt-0.5 text-[11px] md:text-[12px] text-[#4b5c6b]">
+                          {step.description}
                         </p>
                       </div>
-                    </div>
-                    <div className="hidden h-1.5 w-20 overflow-hidden rounded-full bg-white/12 sm:block">
-                      <div className="h-full w-[72%] rounded-full bg-[#6bcfcf]/80" />
                     </div>
                   </div>
-                </div>
+                ))}
+              </div>
 
-                {/* Étape 2 : Déménageurs filtrés */}
-                <div
-                  className={`rounded-3xl border px-4 py-3 md:px-5 md:py-4 backdrop-blur-sm transition-all duration-500 ${
-                    stage === 1
-                      ? "border-white/45 bg-white/20 opacity-100 translate-y-0 shadow-lg shadow-black/40 scale-[1.01]"
-                      : "border-white/10 bg-white/5 opacity-70 translate-y-0.5 shadow-sm shadow-black/20"
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`flex h-9 w-9 items-center justify-center rounded-2xl border text-[12px] font-semibold transition-all duration-500 ${
-                          stage === 1
-                            ? "border-[#6bcfcf] bg-white text-[#043a3a] shadow-sm shadow-black/40"
-                            : "border-white/30 bg-white/12 text-[#7fa5a5]"
-                        }`}
-                      >
-                        2
-                      </div>
-                      <div>
-                        <p className="text-[11px] md:text-[13px] font-semibold text-white/85 tracking-[0.14em] uppercase">
-                          Pros filtrés
-                        </p>
-                        <p className="mt-0.5 text-[11px] md:text-[12px] text-white/60">
-                          On ne garde que les déménageurs fiables, bien notés et assurés.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="hidden items-center gap-1.5 sm:flex">
-                      {[0, 1, 2, 3].map((dot) => (
-                        <span
-                          key={dot}
-                          className={`h-1.5 w-1.5 rounded-full ${
-                            dot < 3 ? "bg-[#6bcfcf]" : "bg-white/26"
-                          }`}
-                        />
-                      ))}
-                    </div>
+              {/* Mini comparateur – style Notion-like */}
+              <div className="mt-4 rounded-2xl border border-[#E3E5E8] bg-white/95 px-4 py-3.5 md:px-5 md:py-4 shadow-sm shadow-black/10">
+                <div className="mb-2 flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7b8794]">
+                    Aperçu des devis
+                  </span>
+                  <span className="text-[10px] font-medium text-[#2B7A78]">
+                    Volume et options identiques
+                  </span>
+                </div>
+                <div className="grid grid-cols-3 gap-2 text-[11px] text-[#04163a]">
+                  <div className="flex flex-col gap-1 rounded-xl border border-[#E3E5E8] bg-[#F8F9FA] px-3 py-2">
+                    <span className="text-[10px] font-medium text-[#7b8794]">
+                      Offre A
+                    </span>
+                    <span className="text-[13px] font-semibold">1 040 €</span>
+                    <span className="text-[10px] text-[#9aa5b1]">
+                      Standard
+                    </span>
                   </div>
-                </div>
-
-                {/* Étape 3 : Devis comparables */}
-                <div
-                  className={`relative overflow-hidden rounded-3xl border px-4 py-4 md:px-5 md:py-5 transition-all duration-500 ${
-                    stage === 2
-                      ? "border-white/60 bg-white/95 translate-y-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)] scale-[1.01]"
-                      : "border-white/25 bg-white/75 translate-y-0.5 shadow-lg shadow-black/25"
-                  }`}
-                >
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`flex h-9 w-9 items-center justify-center rounded-2xl border text-[12px] font-semibold transition-all duration-500 ${
-                            stage === 2
-                              ? "border-[#34d399] bg-[#a7f3d0] text-[#064e3b] shadow-sm shadow-black/40"
-                              : "border-emerald-200/60 bg-emerald-400/14 text-emerald-900/80"
-                          }`}
-                        >
-                          3
-                        </div>
-                        <div>
-                          <p className="text-[11px] md:text-[13px] font-semibold tracking-[0.14em] text-[#043a3a] uppercase">
-                            Comparaison claire
-                          </p>
-                          <p className="mt-0.5 text-[11px] md:text-[12px] text-[#315a5a]">
-                            5+ devis alignés sur le même volume et les mêmes options.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Mini comparateur – focus sur une offre */}
-                    <div className="mt-3">
-                      <div className="mb-2 flex items-center justify-between gap-2">
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#6d8f8f]">
-                          Aperçu des devis
-                        </span>
-                        <span className="text-[10px] font-medium text-[#1fb6aa]">
-                          Offre recommandée mise en avant
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-3 text-[10px] text-[#315a5a]">
-                        <div className="flex-1 rounded-2xl bg-white/60 px-3 py-2">
-                          <p className="font-semibold">Offre A</p>
-                          <p className="mt-0.5 text-[13px] md:text-[14px] font-semibold">
-                            1 040 €
-                          </p>
-                        </div>
-                        <div className="flex-1 rounded-2xl bg-white/60 px-3 py-2">
-                          <p className="font-semibold">Offre recommandée</p>
-                          <p className="mt-0.5 text-[13px] md:text-[14px] font-semibold">
-                            890 €
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Carte flottante pour l'offre C */}
-                      <div
-                        className={`pointer-events-none absolute right-6 bottom-5 transition-transform duration-500 ${
-                          stage === 2 ? "translate-y-0" : "translate-y-1"
-                        }`}
-                      >
-                        <div className="rounded-2xl bg-white px-4 py-3 text-[11px] text-[#04163a] shadow-xl shadow-black/20">
-                          <p className="text-[10px] font-semibold text-[#6d8f8f]">
-                            Offre C
-                          </p>
-                          <p className="mt-0.5 text-[13px] md:text-[14px] font-semibold">
-                            920 €
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="flex flex-col gap-1 rounded-xl border border-[#2B7A78] bg-[#E6FFFA] px-3 py-2 shadow-sm shadow-emerald-500/20">
+                    <span className="text-[10px] font-medium text-[#0f766e]">
+                      Offre recommandée
+                    </span>
+                    <span className="text-[13px] font-semibold text-[#0E0E0E]">
+                      890 €
+                    </span>
+                    <span className="text-[10px] text-[#0f766e]">
+                      Meilleur rapport qualité/prix
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-1 rounded-xl border border-[#E3E5E8] bg-[#F8F9FA] px-3 py-2">
+                    <span className="text-[10px] font-medium text-[#7b8794]">
+                      Offre C
+                    </span>
+                    <span className="text-[13px] font-semibold">920 €</span>
+                    <span className="text-[10px] text-[#9aa5b1]">Premium</span>
                   </div>
                 </div>
               </div>
 
               {/* Objectif mis en avant */}
-              <div className="mt-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/12 px-3 py-1.5 text-[11px] text-white/85 shadow-sm shadow-black/30">
-                  <span className="rounded-full bg-[#6bcfcf] px-2 py-0.5 text-[10px] font-semibold text-[#043a3a]">
+              <div className="mt-3 flex justify-center">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#E3E5E8] bg-white/90 px-3 py-1.5 text-[11px] text-[#04163a] shadow-sm shadow-black/10">
+                  <span className="rounded-full bg-[#6BCFCF] px-2 py-0.5 text-[10px] font-semibold text-[#043a3a]">
                     Objectif
                   </span>
                   <span>Comparer, pas se faire rappeler 10 fois.</span>
