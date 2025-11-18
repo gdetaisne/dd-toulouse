@@ -29,20 +29,37 @@ export default function CommentCaMarchePage() {
     {
       number: "1",
       title: "Créez votre dossier unique",
-      description:
-        "Quelques infos clés sur votre déménagement (adresses, accès, volume estimé, contraintes). Un seul dossier pour tous les déménageurs.",
+      description: (
+        <>
+          Quelques infos clés sur votre déménagement (adresses, accès, volume
+          estimé, contraintes).{" "}
+          <span className="font-semibold text-[#043a3a]">📁 Un seul dossier</span>{" "}
+          pour tous les déménageurs.
+        </>
+      ),
     },
     {
       number: "2",
       title: "Nous filtrons les déménageurs",
-      description:
-        "On ne garde que les pros fiables, bien notés et assurés. Votre dossier reste anonyme : vous gardez la main.",
+      description: (
+        <>
+          On ne garde que les{" "}
+          <span className="font-semibold text-[#043a3a]">🛡️ pros fiables</span>,
+          bien notés et assurés. Votre dossier reste anonyme : vous gardez la
+          main.
+        </>
+      ),
     },
     {
       number: "3",
       title: "Vous comparez 5+ devis fiables",
-      description:
-        "Même base, mêmes options, même volume estimé : des devis enfin comparables, sans appels commerciaux non souhaités.",
+      description: (
+        <>
+          Même base, mêmes options, même volume estimé :{" "}
+          <span className="font-semibold text-[#043a3a]">📊 des devis enfin comparables</span>
+          , sans appels commerciaux non souhaités.
+        </>
+      ),
     },
   ];
 
@@ -72,8 +89,11 @@ export default function CommentCaMarchePage() {
               <span className="font-semibold text-white">
                 comparer des devis vraiment comparables
               </span>{" "}
-              pour votre déménagement à {city.nameCapitalized}, sans spam ni
-              appels commerciaux.
+              pour votre déménagement à {city.nameCapitalized},{" "}
+              <span className="font-semibold text-[#6BCFCF]">
+                sans spam ni appels commerciaux
+              </span>
+              .
             </p>
           </div>
         </div>
@@ -117,22 +137,56 @@ export default function CommentCaMarchePage() {
             <div className="rounded-2xl border border-[#E3E5E8] bg-[#F4FBFB] p-4 text-sm text-[#043a3a]">
               <p className="font-semibold">Ce que vous gagnez</p>
               <ul className="mt-2 space-y-1 text-xs md:text-sm text-[#285c5c]">
-                <li>• 30 minutes pour créer un dossier propre.</li>
-                <li>• 5+ devis reçus sans relances ni visites inutiles.</li>
+                <li>
+                  •{" "}
+                  <span className="font-semibold text-[#043a3a]">
+                    ⏱️ 30 minutes
+                  </span>{" "}
+                  pour créer un dossier propre.
+                </li>
+                <li>
+                  •{" "}
+                  <span className="font-semibold text-[#0f766e]">📨 5+ devis</span>{" "}
+                  reçus sans relances ni visites inutiles.
+                </li>
               </ul>
             </div>
             <div className="rounded-2xl border border-[#E3E5E8] bg-[#F8FAFC] p-4 text-sm text-[#043a3a]">
               <p className="font-semibold">Ce que l’on évite</p>
               <ul className="mt-2 space-y-1 text-xs md:text-sm text-[#285c5c]">
-                <li>• Devis incomparables, formats différents.</li>
-                <li>• Appels commerciaux non sollicités.</li>
+                <li>
+                  •{" "}
+                  <span className="font-semibold text-[#b91c1c]">
+                    ❌ Devis incomparables
+                  </span>
+                  , formats différents.
+                </li>
+                <li>
+                  •{" "}
+                  <span className="font-semibold text-[#b91c1c]">
+                    📵 Appels commerciaux non sollicités
+                  </span>
+                  .
+                </li>
               </ul>
             </div>
             <div className="rounded-2xl border border-[#E3E5E8] bg-white p-4 text-sm text-[#043a3a]">
               <p className="font-semibold">Ce que ça reste</p>
               <ul className="mt-2 space-y-1 text-xs md:text-sm text-[#285c5c]">
-                <li>• Gratuit, sans engagement.</li>
-                <li>• Dossier anonyme jusqu’à votre choix final.</li>
+                <li>
+                  •{" "}
+                  <span className="font-semibold text-[#0f766e]">
+                    🔓 Gratuit, sans engagement
+                  </span>
+                  .
+                </li>
+                <li>
+                  • Dossier{" "}
+                  <span className="font-semibold text-[#0f766e]">
+                    🕵️ anonyme jusqu’à votre choix final
+                  </span>
+                  .
+                </li>
               </ul>
             </div>
           </div>
@@ -161,9 +215,23 @@ export default function CommentCaMarchePage() {
                 Ce que vous faites
               </h3>
               <ul className="mt-3 space-y-2 text-sm text-[#4b5c6b]">
-                <li>• Remplir un seul dossier avec vos infos et contraintes.</li>
-                <li>• Préciser vos préférences (budget, dates, niveau de service).</li>
-                <li>• Choisir le déménageur qui vous convient parmi les offres.</li>
+                <li>
+                  • Remplir{" "}
+                  <span className="font-semibold text-[#043a3a]">
+                    📁 un seul dossier
+                  </span>{" "}
+                  avec vos infos et contraintes.
+                </li>
+                <li>
+                  • Préciser vos{" "}
+                  <span className="font-semibold text-[#043a3a]">
+                    🎯 préférences
+                  </span>{" "}
+                  (budget, dates, niveau de service).
+                </li>
+                <li>
+                  • Choisir le déménageur qui vous convient parmi les offres.
+                </li>
               </ul>
             </div>
 
@@ -175,8 +243,16 @@ export default function CommentCaMarchePage() {
                 Ce que fait le comparateur
               </h3>
               <ul className="mt-3 space-y-2 text-sm text-white/80">
-                <li>• Filtrer les déménageurs fiables et adaptés à votre dossier.</li>
-                <li>• Aligner les devis sur la même base pour les rendre lisibles.</li>
+                <li>
+                  •{" "}
+                  <span className="font-semibold text-[#6BCFCF]">
+                    🧮 Filtrer les déménageurs fiables
+                  </span>{" "}
+                  et adaptés à votre dossier.
+                </li>
+                <li>
+                  • Aligner les devis sur la même base pour les rendre lisibles.
+                </li>
                 <li>• Vous accompagner jusqu’au choix final si besoin.</li>
               </ul>
             </div>
