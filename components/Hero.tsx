@@ -44,17 +44,17 @@ export default function Hero() {
             <p className="mt-4 text-base md:text-lg text-white/85 max-w-xl mx-auto lg:mx-0">
               Un seul dossier, des déménageurs contrôlés, des devis comparables.
             </p>
-            <ul className="mt-6 space-y-3 text-base md:text-lg text-white/90">
+            <ul className="mt-6 space-y-3 text-sm md:text-base text-white/90">
               {[
-                "Même volume pour tous les déménageurs",
-                "Dossier anonyme jusqu’à votre choix",
+                "Même volume pour tout le monde",
+                "Dossier anonyme, vous décidez",
                 "5+ devis fiables, 100% gratuits",
               ].map((text) => (
                 <li
                   key={text}
-                  className="flex items-start gap-3 justify-center lg:justify-start"
+                  className="flex items-center gap-3 justify-center lg:justify-start"
                 >
-                  <span className="mt-1 flex h-7 w-7 items-center justify-center rounded-full border border-[#6bcfcf]/50 bg-white/5 text-[#6bcfcf] shadow-sm">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#6bcfcf]/40 bg-white/5 text-[#6bcfcf] shadow-sm">
                     <svg
                       className="h-3.5 w-3.5"
                       viewBox="0 0 24 24"
@@ -86,14 +86,19 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Colonne droite – mockup comparateur statique */}
+          {/* Colonne droite – mockup comparateur style Stripe */}
           <div className="relative mx-auto w-full max-w-[560px] lg:mx-0">
             <div className="absolute -inset-6 hidden rounded-3xl bg-black/60 blur-3xl lg:block" />
-            <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-[#F8F9FA]/95 p-5 shadow-2xl shadow-black/60 text-[#04163a] md:p-6">
-              {/* Header minimal – badge baseline aligné à gauche */}
-              <div className="flex items-center justify-start">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#6BCFCF] px-3 py-1.5 text-[10px] font-semibold text-[#043a3a] shadow-sm shadow-black/20">
-                  3 étapes. 0 spam. 5+ devis fiables.
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/95 via-white to-[#F5FBFB] p-5 md:p-6 shadow-[0_24px_70px_rgba(15,23,42,0.55)] text-[#04163a]">
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#6BCFCF] via-[#4f46e5] to-[#22c55e]" />
+              {/* Header minimal – baseline */}
+              <div className="relative flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0b304a] px-3 py-1.5 text-[10px] font-semibold text-white/90">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  3 étapes · 0 spam · 5+ devis fiables
+                </span>
+                <span className="hidden text-[11px] font-medium text-[#64748b] md:inline">
+                  ⏱️ 30 min → 5+ devis alignés
                 </span>
               </div>
 
@@ -103,20 +108,18 @@ export default function Hero() {
                   {
                     id: 0,
                     label: "Dossier unique",
-                    description:
-                      "Un seul dossier envoyé à 5+ déménageurs contrôlés.",
+                    description: "Vous décrivez votre besoin une seule fois.",
                   },
                   {
                     id: 1,
                     label: "Pros filtrés",
-                    description:
-                      "On ne garde que les déménageurs fiables, bien notés et assurés.",
+                    description: "On ne garde que les déménageurs sérieux.",
                   },
                   {
                     id: 2,
                     label: "Comparaison claire",
                     description:
-                      "5+ devis alignés sur le même volume et les mêmes options.",
+                      "5+ offres alignées sur le même volume et les mêmes options.",
                   },
                 ].map((step, index) => (
                   <div
