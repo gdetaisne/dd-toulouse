@@ -20,7 +20,7 @@ export default function StickyCTA() {
       }`}
     >
       <div className="mx-auto max-w-3xl px-4 md:px-6">
-        <div className="rounded-2xl border border-white/10 bg-[#04141f]/90 p-3 sm:p-4 shadow-[0_18px_60px_rgba(0,0,0,0.65)] backdrop-blur-md">
+        <div className="rounded-2xl border border-white/10 bg-[#04141f]/90 p-3 sm:p-4 shadow-[0_18px_60px_rgba(0,0,0,0.65)] backdrop-blur-md transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_22px_80px_rgba(0,0,0,0.85)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
@@ -33,7 +33,7 @@ export default function StickyCTA() {
             <div className="flex sm:flex-row sm:items-center sm:justify-end">
               <a
                 href="/inventaire-ia/"
-                className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#2b7a78] via-[#26a69a] to-[#6BCFCF] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#0b2730]/60 transition hover:shadow-[0_0_35px_rgba(38,166,154,0.6)] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6BCFCF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#04141f] sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#2b7a78] via-[#26a69a] to-[#6BCFCF] bg-[length:200%_100%] bg-[position:0%_50%] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#0b2730]/60 transition hover:bg-[position:100%_50%] hover:shadow-[0_0_35px_rgba(38,166,154,0.6)] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6BCFCF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#04141f] sm:w-auto"
                 aria-label="Recevez 5+ devis fiables gratuitement"
               >
                 Recevez 5+ devis fiables gratuitement

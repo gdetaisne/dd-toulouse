@@ -32,7 +32,10 @@ export default function Hero() {
       <div className="relative mx-auto max-w-6xl px-4 py-16 md:px-8 md:py-24 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* Colonne gauche – texte */}
-          <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
+          <div
+            className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left motion-safe:animate-fade-up-soft"
+            style={{ animationDelay: "40ms" }}
+          >
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80">
               <span className="h-2 w-2 rounded-full bg-emerald-300 animate-pulse" />
               Processus IA anti-arnaque
@@ -87,9 +90,12 @@ export default function Hero() {
           </div>
 
           {/* Colonne droite – mockup comparateur style Stripe */}
-          <div className="relative mx-auto w-full max-w-[560px] lg:mx-0">
+          <div
+            className="relative mx-auto w-full max-w-[560px] lg:mx-0 motion-safe:animate-fade-up-soft"
+            style={{ animationDelay: "140ms" }}
+          >
             <div className="absolute -inset-6 hidden rounded-3xl bg-black/60 blur-3xl lg:block" />
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/95 via-white to-[#F5FBFB] p-5 md:p-6 shadow-[0_24px_70px_rgba(15,23,42,0.55)] text-[#04163a]">
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/95 via-white to-[#F5FBFB] p-5 md:p-6 shadow-[0_24px_70px_rgba(15,23,42,0.55)] text-[#04163a] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(15,23,42,0.7)]">
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#6BCFCF] via-[#4f46e5] to-[#22c55e]" />
               {/* Header minimal – baseline */}
               <div className="relative flex items-center justify-between">
@@ -173,7 +179,7 @@ export default function Hero() {
                       Standard
                     </span>
                   </div>
-                  <div className="flex flex-col gap-1 rounded-xl border border-[#2B7A78] bg-[#E6FFFA] px-3 py-2 shadow-sm shadow-emerald-500/20">
+                  <div className="flex flex-col gap-1 rounded-xl border border-[#2B7A78] bg-[#E6FFFA] px-3 py-2 shadow-sm shadow-emerald-500/20 motion-safe:animate-soft-pulse">
                     <span className="text-[10px] font-medium text-[#0f766e]">
                       Offre recommandée
                     </span>
