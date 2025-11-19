@@ -43,28 +43,30 @@ export default function Testimonials() {
   const ratingLabel = `${averageRating.toString().replace(".", ",")}/5`;
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-3 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
+    <div className="space-y-10">
+      {/* Header avec espacement généreux */}
+      <div className="space-y-4 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#2b7a78]">
           Avis clients
         </p>
-        <h2 className="text-2xl font-semibold text-[#04163a] md:text-3xl lg:text-4xl">
+        <h2 className="text-3xl font-bold text-[#04163a] md:text-4xl lg:text-5xl leading-tight">
           Ce que disent les clients à {city.nameCapitalized}
         </h2>
-        <div className="flex flex-col items-center justify-center gap-1 text-base text-yellow-400 md:text-lg">
-          <div className="flex items-center gap-2">
-          <span className="text-lg">⭐⭐⭐⭐⭐</span>
-            <span className="text-sm text-[#04163a]/70 md:text-base">
+        <div className="flex flex-col items-center justify-center gap-2 text-base text-yellow-400 md:text-lg">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">⭐⭐⭐⭐⭐</span>
+            <span className="text-base md:text-lg font-semibold text-[#04163a]/80">
               {ratingLabel} de moyenne
-          </span>
+            </span>
           </div>
-          <p className="text-xs text-[#04163a]/60 md:text-sm">
+          <p className="text-sm md:text-base text-[#04163a]/60 font-light">
             Clarté des devis, 0 spam, accompagnement, pros fiables.
           </p>
         </div>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-3 md:gap-8">
+      {/* Cards avec hover lift + animations staggered */}
+      <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
         {reviews.map((review, index) => {
           const [name, location] = review.author.split(" — ");
           const displayName = name ?? review.author;
@@ -73,26 +75,38 @@ export default function Testimonials() {
           return (
             <article
               key={`${review.summary}-${index}`}
-              className="rounded-2xl border border-[#dfeaea] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md md:p-7"
+              className="group relative rounded-3xl border border-[#dfeaea] bg-white p-6 md:p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#6bcfcf]/40 motion-safe:animate-fade-up-soft"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="mb-5 flex items-center gap-3">
-                <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#6bcfcf]/15 to-[#2b7a78]/25 ring-2 ring-[#2b7a78]/20">
-                  <span className="text-sm font-semibold text-[#043a3a]">
-                    {initials}
-                  </span>
+              {/* Glow effect au hover */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
+              
+              <div className="relative space-y-5">
+                {/* Avatar + Info */}
+                <div className="flex items-center gap-4">
+                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6bcfcf]/20 to-[#2b7a78]/30 ring-2 ring-[#2b7a78]/20 transition-all duration-300 group-hover:ring-[#6bcfcf]/40 group-hover:scale-110">
+                    <span className="text-base font-bold text-[#043a3a]">
+                      {initials}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="text-base md:text-lg font-bold text-[#04163a]">
+                      {displayName}
+                    </div>
+                    <div className="text-xs md:text-sm text-[#04163a]/60">
+                      {location ?? city.nameCapitalized}
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-base font-semibold text-[#04163a]">
-                    {displayName}
-                  </div>
-                  <div className="text-xs text-[#04163a]/60">
-                    {location ?? city.nameCapitalized}
-                  </div>
+
+                {/* Quote avec style */}
+                <div className="relative">
+                  <span className="absolute -left-2 -top-2 text-4xl text-[#6bcfcf]/20 font-serif">"</span>
+                  <p className="text-sm md:text-base leading-relaxed text-[#04163a]/80 pl-4">
+                    {review.body}
+                  </p>
                 </div>
               </div>
-              <p className="text-sm leading-relaxed text-[#04163a]/80 md:text-base">
-                {review.body}
-              </p>
             </article>
           );
         })}

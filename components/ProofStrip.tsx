@@ -25,48 +25,59 @@ export default function ProofStrip() {
   const chips = ["Déménageurs contrôlés", "Dossier anonyme"];
 
   return (
-    <div className="space-y-6 rounded-3xl bg-gradient-to-br from-[#04163A] via-[#05243f] to-[#0b3b46] p-6 md:p-8 text-white shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#6BCFCF]">
+    <div className="relative overflow-hidden space-y-10 rounded-3xl bg-gradient-to-br from-[#0A1929] via-[#04141f] to-[#0b3b46] p-8 md:p-12 lg:p-16 text-white shadow-[0_32px_90px_rgba(0,0,0,0.6)]">
+      {/* Halos lumineux (Stripe-style) */}
+      <div className="pointer-events-none absolute top-0 left-0 h-80 w-80 rounded-full bg-[radial-gradient(circle_at_center,_rgba(107,207,207,0.2),_transparent_70%)] blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(79,70,229,0.12),_transparent_70%)] blur-3xl" />
+      
+      {/* Header avec espacement généreux */}
+      <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div className="space-y-3">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
             Chiffres clés
           </p>
-          <h2 className="mt-3 text-2xl md:text-3xl font-semibold text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
             Le comparateur en quelques chiffres
           </h2>
-          <p className="mt-2 text-sm md:text-base text-white/75">
-            Des données issues de dossiers réellement comparés, pas de promesses
-            marketing.
+          <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-xl font-light">
+            Des données issues de dossiers réellement comparés, pas de promesses marketing.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-3">
           {chips.map((chip) => (
             <span
               key={chip}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-medium text-white/90 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-xs md:text-sm font-semibold text-white/90 backdrop-blur-sm shadow-lg hover:bg-white/10 hover:border-white/25 transition-all duration-300"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-[#6BCFCF]" />
+              <span className="h-2 w-2 rounded-full bg-[#6BCFCF] animate-pulse" />
               {chip}
             </span>
           ))}
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4">
-        {stats.map((stat) => (
+      {/* Stats cards avec hover lift */}
+      <div className="relative grid gap-6 md:grid-cols-4 md:gap-8">
+        {stats.map((stat, index) => (
           <div
             key={stat.value}
-            className="rounded-2xl border border-white/15 bg-white/5 p-5 md:p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-white/10 hover:shadow-lg hover:shadow-black/40"
+            className="group relative rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 shadow-lg backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:border-white/20 motion-safe:animate-fade-up-soft"
+            style={{ animationDelay: `${index * 80}ms` }}
           >
-            <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/60">
-              {stat.label}
+            {/* Glow effect au hover */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-10" />
+            
+            <div className="relative space-y-4">
+              <div className="text-xs md:text-sm font-bold uppercase tracking-[0.18em] text-white/60">
+                {stat.label}
+              </div>
+              <div className="flex items-baseline gap-2">
+                <span className="text-5xl md:text-6xl font-bold text-white leading-none transition-all duration-300 group-hover:text-[#6BCFCF]">
+                  {stat.value}
+                </span>
+              </div>
+              <p className="text-sm md:text-base text-white/70 leading-relaxed">{stat.caption}</p>
             </div>
-            <div className="mt-3 flex items-baseline gap-2">
-              <span className="text-3xl md:text-4xl font-bold text-white">
-              {stat.value}
-              </span>
-            </div>
-            <p className="mt-3 text-sm text-white/75">{stat.caption}</p>
           </div>
         ))}
       </div>

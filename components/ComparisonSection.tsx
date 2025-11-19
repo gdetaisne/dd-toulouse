@@ -2,7 +2,7 @@ export default function ComparisonSection() {
   const rows = [
     {
       label: "Prix",
-      without: "Devis reçus au fil de l’eau, écarts de prix peu lisibles.",
+      without: "Devis reçus au fil de l'eau, écarts de prix peu lisibles.",
       with: "5+ devis alignés sur le même volume et les mêmes options.",
     },
     {
@@ -12,7 +12,7 @@ export default function ComparisonSection() {
     },
     {
       label: "Stress & risques",
-      without: "Qualité des déménageurs difficile à vérifier, risque d’arnaque.",
+      without: "Qualité des déménageurs difficile à vérifier, risque d'arnaque.",
       with: "Pros contrôlés (assurances, avis) et support en cas de souci.",
     },
     {
@@ -23,40 +23,46 @@ export default function ComparisonSection() {
   ];
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#04163A] via-[#05243f] to-[#0b3b46] p-4 md:p-6 shadow-[0_24px_70px_rgba(0,0,0,0.55)]">
-      <div className="overflow-x-auto">
-        <table className="min-w-full border-separate border-spacing-y-2 text-left text-sm text-white/85">
+    <div className="relative overflow-hidden rounded-3xl border border-white/8 bg-gradient-to-br from-[#0A1929] via-[#04141f] to-[#0b3b46] p-6 md:p-10 lg:p-12 shadow-[0_32px_90px_rgba(0,0,0,0.6)]">
+      {/* Halo lumineux */}
+      <div className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(107,207,207,0.2),_transparent_70%)] blur-3xl" />
+      
+      <div className="relative overflow-x-auto">
+        <table className="min-w-full border-separate border-spacing-0 text-left text-sm text-white/85">
           <thead>
             <tr>
-              <th className="w-40 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">
+              <th className="w-32 px-4 py-4 text-xs font-bold uppercase tracking-[0.16em] text-white/50 border-b border-white/10">
                 Aspect
               </th>
-              <th className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
+              <th className="px-4 py-4 text-xs font-bold uppercase tracking-[0.16em] text-white/60 border-b border-white/10">
                 Sans comparateur
               </th>
-              <th className="px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#6BCFCF]">
+              <th className="px-4 py-4 text-xs font-bold uppercase tracking-[0.16em] text-[#6BCFCF] border-b border-[#6BCFCF]/30">
                 Avec notre comparateur
               </th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.label}>
-                <td className="align-top px-3 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
+            {rows.map((row, index) => (
+              <tr 
+                key={row.label}
+                className="group hover:bg-white/5 transition-colors duration-200"
+              >
+                <td className="align-top px-4 py-5 text-xs font-bold uppercase tracking-[0.16em] text-white/60 border-b border-white/5">
                   {row.label}
                 </td>
-                <td className="align-top px-3 py-3">
-                  <div className="flex items-start gap-2 text-white/70">
-                    <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500/15 text-red-300">
-                      <span>×</span>
+                <td className="align-top px-4 py-5 border-b border-white/5">
+                  <div className="flex items-start gap-3 text-sm md:text-base text-white/70 leading-relaxed">
+                    <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-red-500/15 text-red-300 font-bold transition-all duration-300 group-hover:bg-red-500/25 group-hover:scale-110">
+                      ×
                     </span>
                     <span>{row.without}</span>
                   </div>
                 </td>
-                <td className="align-top px-3 py-3">
-                  <div className="flex items-start gap-2 text-emerald-100">
-                    <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-200">
-                      <span>✓</span>
+                <td className="align-top px-4 py-5 border-b border-white/5">
+                  <div className="flex items-start gap-3 text-sm md:text-base text-emerald-100 leading-relaxed">
+                    <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-400/15 text-emerald-200 font-bold transition-all duration-300 group-hover:bg-emerald-400/25 group-hover:scale-110">
+                      ✓
                     </span>
                     <span>{row.with}</span>
                   </div>
@@ -69,4 +75,3 @@ export default function ComparisonSection() {
     </div>
   );
 }
-

@@ -15,29 +15,37 @@ export default function StickyCTA() {
 
   return (
     <div
-      className={`fixed bottom-4 left-0 right-0 z-50 md:bottom-6 transition-all duration-300 ${
-        visible ? "opacity-100 translate-y-0" : "pointer-events-none translate-y-4 opacity-0"
+      className={`fixed bottom-4 left-0 right-0 z-50 md:bottom-6 transition-all duration-500 ${
+        visible ? "opacity-100 translate-y-0" : "pointer-events-none translate-y-8 opacity-0"
       }`}
     >
-      <div className="mx-auto max-w-3xl px-4 md:px-6">
-        <div className="rounded-2xl border border-white/10 bg-[#04141f]/90 p-3 sm:p-4 shadow-[0_18px_60px_rgba(0,0,0,0.65)] backdrop-blur-md transition-all duration-500 hover:-translate-y-0.5 hover:shadow-[0_22px_80px_rgba(0,0,0,0.85)]">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="space-y-1">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
-                Passez à l’action
+      <div className="mx-auto max-w-4xl px-4 md:px-6">
+        <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-[#0A1929]/95 p-4 sm:p-6 shadow-[0_24px_80px_rgba(0,0,0,0.7)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_32px_100px_rgba(0,0,0,0.85)] hover:border-white/20">
+          {/* Filament lumineux en haut (Stripe-style) */}
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#6BCFCF] via-[#4f46e5] to-[#22c55e] opacity-80" />
+          
+          {/* Glow effect au hover */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-10" />
+          
+          <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-2">
+              <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
+                Passez à l'action
               </p>
-              <p className="text-[11px] sm:text-xs text-white/75">
-                Estimation rapide, avec ou sans photos, c’est vous qui décidez.
+              <p className="text-sm md:text-base text-white/75 leading-relaxed">
+                Estimation rapide, avec ou sans photos, c'est vous qui décidez.
               </p>
             </div>
             <div className="flex sm:flex-row sm:items-center sm:justify-end">
               <a
                 href="/inventaire-ia/"
-                className="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-[#2b7a78] via-[#26a69a] to-[#6BCFCF] bg-[length:200%_100%] bg-[position:0%_50%] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#0b2730]/60 transition hover:bg-[position:100%_50%] hover:shadow-[0_0_35px_rgba(38,166,154,0.6)] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6BCFCF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#04141f] sm:w-auto"
+                className="group/btn relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-6 py-3 text-sm md:text-base font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.4)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 sm:w-auto"
                 aria-label="Recevez 5+ devis fiables gratuitement"
               >
-                Recevez 5+ devis fiables gratuitement
-                <span className="ml-2 text-base leading-none">→</span>
+                {/* Shimmer effect au hover */}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-700" />
+                <span className="relative">Recevez 5+ devis fiables gratuitement</span>
+                <span className="relative text-lg leading-none group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
               </a>
             </div>
           </div>
