@@ -44,18 +44,23 @@ export default function Testimonials() {
 
   return (
     <div className="space-y-8">
-      <div className="space-y-4 text-center">
+      <div className="space-y-3 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#2b7a78]">
-          Avis clients vérifiés
+          Avis clients
         </p>
         <h2 className="text-2xl font-semibold text-[#04163a] md:text-3xl lg:text-4xl">
-          Ils nous ont fait confiance à {city.nameCapitalized}
+          Ce que disent les clients à {city.nameCapitalized}
         </h2>
-        <div className="flex items-center justify-center gap-2 text-base text-yellow-400 md:text-lg">
+        <div className="flex flex-col items-center justify-center gap-1 text-base text-yellow-400 md:text-lg">
+          <div className="flex items-center gap-2">
           <span className="text-lg">⭐⭐⭐⭐⭐</span>
-          <span className="text-sm text-[#04163a]/70 md:text-base">
-            {ratingLabel} sur 1200+ déménagements pilotés
+            <span className="text-sm text-[#04163a]/70 md:text-base">
+              {ratingLabel} de moyenne
           </span>
+          </div>
+          <p className="text-xs text-[#04163a]/60 md:text-sm">
+            Clarté des devis, 0 spam, accompagnement, pros fiables.
+          </p>
         </div>
       </div>
 
