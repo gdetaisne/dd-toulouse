@@ -47,8 +47,8 @@ function TestimonialCard({ review, index }: { review: any; index: number }) {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const tiltX = ((y - centerY) / centerY) * -8; // Max 8deg
-    const tiltY = ((x - centerX) / centerX) * 8;
+    const tiltX = ((y - centerY) / centerY) * -5; // Réduit à 5deg (plus subtil)
+    const tiltY = ((x - centerX) / centerX) * 5;
     setTilt({ x: tiltX, y: tiltY });
   };
 
@@ -67,7 +67,7 @@ function TestimonialCard({ review, index }: { review: any; index: number }) {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={handleMouseLeave}
-      className="group relative rounded-3xl border border-[#dfeaea] bg-white p-6 md:p-8 shadow-lg transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#6bcfcf]/40 motion-safe:animate-fade-up-soft"
+      className="group relative rounded-3xl border border-white/15 bg-white/5 backdrop-blur-sm p-6 md:p-8 shadow-lg transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:border-white/30 hover:bg-white/10 motion-safe:animate-fade-up-soft"
       style={{
         animationDelay: `${index * 100}ms`,
         transform: isHovering
@@ -77,33 +77,30 @@ function TestimonialCard({ review, index }: { review: any; index: number }) {
       }}
     >
       {/* Glow effect au hover */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-10" />
       
       <div className="relative space-y-5">
         {/* Avatar + Info */}
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6bcfcf]/20 to-[#2b7a78]/30 ring-2 ring-[#2b7a78]/20 transition-all duration-300 group-hover:ring-[#6bcfcf]/40 group-hover:scale-110">
-            <span className="text-base font-bold text-[#043a3a]">
+          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6BCFCF]/30 to-[#4FB8B8]/40 border-2 border-[#6BCFCF]/40 transition-all duration-300 group-hover:border-[#6BCFCF]/60 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(107,207,207,0.5)]">
+            <span className="text-sm font-bold text-white">
               {initials}
             </span>
           </div>
           <div>
-            <div className="text-base md:text-lg font-bold text-[#04163a]">
+            <div className="text-base md:text-lg font-bold text-white">
               {displayName}
             </div>
-            <div className="text-xs md:text-sm text-[#04163a]/60">
+            <div className="text-xs md:text-sm text-white/70">
               {location ?? city.nameCapitalized}
             </div>
           </div>
         </div>
 
-        {/* Quote avec style */}
-        <div className="relative">
-          <span className="absolute -left-2 -top-2 text-4xl text-[#6bcfcf]/20 font-serif">"</span>
-          <p className="text-sm md:text-base leading-relaxed text-[#04163a]/80 pl-4">
-            {review.body}
-          </p>
-        </div>
+        {/* Quote épurée */}
+        <p className="text-sm md:text-base leading-relaxed text-white/85">
+          {review.body}
+        </p>
       </div>
     </article>
   );
@@ -117,29 +114,31 @@ export default function Testimonials() {
 
   return (
     <div className="space-y-10">
-      {/* Header avec espacement généreux */}
+      {/* Header avec contraste bleu */}
       <div className="space-y-4 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#2b7a78]">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
           Avis clients
         </p>
-        <h2 className="text-3xl font-bold text-[#04163a] md:text-4xl lg:text-5xl leading-tight">
+        <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl leading-tight">
           Ce que disent les clients à {city.nameCapitalized}
         </h2>
-        <div className="flex flex-col items-center justify-center gap-2 text-base text-yellow-400 md:text-lg">
-          <div className="flex items-center gap-3">
-            <span className="text-2xl">⭐⭐⭐⭐⭐</span>
-            <span className="text-base md:text-lg font-semibold text-[#04163a]/80">
-              {ratingLabel} de moyenne
+        
+        {/* Rating avec design Stripe-like sur fond sombre */}
+        <div className="flex flex-col items-center justify-center gap-3 pt-2">
+          <div className="inline-flex items-center gap-3 rounded-2xl border border-white/15 bg-white/5 backdrop-blur-sm px-6 py-3 shadow-lg">
+            <span className="text-xl">⭐⭐⭐⭐⭐</span>
+            <span className="text-base md:text-lg font-bold text-white">
+              {ratingLabel}
             </span>
           </div>
-          <p className="text-sm md:text-base text-[#04163a]/60 font-light">
-            Clarté des devis, 0 spam, accompagnement, pros fiables.
+          <p className="text-sm md:text-base text-white/70 font-light max-w-xl mx-auto">
+            Clarté des devis · 0 spam · Accompagnement · Pros fiables
           </p>
         </div>
       </div>
 
-      {/* Cards avec tilt 3D */}
-      <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
+      {/* Cards avec tilt 3D subtil */}
+      <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-6">
         {reviews.map((review, index) => (
           <TestimonialCard key={`${review.summary}-${index}`} review={review} index={index} />
         ))}

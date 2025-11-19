@@ -2,21 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 export default function Hero() {
-  const [stage, setStage] = useState(2);
   const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mediaQuery.matches) return;
-
-    const interval = setInterval(() => {
-      setStage((prev) => (prev + 1) % 3);
-    }, 3200);
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -76,38 +62,6 @@ export default function Hero() {
               Un seul dossier, des déménageurs contrôlés, des devis comparables.
             </p>
 
-            {/* Liste avec hover effects */}
-            <ul className="mt-8 space-y-4 text-base md:text-lg text-white/85">
-              {[
-                "Même volume pour tout le monde",
-                "Dossier anonyme, vous décidez",
-                "5+ devis fiables, 100% gratuits",
-              ].map((text) => (
-                <li
-                  key={text}
-                  className="group flex items-center gap-3 justify-center lg:justify-start hover:translate-x-1 transition-transform duration-300"
-                >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#6bcfcf]/30 bg-white/5 text-[#6bcfcf] shadow-sm group-hover:border-[#6bcfcf]/50 group-hover:bg-white/10 group-hover:shadow-[0_0_16px_rgba(107,207,207,0.4)] transition-all duration-300">
-                    <svg
-                      className="h-4 w-4"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M5 13.5L9.5 18L19 7"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  <span className="font-medium">{text}</span>
-                </li>
-              ))}
-            </ul>
-
             {/* CTA avec gradient + glow (Stripe-style) */}
             <div className="mt-10 flex flex-col items-center justify-center sm:flex-row lg:justify-start">
               <a
@@ -123,122 +77,110 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* ========== COLONNE DROITE – MOCKUP PRODUIT ========== */}
+          {/* ========== COLONNE DROITE – BÉNÉFICES VISUELS (STRIPE-LIKE) ========== */}
           <div
-            className="relative mx-auto w-full max-w-[600px] lg:mx-0 motion-safe:animate-fade-up-soft"
+            className="relative mx-auto w-full max-w-[520px] lg:mx-0 motion-safe:animate-fade-up-soft"
             style={{ animationDelay: "180ms" }}
           >
             {/* Halo ultra-profond derrière la carte (Stripe signature) */}
             <div className="absolute -inset-12 hidden rounded-3xl bg-gradient-radial from-[#6BCFCF]/25 via-[#4FB8B8]/10 to-transparent blur-3xl lg:block" />
             
-            {/* Carte produit avec depth maximale */}
+            {/* Carte produit épurée - Focus bénéfices */}
             <div className="group relative overflow-hidden rounded-3xl border border-white/8 bg-gradient-to-b from-white/98 via-white/95 to-[#F5FBFB]/95 p-6 md:p-8 shadow-[0_32px_90px_rgba(15,23,42,0.6)] text-[#04163a] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_40px_120px_rgba(15,23,42,0.75)] hover:border-white/12">
               
               {/* Filament lumineux en haut (Stripe-style) */}
               <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-[#6BCFCF] via-[#4f46e5] to-[#22c55e] opacity-90" />
               
-              {/* Header minimal */}
-              <div className="relative flex items-center justify-between">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0A1929] px-3.5 py-2 text-[11px] font-semibold text-white/90 shadow-lg">
+              {/* Header */}
+              <div className="relative mb-6 text-center">
+                <span className="inline-flex items-center gap-2 rounded-full bg-[#0A1929] px-4 py-2 text-xs font-bold text-white/90 shadow-lg">
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   3 étapes · 0 spam · 5+ devis fiables
                 </span>
-                <span className="hidden text-xs font-medium text-[#64748b] md:inline">
-                  ⏱️ 30 min → 5+ devis alignés
-                </span>
               </div>
 
-              {/* Pipeline en 3 étapes (avec micro-animations) */}
-              <div className="mt-6 space-y-3">
-                {[
-                  {
-                    id: 0,
-                    label: "Dossier unique",
-                    description: "Vous décrivez votre besoin une seule fois.",
-                  },
-                  {
-                    id: 1,
-                    label: "Pros filtrés",
-                    description: "On ne garde que les déménageurs sérieux.",
-                  },
-                  {
-                    id: 2,
-                    label: "Comparaison claire",
-                    description: "5+ offres alignées sur le même volume et les mêmes options.",
-                  },
-                ].map((step, index) => (
-                  <div
-                    key={step.label}
-                    className={`rounded-2xl border px-5 py-4 transition-all duration-500 ${
-                      stage === step.id
-                        ? "border-[#6BCFCF] bg-white shadow-[0_8px_24px_rgba(107,207,207,0.25)] scale-[1.02]"
-                        : "border-white/40 bg-white/70 shadow-sm hover:scale-[1.01] hover:shadow-md hover:border-[#6BCFCF]/50"
-                    }`}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div
-                        className={`flex h-9 w-9 items-center justify-center rounded-xl border text-sm font-bold transition-all duration-500 ${
-                          stage === step.id
-                            ? "border-[#2B7A78] bg-[#2B7A78] text-white shadow-[0_0_16px_rgba(43,122,120,0.5)] animate-soft-pulse"
-                            : "border-[#E3E5E8] bg-white text-[#7fa5a5] group-hover:border-[#6BCFCF]/30"
-                        }`}
-                      >
-                        {index + 1}
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-sm md:text-base font-bold tracking-wide text-[#0E0E0E] uppercase">
-                          {step.label}
-                        </p>
-                        <p className="mt-1 text-xs md:text-sm text-[#4b5c6b] leading-relaxed">
-                          {step.description}
-                        </p>
-                      </div>
+              {/* 3 bénéfices clés avec pictogrammes SVG + animations */}
+              <div className="space-y-3">
+                {/* Bénéfice 1 : Comparabilité */}
+                <div 
+                  className="group/item flex items-start gap-4 rounded-2xl border border-[#E3E5E8] bg-white p-4 hover:border-[#6BCFCF]/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  style={{ animationDelay: "400ms" }}
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#6BCFCF]/10 to-[#4FB8B8]/20 border border-[#6BCFCF]/20 group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-300">
+                    <svg className="h-5 w-5 text-[#2B7A78]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-[#0E0E0E]">Devis comparables</div>
+                    <div className="mt-1 text-xs text-[#4b5c6b] leading-relaxed">
+                      Même volume, mêmes options pour tous
                     </div>
                   </div>
-                ))}
-              </div>
-
-              {/* Mini comparateur – Notion-like avec hover effects */}
-              <div className="mt-5 rounded-2xl border border-[#E3E5E8] bg-white px-5 py-4 shadow-sm hover:shadow-md hover:border-[#6BCFCF]/30 transition-all duration-300">
-                <div className="mb-3 flex items-center justify-between gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#7b8794]">
-                    Aperçu des devis
-                  </span>
-                  <span className="text-xs font-semibold text-[#2B7A78]">
-                    Volume et options identiques
-                  </span>
                 </div>
-                <div className="grid grid-cols-3 gap-3 text-sm">
-                  {/* Offre A */}
-                  <div className="group/card flex flex-col gap-1.5 rounded-xl border border-[#E3E5E8] bg-[#F8F9FA] px-3 py-3 hover:border-[#6BCFCF]/40 hover:shadow-md transition-all duration-300">
-                    <span className="text-xs font-medium text-[#7b8794]">Offre A</span>
-                    <span className="text-lg font-bold text-[#0E0E0E]">1 040 €</span>
-                    <span className="text-xs text-[#9aa5b1]">Standard</span>
-                  </div>
 
-                  {/* Offre recommandée (highlight) */}
-                  <div className="group/card flex flex-col gap-1.5 rounded-xl border-2 border-[#2B7A78] bg-gradient-to-br from-[#E6FFFA] to-white px-3 py-3 shadow-[0_4px_16px_rgba(43,122,120,0.2)] hover:shadow-[0_8px_24px_rgba(43,122,120,0.35)] hover:scale-[1.03] motion-safe:animate-soft-pulse transition-all duration-300">
-                    <span className="text-xs font-bold text-[#0f766e]">Offre recommandée</span>
-                    <span className="text-lg font-bold text-[#0E0E0E]">890 €</span>
-                    <span className="text-xs font-medium text-[#0f766e]">Meilleur rapport qualité/prix</span>
+                {/* Bénéfice 2 : 0 spam */}
+                <div 
+                  className="group/item flex items-start gap-4 rounded-2xl border border-[#E3E5E8] bg-white p-4 hover:border-[#6BCFCF]/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  style={{ animationDelay: "500ms" }}
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#6BCFCF]/10 to-[#4FB8B8]/20 border border-[#6BCFCF]/20 group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-300">
+                    <svg className="h-5 w-5 text-[#2B7A78]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
                   </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-[#0E0E0E]">Dossier anonyme</div>
+                    <div className="mt-1 text-xs text-[#4b5c6b] leading-relaxed">
+                      Vous décidez qui vous contacte
+                    </div>
+                  </div>
+                </div>
 
-                  {/* Offre C */}
-                  <div className="group/card flex flex-col gap-1.5 rounded-xl border border-[#E3E5E8] bg-[#F8F9FA] px-3 py-3 hover:border-[#6BCFCF]/40 hover:shadow-md transition-all duration-300">
-                    <span className="text-xs font-medium text-[#7b8794]">Offre C</span>
-                    <span className="text-lg font-bold text-[#0E0E0E]">920 €</span>
-                    <span className="text-xs text-[#9aa5b1]">Premium</span>
+                {/* Bénéfice 3 : Pros contrôlés */}
+                <div 
+                  className="group/item flex items-start gap-4 rounded-2xl border border-[#E3E5E8] bg-white p-4 hover:border-[#6BCFCF]/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  style={{ animationDelay: "600ms" }}
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#6BCFCF]/10 to-[#4FB8B8]/20 border border-[#6BCFCF]/20 group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-300">
+                    <svg className="h-5 w-5 text-[#2B7A78]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-[#0E0E0E]">Pros contrôlés</div>
+                    <div className="mt-1 text-xs text-[#4b5c6b] leading-relaxed">
+                      Assurances, avis, 0 litige
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bénéfice 4 : Gratuité */}
+                <div 
+                  className="group/item flex items-start gap-4 rounded-2xl border border-[#E3E5E8] bg-white p-4 hover:border-[#6BCFCF]/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                  style={{ animationDelay: "700ms" }}
+                >
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#6BCFCF]/10 to-[#4FB8B8]/20 border border-[#6BCFCF]/20 group-hover/item:scale-110 group-hover/item:rotate-3 transition-all duration-300">
+                    <svg className="h-5 w-5 text-[#2B7A78]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-bold text-[#0E0E0E]">100% gratuit</div>
+                    <div className="mt-1 text-xs text-[#4b5c6b] leading-relaxed">
+                      5+ devis fiables sans aucun frais
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Objectif (badge final) */}
-              <div className="mt-4 flex justify-center">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#E3E5E8] bg-white px-4 py-2 text-xs md:text-sm text-[#04163a] shadow-sm hover:shadow-md hover:border-[#6BCFCF]/40 transition-all duration-300">
-                  <span className="rounded-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] px-2.5 py-1 text-xs font-bold text-white shadow-sm">
-                    Objectif
-                  </span>
-                  <span className="font-medium">Comparer, pas se faire rappeler 10 fois.</span>
+              <div className="mt-6 flex justify-center">
+                <div className="group/badge inline-flex items-center gap-2 rounded-full border border-[#E3E5E8] bg-gradient-to-r from-[#E6FFFA] to-white px-4 py-2.5 text-xs md:text-sm text-[#04163a] shadow-sm hover:shadow-md hover:border-[#6BCFCF]/40 hover:scale-105 transition-all duration-300">
+                  <svg className="h-4 w-4 text-[#2B7A78] group-hover/badge:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  <span className="font-semibold">Comparer, pas se faire rappeler 10 fois</span>
                 </div>
               </div>
             </div>

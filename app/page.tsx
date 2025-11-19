@@ -57,18 +57,29 @@ export default function Home() {
 
       {/* 3. Comparatif – pourquoi notre comparateur est différent */}
       <section className="section section-contrast">
-        <div className="container space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white">
-              Pourquoi utiliser ce comparateur ?
+        <div className="container space-y-10">
+          <div className="text-center space-y-4">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
+              Pourquoi ce comparateur
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              Ce que vous gagnez vraiment
             </h2>
+            <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto font-light">
+              4 bénéfices concrets pour comparer sereinement vos devis.
+            </p>
           </div>
 
           <ComparisonSection />
 
           <div className="text-center">
-            <a href="/inventaire-ia/" className="btn-primary">
-              Recevoir 5+ devis fiables gratuitement
+            <a 
+              href="/inventaire-ia/" 
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+              <span className="relative">Recevoir 5+ devis fiables gratuitement</span>
+              <span className="relative text-xl leading-none group-hover:translate-x-1 transition-transform duration-300">→</span>
             </a>
           </div>
         </div>
@@ -82,7 +93,7 @@ export default function Home() {
       </section>
 
       {/* 5. Avis clients */}
-      <section className="section section-gray">
+      <section className="section section-contrast">
         <div className="container">
           <Testimonials />
         </div>
