@@ -8,6 +8,7 @@ import ComparisonSection from "@/components/ComparisonSection";
 import ProofStrip from "@/components/ProofStrip";
 import Testimonials from "@/components/Testimonials";
 import StickyCTA from "@/components/StickyCTA";
+import FAQAccordion from "@/components/FAQAccordion";
 
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
@@ -89,32 +90,20 @@ export default function Home() {
 
       {/* 6. FAQ ultra courte */}
       <section className="section section-light">
-        <div className="container space-y-6">
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#04163a]">
+        <div className="container space-y-8">
+          <div className="text-center space-y-3">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#2b7a78]">
+              FAQ
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#04163a] leading-tight">
               Questions fréquentes
             </h2>
-            <p className="text-sm text-[#04163a]/70">
-              3–4 réponses rapides aux questions qu’on nous pose le plus.
+            <p className="text-base md:text-lg text-[#04163a]/70 leading-relaxed max-w-2xl mx-auto font-light">
+              Les réponses aux questions qu'on nous pose le plus.
             </p>
           </div>
-          <div className="grid gap-4 md:grid-cols-4">
-            {shortFaq.map((item) => (
-              <div
-                key={item.q}
-                className="group rounded-2xl border border-[#E3E5E8] bg-gradient-to-b from-white to-[#F8F9FA] p-4 md:p-5 text-left shadow-sm shadow-black/5 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_18px_60px_rgba(15,23,42,0.15)] hover:border-[#6BCFCF]/50"
-              >
-                <div className="mb-2 flex items-start justify-between gap-2">
-                  <h3 className="text-sm font-semibold text-[#04163a]">
-                    {item.q}
-                  </h3>
-                  <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#E6FFFA] text-[11px] font-semibold text-[#0f766e] transition-transform duration-150 group-hover:scale-105">
-                    ?
-                  </span>
-                </div>
-                <p className="mt-1 text-sm text-[#4b5c6b]">{item.a}</p>
-              </div>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <FAQAccordion items={shortFaq} />
           </div>
         </div>
       </section>
