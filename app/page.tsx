@@ -20,9 +20,6 @@ export const metadata: Metadata = (() => {
   };
 })();
 
-// Force dynamic rendering to avoid prerendering errors
-export const dynamic = 'force-dynamic';
-
 export default function Home() {
   const city = getCityDataFromUrl(env.SITE_URL);
   const shortFaq = [

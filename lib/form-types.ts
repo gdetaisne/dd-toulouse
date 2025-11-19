@@ -6,7 +6,7 @@ export interface FormState {
   
   // Étape 2 : Projet
   originAddress: string;
-  originHousingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house';
+  originHousingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house' | 'house_1floor' | 'house_2floors' | 'house_3floors';
   originFloor: number;
   originElevator: 'none' | 'small' | 'medium' | 'large';
   originFurnitureLift: 'unknown' | 'no' | 'yes';
@@ -14,7 +14,7 @@ export interface FormState {
   originParkingAuth: boolean;
   
   destinationAddress: string;
-  destinationHousingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house';
+  destinationHousingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house' | 'house_1floor' | 'house_2floors' | 'house_3floors';
   destinationFloor: number;
   destinationElevator: 'none' | 'small' | 'medium' | 'large';
   destinationFurnitureLift: 'unknown' | 'no' | 'yes';
