@@ -74,11 +74,11 @@ export const cityData: Record<string, CityData> = {
       { slug: 'jean-jaures', name: 'Jean-Jaurès' }
     ],
     corridors: [
-      { slug: 'toulouse-vers-paris', destination: 'Paris' },
-      { slug: 'toulouse-vers-lyon', destination: 'Lyon' },
-      { slug: 'toulouse-vers-marseille', destination: 'Marseille' },
-      { slug: 'toulouse-vers-nantes', destination: 'Nantes' },
-      { slug: 'toulouse-vers-espagne', destination: 'Espagne' }
+      { slug: 'paris', destination: 'Paris' },
+      { slug: 'lyon', destination: 'Lyon' },
+      { slug: 'marseille', destination: 'Marseille' },
+      { slug: 'nantes', destination: 'Nantes' },
+      { slug: 'espagne', destination: 'Espagne' }
     ]
   },
   

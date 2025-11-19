@@ -301,9 +301,42 @@ export default function LocalPage({
         </section>
         )}
 
-        {/* Partenaires - Fond sombre */}
-        {partenaires && partenaires.length > 0 && (
+        {/* Destinations fréquentes - Fond sombre */}
+        {destinationsFrequentes && destinationsFrequentes.length > 0 && (
         <section className="section section-contrast">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Destinations fréquentes depuis {zoneDisplay}
+              </h2>
+              <p className="text-white/80 max-w-2xl mx-auto">
+                Trajets populaires et déménagements longue distance
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {destinationsFrequentes.map((dest, index) => (
+                <Link
+                  key={index}
+                  href={dest.href}
+                  className="group bg-white/5 backdrop-blur-sm rounded-3xl p-6 border border-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <h3 className="text-lg font-bold text-white">{dest.title}</h3>
+                    <svg className="w-5 h-5 text-[#6BCFCF] group-hover:translate-x-1 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                  <p className="text-white/70 text-sm">{dest.description}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+        )}
+
+        {/* Partenaires - Fond clair */}
+        {partenaires && partenaires.length > 0 && (
+        <section className="section section-light">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
