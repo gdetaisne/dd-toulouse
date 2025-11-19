@@ -1,4 +1,33 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+
+function useInView(ref: React.RefObject<HTMLDivElement | null>, threshold: number = 0.3) {
+  const [isInView, setIsInView] = useState(false);
+  
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isInView) {
+          setIsInView(true);
+        }
+      },
+      { threshold }
+    );
+    
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [ref, threshold, isInView]);
+  
+  return isInView;
+}
+
 export default function HowItWorks() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, 0.3);
+  
   const steps = [
     {
       number: "1",
@@ -18,10 +47,19 @@ export default function HowItWorks() {
   ];
 
   return (
-    <div className="relative overflow-hidden space-y-10 rounded-3xl bg-gradient-to-br from-[#0A1929] via-[#04141f] to-[#0b3b46] p-8 md:p-12 lg:p-16 text-white shadow-[0_32px_90px_rgba(0,0,0,0.6)]">
-      {/* Halos lumineux multiples (Stripe-style) */}
-      <div className="pointer-events-none absolute -top-32 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,_rgba(107,207,207,0.25),_transparent_70%)] blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(79,70,229,0.15),_transparent_70%)] blur-3xl" />
+    <div 
+      ref={sectionRef}
+      className="relative overflow-hidden space-y-10 rounded-3xl bg-gradient-to-br from-[#0A1929] via-[#04141f] to-[#0b3b46] p-8 md:p-12 lg:p-16 text-white shadow-[0_32px_90px_rgba(0,0,0,0.6)]"
+    >
+      {/* Halos lumineux multiples (Stripe-style) avec parallax */}
+      <div 
+        className="pointer-events-none absolute -top-32 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-[radial-gradient(circle_at_center,_rgba(107,207,207,0.25),_transparent_70%)] blur-3xl transition-transform duration-1000"
+        style={{ transform: isInView ? 'translate(-50%, 0)' : 'translate(-50%, -30px)' }}
+      />
+      <div 
+        className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(79,70,229,0.15),_transparent_70%)] blur-3xl transition-transform duration-1000"
+        style={{ transform: isInView ? 'translate(0, 0)' : 'translate(30px, 30px)' }}
+      />
       
       {/* Header avec espacement généreux */}
       <div className="relative space-y-4 text-center">
@@ -36,19 +74,38 @@ export default function HowItWorks() {
         </p>
       </div>
 
+      {/* Timeline animée (ligne progressive) */}
+      <div className="relative hidden md:block">
+        <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-white/10 rounded-full" />
+        <div 
+          className="absolute left-1/2 top-0 w-1 -translate-x-1/2 bg-gradient-to-b from-[#6BCFCF] to-[#4FB8B8] rounded-full transition-all duration-2000 ease-out"
+          style={{ 
+            height: isInView ? '100%' : '0%',
+            transitionDelay: '200ms'
+          }}
+        />
+      </div>
+
       {/* Cards avec hover lift + animations staggered */}
       <div className="relative mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
         {steps.map((step, index) => (
           <div
             key={step.number}
             className="group relative flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 shadow-lg backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:border-white/20 motion-safe:animate-fade-up-soft"
-            style={{ animationDelay: `${index * 100}ms` }}
+            style={{ animationDelay: `${index * 100 + 400}ms` }}
           >
             {/* Glow effect au hover */}
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-10" />
             
             <div className="relative flex justify-center md:justify-start">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-[#6BCFCF] bg-[#0A1929] text-base font-bold text-[#6BCFCF] shadow-[0_0_0_6px_rgba(107,207,207,0.15)] transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(107,207,207,0.4)] group-hover:scale-110">
+              <div 
+                className="flex h-12 w-12 items-center justify-center rounded-2xl border-2 border-[#6BCFCF] bg-[#0A1929] text-base font-bold text-[#6BCFCF] shadow-[0_0_0_6px_rgba(107,207,207,0.15)] transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(107,207,207,0.4)] group-hover:scale-110"
+                style={{
+                  opacity: isInView ? 1 : 0,
+                  transform: isInView ? 'scale(1)' : 'scale(0.8)',
+                  transitionDelay: `${index * 150 + 600}ms`
+                }}
+              >
                 {step.number}
               </div>
             </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Hero() {
   const [stage, setStage] = useState(2);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -17,6 +18,17 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="relative overflow-hidden text-white font-sans">
       {/* Background ultra-profond avec halos multiples */}
@@ -25,9 +37,15 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A1929]/95 via-[#04141f]/90 to-[#0b3b46]/95" />
         <div className="absolute inset-0 bg-gradient-to-r from-white/8 via-transparent to-white/4" />
         
-        {/* Halos lumineux multiples (comme Stripe) */}
-        <div className="pointer-events-none absolute -top-32 right-[-180px] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle_at_center,_rgba(107,207,207,0.35),_transparent_70%)] blur-3xl" />
-        <div className="pointer-events-none absolute top-1/2 left-[-120px] h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle_at_center,_rgba(79,70,229,0.15),_transparent_70%)] blur-3xl" />
+        {/* Halos lumineux multiples (comme Stripe) avec parallax */}
+        <div 
+          className="pointer-events-none absolute -top-32 right-[-180px] h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle_at_center,_rgba(107,207,207,0.35),_transparent_70%)] blur-3xl transition-transform duration-100"
+          style={{ transform: `translate(${scrollY * 0.15}px, ${scrollY * 0.1}px)` }}
+        />
+        <div 
+          className="pointer-events-none absolute top-1/2 left-[-120px] h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle_at_center,_rgba(79,70,229,0.15),_transparent_70%)] blur-3xl transition-transform duration-100"
+          style={{ transform: `translate(${scrollY * -0.1}px, ${scrollY * 0.08}px)` }}
+        />
       </div>
 
       {/* Espacement généreux (Stripe-like) */}

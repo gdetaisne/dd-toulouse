@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { getCityData } from "@/lib/cityData";
 import { getAverageRating, getReviewsForCity } from "@/lib/reviews";
@@ -36,6 +36,79 @@ function getInitials(author: string): string {
   return initials.join("") || "·";
 }
 
+function TestimonialCard({ review, index }: { review: any; index: number }) {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = ((y - centerY) / centerY) * -8; // Max 8deg
+    const tiltY = ((x - centerX) / centerX) * 8;
+    setTilt({ x: tiltX, y: tiltY });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setIsHovering(false);
+  };
+
+  const city = useMemo(() => getCityData(resolveCityFromHostname()), []);
+  const [name, location] = review.author.split(" — ");
+  const displayName = name ?? review.author;
+  const initials = getInitials(displayName);
+
+  return (
+    <article
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={handleMouseLeave}
+      className="group relative rounded-3xl border border-[#dfeaea] bg-white p-6 md:p-8 shadow-lg transition-all duration-500 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#6bcfcf]/40 motion-safe:animate-fade-up-soft"
+      style={{
+        animationDelay: `${index * 100}ms`,
+        transform: isHovering
+          ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(10px)`
+          : 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)',
+        transition: 'transform 0.1s ease-out, box-shadow 0.3s, border-color 0.3s',
+      }}
+    >
+      {/* Glow effect au hover */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
+      
+      <div className="relative space-y-5">
+        {/* Avatar + Info */}
+        <div className="flex items-center gap-4">
+          <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6bcfcf]/20 to-[#2b7a78]/30 ring-2 ring-[#2b7a78]/20 transition-all duration-300 group-hover:ring-[#6bcfcf]/40 group-hover:scale-110">
+            <span className="text-base font-bold text-[#043a3a]">
+              {initials}
+            </span>
+          </div>
+          <div>
+            <div className="text-base md:text-lg font-bold text-[#04163a]">
+              {displayName}
+            </div>
+            <div className="text-xs md:text-sm text-[#04163a]/60">
+              {location ?? city.nameCapitalized}
+            </div>
+          </div>
+        </div>
+
+        {/* Quote avec style */}
+        <div className="relative">
+          <span className="absolute -left-2 -top-2 text-4xl text-[#6bcfcf]/20 font-serif">"</span>
+          <p className="text-sm md:text-base leading-relaxed text-[#04163a]/80 pl-4">
+            {review.body}
+          </p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function Testimonials() {
   const city = useMemo(() => getCityData(resolveCityFromHostname()), []);
   const reviews = getReviewsForCity(city, 3);
@@ -65,51 +138,11 @@ export default function Testimonials() {
         </div>
       </div>
 
-      {/* Cards avec hover lift + animations staggered */}
+      {/* Cards avec tilt 3D */}
       <div className="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
-        {reviews.map((review, index) => {
-          const [name, location] = review.author.split(" — ");
-          const displayName = name ?? review.author;
-          const initials = getInitials(displayName);
-
-          return (
-            <article
-              key={`${review.summary}-${index}`}
-              className="group relative rounded-3xl border border-[#dfeaea] bg-white p-6 md:p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#6bcfcf]/40 motion-safe:animate-fade-up-soft"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Glow effect au hover */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#6BCFCF]/0 to-[#4FB8B8]/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
-              
-              <div className="relative space-y-5">
-                {/* Avatar + Info */}
-                <div className="flex items-center gap-4">
-                  <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6bcfcf]/20 to-[#2b7a78]/30 ring-2 ring-[#2b7a78]/20 transition-all duration-300 group-hover:ring-[#6bcfcf]/40 group-hover:scale-110">
-                    <span className="text-base font-bold text-[#043a3a]">
-                      {initials}
-                    </span>
-                  </div>
-                  <div>
-                    <div className="text-base md:text-lg font-bold text-[#04163a]">
-                      {displayName}
-                    </div>
-                    <div className="text-xs md:text-sm text-[#04163a]/60">
-                      {location ?? city.nameCapitalized}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Quote avec style */}
-                <div className="relative">
-                  <span className="absolute -left-2 -top-2 text-4xl text-[#6bcfcf]/20 font-serif">"</span>
-                  <p className="text-sm md:text-base leading-relaxed text-[#04163a]/80 pl-4">
-                    {review.body}
-                  </p>
-                </div>
-              </div>
-            </article>
-          );
-        })}
+        {reviews.map((review, index) => (
+          <TestimonialCard key={`${review.summary}-${index}`} review={review} index={index} />
+        ))}
       </div>
     </div>
   );
