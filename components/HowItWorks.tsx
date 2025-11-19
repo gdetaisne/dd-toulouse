@@ -135,7 +135,11 @@ export default function HowItWorks() {
       {/* CTAs avec espacement généreux */}
       <div className="relative mt-12 flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:justify-center">
         <a
-          href="/inventaire-ia/"
+<<<<<<< HEAD
+          href="/devis-gratuits/"
+=======
+          href="/devis-gratuits/"
+>>>>>>> 9f1b26e (chore: Update links and configs for devis-gratuits rename)
           className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-base md:text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
           aria-label="Recevez 5+ devis fiables gratuitement"
         >

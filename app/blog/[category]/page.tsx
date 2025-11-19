@@ -291,7 +291,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
               pour vous accompagner dans votre projet.
             </p>
             <Link 
-              href="/inventaire-ia" 
+              href="/devis-gratuits" 
               className="inline-flex items-center px-8 py-4 rounded-2xl bg-white text-[#04163a] font-semibold hover:bg-white/90 transition duration-300"
             >
               Obtenir un devis gratuit

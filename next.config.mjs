@@ -67,6 +67,11 @@ const nextConfig = {
       { source: '/politique-confidentialite/', destination: '/politique-confidentialite', permanent: true },
       
       // ANCIENNES URLs
+
+      // REDIRECTIONS inventaire-ia → devis-gratuits (20/01/2026)
+      { source: '/inventaire-ia', destination: '/devis-gratuits/', permanent: true },
+      { source: '/inventaire-ia/', destination: '/devis-gratuits/', permanent: true },
+      { source: '/inventaire-ia/:path*', destination: '/devis-gratuits/:path*', permanent: true },
       { source: '/estimation-demenagement-toulouse/', destination: '/estimation-rapide', permanent: true },
       { source: '/prix-demenagement-toulouse/', destination: '/blog', permanent: true },
       { source: '/devis-demenagement-toulouse/', destination: '/estimation-rapide', permanent: true },

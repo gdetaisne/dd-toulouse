@@ -61,7 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: getCanonicalUrl('inventaire-ia'),
+      url: getCanonicalUrl('devis-gratuits'),
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,

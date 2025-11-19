@@ -13,7 +13,7 @@ export default function GAListener() {
     const url = pathname + (searchParams?.toString() ? `?${searchParams}` : '');
     pageview(url);
 
-    if (pathname.includes('/inventaire-ia')) {
+    if (pathname.includes('/devis-gratuits')) {
       gaEvent('inventory_ia_view');
     }
   }, [pathname, searchParams]);

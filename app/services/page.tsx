@@ -319,7 +319,7 @@ export default function ServicesPage() {
                 Comment obtenir un devis précis pour ma situation ?
               </summary>
               <div className="mt-3 text-white/85">
-                <p>Utilisez notre <a href="/inventaire-ia/" className="text-[#6bcfcf] underline hover:text-[#6bcfcf]/80">estimation IA gratuite</a>. En 30 minutes avec vos photos, vous recevez 5 devis comparables sous 7 jours, adaptés à votre volume exact et vos contraintes.</p>
+                <p>Utilisez notre <a href="/devis-gratuits/" className="text-[#6bcfcf] underline hover:text-[#6bcfcf]/80">estimation IA gratuite</a>. En 30 minutes avec vos photos, vous recevez 5 devis comparables sous 7 jours, adaptés à votre volume exact et vos contraintes.</p>
               </div>
             </details>
 
@@ -414,7 +414,7 @@ export default function ServicesPage() {
               Utilisez notre outil d'estimation pour obtenir des tarifs personnalisés selon vos besoins spécifiques
             </p>
             <a
-              href="/inventaire-ia/"
+              href="/devis-gratuits/"
               className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-6 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
             >
               Obtenez vos devis précis gratuitement

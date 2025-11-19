@@ -72,7 +72,7 @@ export default function QuartierTemplate(props: {
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="/inventaire-ia/" className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300">
+              <a href="/devis-gratuits/" className="inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300">
                 Créer mon dossier
               </a>
               <a href={parentLink} className="inline-flex h-11 items-center justify-center rounded-2xl border border-white/30 px-5 text-sm font-medium hover:bg-white/15 transition duration-300">

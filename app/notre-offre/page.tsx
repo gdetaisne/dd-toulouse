@@ -470,7 +470,7 @@ export default function NotreOffrePage() {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="/inventaire-ia/"
+                href="/devis-gratuits/"
                 className="inline-flex h-12 items-center justify-center rounded-2xl bg-[#6bcfcf] px-8 text-lg font-semibold text-[#04163a] shadow-lg hover:bg-[#6bcfcf]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6bcfcf]/50 transition duration-300"
               >
                 Estimez gratuitement votre volume

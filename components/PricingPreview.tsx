@@ -74,7 +74,11 @@ export default function PricingPreview() {
         >
           Voir le détail des formules et services
         </a>
-        <a href="/inventaire-ia/" className="btn-accent text-sm">
+<<<<<<< HEAD
+        <a href="/devis-gratuits/" className="btn-accent text-sm">
+=======
+        <a href="/devis-gratuits/" className="btn-accent text-sm">
+>>>>>>> 9f1b26e (chore: Update links and configs for devis-gratuits rename)
           Calculer mon volume et recevoir 5 devis fiables
         </a>
       </div>

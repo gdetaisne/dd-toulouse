@@ -61,7 +61,11 @@ export default function PartnerCard({ partner }: PartnerCardProps) {
       </div>
       
       <a 
-        href="/inventaire-ia/"
+<<<<<<< HEAD
+        href="/devis-gratuits/"
+=======
+        href="/devis-gratuits/"
+>>>>>>> 9f1b26e (chore: Update links and configs for devis-gratuits rename)
         className="w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] px-4 py-3 text-sm font-semibold text-[#04141f] hover:shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
       >
         Demander un devis

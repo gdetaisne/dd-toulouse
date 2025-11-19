@@ -74,7 +74,11 @@ export default function Home() {
 
           <div className="text-center">
             <a 
-              href="/inventaire-ia/" 
+<<<<<<< HEAD
+              href="/devis-gratuits/" 
+=======
+              href="/devis-gratuits/" 
+>>>>>>> 9f1b26e (chore: Update links and configs for devis-gratuits rename)
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
@@ -138,7 +142,11 @@ export default function Home() {
                   devis alignés sur la même base, sans appels commerciaux non
                   souhaités.
                 </p>
-                <a href="/inventaire-ia/" className="btn-primary">
+<<<<<<< HEAD
+                <a href="/devis-gratuits/" className="btn-primary">
+=======
+                <a href="/devis-gratuits/" className="btn-primary">
+>>>>>>> 9f1b26e (chore: Update links and configs for devis-gratuits rename)
                   Lancer mon comparateur de devis
                 </a>
               </div>

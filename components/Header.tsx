@@ -209,7 +209,7 @@ export default function Header() {
         {/* CTA Button */}
         <div className="flex items-center gap-3">
           <Link 
-            href="/inventaire-ia" 
+            href="/devis-gratuits" 
             className="hidden sm:inline-flex h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
             onClick={() => trackClick('cta-header')}
           >
@@ -319,7 +319,7 @@ export default function Header() {
             {/* CTA Mobile */}
             <div className="pt-4 border-t border-gray-200">
               <Link
-                href="/inventaire-ia"
+                href="/devis-gratuits"
                 className="block w-full text-center h-11 items-center justify-center rounded-2xl bg-[#2b7a78] px-5 text-sm font-medium text-white shadow-marketing-xl hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
