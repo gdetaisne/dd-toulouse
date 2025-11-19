@@ -9,6 +9,9 @@ import { SatelliteArticlesSection } from '@/components/blog/SatelliteArticlesSec
 
 const city = getCityDataFromUrl(env.SITE_URL);
 
+// Force dynamic rendering to avoid prerendering errors with client components
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: `Blog Déménagement ${city.nameCapitalized} 2025 : Guides & Conseils | Moverz`,
   description: `Guides complets déménagement ${city.nameCapitalized} 2025 : Prix, astuces, checklist. 99+ articles experts. Comparez 5 devis gratuits en 7j.`,

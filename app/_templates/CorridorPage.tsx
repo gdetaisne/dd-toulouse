@@ -57,6 +57,9 @@ export function generateCorridorPageJsonLd(destination: string) {
   };
 }
 
+// Force dynamic rendering to avoid prerendering errors
+export const dynamic = 'force-dynamic';
+
 export default function CorridorPage({
   destination,
   distance,

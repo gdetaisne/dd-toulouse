@@ -87,6 +87,9 @@ export function generateLocalPageJsonLd(zone: string, zoneDisplay: string) {
   };
 }
 
+// Force dynamic rendering to avoid prerendering errors
+export const dynamic = 'force-dynamic';
+
 export default function LocalPage({
   zone,
   zoneDisplay,
@@ -99,6 +102,7 @@ export default function LocalPage({
   partenaires,
   faq,
 }: LocalPageProps) {
+  // Force dynamic rendering to avoid prerendering errors
   const jsonLd = generateLocalPageJsonLd(zone, zoneDisplay);
   const city = getCityDataFromUrl(env.SITE_URL);
 
