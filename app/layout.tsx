@@ -29,6 +29,9 @@ export const viewport: Viewport = {
   themeColor: '#2b7a78',
 };
 
+// Force dynamic rendering to avoid prerendering errors with client components
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
   children,
 }: {
