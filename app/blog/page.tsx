@@ -5,19 +5,19 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import { getCanonicalUrl } from '@/lib/canonical-helper';
 import { getCityDataFromUrl } from '@/lib/cityData';
 import { env } from '@/lib/env';
+import { SatelliteArticlesSection } from '@/components/blog/SatelliteArticlesSection';
 
 const city = getCityDataFromUrl(env.SITE_URL);
 
-import { SatelliteArticlesSection } from '@/components/blog/SatelliteArticlesSection';
 export const metadata: Metadata = {
-  title: `📦 Blog Déménagement ${city.nameCapitalized} 2025 : Guides & Conseils | Moverz`,
-  description: `Guides complets déménagement ${city.nameCapitalized} 2025 : Prix 💰, astuces, checklist 📋. 99+ articles experts ⭐. Comparez 5 devis gratuits en 7j.`,
+  title: `Blog Déménagement ${city.nameCapitalized} 2025 : Guides & Conseils | Moverz`,
+  description: `Guides complets déménagement ${city.nameCapitalized} 2025 : Prix, astuces, checklist. 99+ articles experts. Comparez 5 devis gratuits en 7j.`,
   alternates: {
     canonical: getCanonicalUrl('blog'),
   },
   openGraph: {
-    title: `📦 Blog Déménagement ${city.nameCapitalized} 2025 - Tous nos guides pratiques`,
-    description: `Guides complets déménagement ${city.nameCapitalized} 2025 : Prix 💰, astuces, checklist 📋. 99+ articles experts ⭐. Comparez 5 devis gratuits en 7j.`,
+    title: `Blog Déménagement ${city.nameCapitalized} 2025 - Tous nos guides pratiques`,
+    description: `Guides complets déménagement ${city.nameCapitalized} 2025 : Prix, astuces, checklist. 99+ articles experts. Comparez 5 devis gratuits en 7j.`,
     url: getCanonicalUrl('blog'),
     type: 'website',
   },
@@ -82,21 +82,10 @@ export default function BlogPage() {
     <main className="bg-hero min-h-screen">
       <div className="halo" />
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden text-white">
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1488998427799-e3362cec87c3?q=80&w=2000&auto=format&fit=crop"
-            alt="Blog déménagement - Guides et conseils"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/95 via-[#2b7a78]/88 to-[#04163a]/90"></div>
-        </div>
-
-        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="text-center">
+      {/* Hero Section - Version Stripe */}
+      <section className="section section-contrast relative overflow-hidden">
+        <div className="container relative">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
             <Breadcrumbs 
               items={[
                 { label: "Accueil", href: "/" },
@@ -104,40 +93,39 @@ export default function BlogPage() {
               ]}
             />
             
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 mt-6">
-              <span className="text-2xl">✨</span>
-              <span className="text-sm font-medium text-white">Magazine Déménagement</span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#6BCFCF] animate-pulse" />
+              Magazine Déménagement
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-white">
-              Guides Déménagement <span className="text-[#6bcfcf]">{city.nameCapitalized}</span>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-white leading-tight">
+              Guides Déménagement <span className="text-[#6BCFCF]">{city.nameCapitalized}</span>
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-light">
+            <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed font-light">
               Conseils d'experts, astuces pratiques et guides complets pour un déménagement réussi
             </p>
           </div>
         </div>
       </section>
 
-      {/* Guides Pilier Premium avec Images */}
-      <section className="section pb-0">
+      {/* Guides Pilier Premium - Version Stripe */}
+      <section className="section section-light">
         <div className="container">
-          <div className="mb-16 text-center">
-            <span className="inline-block px-4 py-2 rounded-full bg-[#6bcfcf]/10 text-[#6bcfcf] text-sm font-semibold mb-4">
-              NOS MEILLEURS GUIDES
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              📖 Guides Complets
+          <div className="mb-12 text-center space-y-4">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#2B7A78]">
+              Nos meilleurs guides
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#04163a] leading-tight">
+              Guides Complets
             </h2>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto font-light">
+            <p className="text-base md:text-lg text-[#4b5c6b] max-w-2xl mx-auto leading-relaxed font-light">
               Tout ce que vous devez savoir pour réussir votre déménagement
             </p>
           </div>
 
-          <div className="grid gap-12 max-w-6xl mx-auto">
+          <div className="grid gap-8 max-w-6xl mx-auto">
             {pilierPosts.slice(0, 3).map((post, index) => {
               const image = getImageForPost(post, index);
-              const icons = ['🏆', '💰', '🎯'];
               
               return (
                 <Link 
@@ -145,35 +133,34 @@ export default function BlogPage() {
                   href={`/blog/${post.cleanCategory}/${post.cleanSlug}`}
                   className="group"
                 >
-                  <article className="relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#6bcfcf]/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#6bcfcf]/20">
-                    <div className="grid md:grid-cols-[400px_1fr] gap-0">
+                  <article className="relative overflow-hidden rounded-3xl bg-white border border-[#E3E5E8] shadow-lg hover:border-[#6BCFCF]/40 transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+                    <div className="grid md:grid-cols-[350px_1fr] gap-0">
                       {/* Image */}
                       <div className="relative h-64 md:h-auto overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#04163a] via-transparent to-transparent z-10"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#04163a]/60 via-transparent to-transparent z-10"></div>
                         <img 
                           src={image}
                           alt={post.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute top-6 left-6 z-20">
-                          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#6bcfcf] text-[#04163a] text-sm font-bold shadow-lg">
-                            <span className="text-xl">{icons[index]}</span>
+                          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#6BCFCF] text-[#04163a] text-sm font-bold shadow-lg">
                             Guide #{index + 1}
                           </span>
                         </div>
                       </div>
                       
                       {/* Contenu */}
-                      <div className="p-8 md:p-10 flex flex-col justify-center">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight mb-4 group-hover:text-[#6bcfcf] transition-colors">
+                      <div className="p-6 md:p-8 flex flex-col justify-center">
+                        <h3 className="text-xl md:text-2xl font-bold text-[#04163a] leading-tight mb-3 group-hover:text-[#2B7A78] transition-colors">
                           {post.title}
                         </h3>
                         
-                        <p className="text-lg text-white/70 leading-relaxed mb-6 line-clamp-2">
+                        <p className="text-sm md:text-base text-[#4b5c6b] leading-relaxed mb-4 line-clamp-2">
                           {post.meta_description}
                         </p>
                         
-                        <div className="flex flex-wrap items-center gap-6 text-sm text-white/50 mb-6">
+                        <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm text-[#4b5c6b] mb-4">
                           <div className="flex items-center gap-2">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -188,7 +175,7 @@ export default function BlogPage() {
                           </div>
                         </div>
                         
-                        <div className="flex items-center gap-3 text-[#6bcfcf] font-semibold group-hover:gap-4 transition-all">
+                        <div className="flex items-center gap-2 text-[#2B7A78] font-semibold text-sm md:text-base group-hover:gap-3 transition-all">
                           Lire le guide complet
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -204,9 +191,9 @@ export default function BlogPage() {
 
           {/* Autres guides piliers */}
           {pilierPosts.length > 3 && (
-            <div className="mt-20">
-              <h3 className="text-2xl font-bold text-white mb-8 text-center">Autres Guides Essentiels</h3>
-              <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="mt-16">
+              <h3 className="text-2xl md:text-3xl font-bold text-[#04163a] mb-8 text-center">Autres Guides Essentiels</h3>
+              <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {pilierPosts.slice(3).map((post, index) => {
                   const image = getImageForPost(post, index + 3);
                   
@@ -216,22 +203,22 @@ export default function BlogPage() {
                       href={`/blog/${post.cleanCategory}/${post.cleanSlug}`}
                       className="group"
                     >
-                      <article className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-[#6bcfcf]/50 hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-[#6bcfcf]/10">
+                      <article className="bg-white border border-[#E3E5E8] rounded-3xl overflow-hidden hover:border-[#6BCFCF]/40 hover:scale-105 transition-all duration-300 hover:shadow-lg">
                         <div className="relative h-48 overflow-hidden">
                           <img 
                             src={image}
                             alt={post.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#04163a] via-transparent to-transparent"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#04163a]/60 via-transparent to-transparent"></div>
                         </div>
                         <div className="p-6">
-                          <h3 className="text-lg font-semibold text-white group-hover:text-[#6bcfcf] transition-colors mb-3 line-clamp-2">
+                          <h3 className="text-base md:text-lg font-semibold text-[#04163a] group-hover:text-[#2B7A78] transition-colors mb-3 line-clamp-2">
                             {post.title}
                           </h3>
-                          <div className="flex items-center justify-between text-xs text-white/50">
+                          <div className="flex items-center justify-between text-xs text-[#4b5c6b]">
                             <span>{(post.word_count || 0).toLocaleString()} mots</span>
-                            <span className="text-[#6bcfcf] font-medium group-hover:text-white">
+                            <span className="text-[#2B7A78] font-medium group-hover:text-[#04163a]">
                               Lire →
                             </span>
                           </div>
@@ -253,29 +240,30 @@ export default function BlogPage() {
         />
       )}
 
-      {/* CTA Premium */}
-      <section className="section pt-20">
-        <div className="container max-w-5xl">
-          <div className="relative overflow-hidden rounded-3xl">
-            {/* Background gradient animé */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#2b7a78] via-[#6bcfcf] to-[#2b7a78] animate-gradient-xy"></div>
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80')] bg-cover bg-center opacity-10"></div>
-            
-            <div className="relative p-12 md:p-16 text-center">
-              <div className="text-6xl mb-6">🚀</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+      {/* CTA Premium - Version Stripe */}
+      <section className="section section-contrast">
+        <div className="container max-w-4xl">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#04163A] via-[#05243f] to-[#0b3b46] p-8 md:p-12 text-center shadow-[0_24px_70px_rgba(0,0,0,0.55)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_55%)]" />
+            <div className="relative space-y-6">
+              <div className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/80">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#6BCFCF] animate-pulse" />
+                Sans engagement · 0 spam · 5+ devis fiables
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
                 Prêt à déménager à {city.nameCapitalized} ?
               </h2>
-              <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-                Comparez gratuitement les devis de déménageurs professionnels. 
-                <strong> Rapide, gratuit, et sans engagement.</strong>
+              <p className="text-base md:text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
+                Comparez gratuitement les devis de déménageurs professionnels.{" "}
+                <span className="font-semibold text-white">Rapide, gratuit, et sans engagement.</span>
               </p>
               <Link 
                 href="/inventaire-ia" 
-                className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-white text-[#04163a] font-bold text-lg hover:bg-[#04163a] hover:text-white hover:scale-110 transition-all duration-300 shadow-2xl"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
-                Obtenir 5 devis gratuits
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+                <span className="relative">Obtenir 5 devis gratuits</span>
+                <svg className="relative w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Link>

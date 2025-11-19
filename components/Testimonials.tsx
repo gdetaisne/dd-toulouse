@@ -129,7 +129,7 @@ export default function Testimonials() {
             <span className="text-xl">⭐⭐⭐⭐⭐</span>
             <span className="text-base md:text-lg font-bold text-white">
               {ratingLabel}
-            </span>
+          </span>
           </div>
           <p className="text-sm md:text-base text-white/70 font-light max-w-xl mx-auto">
             Clarté des devis · 0 spam · Accompagnement · Pros fiables

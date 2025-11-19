@@ -124,14 +124,14 @@ export default function ProofStrip() {
       <div className="relative text-center space-y-4">
         <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#2B7A78]">
           Chiffres clés
-        </p>
+          </p>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#04163a] leading-tight">
           Le comparateur en quelques chiffres
-        </h2>
+          </h2>
         <p className="text-base md:text-lg text-[#4b5c6b] leading-relaxed max-w-2xl mx-auto font-light">
           Des données issues de dossiers réellement comparés.
-        </p>
-      </div>
+          </p>
+        </div>
 
       {/* Stats cards avec counter animations + pictogrammes */}
       <div className="relative grid gap-6 md:grid-cols-4 md:gap-6">
@@ -169,12 +169,12 @@ export default function ProofStrip() {
                     : 'bg-[#F8F9FA] border-[#E3E5E8] text-[#4b5c6b] group-hover:border-[#6BCFCF]/40'
                 }`}>
                   {stat.icon}
-                </div>
-                
+      </div>
+
                 <div className="space-y-2">
                   <div className="text-xs md:text-sm font-bold uppercase tracking-[0.18em] text-[#4b5c6b]">
-                    {stat.label}
-                  </div>
+              {stat.label}
+            </div>
                   <div className="flex items-baseline gap-1">
                     <span className={`text-4xl md:text-5xl font-bold leading-none transition-all duration-300 ${
                       stat.highlight 
@@ -193,7 +193,7 @@ export default function ProofStrip() {
             </div>
           );
         })}
-      </div>
+          </div>
       
       {/* Pills réassurance en bas */}
       <div className="relative flex flex-wrap items-center justify-center gap-3 pt-4">

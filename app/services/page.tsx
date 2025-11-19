@@ -29,33 +29,24 @@ export default function ServicesPage() {
     <main className="bg-hero">
       <div className="halo" />
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden text-white">
-        {/* Image de fond avec overlay */}
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?q=80&w=2000&auto=format&fit=crop"
-            alt={`Services de déménagement professionnels à ${city.nameCapitalized}`}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#04163a]/95 via-[#2b7a78]/90 to-[#04163a]/90"></div>
-        </div>
-
-        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-        
-        <div className="relative mx-auto max-w-7xl px-6 py-16 md:px-12 md:py-24 lg:py-32">
-          <div className="text-center">
+      {/* Hero Section - Version Stripe */}
+      <section className="section section-contrast relative overflow-hidden">
+        <div className="container relative">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
             <Breadcrumbs 
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Services", href: "/services" }
               ]}
             />
-            <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#6BCFCF] animate-pulse" />
+              Nos formules
+            </div>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-white leading-tight">
               Nos formules de déménagement depuis {city.nameCapitalized}
             </h1>
-            <p className="mt-4 text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed font-light">
               Choisissez la formule qui correspond à vos besoins et votre budget. 
               Toutes nos prestations incluent l'estimation IA gratuite.
             </p>
@@ -64,26 +55,29 @@ export default function ServicesPage() {
       </section>
 
       {/* Comparatif des formules */}
-      <section className="section">
+      <section className="section section-light">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+          <div className="text-center mb-12 space-y-4">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#2B7A78]">
+              Nos offres
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#04163a] leading-tight">
               Comparatif de nos formules
             </h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-[#4b5c6b] max-w-2xl mx-auto leading-relaxed font-light">
               Découvrez les différences entre nos trois formules pour faire le meilleur choix
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Formule Économique */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 relative">
+            <div className="bg-white border border-[#E3E5E8] rounded-3xl p-8 relative shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#6BCFCF]/40 transition-all duration-300">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 bg-[#2b7a78] text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
-                  💰 Économique
+                  Économique
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Déménagement Économique</h3>
-                <p className="text-white/70 text-sm">Pour les budgets serrés</p>
+                <h3 className="text-xl font-semibold text-[#04163a] mb-2">Déménagement Économique</h3>
+                <p className="text-[#4b5c6b] text-sm">Pour les budgets serrés</p>
               </div>
               
               <div className="space-y-4 mb-8">
@@ -93,7 +87,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Estimation IA gratuite</span>
+                  <span className="text-[#04163a] text-sm">Estimation IA gratuite</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -101,7 +95,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Fourniture de cartons</span>
+                  <span className="text-[#04163a] text-sm">Fourniture de cartons</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -109,7 +103,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Assurance incluse</span>
+                  <span className="text-[#04163a] text-sm">Assurance incluse</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -117,16 +111,16 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Support téléphonique</span>
+                  <span className="text-[#04163a] text-sm">Support téléphonique</span>
                 </div>
               </div>
 
               <div className="text-center">
-                <div className="text-2xl font-bold text-white mb-2">À partir de 280€</div>
-                <p className="text-white/60 text-sm mb-6">Studio local {city.nameCapitalized}</p>
+                <div className="text-2xl font-bold text-[#04163a] mb-2">À partir de 280€</div>
+                <p className="text-[#4b5c6b] text-sm mb-6">Studio local {city.nameCapitalized}</p>
                 <a
                   href={`/services/demenagement-economique-${city.slug}`}
-                  className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition duration-300"
+                  className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-[#F8F9FA] border border-[#E3E5E8] text-[#04163a] font-medium hover:bg-[#E3E5E8] transition duration-300"
                 >
                   Découvrir cette formule
                 </a>
@@ -134,7 +128,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Formule Standard */}
-            <div className="bg-white/5 backdrop-blur-sm border border-[#6bcfcf] rounded-2xl p-8 relative">
+            <div className="bg-white border border-[#6BCFCF] rounded-3xl p-8 relative shadow-lg hover:shadow-[0_20px_60px_rgba(107,207,207,0.25)] transition-all duration-300">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                 <div className="bg-[#6bcfcf] text-[#04163a] px-4 py-1 rounded-full text-sm font-semibold">
                   Recommandé
@@ -143,10 +137,10 @@ export default function ServicesPage() {
               
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 bg-[#6bcfcf] text-[#04163a] px-4 py-2 rounded-full text-sm font-medium mb-4">
-                  ⭐ Standard
+                  Standard
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Déménagement Standard</h3>
-                <p className="text-white/70 text-sm">Le plus populaire</p>
+                <h3 className="text-xl font-semibold text-[#04163a] mb-2">Déménagement Standard</h3>
+                <p className="text-[#4b5c6b] text-sm">Le plus populaire</p>
               </div>
               
               <div className="space-y-4 mb-8">
@@ -156,7 +150,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Estimation IA gratuite</span>
+                  <span className="text-[#04163a] text-sm">Estimation IA gratuite</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -164,7 +158,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Emballage de base</span>
+                  <span className="text-[#04163a] text-sm">Emballage de base</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -172,7 +166,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Démontage/Remontage</span>
+                  <span className="text-[#04163a] text-sm">Démontage/Remontage</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -180,7 +174,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Assurance renforcée</span>
+                  <span className="text-[#04163a] text-sm">Assurance renforcée</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -188,13 +182,13 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Support prioritaire</span>
+                  <span className="text-[#04163a] text-sm">Support prioritaire</span>
                 </div>
               </div>
 
               <div className="text-center">
-                <div className="text-2xl font-bold text-white mb-2">À partir de 600€</div>
-                <p className="text-white/60 text-sm mb-6">T2 local {city.nameCapitalized}</p>
+                <div className="text-2xl font-bold text-[#04163a] mb-2">À partir de 600€</div>
+                <p className="text-[#4b5c6b] text-sm mb-6">T2 local {city.nameCapitalized}</p>
                 <a
                   href={`/services/demenagement-standard-${city.slug}`}
                   className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-[#6bcfcf] text-[#04163a] font-medium hover:bg-[#6bcfcf]/90 transition duration-300"
@@ -205,13 +199,13 @@ export default function ServicesPage() {
             </div>
 
             {/* Formule Premium */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 relative">
+            <div className="bg-white border border-[#E3E5E8] rounded-3xl p-8 relative shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#2b7a78]/40 transition-all duration-300">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#6bcfcf] to-[#2b7a78] text-white px-4 py-2 rounded-full text-sm font-medium mb-4">
-                  👑 Premium
+                  Premium
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">Déménagement Premium</h3>
-                <p className="text-white/70 text-sm">Service haut de gamme</p>
+                <h3 className="text-xl font-semibold text-[#04163a] mb-2">Déménagement Premium</h3>
+                <p className="text-[#4b5c6b] text-sm">Service haut de gamme</p>
               </div>
               
               <div className="space-y-4 mb-8">
@@ -221,7 +215,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Estimation IA gratuite</span>
+                  <span className="text-[#04163a] text-sm">Estimation IA gratuite</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -229,7 +223,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Emballage complet</span>
+                  <span className="text-[#04163a] text-sm">Emballage complet</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -237,7 +231,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Déballage inclus</span>
+                  <span className="text-[#04163a] text-sm">Déballage inclus</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -245,7 +239,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Assurance tous risques</span>
+                  <span className="text-[#04163a] text-sm">Assurance tous risques</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -253,7 +247,7 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Garde-meuble</span>
+                  <span className="text-[#04163a] text-sm">Garde-meuble</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#6bcfcf] flex items-center justify-center">
@@ -261,16 +255,16 @@ export default function ServicesPage() {
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-white/90 text-sm">Support dédié 24/7</span>
+                  <span className="text-[#04163a] text-sm">Support dédié 24/7</span>
                 </div>
               </div>
 
               <div className="text-center">
-                <div className="text-2xl font-bold text-white mb-2">À partir de 1200€</div>
-                <p className="text-white/60 text-sm mb-6">Local {city.nameCapitalized}</p>
+                <div className="text-2xl font-bold text-[#04163a] mb-2">À partir de 1200€</div>
+                <p className="text-[#4b5c6b] text-sm mb-6">Local {city.nameCapitalized}</p>
                 <a
                   href={`/services/demenagement-premium-${city.slug}`}
-                  className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-white/10 border border-white/20 text-white font-medium hover:bg-white/20 transition duration-300"
+                  className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-[#F8F9FA] border border-[#E3E5E8] text-[#04163a] font-medium hover:bg-[#E3E5E8] transition duration-300"
                 >
                   Découvrir cette formule
                 </a>
@@ -281,7 +275,7 @@ export default function ServicesPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="section">
+      <section className="section section-contrast">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
@@ -342,23 +336,31 @@ export default function ServicesPage() {
       </section>
 
       {/* Ressources complémentaires */}
-      <section className="section">
+      <section className="section section-light">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+          <div className="text-center mb-12 space-y-4">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#2B7A78]">
+              Ressources
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#04163a] leading-tight">
               Ressources utiles pour votre déménagement
             </h2>
-            <p className="text-white/80 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-[#4b5c6b] max-w-2xl mx-auto leading-relaxed font-light">
               Guides pratiques et informations locales pour bien préparer votre déménagement
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Articles blog */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-                📚 Guides pratiques
-              </h3>
+            <div className="bg-white border border-[#E3E5E8] rounded-3xl p-8 shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#6BCFCF]/40 transition-all duration-300">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#6BCFCF]/20 border border-[#6BCFCF]/30">
+                  <svg className="w-5 h-5 text-[#6BCFCF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-[#04163a]">Guides pratiques</h3>
+              </div>
               <div className="space-y-4">
                 <a href="/blog/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Guide complet du déménagement à {city.nameCapitalized}
@@ -369,22 +371,27 @@ export default function ServicesPage() {
                 <a href="/blog/prix/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Prix déménagement 2025 : tout comprendre
                 </a>
-                <a href="/blog/" className="block text-white/70 hover:text-white text-sm transition-colors mt-6">
+                <a href="/blog/" className="block text-[#4b5c6b] hover:text-[#04163a] text-sm transition-colors mt-6">
                   Voir tous les articles →
                 </a>
               </div>
             </div>
 
             {/* Quartiers */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-                📍 Déménager par quartier
-              </h3>
+            <div className="bg-white border border-[#E3E5E8] rounded-3xl p-8 shadow-lg hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)] hover:border-[#6BCFCF]/40 transition-all duration-300">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#6BCFCF]/20 border border-[#6BCFCF]/30">
+                  <svg className="w-5 h-5 text-[#6BCFCF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-[#04163a]">Déménager par quartier</h3>
+              </div>
               <div className="space-y-4">
                 <a href={`/${city.slug}/`} className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Déménagement {city.nameCapitalized} (vue d'ensemble)
                 </a>
-                <a href="/quartiers-toulouse/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
+                <a href="/quartiers-nice/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">
                   → Tous les quartiers de {city.nameCapitalized}
                 </a>
                 <a href="/faq/" className="block text-[#6bcfcf] hover:text-[#6bcfcf]/80 transition-colors">

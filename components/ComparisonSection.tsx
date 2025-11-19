@@ -49,7 +49,7 @@ export default function ComparisonSection() {
       {/* Grid de bénéfices */}
       <div className="relative grid gap-6 md:grid-cols-2 lg:gap-8">
         {benefits.map((benefit, index) => (
-          <div
+        <div
             key={benefit.title}
             className="group relative flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:bg-white/10 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:border-white/20 motion-safe:animate-fade-up-soft"
             style={{ animationDelay: `${index * 100}ms` }}
@@ -61,8 +61,8 @@ export default function ComparisonSection() {
               {/* Pictogramme SVG avec animation */}
               <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6BCFCF]/20 to-[#4FB8B8]/30 border border-[#6BCFCF]/30 text-[#6BCFCF] transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_0_20px_rgba(107,207,207,0.4)]">
                 {benefit.icon}
-              </div>
-              
+          </div>
+
               <div className="flex-1 space-y-2">
                 <h3 className="text-lg md:text-xl font-bold text-white leading-tight">
                   {benefit.title}
@@ -72,8 +72,8 @@ export default function ComparisonSection() {
                 </p>
               </div>
             </div>
-          </div>
-        ))}
+        </div>
+      ))}
       </div>
     </div>
   );
