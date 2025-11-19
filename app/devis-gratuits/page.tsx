@@ -26,20 +26,6 @@ const HOUSING_LABELS: Record<string, string> = {
   house_3floors: 'maison avec 3 étages ou plus',
 };
 
-const HOUSING_TYPE_MAPPING: Record<string, HousingType> = {
-  studio: 'studio',
-  t1: 't1',
-  t2: 't2',
-  t3: 't3',
-  t4: 't4',
-  t5: 't5',
-  house: 'house',
-  // Variantes UI de maison → même base `house` pour les calculs
-  house_1floor: 'house',
-  house_2floors: 'house',
-  house_3floors: 'house',
-};
-
 const HOUSING_SURFACE_TYPICAL: Record<HousingType, number> = {
   studio: CONSTANTS.surfaces.studio.typical,
   t1: CONSTANTS.surfaces.t1.typical,
@@ -48,19 +34,18 @@ const HOUSING_SURFACE_TYPICAL: Record<HousingType, number> = {
   t4: CONSTANTS.surfaces.t4.typical,
   t5: CONSTANTS.surfaces.t5.typical,
   house: CONSTANTS.surfaces.house.typical,
+  house_1floor: CONSTANTS.surfaces.house_1floor.typical,
+  house_2floors: CONSTANTS.surfaces.house_2floors.typical,
+  house_3floors: CONSTANTS.surfaces.house_3floors.typical,
 };
-
-function getBaseHousingType(housingType: string): HousingType {
-  return HOUSING_TYPE_MAPPING[housingType] ?? 't2';
-}
 
 function getHousingLabel(housingType: string): string {
   return HOUSING_LABELS[housingType] ?? housingType;
 }
 
 function getHousingSurfaceLabel(housingType: string): string {
-  const base = getBaseHousingType(housingType);
-  const surface = HOUSING_SURFACE_TYPICAL[base];
+  const key = housingType as HousingType;
+  const surface = HOUSING_SURFACE_TYPICAL[key] ?? HOUSING_SURFACE_TYPICAL.t2;
   return `~${surface}m²`;
 }
 
@@ -698,11 +683,11 @@ export default function InventaireIAPage() {
     
     // Étape 2 → 3 : Pré-remplir la superficie moyenne selon le type de logement
     if (formState.currentStep === 2) {
-      const baseType = getBaseHousingType(formState.originHousingType);
-      const suggestedSurface = HOUSING_SURFACE_TYPICAL[baseType];
+      const key = formState.originHousingType as HousingType;
+      const suggestedSurface = HOUSING_SURFACE_TYPICAL[key] ?? HOUSING_SURFACE_TYPICAL.t2;
       updateField('surfaceM2', suggestedSurface);
-      // ⚠️ Important : pour le pricing on utilise uniquement les types supportés par moverz-constants
-      updateField('housingType', baseType as FormState['housingType']);
+      // On synchronise le type de logement pour le pricing, en conservant la distinction entre maisons
+      updateField('housingType', formState.originHousingType as FormState['housingType']);
     }
     
     if (!completedSteps.includes(formState.currentStep)) {

@@ -27,7 +27,7 @@ export interface FormState {
   dateFlexible: boolean;
   
   // Étape 3 : Volume & Services
-  housingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house';
+  housingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house' | 'house_1floor' | 'house_2floors' | 'house_3floors';
   surfaceM2: number;
   density: 'light' | 'normal' | 'dense';
   formule: 'ECONOMIQUE' | 'STANDARD' | 'PREMIUM';

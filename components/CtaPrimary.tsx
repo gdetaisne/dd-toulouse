@@ -21,7 +21,7 @@ export default function CtaPrimary({ placement, label, className = "" }: CtaPrim
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     // Rediriger vers la page Inventaire IA
-    window.location.href = "/devis-gratuits/";
+    window.location.href = "/inventaire-ia/";
     
     setIsSubmitting(false);
   };

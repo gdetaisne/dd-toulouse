@@ -38,6 +38,7 @@ export default function StickyCTA() {
             </div>
             <div className="flex sm:flex-row sm:items-center sm:justify-end">
               <a
+                href="/inventaire-ia/"
                 className="group/btn relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-6 py-3 text-sm md:text-base font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.4)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 sm:w-auto"
                 aria-label="Recevez 5+ devis fiables gratuitement"
               >
