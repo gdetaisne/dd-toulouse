@@ -23,7 +23,7 @@ export const metadata: Metadata = (() => {
 
 export default function ContactPage() {
   const city = getCityDataFromUrl(env.SITE_URL);
-  const emailDomain = city.siteUrl.replace(/^https?:\/\//, '').replace(/^www\./, '');
+  const emailDomain = city.siteUrl.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/$/, '');
   
   return (
     <main className="bg-hero min-h-screen">
@@ -206,6 +206,7 @@ export default function ContactPage() {
                 Créez votre dossier en 30 minutes et recevez 5+ devis comparables sous 7 jours
               </p>
               <a 
+                href="/devis-gratuits/" 
                 className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
