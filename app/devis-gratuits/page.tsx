@@ -682,7 +682,7 @@ export default function InventaireIAPage() {
         setIsSaving(false);
       }
     }
-    
+
     // Étape 2 → 3 : Pré-remplir la superficie moyenne selon le type de logement
     if (formState.currentStep === 2) {
       const key = formState.originHousingType as HousingType;
@@ -722,7 +722,6 @@ export default function InventaireIAPage() {
       } finally {
         setIsSaving(false);
       }
-    }
       return;
     }
 
