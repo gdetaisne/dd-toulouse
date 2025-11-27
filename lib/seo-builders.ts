@@ -29,23 +29,25 @@ export function buildSiteMetadata(options: SiteMetadataOptions = {}): Metadata {
   let defaultDescription: string;
 
   if (isMoneyPage) {
-    // Intent Transactionnel (Homepages, services, quartiers)
-    // Pain point: Devis incomparables, process long (appels/RDV)
-    // USP: Cahier des charges standardisé, sélection minutieuse, 100% en ligne
-    // Optimisé CTR: 50-60 car + bénéfice clair + chiffre
-    defaultTitle = customTitle || `Déménagement ${city.nameCapitalized} : 5 Devis en 7j | 2025`;
+    // Intent transactionnel (homepages / pages money)
+    // Wording aligné avec LEADGEN-01 : 5+ devis fiables, pros contrôlés, 0 spam
+    defaultTitle =
+      customTitle ||
+      `Déménagement à ${city.nameCapitalized} | 5+ devis fiables | Pros contrôlés`;
     templateTitle = customTemplate || `%s | Déménageurs ${city.nameCapitalized}`;
     defaultDescription =
       customDescription ||
-      `Comparez 5 devis de déménageurs ${city.nameCapitalized} en 7 jours. Cahier des charges en ligne, sélection rigoureuse, 100% gratuit. Économisez jusqu'à 40% sur votre déménagement.`;
+      `Recevez 5+ devis de déménageurs contrôlés à ${city.nameCapitalized}, comparables entre eux et sans spam. Plateforme indépendante, 100% gratuit.`;
   } else {
-    // Wording par défaut (racine, autres pages)
-    // Optimisé CTR: 50-60 car + formule claire
-    defaultTitle = customTitle || `Déménagement ${city.nameCapitalized} : 5 Devis Gratuits`;
+    // Wording par défaut (autres pages)
+    // Focalisé sur 5+ devis fiables, sans IA ni promesse floue
+    defaultTitle =
+      customTitle ||
+      `Devis déménagement ${city.nameCapitalized} gratuits — 5+ devis fiables`;
     templateTitle = customTemplate || `%s | Déménagement ${city.nameCapitalized}`;
     defaultDescription =
       customDescription ||
-      `5 devis de déménageurs ${city.nameCapitalized} en 7 jours. Estimation par photos en 30 min, 100% gratuit. Économisez jusqu'à 40% avec des professionnels sélectionnés.`;
+      `Décrivez votre déménagement à ${city.nameCapitalized} et recevez 5+ devis fiables sans appels indésirables. Déménageurs contrôlés, service 100% gratuit.`;
   }
 
   return {

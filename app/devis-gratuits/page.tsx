@@ -1383,72 +1383,89 @@ export default function InventaireIAPage() {
           {formState.currentStep === 4 && (
             <div>
               <h2 className="text-3xl font-bold mb-4 text-center text-[#04163a]">
-                Validez votre dossier
+                Confirmez votre demande en 1 clic
               </h2>
               <p className="text-center text-[#4b5c6b] mb-2 text-lg">
-                Un mail de validation vous a été envoyé. Merci de cliquer sur le lien présent dans ce mail pour finaliser votre dossier.
+                Nous venons d&apos;envoyer un mail à{' '}
+                <span className="font-bold">
+                  {(confirmationEmail || formState.email || '').trim()}
+                </span>
+                . Sans cette validation, nous ne pourrons pas traiter votre demande.
               </p>
-              {confirmationEmail && (
-                <p className="text-center text-sm text-[#04163a] mb-6">
-                  Un email de confirmation vient d'être envoyé à{' '}
-                  <span className="font-bold">{confirmationEmail}</span>. Ouvrez-le et cliquez sur le lien de validation pour finaliser votre demande.
-                </p>
-              )}
               {confirmationError && (
                 <p className="text-center text-sm text-red-600 mb-6">
                   {confirmationError}
                 </p>
               )}
 
-              {/* Vérification email */}
-              <div className="mb-8 p-6 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl">
-                <h3 className="font-bold mb-3 text-[#04163a]">Vérifiez votre email</h3>
-                <p className="text-sm text-[#4b5c6b] mb-3">
-                  Vous n'avez pas reçu le mail ? Vérifiez ou corrigez votre adresse ci-dessous,
-                  puis demandez un nouvel envoi. C'est sur cet email que vous recevrez le lien de confirmation puis vos devis.
-                </p>
-                <div className="grid md:grid-cols-[2fr,1fr] gap-4 items-end">
-                <Input
-                  label=""
-                  type="email"
-                  value={formState.email}
-                  onChange={(v) => updateField('email', v)}
-                  placeholder="votre@email.com"
-                />
-                  <button 
-                    type="button"
-                    onClick={async () => {
-                      if (!formState.leadId) {
-                        alert('Erreur : aucun lead créé. Veuillez recommencer.');
-                        return;
-                      }
-                      const emailTrimmed = formState.email.trim();
-                      if (!emailTrimmed || !emailTrimmed.includes('@') || !emailTrimmed.includes('.')) {
-                        alert('Veuillez renseigner une adresse email valide.');
-                        return;
-                      }
-                      try {
-                        setIsSaving(true);
-                        setConfirmationError(null);
-                        await updateLead(formState.leadId, {
-                          email: emailTrimmed.toLowerCase(),
-                        });
-                        await requestLeadConfirmation(formState.leadId);
-                        setConfirmationEmail(emailTrimmed.toLowerCase());
-                      } catch (error: any) {
-                        console.error('❌ Erreur mise à jour email / nouvelle confirmation:', error);
-                        setConfirmationError(error?.message || 'Erreur lors de l’envoi de l’email de confirmation. Veuillez réessayer.');
-                        alert('Erreur lors de l’envoi de l’email de confirmation. Vos informations sont sauvegardées, vous pouvez réessayer.');
-                      } finally {
-                        setIsSaving(false);
-                      }
-                    }}
-                    className="w-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-3.5 rounded-xl font-semibold hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-                    disabled={isSaving}
-                  >
-                    {isSaving ? 'Envoi…' : 'Mettre à jour / renvoyer le mail de validation'}
-                  </button>
-                </div>
+              {/* CTA principal */}
+              <div className="mt-8 mb-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  className="group relative w-full md:w-auto px-10 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-4 rounded-xl font-bold text-lg overflow-hidden hover:shadow-[0_0_0_6px_rgba(107,207,207,0.2),0_12px_40px_rgba(107,207,207,0.5)] transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative flex items-center gap-2">
+                    ✅ J&apos;ai cliqué sur le lien de validation
+                  </span>
+                </button>
+              </div>
+
+              {/* Lien secondaire : pas de mail reçu */}
+              <div className="mb-6 text-center">
+                <details className="inline-block text-left">
+                  <summary className="text-sm text-[#4b5c6b] cursor-pointer hover:text-[#04163a]">
+                    Je n&apos;ai pas reçu le mail de validation
+                  </summary>
+                  <div className="mt-4 p-4 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl max-w-xl mx-auto">
+                    <p className="text-sm text-[#4b5c6b] mb-3">
+                      Vérifiez ou corrigez votre adresse ci-dessous, puis renvoyez le mail de validation.
+                    </p>
+                    <div className="grid md:grid-cols-[2fr,1fr] gap-4 items-end">
+                      <Input
+                        label=""
+                        type="email"
+                        value={formState.email}
+                        onChange={(v) => updateField('email', v)}
+                        placeholder="votre@email.com"
+                      />
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          if (!formState.leadId) {
+                            alert('Erreur : aucun lead créé. Veuillez recommencer.');
+                            return;
+                          }
+                          const emailTrimmed = formState.email.trim();
+                          if (!emailTrimmed || !emailTrimmed.includes('@') || !emailTrimmed.includes('.')) {
+                            alert('Veuillez renseigner une adresse email valide.');
+                            return;
+                          }
+                          try {
+                            setIsSaving(true);
+                            setConfirmationError(null);
+                            await updateLead(formState.leadId, {
+                              email: emailTrimmed.toLowerCase(),
+                            });
+                            await requestLeadConfirmation(formState.leadId);
+                            setConfirmationEmail(emailTrimmed.toLowerCase());
+                          } catch (error: any) {
+                            console.error('❌ Erreur mise à jour email / nouvelle confirmation:', error);
+                            setConfirmationError(error?.message || 'Erreur lors de l’envoi de l’email de confirmation. Veuillez réessayer.');
+                            alert('Erreur lors de l’envoi de l’email de confirmation. Vos informations sont sauvegardées, vous pouvez réessayer.');
+                          } finally {
+                            setIsSaving(false);
+                          }
+                        }}
+                        className="w-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-3.5 rounded-xl font-semibold hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                        disabled={isSaving}
+                      >
+                        {isSaving ? 'Envoi…' : 'Renvoyer le mail de validation'}
+                      </button>
+                    </div>
+                  </div>
+                </details>
               </div>
 
               {/* Ce qui va se passer */}
@@ -1460,22 +1477,22 @@ export default function InventaireIAPage() {
                   {[
                     {
                       num: 1,
-                      title: 'Confirmez votre adresse email',
+                      title: 'Vous confirmez votre adresse email',
                       desc: "Vous recevez un email de confirmation dans les 2 minutes. Cliquez sur le lien de validation dans ce mail pour que nous puissions lancer l'envoi de vos devis.",
                     },
                     {
                       num: 2,
-                      title: 'Transmission aux déménageurs',
+                      title: 'Nous contactons les déménageurs',
                       desc: "Nous contactons une dizaine de déménageurs et vous tenons informé de l'évolution de votre dossier à chaque étape. Rassurez-vous, rien à faire de votre côté.",
                     },
                     {
                       num: 3,
-                      title: 'Réception des devis',
+                      title: 'Nous vous présentons les devis',
                       desc: 'Dès que nous avons obtenu suffisamment de devis qualifiés, nous vous les présentons dans une grille de lecture simplifiée. Notre objectif : vous proposer entre 3 et 5 devis sous 5 à 7 jours.',
                     },
                     {
                       num: 4,
-                      title: 'Vous comparez et choisissez',
+                      title: 'Vous choisissez en toute sérénité',
                       desc: 'Aucune obligation, vous choisissez le meilleur rapport qualité-prix.',
                     },
                   ].map((step) => (
@@ -1524,32 +1541,7 @@ export default function InventaireIAPage() {
               </div>
 
               {/* Boutons */}
-              <div className="flex gap-4">
-                <button
-                  onClick={() => goToStep(3)}
-                  className="flex-1 bg-white border-2 border-[#E3E5E8] text-[#04163a] py-3 rounded-xl font-medium hover:border-[#6BCFCF] hover:text-[#6BCFCF] transition-all duration-300"
-                >
-                  ← Retour
-                </button>
-                <button
-                  onClick={handleSubmit}
-                  disabled={isSaving}
-                  className="group relative flex-1 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-5 rounded-xl font-bold text-lg overflow-hidden hover:shadow-[0_0_0_6px_rgba(107,207,207,0.2),0_12px_40px_rgba(107,207,207,0.5)] transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                  <span className="relative flex items-center gap-2">
-                    {isSaving ? (
-                      <>
-                        <span className="animate-spin">⏳</span> Envoi en cours...
-                      </>
-                    ) : (
-                      <>
-                        J'ai confirmé mon email
-                      </>
-                    )}
-                  </span>
-                </button>
-              </div>
+              {/* Pas de boutons de navigation supplémentaires : tout passe par le mail */}
             </div>
           )}
         </div>
