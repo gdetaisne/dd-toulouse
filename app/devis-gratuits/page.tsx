@@ -75,9 +75,13 @@ function PostalCityGroup({
     onCityChange('');
   };
 
-  const cities = postalCode.length === 5 ? (FRENCH_POSTCODES[postalCode] || []) : [];
-  const isPostcodeValid = postalCode.length === 5 && cities.length > 0;
-  const hasPostcodeError = postalCode.length === 5 && !isPostcodeValid;
+  const isPostcodeFormatValid = postalCode.length === 5;
+  const cities =
+    isPostcodeFormatValid && FRENCH_POSTCODES[postalCode]
+      ? FRENCH_POSTCODES[postalCode]
+      : [];
+  const hasPostcodeWarning =
+    isPostcodeFormatValid && cities.length === 0 && postalCode.length === 5;
 
   const handleCitySelectChange = (val: string) => {
     if (val === '__other__') {
@@ -99,11 +103,11 @@ function PostalCityGroup({
     <>
       {/* Code postal */}
       <div className="mb-4">
-        <label className="block text-sm font-semibold text-[#04163a] mb-2">
+      <label className="block text-sm font-semibold text-[#04163a] mb-2">
           Code postal <span className="text-[#6BCFCF] ml-1">*</span>
-        </label>
-        <input
-          type="text"
+      </label>
+      <input
+        type="text"
           inputMode="numeric"
           maxLength={5}
           value={postalCode}
@@ -111,9 +115,10 @@ function PostalCityGroup({
           className="w-full px-4 py-3.5 bg-white border-2 border-[#E3E5E8] rounded-xl text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
           placeholder="Ex: 33700"
         />
-        {hasPostcodeError && (
-          <p className="mt-1 text-xs text-red-600">
-            Code postal inconnu. Vérifiez la saisie.
+        {hasPostcodeWarning && (
+          <p className="mt-1 text-xs text-amber-700">
+            Code postal non présent dans notre base interne. Vous pouvez continuer en
+            saisissant la ville manuellement.
           </p>
         )}
       </div>
@@ -126,16 +131,20 @@ function PostalCityGroup({
         <select
           value={citySelectValue}
           onChange={(e) => handleCitySelectChange(e.target.value)}
-          disabled={!isPostcodeValid}
+          disabled={!isPostcodeFormatValid}
           className="w-full px-4 py-3 bg-white border border-[#E3E5E8] rounded-xl text-[#04163a] focus:outline-none focus:border-[#6BCFCF] focus:ring-4 focus:ring-[#6BCFCF]/10 transition-all duration-200 cursor-pointer disabled:bg-[#F8F9FA] disabled:cursor-not-allowed"
         >
-          <option value="">{isPostcodeValid ? 'Sélectionnez une ville' : 'Entrez un code postal valide'}</option>
+          <option value="">
+            {isPostcodeFormatValid
+              ? 'Sélectionnez une ville ou choisissez "Autre ville…"'
+              : 'Entrez un code postal valide'}
+          </option>
           {cities.map((c) => (
             <option key={c} value={c}>
               {c}
             </option>
           ))}
-          {isPostcodeValid && (
+          {isPostcodeFormatValid && (
             <option value="__other__">Autre ville…</option>
           )}
         </select>
@@ -162,7 +171,7 @@ function PostalCityGroup({
           placeholder="Numéro et rue, bâtiment, étage..."
           className="w-full px-4 py-3.5 bg-white border-2 border-[#E3E5E8] rounded-xl text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
         />
-      </div>
+    </div>
     </>
   );
 }
@@ -448,11 +457,9 @@ export default function InventaireIAPage() {
   const destinationPostcode = formState.destinationPostalCode || '';
 
   const isOriginPostcodeValid =
-    originPostcode.length === 5 &&
-    !!FRENCH_POSTCODES[originPostcode];
+    originPostcode.length === 5;
   const isDestinationPostcodeValid =
-    destinationPostcode.length === 5 &&
-    !!FRENCH_POSTCODES[destinationPostcode];
+    destinationPostcode.length === 5;
 
   // Load from localStorage (only once on mount)
   useEffect(() => {
@@ -690,7 +697,7 @@ export default function InventaireIAPage() {
         setIsSaving(false);
       }
     }
-
+    
     // Étape 2 → 3 : Pré-remplir la superficie moyenne selon le type de logement
     if (formState.currentStep === 2) {
       const key = formState.originHousingType as HousingType;
@@ -699,16 +706,16 @@ export default function InventaireIAPage() {
       // On synchronise le type de logement pour le pricing, en conservant la distinction entre maisons
       updateField('housingType', formState.originHousingType as FormState['housingType']);
     }
-
+    
     // Étape 3 → 4 : Sauvegarder + demander l'email de confirmation
     if (formState.currentStep === 3) {
-      if (!formState.leadId) {
+    if (!formState.leadId) {
         alert('Erreur : aucun lead créé. Veuillez recommencer.');
-        return;
-      }
-
-      try {
-        setIsSaving(true);
+      return;
+    }
+    
+    try {
+      setIsSaving(true);
         setConfirmationError(null);
 
         // S'assurer que tout est bien sauvegardé avant la demande de confirmation
@@ -727,9 +734,9 @@ export default function InventaireIAPage() {
         console.error('❌ Erreur lors de la demande de confirmation email:', error);
         setConfirmationError(error?.message || 'Erreur lors de l’envoi de l’email de confirmation. Veuillez réessayer.');
         alert('Erreur lors de l’envoi de l’email de confirmation. Vos informations sont sauvegardées, vous pouvez réessayer.');
-      } finally {
-        setIsSaving(false);
-      }
+    } finally {
+      setIsSaving(false);
+    }
       return;
     }
 
@@ -1400,13 +1407,13 @@ export default function InventaireIAPage() {
                   Assurez-vous que votre adresse est correcte pour ne pas perdre contact :
                 </p>
                 <div className="grid md:grid-cols-[2fr,1fr] gap-4 items-end">
-                  <Input
-                    label=""
-                    type="email"
-                    value={formState.email}
-                    onChange={(v) => updateField('email', v)}
-                    placeholder="votre@email.com"
-                  />
+                <Input
+                  label=""
+                  type="email"
+                  value={formState.email}
+                  onChange={(v) => updateField('email', v)}
+                  placeholder="votre@email.com"
+                />
                   <button
                     type="button"
                     onClick={async () => {
