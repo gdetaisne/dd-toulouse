@@ -1379,19 +1379,21 @@ export default function InventaireIAPage() {
             </div>
           )}
 
-          {/* ÉTAPE 4 : Récapitulatif */}
+          {/* ÉTAPE 4 : Récapitulatif & confirmation email */}
           {formState.currentStep === 4 && (
             <div>
               <h2 className="text-3xl font-bold mb-4 text-center text-[#04163a]">
-                Bravo ! Nous avons toutes les informations
+                Confirmez votre email pour valider votre demande
               </h2>
               <p className="text-center text-[#4b5c6b] mb-2 text-lg">
-                Nous avons tout ce qu'il faut pour demander vos devis personnalisés.
+                Nous avons bien enregistré toutes les informations de votre déménagement.
+                Pour que nous puissions envoyer votre dossier aux déménageurs, vous devez d'abord confirmer votre adresse email.
               </p>
               {confirmationEmail && (
                 <p className="text-center text-sm text-[#04163a] mb-6">
-                  Nous avons envoyé un email de confirmation à{' '}
-                  <span className="font-bold">{confirmationEmail}</span>.
+                  Un email de confirmation vient d'être envoyé à{' '}
+                  <span className="font-bold">{confirmationEmail}</span>. Ouvrez-le et
+                  cliquez sur le bouton de confirmation pour valider définitivement votre demande.
                 </p>
               )}
               {confirmationError && (
@@ -1404,7 +1406,8 @@ export default function InventaireIAPage() {
               <div className="mb-8 p-6 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl">
                 <h3 className="font-bold mb-3 text-[#04163a]">Vérifiez votre email</h3>
                 <p className="text-sm text-[#4b5c6b] mb-3">
-                  Assurez-vous que votre adresse est correcte pour ne pas perdre contact :
+                    Assurez-vous que votre adresse est correcte : c'est sur cet email que
+                    vous recevrez le lien de confirmation puis vos devis.
                 </p>
                 <div className="grid md:grid-cols-[2fr,1fr] gap-4 items-end">
                 <Input
@@ -1445,7 +1448,7 @@ export default function InventaireIAPage() {
                     className="w-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-3.5 rounded-xl font-semibold hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                     disabled={isSaving}
                   >
-                    {isSaving ? 'Envoi…' : 'Mettre à jour / renvoyer l’email'}
+                    {isSaving ? 'Envoi…' : 'Mettre à jour / renvoyer l’email de confirmation'}
                   </button>
                 </div>
               </div>
@@ -1490,8 +1493,8 @@ export default function InventaireIAPage() {
                   {[
                     {
                       num: 1,
-                      title: 'Confirmation immédiate',
-                      desc: 'Vous recevrez un email de confirmation dans les 2 minutes.',
+                      title: 'Confirmez votre adresse email',
+                      desc: "Vous recevez un email de confirmation dans les 2 minutes. Cliquez sur le bouton de validation dans cet email pour que nous puissions lancer l'envoi de vos devis.",
                     },
                     {
                       num: 2,
@@ -1574,7 +1577,7 @@ export default function InventaireIAPage() {
                       </>
                     ) : (
                       <>
-                        Obtenir mes devis gratuits
+                        J'ai confirmé mon email
                       </>
                     )}
                   </span>
