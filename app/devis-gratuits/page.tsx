@@ -941,6 +941,7 @@ export default function InventaireIAPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <Select
                       label="Monte-meuble"
+                      help="Avons-nous besoin de prévoir un monte-meuble à cette adresse ? Si vous avez des meubles volumineux à faire passer par la fenêtre ou si l'accès est compliqué, cela peut être nécessaire."
                       value={formState.originFurnitureLift}
                       onChange={(v) => updateField('originFurnitureLift', v as any)}
                       options={[
@@ -952,6 +953,7 @@ export default function InventaireIAPage() {
                     />
                     <Select
                       label="Distance de portage"
+                      help="C'est la distance prévue entre l'arrière du camion et l'entrée de votre logement (ou du hall). Plus elle est longue, plus le déménagement demande de temps et d'efforts."
                       value={formState.originCarryDistance}
                       onChange={(v) => updateField('originCarryDistance', v as any)}
                       options={[
@@ -1044,6 +1046,7 @@ export default function InventaireIAPage() {
                       <div className="grid grid-cols-2 gap-4">
                         <Select
                           label="Monte-meuble"
+                          help="Avons-nous besoin de prévoir un monte-meuble à cette adresse ? Si vous avez des meubles volumineux à faire passer par la fenêtre ou si l'accès est compliqué, cela peut être nécessaire."
                           value={formState.destinationFurnitureLift}
                           onChange={(v) => updateField('destinationFurnitureLift', v as any)}
                           options={[
@@ -1055,6 +1058,7 @@ export default function InventaireIAPage() {
                         />
                         <Select
                           label="Distance de portage"
+                          help="C'est la distance prévue entre l'arrière du camion et l'entrée de votre logement (ou du hall). Plus elle est longue, plus le déménagement demande de temps et d'efforts."
                           value={formState.destinationCarryDistance}
                           onChange={(v) => updateField('destinationCarryDistance', v as any)}
                           options={[
