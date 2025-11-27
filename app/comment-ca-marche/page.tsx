@@ -6,21 +6,22 @@ import { getCanonicalUrl } from "@/lib/canonical-helper";
 import { getCityDataFromUrl } from "@/lib/cityData";
 import { env } from "@/lib/env";
 
-export const metadata: Metadata = {
-  title: "Comment ça marche ? Déménagement Nice en 3 étapes | Moverz",
-  description:
-    "Créez un inventaire IA unique en 30 min, recevez 5+ devis de déménageurs contrôlés (solvabilité vérifiée, 0 litige) et choisissez sans harcèlement. 100% gratuit.",
-  alternates: {
-    canonical: getCanonicalUrl("comment-ca-marche"),
-  },
-  openGraph: {
-    title: "Processus IA anti-arnaque : 5+ devis comparables à Nice | Moverz",
-    description:
-      "Notre IA calcule votre volume exact et l'envoie à 5+ déménageurs contrôlés. Recevez des devis comparables en 7 jours, sans appels intrusifs.",
-    url: getCanonicalUrl("comment-ca-marche"),
-    type: "website",
-  },
-};
+export const metadata: Metadata = (() => {
+  const city = getCityDataFromUrl(env.SITE_URL);
+  return {
+    title: `Comment ça marche | Déménagement ${city.nameCapitalized} | 3 étapes`,
+    description: `3 étapes : 1) Dossier 5 min, 2) 5+ devis en 48h, 3) Choix déménageur à ${city.nameCapitalized}. Dès 280€. Anonyme, 0 spam. Déménageurs contrôlés. Gratuit.`,
+    alternates: {
+      canonical: getCanonicalUrl("comment-ca-marche"),
+    },
+    openGraph: {
+      title: `Comment ça marche | Déménagement ${city.nameCapitalized} | 3 étapes`,
+      description: `3 étapes : Dossier 5 min → 5+ devis 48h → Choix. Dès 280€. Gratuit.`,
+      url: getCanonicalUrl("comment-ca-marche"),
+      type: "website",
+    },
+  };
+})();
 
 export default function CommentCaMarchePage() {
   const city = getCityDataFromUrl(env.SITE_URL);
@@ -64,12 +65,12 @@ export default function CommentCaMarchePage() {
   return (
     <main className="bg-hero">
       <div className="halo" />
-
+      
       {/* Hero Stripe-like */}
       <section className="section section-contrast relative overflow-hidden">
         <div className="container relative">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <Breadcrumbs
+            <Breadcrumbs 
               items={[
                 { label: "Accueil", href: "/" },
                 { label: "Comment ça marche", href: "/comment-ca-marche" },
@@ -132,7 +133,7 @@ export default function CommentCaMarchePage() {
                     {/* Badge numéro */}
                     <div className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-[#2B7A78] text-xs font-bold text-white shadow-lg">
                       {step.number}
-                    </div>
+                </div>
                   </div>
                   
                   <div className="space-y-2 text-center">
@@ -147,7 +148,7 @@ export default function CommentCaMarchePage() {
               </div>
             ))}
           </div>
-        </div>
+                </div>
       </section>
 
       {/* Ce que vous gagnez / évitez / reste - Version Stripe */}
@@ -174,17 +175,17 @@ export default function CommentCaMarchePage() {
                 Ce que vous gagnez
               </h3>
               <ul className="space-y-2 text-sm md:text-base text-white/80">
-                <li className="flex items-start gap-2">
+                      <li className="flex items-start gap-2">
                   <span className="text-[#6BCFCF] mt-0.5">·</span>
                   <span><span className="font-semibold text-white">30 minutes</span> pour créer un dossier propre</span>
-                </li>
-                <li className="flex items-start gap-2">
+                      </li>
+                      <li className="flex items-start gap-2">
                   <span className="text-[#6BCFCF] mt-0.5">·</span>
                   <span><span className="font-semibold text-white">5+ devis</span> reçus sans relances ni visites</span>
-                </li>
-              </ul>
-            </div>
-
+                      </li>
+                    </ul>
+                  </div>
+                  
             {/* Ce que l'on évite */}
             <div className="group rounded-3xl border border-white/15 bg-white/5 backdrop-blur-sm p-6 md:p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:border-white/30 hover:bg-white/10">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500/30 to-red-600/40 border-2 border-red-500/40 mb-4 transition-all duration-300 group-hover:scale-110">
@@ -196,17 +197,17 @@ export default function CommentCaMarchePage() {
                 Ce que l'on évite
               </h3>
               <ul className="space-y-2 text-sm md:text-base text-white/80">
-                <li className="flex items-start gap-2">
+                      <li className="flex items-start gap-2">
                   <span className="text-red-400 mt-0.5">·</span>
                   <span><span className="font-semibold text-white">Devis incomparables</span>, formats différents</span>
-                </li>
-                <li className="flex items-start gap-2">
+                      </li>
+                      <li className="flex items-start gap-2">
                   <span className="text-red-400 mt-0.5">·</span>
                   <span><span className="font-semibold text-white">Appels commerciaux</span> non sollicités</span>
-                </li>
-              </ul>
-            </div>
-
+                      </li>
+                    </ul>
+                  </div>
+                  
             {/* Ce que ça reste */}
             <div className="group rounded-3xl border border-white/15 bg-white/5 backdrop-blur-sm p-6 md:p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:border-white/30 hover:bg-white/10">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6BCFCF]/30 to-[#4FB8B8]/40 border-2 border-[#6BCFCF]/40 mb-4 transition-all duration-300 group-hover:scale-110">
@@ -245,8 +246,8 @@ export default function CommentCaMarchePage() {
             <p className="text-base md:text-lg text-[#4b5c6b] max-w-2xl mx-auto leading-relaxed font-light">
               Vous vous concentrez sur vos critères et votre calendrier, nous
               gérons la partie technique et la mise en forme des devis.
-            </p>
-          </div>
+                </p>
+              </div>
 
           <div className="grid gap-6 md:grid-cols-2 md:gap-8">
             {/* Votre rôle */}
@@ -255,8 +256,8 @@ export default function CommentCaMarchePage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F8F9FA] border-2 border-[#E3E5E8] transition-all duration-300 group-hover:border-[#6BCFCF]/40">
                   <svg className="h-6 w-6 text-[#4b5c6b]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
+                    </svg>
+                  </div>
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#4b5c6b]">
                     Votre rôle
@@ -280,7 +281,7 @@ export default function CommentCaMarchePage() {
                   <span>Choisir le déménageur qui vous convient parmi les offres</span>
                 </li>
               </ul>
-            </div>
+              </div>
 
             {/* Notre rôle */}
             <div className="group rounded-3xl border border-[#6BCFCF]/40 bg-gradient-to-br from-[#04163A] via-[#05243f] to-[#0b3b46] p-6 md:p-8 text-white shadow-[0_24px_70px_rgba(0,0,0,0.55)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_32px_90px_rgba(0,0,0,0.7)]">
@@ -288,7 +289,7 @@ export default function CommentCaMarchePage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6BCFCF]/30 to-[#4FB8B8]/40 border-2 border-[#6BCFCF]/40 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(107,207,207,0.4)]">
                   <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-                  </svg>
+                    </svg>
                 </div>
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#6BCFCF]">
@@ -331,13 +332,14 @@ export default function CommentCaMarchePage() {
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
                   Lancer mon comparateur de devis
-                </h2>
+            </h2>
                 <p className="text-base md:text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
                   Pour votre déménagement à {city.nameCapitalized}, obtenez des
                   devis alignés sur la même base, sans appels commerciaux non
                   souhaités.
                 </p>
                 <a 
+                  href="/devis-gratuits/" 
                   className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />

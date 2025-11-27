@@ -13,9 +13,9 @@ import FAQAccordion from "@/components/FAQAccordion";
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
-    title: `Déménagement ${city.nameCapitalized} — 5 Devis IA Comparables Gratuits`,
+    title: `Déménagement ${city.nameCapitalized} dès 280€ | 5+ Devis 48h | Contrôlés`,
     description:
-      `Déménagez à ${city.nameCapitalized} dès 280€. IA analyse vos photos → 5 devis comparables sous 7j. Gratuit, sans appels. 1200+ clients ⭐4.9/5`,
+      `280€ minimum. Recevez 5+ devis comparables en 48h à ${city.nameCapitalized}. Dossier anonyme, 0 harcèlement. Déménageurs contrôlés et assurés. 100% gratuit.`,
     ...getCanonicalAlternates(''),
   };
 })();
@@ -59,13 +59,13 @@ export default function Home() {
       <section className="section section-contrast">
         <div className="container space-y-10">
           <div className="text-center space-y-4">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
+            <p className="text-sm md:text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
               Pourquoi ce comparateur
             </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
               Ce que vous gagnez vraiment
             </h2>
-            <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto font-light">
+            <p className="text-lg md:text-base lg:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto font-light">
               4 bénéfices concrets pour comparer sereinement vos devis.
             </p>
           </div>
@@ -74,7 +74,7 @@ export default function Home() {
 
           <div className="text-center">
             <a 
-              href="/devis-gratuits/"
+              href="/devis-gratuits/" 
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />

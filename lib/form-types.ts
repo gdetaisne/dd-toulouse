@@ -5,7 +5,9 @@ export interface FormState {
   email: string;
   
   // Étape 2 : Projet
-  originAddress: string;
+  originPostalCode: string;
+  originCity: string;
+  originAddress: string; // Adresse détaillée (facultative)
   originHousingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house' | 'house_1floor' | 'house_2floors' | 'house_3floors';
   originFloor: number;
   originElevator: 'none' | 'small' | 'medium' | 'large';
@@ -13,7 +15,9 @@ export interface FormState {
   originCarryDistance: '0-10' | '10-20' | '20-30' | '30-40' | '40-50' | '50-60' | '60-70' | '70-80' | '80-90' | '90-100';
   originParkingAuth: boolean;
   
-  destinationAddress: string;
+  destinationPostalCode: string;
+  destinationCity: string;
+  destinationAddress: string; // Adresse détaillée (facultative)
   destinationHousingType: 'studio' | 't1' | 't2' | 't3' | 't4' | 't5' | 'house' | 'house_1floor' | 'house_2floors' | 'house_3floors';
   destinationFloor: number;
   destinationElevator: 'none' | 'small' | 'medium' | 'large';
@@ -48,6 +52,8 @@ export interface PricingResult {
 export const INITIAL_FORM_STATE: FormState = {
   contactName: '',
   email: '',
+  originPostalCode: '',
+  originCity: '',
   originAddress: '',
   originHousingType: 't2',
   originFloor: 0,
@@ -55,6 +61,8 @@ export const INITIAL_FORM_STATE: FormState = {
   originFurnitureLift: 'unknown',
   originCarryDistance: '0-10',
   originParkingAuth: false,
+  destinationPostalCode: '',
+  destinationCity: '',
   destinationAddress: '',
   destinationHousingType: 't2',
   destinationFloor: 0,

@@ -213,6 +213,54 @@ export async function updateLead(leadId: string, payload: UpdateLeadPayload, ret
   console.log('✅ Lead mis à jour avec succès:', leadId);
 }
 
+// Demander l'envoi d'un email de confirmation au lead
+export async function requestLeadConfirmation(leadId: string): Promise<void> {
+  // ⚠️ Protection : pas de confirmation pour les IDs de démo
+  if (leadId.startsWith('demo-')) {
+    throw new Error('Cannot request confirmation for demo lead. Please create a real lead first.');
+  }
+
+  console.log(`📤 POST /api/leads/${leadId}/request-confirmation`);
+
+  const response = await fetch(`${API_BASE_URL}/api/leads/${leadId}/request-confirmation`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({}),
+  });
+
+  if (!response.ok) {
+    let errorData: any = {};
+    const contentType = response.headers.get('content-type');
+
+    if (contentType && contentType.includes('application/json')) {
+      try {
+        errorData = await response.json();
+      } catch (e) {
+        const text = await response.text();
+        errorData = { rawResponse: text };
+      }
+    } else {
+      const text = await response.text();
+      errorData = { rawResponse: text };
+    }
+
+    console.error('❌ Erreur request-confirmation backend:', {
+      status: response.status,
+      statusText: response.statusText,
+      errorData,
+      leadId,
+      url: `${API_BASE_URL}/api/leads/${leadId}/request-confirmation`,
+    });
+
+    const errorMessage = errorData.error || errorData.message || errorData.rawResponse || `Failed to request confirmation (${response.status})`;
+    throw new Error(errorMessage);
+  }
+
+  console.log('✅ Email de confirmation demandé avec succès pour le lead:', leadId);
+}
+
 // Fonction helper pour extraire ville et code postal d'une adresse
 export function parseAddress(address: string): { city: string; postalCode: string } {
   // Format attendu : "Nice, 06000" ou "Nice" ou "06000"

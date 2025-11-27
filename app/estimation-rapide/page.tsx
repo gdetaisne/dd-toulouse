@@ -351,10 +351,10 @@ function calculerDistanceIntelligente(villeDepart: string, villeArrivee: string)
   return Math.max(50, Math.min(800, facteurDistance));
 }
 
-// Fonction de calcul des tarifs selon la distance
 // Import constants centralisés
 import { CONSTANTS } from '@/lib/moverz-constants';
 
+// Fonction de calcul des tarifs selon la distance
 function calculerTarifs(distance: number) {
   if (distance < 100) {
     return CONSTANTS.pricing.tarifsByDistance.local;
@@ -447,8 +447,12 @@ export default function EstimationRapide() {
   }, [villeArrivee]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-primary via-brand-primary to-brand-accent py-12">
-      <div className="container max-w-6xl mx-auto px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#04141f] via-[#04163a] to-[#04141f] py-16 relative overflow-hidden">
+      {/* Halos décoratifs animés */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#6BCFCF]/10 rounded-full blur-3xl motion-safe:animate-pulse" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#4FB8B8]/10 rounded-full blur-3xl motion-safe:animate-pulse" style={{ animationDelay: '1s' }} />
+      
+      <div className="container max-w-4xl mx-auto px-4 relative z-10">
         <Breadcrumbs
           items={[
             { label: "Accueil", href: "/" },
@@ -457,28 +461,34 @@ export default function EstimationRapide() {
         />
         {/* Header */}
         <div className="text-center mb-12 mt-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Estimation Rapide de Coût de Déménagement
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#6BCFCF]/10 to-[#4FB8B8]/10 border border-[#6BCFCF]/20 mb-6">
+            <svg className="w-4 h-4 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+            </svg>
+            <span className="text-sm font-semibold text-white">Estimation instantanée · 0 engagement</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+            Estimation Rapide de Coût
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
-            Obtenez une estimation instantanée des fourchettes de prix pour votre déménagement
+          <p className="text-xl text-white/80 max-w-2xl mx-auto">
+            Obtenez une fourchette de prix instantanée pour votre déménagement
           </p>
         </div>
 
         {/* Formulaire horizontal sur desktop */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 mb-12">
-          <h2 className="text-2xl font-semibold text-white mb-6 text-center">Vos informations</h2>
+        <div className="bg-white rounded-3xl p-10 md:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.3)] border border-white/20 backdrop-blur-sm motion-safe:animate-fade-up-soft mb-12">
+          <h2 className="text-2xl font-bold text-[#04163a] mb-8 text-center">Vos informations</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Type de logement */}
             <div>
-              <label className="block text-sm font-medium text-white/90 mb-2">
+              <label className="block text-sm font-semibold text-[#04163a] mb-2">
                 Type de logement
               </label>
               <select
                 value={logement}
                 onChange={(e) => setLogement(e.target.value as LogementType)}
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-brand-soft focus:border-transparent"
+                className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[#E3E5E8] text-[#04163a] focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
               >
                 {Object.entries(LOGEMENTS).map(([key, config]) => (
                   <option key={key} value={key} className="bg-gray-800 text-white">
@@ -490,7 +500,7 @@ export default function EstimationRapide() {
 
             {/* Ville de départ */}
             <div className="relative">
-              <label className="block text-sm font-medium text-white/90 mb-2">
+              <label className="block text-sm font-semibold text-[#04163a] mb-2">
                 Ville de départ
               </label>
               <input
@@ -499,11 +509,11 @@ export default function EstimationRapide() {
                 onChange={(e) => setVilleDepart(e.target.value)}
                 onFocus={() => setShowSuggestionsDepart(true)}
                 onBlur={() => setTimeout(() => setShowSuggestionsDepart(false), 200)}
-                placeholder="Ex: nice"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-brand-soft focus:border-transparent"
+                placeholder="Ex: Paris"
+                className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[#E3E5E8] text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
               />
               {showSuggestionsDepart && suggestionsDepart.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-lg border border-white/20 z-10">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-[#E3E5E8] z-10">
                   {suggestionsDepart.map((ville, index) => (
                     <button
                       key={index}
@@ -511,7 +521,7 @@ export default function EstimationRapide() {
                         setVilleDepart(ville);
                         setShowSuggestionsDepart(false);
                       }}
-                      className="w-full px-4 py-2 text-left text-gray-800 hover:bg-gray-100 first:rounded-t-xl last:rounded-b-xl"
+                      className="w-full px-4 py-2.5 text-left text-[#04163a] hover:bg-[#6BCFCF]/5 first:rounded-t-xl last:rounded-b-xl transition-colors"
                     >
                       {ville}
                     </button>
@@ -522,7 +532,7 @@ export default function EstimationRapide() {
 
             {/* Ville d'arrivée */}
             <div className="relative">
-              <label className="block text-sm font-medium text-white/90 mb-2">
+              <label className="block text-sm font-semibold text-[#04163a] mb-2">
                 Ville d'arrivée
               </label>
               <input
@@ -531,11 +541,11 @@ export default function EstimationRapide() {
                 onChange={(e) => setVilleArrivee(e.target.value)}
                 onFocus={() => setShowSuggestionsArrivee(true)}
                 onBlur={() => setTimeout(() => setShowSuggestionsArrivee(false), 200)}
-                placeholder="Ex: Paris"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-brand-soft focus:border-transparent"
+                placeholder="Ex: Marseille"
+                className="w-full px-4 py-3.5 rounded-xl bg-white border-2 border-[#E3E5E8] text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
               />
               {showSuggestionsArrivee && suggestionsArrivee.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-lg border border-white/20 z-10">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-[#E3E5E8] z-10">
                   {suggestionsArrivee.map((ville, index) => (
                     <button
                       key={index}
@@ -543,7 +553,7 @@ export default function EstimationRapide() {
                         setVilleArrivee(ville);
                         setShowSuggestionsArrivee(false);
                       }}
-                      className="w-full px-4 py-2 text-left text-gray-800 hover:bg-gray-100 first:rounded-t-xl last:rounded-b-xl"
+                      className="w-full px-4 py-2.5 text-left text-[#04163a] hover:bg-[#6BCFCF]/5 first:rounded-t-xl last:rounded-b-xl transition-colors"
                     >
                       {ville}
                     </button>
@@ -554,224 +564,274 @@ export default function EstimationRapide() {
           </div>
         </div>
 
-        {/* Résultats avec le même format que la page services */}
+        {/* Résultats Stripe-like */}
         {resultats ? (
-          <div className="space-y-8">
+          <div className="space-y-10">
             {/* Détails du calcul */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20">
-              <h3 className="text-lg font-semibold text-white mb-4 text-center">Détails du calcul</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div className="text-center">
-                  <span className="text-white/70 block">Volume</span>
-                  <span className="text-white font-medium text-lg">{resultats.volume}m³</span>
+            <div className="bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-[#E3E5E8]">
+              <h3 className="text-xl font-bold text-[#04163a] mb-6 text-center">Détails de votre estimation</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="text-center p-4 rounded-xl bg-[#F8F9FA]">
+                  <span className="text-[#4b5c6b] block text-sm mb-1">Volume</span>
+                  <span className="text-[#04163a] font-bold text-2xl">{resultats.volume}m³</span>
                 </div>
-                <div className="text-center">
-                  <span className="text-white/70 block">Distance</span>
-                  <span className="text-white font-medium text-lg">{resultats.distance}km</span>
+                <div className="text-center p-4 rounded-xl bg-[#F8F9FA]">
+                  <span className="text-[#4b5c6b] block text-sm mb-1">Distance</span>
+                  <span className="text-[#04163a] font-bold text-2xl">{resultats.distance}km</span>
                 </div>
-                <div className="text-center">
-                  <span className="text-white/70 block">Tarif Éco</span>
-                  <span className="text-white font-medium text-lg">{resultats.tarifEco}€/m³</span>
+                <div className="text-center p-4 rounded-xl bg-[#F8F9FA]">
+                  <span className="text-[#4b5c6b] block text-sm mb-1">Tarif Éco</span>
+                  <span className="text-[#04163a] font-bold text-2xl">{resultats.tarifEco}€/m³</span>
                 </div>
-                <div className="text-center">
-                  <span className="text-white/70 block">Tarif Standard</span>
-                  <span className="text-white font-medium text-lg">{resultats.tarifStandard}€/m³</span>
+                <div className="text-center p-4 rounded-xl bg-[#F8F9FA]">
+                  <span className="text-[#4b5c6b] block text-sm mb-1">Tarif Standard</span>
+                  <span className="text-[#04163a] font-bold text-2xl">{resultats.tarifStandard}€/m³</span>
                 </div>
               </div>
             </div>
 
-            {/* Cartes d'offres au format services */}
+            {/* Cartes d'offres Stripe-like */}
             <div className="grid md:grid-cols-3 gap-6">
               {/* Offre Économique */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 text-center relative">
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-green-500 text-white px-4 py-1 rounded-full text-sm font-medium">💰 Économique</span>
+              <div className="group bg-white rounded-3xl p-8 border-2 border-[#E3E5E8] text-center relative hover:border-green-500/50 hover:shadow-[0_8px_30px_rgba(34,197,94,0.15)] hover:-translate-y-1 transition-all duration-300">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">Économique</span>
                 </div>
                 
-                <h3 className="text-xl font-semibold text-white mb-2 mt-4">Déménagement Économique</h3>
-                <p className="text-white/70 text-sm mb-6">Pour les budgets serrés</p>
+                <h3 className="text-xl font-bold text-[#04163a] mb-2 mt-4">Déménagement Économique</h3>
+                <p className="text-[#4b5c6b] text-sm mb-6">Pour les budgets serrés</p>
                 
-                <div className="space-y-3 text-sm text-white/90 mb-6">
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                    Chargement, déchargement et transport
+                <div className="space-y-3 text-sm text-[#04163a] mb-8">
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Chargement, déchargement et transport</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                    Mobilier et cartons
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Mobilier et cartons</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                    Assurance incluse
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Assurance incluse</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                    Support téléphonique
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Support téléphonique</span>
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-lg font-medium text-green-400">
-                    {formaterPrix(resultats.prixEco.min)}
-                  </span>
-                  <span className="text-3xl font-bold text-white">
-                    {formaterPrix(Math.round((resultats.prixEco.min + resultats.prixEco.max) / 2))}
-                  </span>
-                  <span className="text-lg font-medium text-red-600">
-                    {formaterPrix(resultats.prixEco.max)}
-                  </span>
+                <div className="mb-6 p-4 bg-[#F8F9FA] rounded-xl">
+                  <div className="flex items-baseline justify-center gap-2 mb-1">
+                    <span className="text-sm font-medium text-green-600">
+                      {formaterPrix(resultats.prixEco.min)}
+                    </span>
+                    <span className="text-3xl font-bold text-[#04163a]">
+                      {formaterPrix(Math.round((resultats.prixEco.min + resultats.prixEco.max) / 2))}
+                    </span>
+                    <span className="text-sm font-medium text-red-600">
+                      {formaterPrix(resultats.prixEco.max)}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#4b5c6b]">Fourchette de prix estimée</p>
                 </div>
                 
-                <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-xl transition-colors">
+                <button className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:shadow-[0_4px_20px_rgba(34,197,94,0.3)] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 hover:-translate-y-0.5">
                   Découvrir cette formule
                 </button>
               </div>
 
               {/* Offre Standard */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 text-center relative">
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">⭐ Standard</span>
+              <div className="group bg-white rounded-3xl p-8 border-2 border-[#6BCFCF] text-center relative hover:shadow-[0_12px_40px_rgba(107,207,207,0.25)] hover:-translate-y-1 transition-all duration-300 scale-105">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">Standard</span>
                 </div>
                 <div className="absolute -top-2 -right-2">
-                  <span className="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-medium">Recommandé</span>
+                  <span className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-[#04141f] px-3 py-1 rounded-full text-xs font-bold shadow-lg">Recommandé</span>
                 </div>
                 
-                <h3 className="text-xl font-semibold text-white mb-2 mt-4">Déménagement Standard</h3>
-                <p className="text-white/70 text-sm mb-6">Le plus populaire</p>
+                <h3 className="text-xl font-bold text-[#04163a] mb-2 mt-4">Déménagement Standard</h3>
+                <p className="text-[#4b5c6b] text-sm mb-6">Le plus populaire</p>
                 
-                <div className="space-y-3 text-sm text-white/90 mb-6">
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                    Chargement et déplacement des meubles
+                <div className="space-y-3 text-sm text-[#04163a] mb-8">
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-[#6BCFCF] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Chargement et déplacement des meubles</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                    Objets précieux et fragiles
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-[#6BCFCF] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Objets précieux et fragiles</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                    Montage et démontage mobilier
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-[#6BCFCF] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Montage et démontage mobilier</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                    Assurance renforcée
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-[#6BCFCF] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Assurance renforcée</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
-                    Support prioritaire
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-[#6BCFCF] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Support prioritaire</span>
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-lg font-medium text-green-400">
-                    {formaterPrix(resultats.prixStandard.min)}
-                  </span>
-                  <span className="text-3xl font-bold text-white">
-                    {formaterPrix(Math.round((resultats.prixStandard.min + resultats.prixStandard.max) / 2))}
-                  </span>
-                  <span className="text-lg font-medium text-red-600">
-                    {formaterPrix(resultats.prixStandard.max)}
-                  </span>
+                <div className="mb-6 p-4 bg-gradient-to-br from-[#6BCFCF]/10 to-[#4FB8B8]/10 rounded-xl border border-[#6BCFCF]/20">
+                  <div className="flex items-baseline justify-center gap-2 mb-1">
+                    <span className="text-sm font-medium text-green-600">
+                      {formaterPrix(resultats.prixStandard.min)}
+                    </span>
+                    <span className="text-3xl font-bold text-[#04163a]">
+                      {formaterPrix(Math.round((resultats.prixStandard.min + resultats.prixStandard.max) / 2))}
+                    </span>
+                    <span className="text-sm font-medium text-red-600">
+                      {formaterPrix(resultats.prixStandard.max)}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#4b5c6b]">Fourchette de prix estimée</p>
                 </div>
                 
-                <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-xl transition-colors">
+                <button className="w-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] hover:shadow-[0_4px_20px_rgba(107,207,207,0.4)] text-[#04141f] font-bold py-3.5 px-6 rounded-xl transition-all duration-300 hover:-translate-y-0.5">
                   Découvrir cette formule
                 </button>
               </div>
 
               {/* Offre Premium */}
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 text-center relative">
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-medium">👑 Premium</span>
+              <div className="group bg-white rounded-3xl p-8 border-2 border-purple-500/50 text-center relative hover:border-purple-500 hover:shadow-[0_8px_30px_rgba(168,85,247,0.2)] hover:-translate-y-1 transition-all duration-300">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">Premium</span>
                 </div>
                 
-                <h3 className="text-xl font-semibold text-white mb-2 mt-4">Déménagement Premium</h3>
-                <p className="text-white/70 text-sm mb-6">Service haut de gamme</p>
+                <h3 className="text-xl font-bold text-[#04163a] mb-2 mt-4">Déménagement Premium</h3>
+                <p className="text-[#4b5c6b] text-sm mb-6">Service haut de gamme</p>
                 
-                <div className="space-y-3 text-sm text-white/90 mb-6">
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                    Transport et chargement des meubles
+                <div className="space-y-3 text-sm text-[#04163a] mb-8">
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Transport et chargement des meubles</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                    <strong>Objets fragiles</strong>
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span><strong>Objets fragiles</strong></span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                    Emballage de vos biens
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Emballage de vos biens</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                    Montage et démontage mobilier
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Montage et démontage mobilier</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                    Assurance tous risques
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Assurance tous risques</span>
                   </div>
-                  <div className="flex items-center justify-center">
-                    <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                    Support dédié 24/7
+                  <div className="flex items-center justify-center gap-2">
+                    <svg className="w-5 h-5 text-purple-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Support dédié 24/7</span>
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-lg font-medium text-green-400">
-                    {formaterPrix(resultats.prixPremium.min)}
-                  </span>
-                  <span className="text-3xl font-bold text-white">
-                    {formaterPrix(Math.round((resultats.prixPremium.min + resultats.prixPremium.max) / 2))}
-                  </span>
-                  <span className="text-lg font-medium text-red-600">
-                    {formaterPrix(resultats.prixPremium.max)}
-                  </span>
+                <div className="mb-6 p-4 bg-[#F8F9FA] rounded-xl">
+                  <div className="flex items-baseline justify-center gap-2 mb-1">
+                    <span className="text-sm font-medium text-green-600">
+                      {formaterPrix(resultats.prixPremium.min)}
+                    </span>
+                    <span className="text-3xl font-bold text-[#04163a]">
+                      {formaterPrix(Math.round((resultats.prixPremium.min + resultats.prixPremium.max) / 2))}
+                    </span>
+                    <span className="text-sm font-medium text-red-600">
+                      {formaterPrix(resultats.prixPremium.max)}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#4b5c6b]">Fourchette de prix estimée</p>
                 </div>
                 
-                <button className="w-full bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-6 rounded-xl transition-colors">
+                <button className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:shadow-[0_4px_20px_rgba(168,85,247,0.3)] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 hover:-translate-y-0.5">
                   Découvrir cette formule
                 </button>
               </div>
             </div>
           </div>
         ) : (
-          <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 text-center">
-            <div className="text-white/60 text-lg">
-              Remplissez les informations ci-dessus pour obtenir votre estimation
-            </div>
+          <div className="bg-white rounded-3xl p-12 shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-[#E3E5E8] text-center">
+            <svg className="w-16 h-16 mx-auto mb-4 text-[#6BCFCF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+            <h3 className="text-xl font-bold text-[#04163a] mb-2">Prêt à estimer votre déménagement ?</h3>
+            <p className="text-[#4b5c6b]">
+              Remplissez les informations ci-dessus pour obtenir votre estimation instantanée
+            </p>
           </div>
         )}
 
-        {/* Call to Action */}
-        <div className="mt-16 bg-gradient-to-r from-[#2b7a78] to-[#6bcfcf] rounded-3xl p-8 md:p-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Obtenir des devis précis et personnalisés
+        {/* Call to Action Stripe-like */}
+        <div className="mt-16 bg-white rounded-3xl p-10 md:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-[#E3E5E8] text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#6BCFCF]/10 to-[#4FB8B8]/10 border border-[#6BCFCF]/20 mb-6">
+            <svg className="w-4 h-4 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <span className="text-sm font-semibold text-[#04163a]">Devis précis et personnalisés</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#04163a] mb-4">
+            Obtenez des devis gratuits
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Nos partenaires déménageurs nicenais vous proposent des devis gratuits et personnalisés 
+          <p className="text-lg text-[#4b5c6b] mb-8 max-w-2xl mx-auto">
+            Nos partenaires déménageurs vous proposent des devis gratuits et personnalisés 
             avec visite à domicile pour un prix ferme et définitif.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a 
-              href="https://movers-test.gslv.cloud/" 
-              className="inline-flex h-12 items-center justify-center rounded-2xl bg-white px-8 text-lg font-semibold text-[#2b7a78] shadow-xl hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 transition duration-300"
+              href="/devis-gratuits/" 
+              className="group relative inline-flex h-14 items-center justify-center rounded-xl bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] px-10 text-lg font-bold text-[#04141f] shadow-[0_4px_20px_rgba(107,207,207,0.3)] hover:shadow-[0_8px_30px_rgba(107,207,207,0.4)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
             >
-              Demander mes devis gratuits
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative">Demander mes devis gratuits</span>
             </a>
-            <div className="flex items-center space-x-2 text-white/80">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <div className="flex items-center space-x-2 text-[#4b5c6b]">
+              <svg className="w-5 h-5 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              <span className="text-sm">100% gratuit • Sans engagement</span>
+              <span className="text-sm font-medium">100% gratuit · Sans engagement</span>
             </div>
           </div>
         </div>
 
         {/* Note explicative */}
-        <div className="mt-12 text-center">
-          <p className="text-white/70 text-sm max-w-4xl mx-auto">
-            * Les prix indiqués sont des estimations basées sur le volume calculé et la distance. 
+        <div className="mt-12 bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-white/30">
+          <p className="text-[#4b5c6b] text-sm max-w-4xl mx-auto text-center leading-relaxed">
+            <strong className="text-[#04163a]">Note :</strong> Les prix indiqués sont des estimations basées sur le volume calculé et la distance. 
             Les fourchettes incluent une marge de ±25% pour tenir compte des variations de service. 
-            Pour un devis précis, contactez nos partenaires déménageurs.
+            Pour un devis précis et personnalisé, demandez vos devis gratuits.
           </p>
         </div>
       </div>

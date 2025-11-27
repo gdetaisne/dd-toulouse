@@ -4,8 +4,8 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { FormState, INITIAL_FORM_STATE, PricingResult } from '@/lib/form-types';
 import { calculatePricing, calculateVolume, formatPrice, calculateDistance } from '@/lib/pricing';
 import { CONSTANTS, type HousingType } from '@/lib/moverz-constants';
-import { createLead, updateLead, parseAddress, getSource, mapElevatorToBackend, mapDensityToBackend, mapFurnitureLiftToBackend } from '@/lib/api-client';
-import { searchPostcode } from '@/lib/french-cities';
+import { createLead, updateLead, requestLeadConfirmation, getSource, mapElevatorToBackend, mapDensityToBackend, mapFurnitureLiftToBackend } from '@/lib/api-client';
+import { FRENCH_POSTCODES } from '@/lib/french-cities';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -49,128 +49,125 @@ function getHousingSurfaceLabel(housingType: string): string {
   return `~${surface}m²`;
 }
 
-// Types pour l'autocomplete
-interface AddressSuggestion {
-  label: string;
-  postcode: string;
-  city: string;
-}
-
-// Composant AddressInput avec autocomplete français
-function AddressInput({
-  label,
-  value,
-  onChange,
-  required = false,
-  placeholder = '',
-  helpText = '',
-  disabled = false,
+// Composant groupant Code postal + Ville + Adresse
+function PostalCityGroup({
+  postalCode,
+  city,
+  address,
+  onPostalCodeChange,
+  onCityChange,
+  onAddressChange,
 }: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  required?: boolean;
-  placeholder?: string;
-  helpText?: string;
-  disabled?: boolean;
+  postalCode: string;
+  city: string;
+  address: string;
+  onPostalCodeChange: (value: string) => void;
+  onCityChange: (value: string) => void;
+  onAddressChange: (value: string) => void;
 }) {
-  const [suggestions, setSuggestions] = useState<AddressSuggestion[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
+  const [cityMode, setCityMode] = useState<'NONE' | 'LIST' | 'OTHER'>('NONE');
 
-  const fetchSuggestions = async (query: string) => {
-    // Minimum 5 caractères pour avoir des résultats fiables
-    if (query.length < 5) {
-      setSuggestions([]);
-      setShowSuggestions(false);
-      return;
+  const handlePostalChange = (val: string) => {
+    const sanitized = val.replace(/\D/g, '').slice(0, 5);
+    onPostalCodeChange(sanitized);
+    // Reset ville lorsqu'on change de code postal
+    setCityMode('NONE');
+    onCityChange('');
+  };
+
+  const cities = postalCode.length === 5 ? (FRENCH_POSTCODES[postalCode] || []) : [];
+  const isPostcodeValid = postalCode.length === 5 && cities.length > 0;
+  const hasPostcodeError = postalCode.length === 5 && !isPostcodeValid;
+
+  const handleCitySelectChange = (val: string) => {
+    if (val === '__other__') {
+      setCityMode('OTHER');
+      onCityChange('');
+    } else if (val) {
+      setCityMode('LIST');
+      onCityChange(val);
+    } else {
+      setCityMode('NONE');
+      onCityChange('');
     }
-
-    setIsLoading(true);
-    
-    // Recherche locale INSTANTANÉE (pas d'API)
-    const results = searchPostcode(query);
-    
-    setSuggestions(results);
-    setShowSuggestions(results.length > 0);
-    setIsLoading(false);
   };
 
-  const handleInputChange = (val: string) => {
-    onChange(val);
-    
-    // Appeler l'API SEULEMENT quand on atteint exactement 5 caractères
-    if (val.length === 5) {
-      // Debounce très court juste pour éviter les doubles appels
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-      debounceRef.current = setTimeout(() => {
-        fetchSuggestions(val);
-      }, 50);
-    } else if (val.length < 5) {
-      // Cacher les suggestions si < 5 caractères
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
-    // Si > 5 caractères, on garde les suggestions affichées (pas de nouvel appel)
-  };
-
-  const handleSelectSuggestion = (suggestion: AddressSuggestion) => {
-    onChange(suggestion.label);
-    setSuggestions([]);
-    setShowSuggestions(false);
-  };
+  const citySelectValue =
+    cityMode === 'OTHER' ? '__other__' : city || '';
 
   return (
-    <div className="mb-4 relative">
-      <label className="block text-sm font-medium mb-2 text-white">
-        {label}
-        {required && <span className="text-brand-secondary ml-1">*</span>}
-      </label>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => handleInputChange(e.target.value)}
-        onFocus={() => value && suggestions.length > 0 && setShowSuggestions(true)}
-        onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-        placeholder={placeholder}
-        required={required}
-        disabled={disabled}
-        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary placeholder-white/50 disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ color: '#ffffff' }}
-        autoComplete="off"
-      />
-      
-      {/* Dropdown suggestions - Style cohérent avec le site */}
-      {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute z-50 w-full mt-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl border border-white/20 overflow-hidden">
-          {suggestions.map((suggestion, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => handleSelectSuggestion(suggestion)}
-              className="w-full px-4 py-3 text-left hover:bg-gray-100 transition-colors border-b border-gray-200 last:border-0"
-            >
-              <div className="font-semibold" style={{ color: '#04163a' }}>{suggestion.city}</div>
-            </button>
+    <>
+      {/* Code postal */}
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-[#04163a] mb-2">
+          Code postal <span className="text-[#6BCFCF] ml-1">*</span>
+        </label>
+        <input
+          type="text"
+          inputMode="numeric"
+          maxLength={5}
+          value={postalCode}
+          onChange={(e) => handlePostalChange(e.target.value)}
+          className="w-full px-4 py-3.5 bg-white border-2 border-[#E3E5E8] rounded-xl text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
+          placeholder="Ex: 33700"
+        />
+        {hasPostcodeError && (
+          <p className="mt-1 text-xs text-red-600">
+            Code postal inconnu. Vérifiez la saisie.
+          </p>
+        )}
+      </div>
+
+      {/* Ville */}
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-[#04163a] mb-2">
+          Ville <span className="text-[#6BCFCF] ml-1">*</span>
+        </label>
+        <select
+          value={citySelectValue}
+          onChange={(e) => handleCitySelectChange(e.target.value)}
+          disabled={!isPostcodeValid}
+          className="w-full px-4 py-3 bg-white border border-[#E3E5E8] rounded-xl text-[#04163a] focus:outline-none focus:border-[#6BCFCF] focus:ring-4 focus:ring-[#6BCFCF]/10 transition-all duration-200 cursor-pointer disabled:bg-[#F8F9FA] disabled:cursor-not-allowed"
+        >
+          <option value="">{isPostcodeValid ? 'Sélectionnez une ville' : 'Entrez un code postal valide'}</option>
+          {cities.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
           ))}
-        </div>
-      )}
-      
-      {isLoading && (
-        <div className="absolute right-3 top-11 text-white/50 text-sm">⏳</div>
-      )}
-      
-      {helpText && (
-        <p className="mt-2 text-xs text-white/70 bg-white/5 border border-white/10 rounded p-2">
-          {helpText}
-        </p>
-      )}
-    </div>
+          {isPostcodeValid && (
+            <option value="__other__">Autre ville…</option>
+          )}
+        </select>
+        {cityMode === 'OTHER' && (
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => onCityChange(e.target.value)}
+            placeholder="Saisissez votre ville"
+            className="mt-3 w-full px-4 py-3.5 bg-white border-2 border-[#E3E5E8] rounded-xl text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
+          />
+        )}
+      </div>
+
+      {/* Adresse détaillée (facultative) */}
+      <div className="mb-4">
+        <label className="block text-sm font-semibold text-[#04163a] mb-2">
+          Adresse (facultatif)
+        </label>
+        <input
+          type="text"
+          value={address}
+          onChange={(e) => onAddressChange(e.target.value)}
+          placeholder="Numéro et rue, bâtiment, étage..."
+          className="w-full px-4 py-3.5 bg-white border-2 border-[#E3E5E8] rounded-xl text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] transition-all duration-300"
+        />
+      </div>
+    </>
   );
 }
 
-// Stepper Component
+// Stepper Component - Stripe-like
 function Stepper({ 
   currentStep, 
   completedSteps, 
@@ -188,42 +185,60 @@ function Stepper({
   ];
 
   return (
-    <div className="flex items-center justify-between mb-8 px-4">
-      {steps.map((step, index) => (
-        <React.Fragment key={step.number}>
-          <div className="flex flex-col items-center">
+    <div className="mb-16">
+      {/* Progress bar avec glow */}
+      <div className="relative">
+        <div className="absolute top-5 left-0 right-0 h-1 bg-[#E3E5E8] rounded-full" />
+        <div 
+          className="absolute top-5 left-0 h-1 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] rounded-full transition-all duration-700 ease-out shadow-[0_0_20px_rgba(107,207,207,0.5)]"
+          style={{ width: `${((currentStep - 1) / (steps.length - 1)) * 100}%` }}
+        />
+        
+        {/* Steps */}
+        <div className="relative flex justify-between">
+          {steps.map((step) => {
+            const isCompleted = completedSteps.includes(step.number);
+            const isCurrent = step.number === currentStep;
+            const isClickable = isCompleted || isCurrent;
+            
+            return (
             <button
+                key={step.number}
               type="button"
-              onClick={() => onStepClick(step.number)}
-              disabled={step.number > currentStep && !completedSteps.includes(step.number)}
-              className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all cursor-pointer hover:scale-110 disabled:cursor-not-allowed ${
-                step.number === currentStep
-                  ? 'bg-blue-600 text-white'
-                  : completedSteps.includes(step.number)
-                  ? 'bg-green-500 text-white hover:bg-green-600'
-                  : 'bg-gray-200 text-gray-500'
-              }`}
-            >
-              {completedSteps.includes(step.number) ? '✓' : step.number}
-            </button>
-            <span className={`mt-2 text-xs font-medium ${step.number === currentStep ? 'text-brand-secondary' : 'text-white/70'}`}>
+                onClick={() => isClickable && onStepClick(step.number)}
+                disabled={!isClickable}
+                className={`flex flex-col items-center group ${isClickable ? 'cursor-pointer' : 'cursor-not-allowed'}`}
+              >
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-base transition-all duration-300 ${
+                  isCurrent
+                    ? 'bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] shadow-[0_0_0_8px_rgba(107,207,207,0.15),0_4px_20px_rgba(107,207,207,0.4)] scale-110 motion-safe:animate-soft-pulse'
+                    : isCompleted
+                    ? 'bg-[#6BCFCF] text-white group-hover:scale-110 group-hover:shadow-[0_4px_20px_rgba(107,207,207,0.3)]'
+                    : 'bg-white border-2 border-[#E3E5E8] text-[#4b5c6b]'
+                }`}>
+                  {isCompleted ? (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  ) : (
+                    step.number
+                  )}
+                </div>
+                <span className={`mt-3 text-xs font-semibold transition-colors ${
+                  isCurrent ? 'text-[#6BCFCF]' : isCompleted ? 'text-[#04163a]' : 'text-[#4b5c6b]'
+                }`}>
               {step.label}
             </span>
+              </button>
+            );
+          })}
           </div>
-          {index < steps.length - 1 && (
-            <div
-              className={`flex-1 h-1 mx-2 rounded ${
-                completedSteps.includes(step.number) ? 'bg-green-500' : 'bg-gray-200'
-              }`}
-            />
-          )}
-        </React.Fragment>
-      ))}
+      </div>
     </div>
   );
 }
 
-// Input Component
+// Input Component - Stripe-like
 function Input({
   label,
   type = 'text',
@@ -253,10 +268,10 @@ function Input({
   };
 
   return (
-    <div className="mb-4">
-      <label className="block text-sm font-medium mb-2 text-white">
+    <div className="mb-6">
+      <label className="block text-sm font-semibold text-[#04163a] mb-2">
         {label}
-        {required && <span className="text-brand-secondary ml-1">*</span>}
+        {required && <span className="text-[#6BCFCF] ml-1">*</span>}
       </label>
       <input
         type={type}
@@ -266,11 +281,10 @@ function Input({
         placeholder={placeholder}
         required={required}
         disabled={disabled}
-        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary placeholder-white/50 disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ color: '#ffffff' }}
+        className="w-full px-4 py-3.5 bg-white border-2 border-[#E3E5E8] rounded-xl text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_4px_20px_rgba(107,207,207,0.15)] disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-[#F8F9FA] transition-all duration-300"
       />
       {helpText && (
-        <p className="mt-2 text-xs text-white/70 bg-white/5 border border-white/10 rounded p-2">
+        <p className="mt-2 text-xs text-[#4b5c6b] bg-[#F8F9FA] border border-[#E3E5E8] rounded-lg p-3">
           {helpText}
         </p>
       )}
@@ -278,7 +292,7 @@ function Input({
   );
 }
 
-// Select Component
+// Select Component - Stripe-like
 function Select({
   label,
   value,
@@ -293,20 +307,19 @@ function Select({
   required?: boolean;
 }) {
   return (
-    <div className="mb-4">
-      <label className="block text-sm font-medium mb-2 text-white">
+    <div className="mb-6">
+      <label className="block text-sm font-semibold text-[#04163a] mb-2">
         {label}
-        {required && <span className="text-brand-secondary ml-1">*</span>}
+        {required && <span className="text-[#6BCFCF] ml-1">*</span>}
       </label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
-        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary"
-        style={{ color: '#ffffff' }}
+        className="w-full px-4 py-3 bg-white border border-[#E3E5E8] rounded-xl text-[#04163a] focus:outline-none focus:border-[#6BCFCF] focus:ring-4 focus:ring-[#6BCFCF]/10 transition-all duration-200 cursor-pointer"
       >
         {options.map((opt) => (
-          <option key={opt.value} value={opt.value} style={{ color: '#000000' }}>
+          <option key={opt.value} value={opt.value}>
             {opt.label}
           </option>
         ))}
@@ -315,7 +328,7 @@ function Select({
   );
 }
 
-// Checkbox Component
+// Checkbox Component - Stripe-like
 function Checkbox({
   label,
   checked,
@@ -326,19 +339,19 @@ function Checkbox({
   onChange: (checked: boolean) => void;
 }) {
   return (
-    <label className="flex items-start gap-2 cursor-pointer">
+    <label className="flex items-start gap-3 cursor-pointer group">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-1 w-4 h-4 accent-brand-secondary"
+        className="mt-0.5 w-5 h-5 rounded border-2 border-[#E3E5E8] text-[#6BCFCF] focus:ring-4 focus:ring-[#6BCFCF]/10 transition-all cursor-pointer"
       />
-      <span className="text-sm text-white/90">{label}</span>
+      <span className="text-sm text-[#04163a] group-hover:text-[#6BCFCF] transition-colors">{label}</span>
     </label>
   );
 }
 
-// Formule Card Component
+// Formule Card Component - Stripe-like
 function FormuleCard({
   id,
   badge,
@@ -364,76 +377,59 @@ function FormuleCard({
   selected: boolean;
   onSelect: () => void;
 }) {
-  // Couleurs selon la formule
-  const colors = {
-    economique: {
-      badge: 'bg-green-500',
-      button: 'bg-green-500 hover:bg-green-600',
-      bullet: 'text-green-400',
-    },
-    standard: {
-      badge: 'bg-blue-500',
-      button: 'bg-blue-500 hover:bg-blue-600',
-      bullet: 'text-blue-400',
-    },
-    premium: {
-      badge: 'bg-purple-500',
-      button: 'bg-purple-500 hover:bg-purple-600',
-      bullet: 'text-purple-400',
-    },
-  };
-
-  const colorScheme = colors[id as keyof typeof colors] || colors.standard;
-
   return (
     <button
       type="button"
       onClick={onSelect}
-      className={`relative p-6 rounded-2xl transition-all w-full text-left ${
+      className={`group relative p-8 rounded-3xl transition-all duration-300 w-full text-left ${
         selected 
-          ? 'bg-white/20 border-4 border-brand-secondary shadow-2xl scale-105' 
-          : 'bg-white/5 border border-white/20 hover:bg-white/10 hover:border-white/40'
+          ? 'bg-white border-2 border-[#6BCFCF] shadow-[0_0_0_4px_rgba(107,207,207,0.1),0_12px_40px_rgba(107,207,207,0.3)] scale-105' 
+          : 'bg-white border-2 border-[#E3E5E8] hover:border-[#6BCFCF]/50 hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:-translate-y-2'
       }`}
     >
       {recommended && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-900 px-4 py-1 rounded-full text-xs font-bold">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] px-4 py-1.5 rounded-full text-xs font-bold shadow-[0_4px_20px_rgba(107,207,207,0.4)] group-hover:shadow-[0_6px_30px_rgba(107,207,207,0.5)] transition-shadow duration-300">
           Recommandé
         </div>
       )}
       
       {selected && (
-        <div className="absolute top-4 right-4 w-10 h-10 bg-brand-secondary rounded-full flex items-center justify-center shadow-lg animate-pulse">
-          <span className="text-white text-2xl font-bold">✓</span>
+        <div className="absolute top-6 right-6 w-8 h-8 bg-[#6BCFCF] rounded-full flex items-center justify-center shadow-lg">
+          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+          </svg>
         </div>
       )}
 
-      <div className={`inline-block ${colorScheme.badge} text-white px-3 py-1 rounded-full text-xs font-bold mb-4`}>
-        {badge}
+      <div className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-[#F8F9FA] text-[#04163a] border border-[#E3E5E8] mb-4">
+        {badge.replace(/💰|⭐|👑/g, '').trim()}
       </div>
       
-      <h3 className="text-2xl font-bold mb-2 text-white">{title}</h3>
-      <p className="text-sm text-white/70 mb-6">{subtitle}</p>
+      <h3 className="text-xl font-bold mb-2 text-[#04163a]">{title}</h3>
+      <p className="text-sm text-[#4b5c6b] mb-6">{subtitle}</p>
       
-      <ul className="space-y-3 mb-6">
+      {/* Prix principal */}
+      <div className="mb-6 pb-6 border-b border-[#E3E5E8]">
+        <div className="flex items-baseline gap-2">
+          <span className="text-4xl font-bold text-[#04163a]">{formatPrice(prixAvg)}</span>
+          <span className="text-sm text-[#4b5c6b]">/déménagement</span>
+        </div>
+        <div className="mt-2 text-xs text-[#4b5c6b]">
+          De {formatPrice(prixMin)} à {formatPrice(prixMax)}
+        </div>
+      </div>
+      
+      {/* Features */}
+      <ul className="space-y-3">
         {features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm text-white/90">
-            <span className={`${colorScheme.bullet} mt-0.5`}>●</span>
+          <li key={i} className="flex items-start gap-3 text-sm text-[#04163a]">
+            <svg className="w-5 h-5 text-[#6BCFCF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
             <span>{feature}</span>
           </li>
         ))}
       </ul>
-      
-      <div className="flex items-end justify-center gap-4 pt-4 border-t border-white/10">
-        <div className="text-center">
-          <div className="text-xs text-green-400 mb-1">min</div>
-          <div className="text-lg text-green-400 font-semibold">{formatPrice(prixMin)}</div>
-        </div>
-        <span className="text-4xl font-bold text-white leading-none">{formatPrice(prixAvg)}</span>
-        <div className="text-center">
-          <div className="text-xs text-red-400 mb-1">max</div>
-          <div className="text-lg text-red-400 font-semibold">{formatPrice(prixMax)}</div>
-        </div>
-      </div>
     </button>
   );
 }
@@ -443,8 +439,17 @@ export default function InventaireIAPage() {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [pricing, setPricing] = useState<PricingResult | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [confirmationEmail, setConfirmationEmail] = useState<string | null>(null);
+  const [confirmationError, setConfirmationError] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const isOriginPostcodeValid =
+    formState.originPostalCode.length === 5 &&
+    !!FRENCH_POSTCODES[formState.originPostalCode];
+  const isDestinationPostcodeValid =
+    formState.destinationPostalCode.length === 5 &&
+    !!FRENCH_POSTCODES[formState.destinationPostalCode];
 
   // Load from localStorage (only once on mount)
   useEffect(() => {
@@ -484,10 +489,10 @@ export default function InventaireIAPage() {
     if (formState.surfaceM2) {
       // Calculer la distance (ou utiliser une distance par défaut de 50km si pas encore renseignée)
       let distance = 50; // Distance par défaut
-      if (formState.originAddress && formState.destinationAddress) {
+      if (formState.originCity && formState.destinationCity) {
         distance = calculateDistance(
-          formState.originAddress.split(',')[0] || 'nice',
-          formState.destinationAddress.split(',')[0] || 'paris'
+          formState.originCity || 'nice',
+          formState.destinationCity || 'paris'
         );
       }
       
@@ -534,17 +539,14 @@ export default function InventaireIAPage() {
     try {
       setIsSaving(true);
       
-      const originParsed = state.originAddress ? parseAddress(state.originAddress) : { city: '', postalCode: '' };
-      const destParsed = state.destinationAddress ? parseAddress(state.destinationAddress) : { city: '', postalCode: '' };
-      
       await updateLead(state.leadId, {
         // Adresses
         originAddress: state.originAddress || undefined,
-        originCity: originParsed.city || undefined,
-        originPostalCode: originParsed.postalCode || undefined,
+        originCity: state.originCity || undefined,
+        originPostalCode: state.originPostalCode || undefined,
         destAddress: state.destinationAddress || undefined,  // ⚠️ Backend attend "destAddress", pas "destinationAddress"
-        destCity: destParsed.city || undefined,
-        destPostalCode: destParsed.postalCode || undefined,
+        destCity: state.destinationCity || undefined,
+        destPostalCode: state.destinationPostalCode || undefined,
         
         // Dates
         movingDate: state.movingDate || undefined,
@@ -689,7 +691,41 @@ export default function InventaireIAPage() {
       // On synchronise le type de logement pour le pricing, en conservant la distinction entre maisons
       updateField('housingType', formState.originHousingType as FormState['housingType']);
     }
-    
+
+    // Étape 3 → 4 : Sauvegarder + demander l'email de confirmation
+    if (formState.currentStep === 3) {
+      if (!formState.leadId) {
+        alert('Erreur : aucun lead créé. Veuillez recommencer.');
+        return;
+      }
+
+      try {
+        setIsSaving(true);
+        setConfirmationError(null);
+
+        // S'assurer que tout est bien sauvegardé avant la demande de confirmation
+        await saveToBackend({ ...formState, currentStep: 3 });
+
+        await requestLeadConfirmation(formState.leadId);
+
+        const emailTrimmed = formState.email.trim().toLowerCase();
+        setConfirmationEmail(emailTrimmed);
+
+        if (!completedSteps.includes(3)) {
+          setCompletedSteps((prev) => [...prev, 3]);
+        }
+        goToStep(4);
+      } catch (error: any) {
+        console.error('❌ Erreur lors de la demande de confirmation email:', error);
+        setConfirmationError(error?.message || 'Erreur lors de l’envoi de l’email de confirmation. Veuillez réessayer.');
+        alert('Erreur lors de l’envoi de l’email de confirmation. Vos informations sont sauvegardées, vous pouvez réessayer.');
+      } finally {
+        setIsSaving(false);
+      }
+    }
+      return;
+    }
+
     if (!completedSteps.includes(formState.currentStep)) {
       setCompletedSteps((prev) => [...prev, formState.currentStep]);
     }
@@ -697,99 +733,21 @@ export default function InventaireIAPage() {
   };
 
   const handleSubmit = async () => {
-    if (!formState.leadId) {
-      alert('Erreur: Aucun lead créé. Veuillez recommencer.');
-      return;
-    }
-    
-    // ⚠️ Ne pas soumettre si leadId est un demo ID
-    if (formState.leadId.startsWith('demo-')) {
-      alert('Erreur: Votre demande n\'a pas pu être créée. Veuillez recommencer depuis le début.');
-      return;
-    }
-    
-    try {
-      setIsSaving(true);
-      
-      const originParsed = parseAddress(formState.originAddress);
-      const destParsed = parseAddress(formState.destinationAddress);
-      
-      await updateLead(formState.leadId, {
-        // Adresses
-        originAddress: formState.originAddress || undefined,
-        originCity: originParsed.city || undefined,
-        originPostalCode: originParsed.postalCode || undefined,
-        destAddress: formState.destinationAddress || undefined,  // ⚠️ Backend attend "destAddress", pas "destinationAddress"
-        destCity: destParsed.city || undefined,
-        destPostalCode: destParsed.postalCode || undefined,
-        
-        // Dates
-        movingDate: formState.movingDate || undefined,
-        movingDateEnd: formState.movingDateEnd || undefined,
-        dateFlexible: formState.dateFlexible,
-        
-        // Volume & Surface
-        surfaceM2: formState.surfaceM2 || undefined,
-        estimatedVolume: pricing?.volumeM3,
-        density: mapDensityToBackend(formState.density),  // ⚠️ Mapping: 'normal' → 'MEDIUM'
-        
-        // Formule & Prix
-        formule: formState.formule,
-        estimatedPriceMin: pricing?.prixMin,
-        estimatedPriceAvg: pricing?.prixAvg,
-        estimatedPriceMax: pricing?.prixMax,
-        
-        // Détails logement origine
-        originHousingType: formState.originHousingType,
-        originFloor: formState.originFloor,
-        originElevator: mapElevatorToBackend(formState.originElevator),  // ⚠️ Mapping
-        originFurnitureLift: mapFurnitureLiftToBackend(formState.originFurnitureLift),
-        originCarryDistance: formState.originCarryDistance,
-        originParkingAuth: formState.originParkingAuth,
-        
-        // Détails logement destination
-        destHousingType: formState.destinationHousingType,
-        destFloor: formState.destinationFloor,
-        destElevator: mapElevatorToBackend(formState.destinationElevator),  // ⚠️ Mapping
-        destFurnitureLift: mapFurnitureLiftToBackend(formState.destinationFurnitureLift),
-        destCarryDistance: formState.destinationCarryDistance,
-        destParkingAuth: formState.destinationParkingAuth,
-        
-        // Status (marquer comme complété)
-        status: 'CONVERTED',
-        
-        // Métadonnées (tracking interne uniquement)
-        metadata: {
-          currentStep: 4,
-          completedSteps: [1, 2, 3, 4],
-          completedAt: new Date().toISOString(),
-          pricing: pricing || undefined,
-        },
-      });
-      
-      localStorage.setItem('moverz_completed_lead', JSON.stringify({
-        ...formState,
-        pricing,
-      }));
-      
-      console.log('✅ Lead finalisé et sauvegardé dans backend:', formState.leadId);
-      window.location.href = '/devis-gratuits/merci/';
-    } catch (error) {
-      console.error('❌ Erreur finalisation:', error);
-      alert('Erreur lors de l\'envoi final. Vos données sont sauvegardées. Contactez-nous si le problème persiste.');
-    } finally {
-      setIsSaving(false);
-    }
+    // Nouvelle logique : à ce stade tout est déjà sauvegardé et
+    // l'email de confirmation a été demandé. On se contente de
+    // rediriger vers la page de remerciement.
+    window.location.href = '/devis-gratuits/merci/';
   };
 
   return (
-    <div className="min-h-screen bg-hero py-12">
-      {/* Halo effect comme sur la home */}
-      <div className="glow absolute top-0 right-0 w-96 h-96 pointer-events-none" />
+    <div className="min-h-screen bg-gradient-to-br from-[#04141f] via-[#04163a] to-[#04141f] py-16 relative overflow-hidden">
+      {/* Halos décoratifs animés */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#6BCFCF]/10 rounded-full blur-3xl motion-safe:animate-pulse" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#4FB8B8]/10 rounded-full blur-3xl motion-safe:animate-pulse" style={{ animationDelay: '1s' }} />
       
-      <div className="container max-w-4xl mx-auto px-4 relative z-10">
-        {/* Card avec glassmorphism */}
-        <div className="card-glass rounded-3xl p-8 shadow-2xl">
+      <div className="container max-w-3xl mx-auto px-4 relative z-10">
+        {/* Card Stripe-like premium */}
+        <div className="bg-white rounded-3xl p-10 md:p-14 shadow-[0_20px_60px_rgba(0,0,0,0.3)] border border-white/20 backdrop-blur-sm motion-safe:animate-fade-up-soft">
           {/* Bouton Recommencer (si session en cours) */}
           {formState.leadId && (
             <div className="flex justify-end mb-4">
@@ -800,19 +758,28 @@ export default function InventaireIAPage() {
                     window.location.reload();
                   }
                 }}
-                className="text-xs text-white/50 hover:text-white/80 underline"
+                className="text-xs text-[#4b5c6b] hover:text-[#6BCFCF] underline transition-colors"
               >
-                🔄 Recommencer
+                Recommencer
               </button>
             </div>
           )}
           
-          <h1 className="text-3xl md:text-4xl font-bold text-center mb-2 text-white">
-            Demande de Devis Déménagement
-          </h1>
-          <p className="text-center text-white/80 mb-8 text-lg">
-            Obtenez 3 à 6 devis personnalisés sous 24h
-          </p>
+          {/* Badge + Titre */}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#6BCFCF]/10 to-[#4FB8B8]/10 border border-[#6BCFCF]/20 mb-6">
+              <svg className="w-4 h-4 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+              </svg>
+              <span className="text-sm font-semibold text-[#04163a]">5 min · 0 spam · 5+ devis fiables</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#04163a] leading-tight">
+              Demande de Devis Déménagement
+            </h1>
+            <p className="text-[#4b5c6b] text-lg max-w-2xl mx-auto">
+              Obtenez 3 à 6 devis personnalisés sous 24h
+            </p>
+          </div>
 
           <Stepper 
             currentStep={formState.currentStep} 
@@ -823,7 +790,7 @@ export default function InventaireIAPage() {
           {/* ÉTAPE 1 : Contact */}
           {formState.currentStep === 1 && (
             <div>
-              <h2 className="text-2xl font-bold mb-6 text-white">Comment souhaitez-vous être contacté ?</h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#04163a]">Comment souhaitez-vous être contacté ?</h2>
               
               <Input
                 label="Nom que vous souhaitez que nous utilisions"
@@ -849,15 +816,18 @@ export default function InventaireIAPage() {
               <button
                 onClick={handleNext}
                 disabled={!formState.contactName || !formState.email || isSaving}
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition flex items-center justify-center gap-2"
+                className="group relative w-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-4 rounded-xl font-bold overflow-hidden hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2"
               >
-                {isSaving ? (
-                  <>
-                    <span className="animate-spin">⏳</span> Sauvegarde...
-                  </>
-                ) : (
-                  'Suivant →'
-                )}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <span className="relative">
+                  {isSaving ? (
+                    <>
+                      <span className="animate-spin">⏳</span> Sauvegarde...
+                    </>
+                  ) : (
+                    'Suivant →'
+                  )}
+                </span>
               </button>
             </div>
           )}
@@ -865,22 +835,22 @@ export default function InventaireIAPage() {
           {/* ÉTAPE 2 : Projet */}
           {formState.currentStep === 2 && (
             <div>
-              <h2 className="text-2xl font-bold mb-6 text-white">Parlez-nous de votre déménagement</h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#04163a]">Parlez-nous de votre déménagement</h2>
 
               {/* 2 COLONNES : Adresse actuelle et Nouvelle adresse */}
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 
                 {/* BLOC 1 : Adresse actuelle */}
-                <div className="p-6 bg-white/5 rounded-xl border border-white/10">
-                  <h3 className="font-bold mb-4 text-white text-lg">📦 Adresse actuelle</h3>
+                <div className="p-6 bg-[#F8F9FA] rounded-2xl border border-[#E3E5E8]">
+                  <h3 className="font-bold mb-4 text-[#04163a] text-lg">Adresse actuelle</h3>
                   
-                  <AddressInput
-                    label="Code postal + Ville"
-                    value={formState.originAddress}
-                    onChange={(v) => updateField('originAddress', v)}
-                    required
-                    placeholder="Ex: 17290"
-                    helpText=""
+                  <PostalCityGroup
+                    postalCode={formState.originPostalCode}
+                    city={formState.originCity}
+                    address={formState.originAddress}
+                    onPostalCodeChange={(v) => updateField('originPostalCode', v)}
+                    onCityChange={(v) => updateField('originCity', v)}
+                    onAddressChange={(v) => updateField('originAddress', v)}
                   />
 
                     <Select
@@ -972,16 +942,16 @@ export default function InventaireIAPage() {
                 </div>
 
                 {/* BLOC 2 : Nouvelle adresse */}
-                <div className="p-6 bg-white/5 rounded-xl border border-white/10">
-                  <h3 className="font-bold mb-4 text-white text-lg">🏠 Nouvelle adresse</h3>
+                <div className="p-6 bg-[#F8F9FA] rounded-2xl border border-[#E3E5E8]">
+                  <h3 className="font-bold mb-4 text-[#04163a] text-lg">Nouvelle adresse</h3>
                   
-                  <AddressInput
-                    label="Code postal + Ville"
-                    value={formState.destinationAddress}
-                    onChange={(v) => updateField('destinationAddress', v)}
-                    required
-                    placeholder="Ex: 75001"
-                    helpText=""
+                  <PostalCityGroup
+                    postalCode={formState.destinationPostalCode}
+                    city={formState.destinationCity}
+                    address={formState.destinationAddress}
+                    onPostalCodeChange={(v) => updateField('destinationPostalCode', v)}
+                    onCityChange={(v) => updateField('destinationCity', v)}
+                    onAddressChange={(v) => updateField('destinationAddress', v)}
                   />
 
                       <Select
@@ -1074,14 +1044,14 @@ export default function InventaireIAPage() {
               </div>
 
               {/* BLOC 3 : Date de déménagement (pleine largeur) */}
-              <div className="mb-8 p-6 bg-white/5 rounded-xl border border-white/10">
-                <h3 className="font-bold mb-4 text-white text-lg">📅 Date de déménagement</h3>
+              <div className="mb-8 p-6 bg-[#F8F9FA] rounded-2xl border border-[#E3E5E8]">
+                <h3 className="font-bold mb-4 text-[#04163a] text-lg">Date de déménagement</h3>
                 
                 <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2 text-white">
-                    Date souhaitée <span className="text-brand-secondary ml-1">*</span>
+                  <label className="block text-sm font-semibold mb-2 text-[#04163a]">
+                    Date souhaitée <span className="text-[#6BCFCF] ml-1">*</span>
                   </label>
-                  <p className="text-xs text-white/60 mb-2">
+                  <p className="text-xs text-[#4b5c6b] mb-2">
                     Cliquez sur une date (ou sélectionnez une plage en cliquant sur 2 dates)
                   </p>
                   <DatePicker
@@ -1106,18 +1076,18 @@ export default function InventaireIAPage() {
                     minDate={new Date()}
                     dateFormat="dd/MM/yyyy"
                     placeholderText="Sélectionnez une date ou une plage"
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-secondary text-white placeholder-white/50"
-                    calendarClassName="bg-white rounded-lg shadow-xl"
+                    className="w-full px-4 py-3 bg-white border border-[#E3E5E8] rounded-xl text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:border-[#6BCFCF] focus:ring-4 focus:ring-[#6BCFCF]/10 transition-all duration-200"
+                    calendarClassName="bg-white rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)]"
                     inline={false}
                   />
                   {formState.movingDate && formState.movingDateEnd && (
-                    <p className="mt-2 text-sm text-white/70">
-                      📅 Plage sélectionnée : du {new Date(formState.movingDate).toLocaleDateString('fr-FR')} au {new Date(formState.movingDateEnd).toLocaleDateString('fr-FR')}
+                    <p className="mt-2 text-sm text-[#4b5c6b]">
+                      · Plage sélectionnée : du {new Date(formState.movingDate).toLocaleDateString('fr-FR')} au {new Date(formState.movingDateEnd).toLocaleDateString('fr-FR')}
                     </p>
                   )}
                   {formState.movingDate && !formState.movingDateEnd && (
-                    <p className="mt-2 text-sm text-white/70">
-                      📅 Date fixe : {new Date(formState.movingDate).toLocaleDateString('fr-FR')}
+                    <p className="mt-2 text-sm text-[#4b5c6b]">
+                      · Date fixe : {new Date(formState.movingDate).toLocaleDateString('fr-FR')}
                     </p>
                   )}
                 </div>
@@ -1126,16 +1096,23 @@ export default function InventaireIAPage() {
               <div className="flex gap-4">
                 <button
                   onClick={() => goToStep(1)}
-                  className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-300 transition"
+                  className="flex-1 bg-white border-2 border-[#E3E5E8] text-[#04163a] py-3 rounded-xl font-medium hover:border-[#6BCFCF] hover:text-[#6BCFCF] transition-all duration-300"
                 >
                   ← Retour
                 </button>
                 <button
                   onClick={handleNext}
-                  disabled={!formState.originAddress || !formState.movingDate}
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
+                  disabled={
+                    !isOriginPostcodeValid ||
+                    !isDestinationPostcodeValid ||
+                    !formState.originCity ||
+                    !formState.destinationCity ||
+                    !formState.movingDate
+                  }
+                  className="group relative flex-1 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-4 rounded-xl font-bold overflow-hidden hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  Suivant →
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative">Suivant →</span>
                 </button>
         </div>
       </div>
@@ -1144,25 +1121,25 @@ export default function InventaireIAPage() {
           {/* ÉTAPE 3 : Volume & Services */}
           {formState.currentStep === 3 && (
             <div>
-              <h2 className="text-2xl font-bold mb-6 text-white">Volume et Services</h2>
+              <h2 className="text-2xl font-bold mb-6 text-[#04163a]">Volume et Services</h2>
 
               <div className="mb-6">
-                <h3 className="font-bold mb-4 text-white">📦 Estimation du volume → Superficie</h3>
+                <h3 className="font-bold mb-4 text-[#04163a]">Estimation du volume · Superficie</h3>
                 
                 {/* Type de logement sélectionné */}
-                <p className="text-white/80 mb-4">
+                <p className="text-[#4b5c6b] mb-4">
                   Superficie moyenne d'un{' '}
-                  <span className="font-bold text-white">
+                  <span className="font-bold text-[#04163a]">
                     {getHousingLabel(formState.originHousingType)}
                   </span>
                   {' '}:{' '}
-                  <span className="font-bold text-brand-secondary">
+                  <span className="font-bold text-[#6BCFCF]">
                     {getHousingSurfaceLabel(formState.originHousingType)}
                   </span>
                   {' '}
                   <button 
                     onClick={() => goToStep(2)} 
-                    className="text-sm text-brand-secondary hover:underline"
+                    className="text-sm text-[#6BCFCF] hover:underline"
                   >
                     (modifier le type)
                   </button>
@@ -1178,131 +1155,134 @@ export default function InventaireIAPage() {
                 />
 
                 <div className="mt-4">
-                  <label className="block text-sm font-medium mb-3 text-white">
-                    Comment décririez-vous votre logement ?
+                  <label className="block text-sm font-semibold mb-2 text-[#04163a]">
+                    Quantité de meubles et affaires
                   </label>
-                  <div className="grid grid-cols-3 gap-4">
+                  <p className="text-xs text-[#4b5c6b] mb-4">
+                    Cela nous aide à estimer le volume à déménager
+                  </p>
+                  
+                  {/* Layout Stripe : Vertical sur mobile, Horizontal sur desktop */}
+                  <div className="flex flex-col md:grid md:grid-cols-3 gap-3 md:gap-4">
+                    {/* Minimaliste */}
                     <button
                       type="button"
                       onClick={() => updateField('density', 'light')}
-                      className={`p-4 border-2 rounded-xl text-center transition ${
+                      className={`group relative flex items-center md:flex-col md:text-center p-4 md:p-6 border-2 rounded-xl md:rounded-2xl transition-all duration-300 ${
                         formState.density === 'light'
-                          ? 'border-brand-secondary bg-white/20'
-                          : 'border-white/20 bg-white/10 hover:border-white/40'
+                          ? 'border-[#6BCFCF] bg-[#6BCFCF]/5 shadow-[0_4px_20px_rgba(107,207,207,0.2)] md:shadow-[0_8px_30px_rgba(107,207,207,0.25)] md:scale-105'
+                          : 'border-[#E3E5E8] bg-white hover:border-[#6BCFCF]/50 hover:shadow-md md:hover:-translate-y-1 md:hover:shadow-lg active:scale-[0.98]'
                       }`}
                     >
-                      <div className="flex justify-center mb-3">
-                        <svg width="80" height="80" viewBox="0 0 100 100" className="mx-auto">
-                          {/* Pièce vide/sobre */}
-                          <rect x="10" y="10" width="80" height="80" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/60" rx="4"/>
-                          {/* Canapé */}
-                          <rect x="20" y="65" width="25" height="15" fill="currentColor" className="text-white/50" rx="2"/>
-                          {/* Table basse */}
-                          <rect x="50" y="68" width="15" height="10" fill="currentColor" className="text-white/50" rx="1"/>
-                          {/* Lit */}
-                          <rect x="65" y="20" width="20" height="25" fill="currentColor" className="text-white/50" rx="2"/>
+                      {/* SVG à gauche sur mobile, centré sur desktop */}
+                      <div className="flex-shrink-0 mr-4 md:mr-0 md:mb-3">
+                        <svg width="60" height="60" viewBox="0 0 100 100" className="md:w-20 md:h-20">
+                          <rect x="10" y="10" width="80" height="80" fill="none" stroke="#6BCFCF" strokeWidth="2" rx="4"/>
+                          <rect x="20" y="65" width="25" height="15" fill="#6BCFCF" opacity="0.3" rx="2"/>
+                          <rect x="55" y="68" width="15" height="10" fill="#6BCFCF" opacity="0.3" rx="1"/>
+                          <rect x="65" y="20" width="20" height="25" fill="#6BCFCF" opacity="0.3" rx="2"/>
                         </svg>
                       </div>
-                      <div className="font-bold text-white">Sobre</div>
-                      <div className="text-xs text-white/70 mt-1">Peu meublé • -10%</div>
+                      
+                      {/* Texte */}
+                      <div className="flex-1 text-left md:text-center">
+                        <div className="font-bold text-[#04163a] text-base md:text-lg mb-1">Minimaliste</div>
+                        <div className="text-xs text-[#4b5c6b] mb-2 md:mb-3">Peu de meubles · Cartons limités</div>
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-semibold border border-green-200">
+                          -10% volume
+                        </div>
+                      </div>
                     </button>
+
+                    {/* Standard */}
                     <button
                       type="button"
                       onClick={() => updateField('density', 'normal')}
-                      className={`p-4 border-2 rounded-xl text-center transition ${
+                      className={`group relative flex items-center md:flex-col md:text-center p-4 md:p-6 border-2 rounded-xl md:rounded-2xl transition-all duration-300 ${
                         formState.density === 'normal'
-                          ? 'border-brand-secondary bg-white/20'
-                          : 'border-white/20 bg-white/10 hover:border-white/40'
+                          ? 'border-[#6BCFCF] bg-[#6BCFCF]/5 shadow-[0_4px_20px_rgba(107,207,207,0.2)] md:shadow-[0_8px_30px_rgba(107,207,207,0.25)] md:scale-105'
+                          : 'border-[#E3E5E8] bg-white hover:border-[#6BCFCF]/50 hover:shadow-md md:hover:-translate-y-1 md:hover:shadow-lg active:scale-[0.98]'
                       }`}
                     >
-                      <div className="flex justify-center mb-3">
-                        <svg width="80" height="80" viewBox="0 0 100 100" className="mx-auto">
-                          {/* Pièce normale */}
-                          <rect x="10" y="10" width="80" height="80" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/70" rx="4"/>
-                          {/* Canapé */}
-                          <rect x="15" y="60" width="30" height="18" fill="currentColor" className="text-white/60" rx="2"/>
-                          {/* Table basse */}
-                          <rect x="50" y="65" width="18" height="12" fill="currentColor" className="text-white/60" rx="1"/>
-                          {/* Lit */}
-                          <rect x="65" y="15" width="22" height="28" fill="currentColor" className="text-white/60" rx="2"/>
-                          {/* Armoire */}
-                          <rect x="15" y="15" width="15" height="25" fill="currentColor" className="text-white/60" rx="1"/>
-                          {/* Table à manger */}
-                          <rect x="40" y="20" width="18" height="18" fill="currentColor" className="text-white/60" rx="1"/>
-                          {/* Chaises (petits carrés) */}
-                          <rect x="37" y="18" width="5" height="5" fill="currentColor" className="text-white/60"/>
-                          <rect x="61" y="18" width="5" height="5" fill="currentColor" className="text-white/60"/>
+                      <div className="flex-shrink-0 mr-4 md:mr-0 md:mb-3">
+                        <svg width="60" height="60" viewBox="0 0 100 100" className="md:w-20 md:h-20">
+                          <rect x="10" y="10" width="80" height="80" fill="none" stroke="#6BCFCF" strokeWidth="2" rx="4"/>
+                          <rect x="15" y="60" width="30" height="18" fill="#6BCFCF" opacity="0.4" rx="2"/>
+                          <rect x="50" y="65" width="18" height="12" fill="#6BCFCF" opacity="0.4" rx="1"/>
+                          <rect x="65" y="15" width="22" height="28" fill="#6BCFCF" opacity="0.4" rx="2"/>
+                          <rect x="15" y="15" width="15" height="25" fill="#6BCFCF" opacity="0.4" rx="1"/>
+                          <rect x="40" y="20" width="18" height="18" fill="#6BCFCF" opacity="0.4" rx="1"/>
                         </svg>
                       </div>
-                      <div className="font-bold text-white">Normal</div>
-                      <div className="text-xs text-white/70 mt-1">Bien meublé • Standard</div>
+                      
+                      <div className="flex-1 text-left md:text-center">
+                        <div className="font-bold text-[#04163a] text-base md:text-lg mb-1">Standard</div>
+                        <div className="text-xs text-[#4b5c6b] mb-2 md:mb-3">Meubles classiques · Affaires normales</div>
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-200">
+                          Volume normal
+                        </div>
+                      </div>
                     </button>
+
+                    {/* Bien rempli */}
                     <button
                       type="button"
                       onClick={() => updateField('density', 'dense')}
-                      className={`p-4 border-2 rounded-xl text-center transition ${
+                      className={`group relative flex items-center md:flex-col md:text-center p-4 md:p-6 border-2 rounded-xl md:rounded-2xl transition-all duration-300 ${
                         formState.density === 'dense'
-                          ? 'border-brand-secondary bg-white/20'
-                          : 'border-white/20 bg-white/10 hover:border-white/40'
+                          ? 'border-[#6BCFCF] bg-[#6BCFCF]/5 shadow-[0_4px_20px_rgba(107,207,207,0.2)] md:shadow-[0_8px_30px_rgba(107,207,207,0.25)] md:scale-105'
+                          : 'border-[#E3E5E8] bg-white hover:border-[#6BCFCF]/50 hover:shadow-md md:hover:-translate-y-1 md:hover:shadow-lg active:scale-[0.98]'
                       }`}
                     >
-                      <div className="flex justify-center mb-3">
-                        <svg width="80" height="80" viewBox="0 0 100 100" className="mx-auto">
-                          {/* Pièce dense */}
-                          <rect x="10" y="10" width="80" height="80" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/80" rx="4"/>
-                          {/* Canapé d'angle */}
-                          <rect x="12" y="55" width="35" height="20" fill="currentColor" className="text-white/70" rx="2"/>
-                          <rect x="12" y="55" width="20" height="33" fill="currentColor" className="text-white/70" rx="2"/>
-                          {/* Table basse */}
-                          <rect x="50" y="62" width="20" height="15" fill="currentColor" className="text-white/70" rx="1"/>
-                          {/* Lit */}
-                          <rect x="65" y="12" width="23" height="30" fill="currentColor" className="text-white/70" rx="2"/>
-                          {/* Armoire 1 */}
-                          <rect x="12" y="12" width="18" height="28" fill="currentColor" className="text-white/70" rx="1"/>
-                          {/* Armoire 2 */}
-                          <rect x="33" y="12" width="15" height="25" fill="currentColor" className="text-white/70" rx="1"/>
-                          {/* Table à manger */}
-                          <rect x="50" y="14" width="12" height="25" fill="currentColor" className="text-white/70" rx="1"/>
-                          {/* Chaises */}
-                          <rect x="47" y="12" width="4" height="4" fill="currentColor" className="text-white/70"/>
-                          <rect x="47" y="40" width="4" height="4" fill="currentColor" className="text-white/70"/>
-                          <rect x="63" y="12" width="4" height="4" fill="currentColor" className="text-white/70"/>
-                          <rect x="63" y="40" width="4" height="4" fill="currentColor" className="text-white/70"/>
-                          {/* Étagères/rangements */}
-                          <rect x="73" y="45" width="15" height="8" fill="currentColor" className="text-white/70" rx="1"/>
-                          <rect x="73" y="56" width="15" height="8" fill="currentColor" className="text-white/70" rx="1"/>
+                      <div className="flex-shrink-0 mr-4 md:mr-0 md:mb-3">
+                        <svg width="60" height="60" viewBox="0 0 100 100" className="md:w-20 md:h-20">
+                          <rect x="10" y="10" width="80" height="80" fill="none" stroke="#6BCFCF" strokeWidth="2" rx="4"/>
+                          <rect x="12" y="55" width="35" height="20" fill="#6BCFCF" opacity="0.5" rx="2"/>
+                          <rect x="12" y="55" width="20" height="33" fill="#6BCFCF" opacity="0.5" rx="2"/>
+                          <rect x="50" y="62" width="20" height="15" fill="#6BCFCF" opacity="0.5" rx="1"/>
+                          <rect x="65" y="12" width="23" height="30" fill="#6BCFCF" opacity="0.5" rx="2"/>
+                          <rect x="12" y="12" width="18" height="28" fill="#6BCFCF" opacity="0.5" rx="1"/>
+                          <rect x="33" y="12" width="15" height="25" fill="#6BCFCF" opacity="0.5" rx="1"/>
+                          <rect x="50" y="14" width="12" height="25" fill="#6BCFCF" opacity="0.5" rx="1"/>
+                          <rect x="73" y="45" width="15" height="8" fill="#6BCFCF" opacity="0.5" rx="1"/>
                         </svg>
                       </div>
-                      <div className="font-bold text-white">Dense</div>
-                      <div className="text-xs text-white/70 mt-1">Très meublé • +10%</div>
+                      
+                      <div className="flex-1 text-left md:text-center">
+                        <div className="font-bold text-[#04163a] text-base md:text-lg mb-1">Bien rempli</div>
+                        <div className="text-xs text-[#4b5c6b] mb-2 md:mb-3">Nombreux meubles · Beaucoup de cartons</div>
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-full bg-orange-50 text-orange-700 text-xs font-semibold border border-orange-200">
+                          +10% volume
+                        </div>
+                      </div>
                     </button>
-        </div>
-      </div>
+                  </div>
+                </div>
               </div>
 
               <div className="mb-6">
-                <h3 className="font-bold mb-4 text-white">🎯 Choisissez votre formule <span className="text-brand-secondary">*</span></h3>
+                <h3 className="font-bold mb-4 text-[#04163a]">Choisissez votre formule <span className="text-[#6BCFCF]">*</span></h3>
                 
                 {pricing && (
-                  <p className="text-white/80 mb-4">
+                  <p className="text-[#4b5c6b] mb-4">
                     Volume moyen pour un{' '}
-                    <span className="font-bold text-white">
+                    <span className="font-bold text-[#04163a]">
                       {getHousingLabel(formState.originHousingType)}
                     </span>
                     {' '}de{' '}
-                    <span className="font-bold text-white">{formState.surfaceM2} m²</span>
+                    <span className="font-bold text-[#04163a]">{formState.surfaceM2} m²</span>
                     {' '}
-                    <span className="font-bold text-white">
+                    <span className="font-bold text-[#04163a]">
                       {formState.density === 'light' ? 'sobre' : 
                        formState.density === 'normal' ? 'normalement meublé' : 
                        'densément meublé'}
                     </span>
                     {' '}:{' '}
-                    <span className="font-bold text-brand-secondary text-xl">{pricing.volumeM3} m³</span>
+                    <span className="font-bold text-[#6BCFCF] text-xl">{pricing.volumeM3} m³</span>
                   </p>
                 )}
                 
-                <p className="text-sm text-white/70 mb-4">Sélectionnez la formule qui correspond le mieux à vos besoins</p>
+                <p className="text-sm text-[#4b5c6b] mb-4">Sélectionnez la formule qui correspond le mieux à vos besoins</p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {pricing && (
                     <>
@@ -1369,16 +1349,17 @@ export default function InventaireIAPage() {
               <div className="flex gap-4">
                 <button
                   onClick={() => goToStep(2)}
-                  className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-300 transition"
+                  className="flex-1 bg-white border-2 border-[#E3E5E8] text-[#04163a] py-3 rounded-xl font-medium hover:border-[#6BCFCF] hover:text-[#6BCFCF] transition-all duration-300"
                 >
                   ← Retour
                 </button>
                 <button
                   onClick={handleNext}
                   disabled={!pricing}
-                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition"
+                  className="group relative flex-1 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-4 rounded-xl font-bold overflow-hidden hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:-translate-y-0.5"
                 >
-                  Suivant →
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative">Suivant →</span>
                 </button>
               </div>
             </div>
@@ -1387,63 +1368,109 @@ export default function InventaireIAPage() {
           {/* ÉTAPE 4 : Récapitulatif */}
           {formState.currentStep === 4 && (
             <div>
-              <h2 className="text-3xl font-bold mb-4 text-center text-white">
-                🎉 Bravo ! Nous avons toutes les informations
+              <h2 className="text-3xl font-bold mb-4 text-center text-[#04163a]">
+                Bravo ! Nous avons toutes les informations
               </h2>
-              <p className="text-center text-white/80 mb-8 text-lg">
-                Nous avons tout ce qu'il faut pour demander vos devis personnalisés
+              <p className="text-center text-[#4b5c6b] mb-2 text-lg">
+                Nous avons tout ce qu'il faut pour demander vos devis personnalisés.
               </p>
+              {confirmationEmail && (
+                <p className="text-center text-sm text-[#04163a] mb-6">
+                  Nous avons envoyé un email de confirmation à{' '}
+                  <span className="font-bold">{confirmationEmail}</span>.
+                </p>
+              )}
+              {confirmationError && (
+                <p className="text-center text-sm text-red-600 mb-6">
+                  {confirmationError}
+                </p>
+              )}
 
               {/* Vérification email */}
-              <div className="mb-8 p-6 bg-white/10 border border-white/20 rounded-xl">
-                <h3 className="font-bold mb-3 text-white">📧 Vérifiez votre email</h3>
-                <p className="text-sm text-white/70 mb-3">
+              <div className="mb-8 p-6 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl">
+                <h3 className="font-bold mb-3 text-[#04163a]">Vérifiez votre email</h3>
+                <p className="text-sm text-[#4b5c6b] mb-3">
                   Assurez-vous que votre adresse est correcte pour ne pas perdre contact :
                 </p>
-                <Input
-                  label=""
-                  type="email"
-                  value={formState.email}
-                  onChange={(v) => updateField('email', v)}
-                  placeholder="votre@email.com"
-                />
+                <div className="grid md:grid-cols-[2fr,1fr] gap-4 items-end">
+                  <Input
+                    label=""
+                    type="email"
+                    value={formState.email}
+                    onChange={(v) => updateField('email', v)}
+                    placeholder="votre@email.com"
+                  />
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      if (!formState.leadId) {
+                        alert('Erreur : aucun lead créé. Veuillez recommencer.');
+                        return;
+                      }
+                      const emailTrimmed = formState.email.trim();
+                      if (!emailTrimmed || !emailTrimmed.includes('@') || !emailTrimmed.includes('.')) {
+                        alert('Veuillez renseigner une adresse email valide.');
+                        return;
+                      }
+                      try {
+                        setIsSaving(true);
+                        setConfirmationError(null);
+                        await updateLead(formState.leadId, {
+                          email: emailTrimmed.toLowerCase(),
+                        });
+                        await requestLeadConfirmation(formState.leadId);
+                        setConfirmationEmail(emailTrimmed.toLowerCase());
+                      } catch (error: any) {
+                        console.error('❌ Erreur mise à jour email / nouvelle confirmation:', error);
+                        setConfirmationError(error?.message || 'Erreur lors de l’envoi de l’email de confirmation. Veuillez réessayer.');
+                        alert('Erreur lors de l’envoi de l’email de confirmation. Vos informations sont sauvegardées, vous pouvez réessayer.');
+                      } finally {
+                        setIsSaving(false);
+                      }
+                    }}
+                    className="w-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-3.5 rounded-xl font-semibold hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                    disabled={isSaving}
+                  >
+                    {isSaving ? 'Envoi…' : 'Mettre à jour / renvoyer l’email'}
+                  </button>
+                </div>
               </div>
 
               {/* Récapitulatif */}
-              <div className="mb-8 p-6 bg-white/10 border border-white/20 rounded-xl">
-                <h3 className="font-bold mb-4 text-white flex items-center justify-between">
-                  📋 Récapitulatif de votre demande
+              <div className="mb-8 p-6 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl">
+                <h3 className="font-bold mb-4 text-[#04163a] flex items-center justify-between">
+                  Récapitulatif de votre demande
                   <button 
                     onClick={() => goToStep(2)} 
-                    className="text-sm text-brand-secondary hover:underline font-normal"
+                    className="text-sm text-[#6BCFCF] hover:underline font-normal"
                   >
                     Modifier
                   </button>
                 </h3>
-                <p className="text-white/90 text-base leading-relaxed">
-                  Vous déménagez un <span className="font-bold text-white">{formState.housingType.toUpperCase()} de {formState.surfaceM2} m²</span> ({formState.density === 'light' ? 'sobre' : formState.density === 'normal' ? 'normalement meublé' : 'densément meublé'})
-                  {' '}de <span className="font-bold text-white">{formState.originAddress || '[Point de départ]'}</span>
-                  {' '}à <span className="font-bold text-white">{formState.destinationAddress || '[Point d\'arrivée]'}</span>
+                <p className="text-[#04163a] text-base leading-relaxed">
+                  Vous déménagez un <span className="font-bold">{formState.housingType.toUpperCase()} de {formState.surfaceM2} m²</span> ({formState.density === 'light' ? 'sobre' : formState.density === 'normal' ? 'normalement meublé' : 'densément meublé'})
+                  {' '}de <span className="font-bold">{formState.originAddress || '[Point de départ]'}</span>
+                  {' '}à <span className="font-bold">{formState.destinationAddress || '[Point d\'arrivée]'}</span>
                   {formState.movingDate && (
                     <>
-                      {' '}le <span className="font-bold text-white">{new Date(formState.movingDate).toLocaleDateString('fr-FR')}</span>
+                      {' '}le <span className="font-bold">{new Date(formState.movingDate).toLocaleDateString('fr-FR')}</span>
                       {formState.dateFlexible && formState.movingDateEnd && (
-                        <> au <span className="font-bold text-white">{new Date(formState.movingDateEnd).toLocaleDateString('fr-FR')}</span></>
+                        <> au <span className="font-bold">{new Date(formState.movingDateEnd).toLocaleDateString('fr-FR')}</span></>
                       )}
                     </>
                   )}.
                 </p>
-                <div className="mt-4 pt-4 border-t border-white/20">
-                  <p className="text-white/90">
-                    Vous souhaitez un accompagnement <span className="font-bold text-brand-secondary">{formState.formule}</span>
+                <div className="mt-4 pt-4 border-t border-[#E3E5E8]">
+                  <p className="text-[#04163a]">
+                    Vous souhaitez un accompagnement <span className="font-bold text-[#6BCFCF]">{formState.formule}</span>
                   </p>
                 </div>
               </div>
 
               {/* Ce qui va se passer */}
-              <div className="mb-8 p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-brand-secondary/30 rounded-xl">
-                <h3 className="text-xl font-bold mb-6 text-white flex items-center gap-2">
-                  🚀 Voici ce qui va se passer maintenant
+              <div className="mb-8 p-6 bg-gradient-to-br from-[#6BCFCF]/5 to-[#4FB8B8]/5 border border-[#6BCFCF]/20 rounded-2xl">
+                <h3 className="text-xl font-bold mb-6 text-[#04163a] flex items-center gap-2">
+                  Voici ce qui va se passer maintenant
                 </h3>
                 <ol className="space-y-5">
                   {[
@@ -1469,35 +1496,43 @@ export default function InventaireIAPage() {
                     },
                   ].map((step) => (
                     <li key={step.num} className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-10 h-10 bg-brand-secondary text-white rounded-full flex items-center justify-center font-bold text-lg">
+                      <div className="flex-shrink-0 w-10 h-10 bg-[#6BCFCF] text-white rounded-full flex items-center justify-center font-bold text-lg">
                         {step.num}
                       </div>
                       <div>
-                        <h4 className="font-bold text-white mb-1">{step.title}</h4>
-                        <p className="text-sm text-white/80">{step.desc}</p>
+                        <h4 className="font-bold text-[#04163a] mb-1">{step.title}</h4>
+                        <p className="text-sm text-[#4b5c6b]">{step.desc}</p>
                       </div>
                     </li>
                   ))}
                 </ol>
 
                 {/* Garanties */}
-                <div className="mt-6 pt-6 border-t border-white/20">
-                  <h4 className="font-bold mb-3 text-white">✅ Nos garanties</h4>
-                  <div className="grid grid-cols-2 gap-3 text-sm text-white/90">
+                <div className="mt-6 pt-6 border-t border-[#6BCFCF]/20">
+                  <h4 className="font-bold mb-3 text-[#04163a]">Nos garanties</h4>
+                  <div className="grid grid-cols-2 gap-3 text-sm text-[#04163a]">
                     <div className="flex items-center gap-2">
-                      <span className="text-green-400">✓</span>
+                      <svg className="w-5 h-5 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
                       100% gratuit, sans engagement
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-green-400">✓</span>
+                      <svg className="w-5 h-5 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
                       Déménageurs vérifiés
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-green-400">✓</span>
+                      <svg className="w-5 h-5 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
                       Aucun harcèlement
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-green-400">✓</span>
+                      <svg className="w-5 h-5 text-[#6BCFCF]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
                       Données confidentielles (RGPD)
                     </div>
                   </div>
@@ -1508,24 +1543,27 @@ export default function InventaireIAPage() {
               <div className="flex gap-4">
                 <button
                   onClick={() => goToStep(3)}
-                  className="flex-1 bg-white/10 border border-white/20 text-white py-3 rounded-lg font-medium hover:bg-white/20 transition"
+                  className="flex-1 bg-white border-2 border-[#E3E5E8] text-[#04163a] py-3 rounded-xl font-medium hover:border-[#6BCFCF] hover:text-[#6BCFCF] transition-all duration-300"
                 >
                   ← Retour
                 </button>
                 <button
                   onClick={handleSubmit}
                   disabled={isSaving}
-                  className="flex-1 bg-green-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition flex items-center justify-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed shadow-lg"
+                  className="group relative flex-1 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-5 rounded-xl font-bold text-lg overflow-hidden hover:shadow-[0_0_0_6px_rgba(107,207,207,0.2),0_12px_40px_rgba(107,207,207,0.5)] transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSaving ? (
-                    <>
-                      <span className="animate-spin">⏳</span> Envoi en cours...
-                    </>
-                  ) : (
-                    <>
-                      🚀 Obtenir mes devis gratuits
-                    </>
-                  )}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <span className="relative flex items-center gap-2">
+                    {isSaving ? (
+                      <>
+                        <span className="animate-spin">⏳</span> Envoi en cours...
+                      </>
+                    ) : (
+                      <>
+                        Obtenir mes devis gratuits
+                      </>
+                    )}
+                  </span>
                 </button>
               </div>
             </div>

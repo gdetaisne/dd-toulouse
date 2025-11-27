@@ -9,14 +9,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = (() => {
   const city = getCityDataFromUrl(env.SITE_URL);
   return {
-    title: `Services Déménagement ${city.nameCapitalized} — 3 Formules`,
-    description: `Découvrez nos formules de déménagement à ${city.nameCapitalized} : Économique, Standard, Premium. Estimation IA gratuite, devis personnalisés sous 7j. Comparaison transparente.`,
+    title: `Services Déménagement ${city.nameCapitalized} | 280-1200€ | 3 Formules`,
+    description: `Économique (280€), Standard (600€), Premium (1200€) à ${city.nameCapitalized}. Devis comparables en 48h. Déménageurs contrôlés. 0 spam. 100% gratuit.`,
     alternates: {
       canonical: getCanonicalUrl('services'),
     },
     openGraph: {
-      title: `Services Déménagement ${city.nameCapitalized}`,
-      description: "Formules adaptées à tous les budgets. Estimation IA gratuite.",
+      title: `Services Déménagement ${city.nameCapitalized} | 280-1200€ | 3 Formules`,
+      description: `Économique (280€), Standard (600€), Premium (1200€). Devis 48h. Contrôlés. Gratuit.`,
       url: getCanonicalUrl('services'),
       type: 'website',
     },

@@ -7,13 +7,13 @@ import { getCanonicalUrl } from '@/lib/canonical-helper';
 import { getCityDataFromUrl } from '@/lib/cityData';
 import { env } from '@/lib/env';
 
-const city = getCityDataFromUrl(env.SITE_URL);
-
 interface CategoryPageProps {
   params: {
     category: string;
   };
 }
+
+const city = getCityDataFromUrl(env.SITE_URL);
 
 // Category labels mapping
 const categoryLabels: { [key: string]: string } = {
@@ -67,12 +67,12 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
 export default function CategoryPage({ params }: CategoryPageProps) {
   const categoryMapping: { [key: string]: string[] } = {
-    'piano': [`demenagement-piano-${city.slug}`],
-    'garde-meuble': [`garde-meuble-${city.slug}-guide-complet`],
-    'international': [`demenagement-international-${city.slug}`],
-    'entreprise': [`demenagement-d-entreprise-${city.slug}`],
-    'prix': [`prix-demenagement-${city.slug}`],
-    'pas-cher': [`demenagement-${city.slug}-pas-cher`],
+    'piano': ['demenagement-piano-lille'],
+    'garde-meuble': ['garde-meuble-lille-guide-complet'],
+    'international': ['demenagement-international-lille'],
+    'entreprise': ['demenagement-d-entreprise-lille'],
+    'prix': ['prix-demenagement-lille'],
+    'pas-cher': ['demenagement-lille-pas-cher'],
     'urgent': [], 'etudiant': [], 'devis': [], 'longue-distance': [],
   };
   const allPosts = getAllBlogPosts();
@@ -92,34 +92,15 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   
   const categoryLabel = categoryLabels[params.category] || params.category;
   const categoryDescription = categoryDescriptions[params.category] || `Découvrez tous nos articles sur ${categoryLabel.toLowerCase()}.`;
-  
-  // Images Unsplash par catégorie (libre de droits)
-  const categoryImages: { [key: string]: string } = {
-    'etudiant': 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80', // Étudiants avec cartons
-    'entreprise': 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80', // Bureau moderne
-    'prix': 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80', // Calculatrice et budget
-    'devis': 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80', // Documents et planification
-    'pas-cher': 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80', // Tirelire économies
-    'urgent': 'https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&q=80', // Montre urgence
-    'longue-distance': 'https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=800&q=80', // Route longue distance
-    'garde-meuble': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', // Entrepôt stockage
-    'international': 'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=800&q=80', // Globe terrestre
-    'piano': 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=80', // Piano
-  };
-  
-  const categoryImage = categoryImages[params.category] || 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80';
 
   return (
     <main className="bg-hero min-h-screen">
       <div className="halo" />
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#04163a] via-[#2b7a78] to-[#6bcfcf] text-white">
-        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="text-center">
+      {/* Hero - Fond sombre */}
+      <section className="section section-contrast relative overflow-hidden">
+        <div className="container relative">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
             <Breadcrumbs 
               items={[
                 { label: "Accueil", href: "/" },
@@ -127,101 +108,109 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                 { label: categoryLabel, href: `/blog/${params.category}` }
               ]}
             />
-            <h1 className="mt-6 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">
+            
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-[#6BCFCF]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#6BCFCF] animate-pulse" />
+              Blog
+            </div>
+
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-white leading-tight">
               {categoryLabel}
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed font-light">
               {categoryDescription}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Guide Pilier - Bannière */}
+      {/* Guide Pilier - Fond clair */}
       {pilierPosts.length > 0 && (
-        <section className="section pb-8">
+        <section className="section section-light">
           <div className="container">
+            <div className="mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#04163a] mb-4">
+                Guide complet
+              </h2>
+              <p className="text-[#4b5c6b] max-w-2xl">
+                Notre guide détaillé pour tout comprendre
+              </p>
+            </div>
             {pilierPosts.map((post) => (
               <Link 
                 key={post.slug} 
                 href={`/blog/${post.cleanCategory}/${post.cleanSlug}`}
                 className="group block"
               >
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2b7a78] via-[#6bcfcf] to-[#2b7a78] p-1">
-                  {/* Effet de brillance au hover */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                  
-                  <div className="relative bg-[#04163a] rounded-3xl overflow-hidden">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-[#6bcfcf]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#2b7a78]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-                    
-                    <div className="relative grid md:grid-cols-2 gap-8 p-8 md:p-12">
-                      {/* Contenu texte */}
-                      <div className="flex flex-col justify-center space-y-6">
-                        <div className="flex items-center gap-3">
-                          <div className="text-4xl">📚</div>
-                          <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-[#6bcfcf] text-[#04163a]">
-                            Guide Complet
-                          </span>
+                <div className="bg-white border border-[#E3E5E8] rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-lg hover:border-[#6BCFCF]/30 transition-all duration-300">
+                  <div className="grid md:grid-cols-[2fr_1fr] gap-8">
+                    {/* Contenu texte */}
+                    <div className="flex flex-col justify-center space-y-6">
+                      <div className="flex items-center gap-3">
+                        <svg className="w-8 h-8 text-[#6BCFCF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-[#6bcfcf]/10 text-[#04163a] border border-[#6bcfcf]/20">
+                          Guide Complet
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-2xl md:text-3xl font-bold text-[#04163a] leading-tight group-hover:text-[#6bcfcf] transition-colors">
+                        {post.title}
+                      </h3>
+                      
+                      <p className="text-lg text-[#4b5c6b] leading-relaxed">
+                        {post.meta_description}
+                      </p>
+                      
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-[#4b5c6b]">
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[#6BCFCF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                          <span>{post.word_count} mots</span>
                         </div>
-                        
-                        <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight group-hover:text-[#6bcfcf] transition-colors">
-                          {post.title}
-                        </h2>
-                        
-                        <p className="text-lg text-white/80 leading-relaxed">
-                          {post.meta_description}
-                        </p>
-                        
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
-                          <div className="flex items-center gap-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                            </svg>
-                            <span>{post.word_count} mots</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <span>{new Date(post.publish_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                          </div>
+                        <span className="text-[#E3E5E8]">·</span>
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[#6BCFCF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span>{Math.ceil(post.word_count / 200)} min de lecture</span>
                         </div>
-                        
-                        <div className="pt-4">
-                          <span className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#6bcfcf] text-[#04163a] font-semibold group-hover:bg-white transition-colors">
-                            Lire le guide complet
-                            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                          </span>
+                        <span className="text-[#E3E5E8]">·</span>
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-[#6BCFCF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <span>{new Date(post.publish_date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                         </div>
                       </div>
                       
-                      {/* Image et Stats */}
-                      <div className="hidden md:flex flex-col justify-center space-y-4">
-                        <div className="relative rounded-2xl overflow-hidden group/img">
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#04163a] via-transparent to-transparent z-10"></div>
-                          <img 
-                            src={categoryImage} 
-                            alt={categoryLabel}
-                            className="w-full h-64 object-cover group-hover/img:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute bottom-4 left-4 right-4 z-20 grid grid-cols-3 gap-2">
-                            <div className="bg-[#04163a]/90 backdrop-blur-sm rounded-lg p-3 text-center border border-[#6bcfcf]/30">
-                              <div className="text-lg font-bold text-[#6bcfcf]">100%</div>
-                              <div className="text-xs text-white/80">Complet</div>
-                            </div>
-                            <div className="bg-[#04163a]/90 backdrop-blur-sm rounded-lg p-3 text-center border border-[#6bcfcf]/30">
-                              <div className="text-lg font-bold text-[#6bcfcf]">{Math.ceil(post.word_count / 200)}'</div>
-                              <div className="text-xs text-white/80">Lecture</div>
-                            </div>
-                            <div className="bg-[#04163a]/90 backdrop-blur-sm rounded-lg p-3 text-center border border-[#6bcfcf]/30">
-                              <div className="text-lg font-bold text-[#6bcfcf]">{Math.floor(post.word_count / 1000)}k</div>
-                              <div className="text-xs text-white/80">Mots</div>
-                            </div>
-                          </div>
+                      <div className="pt-4">
+                        <span className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] font-semibold group-hover:shadow-lg transition-all duration-300">
+                          Lire le guide complet
+                          <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Stats */}
+                    <div className="hidden md:flex flex-col justify-center space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl p-4 text-center">
+                          <div className="text-3xl font-bold text-[#6bcfcf] mb-1">100%</div>
+                          <div className="text-xs text-[#4b5c6b] font-medium">Complet</div>
                         </div>
+                        <div className="bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl p-4 text-center">
+                          <div className="text-3xl font-bold text-[#6bcfcf] mb-1">{Math.ceil(post.word_count / 200)}'</div>
+                          <div className="text-xs text-[#4b5c6b] font-medium">Lecture</div>
+                        </div>
+                      </div>
+                      <div className="bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl p-4 text-center">
+                        <div className="text-3xl font-bold text-[#6bcfcf] mb-1">{Math.floor(post.word_count / 1000)}k</div>
+                        <div className="text-xs text-[#4b5c6b] font-medium">Mots</div>
                       </div>
                     </div>
                   </div>
@@ -232,15 +221,15 @@ export default function CategoryPage({ params }: CategoryPageProps) {
         </section>
       )}
 
-      {/* Articles Satellites */}
+      {/* Articles Satellites - Fond sombre */}
       {satellitePosts.length > 0 && (
-        <section className="section pt-8">
+        <section className="section section-contrast">
           <div className="container">
-            <div className="mb-10">
-              <h2 className="text-3xl font-bold text-white mb-3">
+            <div className="mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Conseils et Astuces
               </h2>
-              <p className="text-white/60 max-w-3xl">
+              <p className="text-white/80 max-w-2xl">
                 Découvrez nos articles détaillés pour approfondir vos connaissances
               </p>
             </div>
@@ -251,23 +240,34 @@ export default function CategoryPage({ params }: CategoryPageProps) {
                   href={`/blog/${post.cleanCategory}/${post.cleanSlug}`}
                   className="group"
                 >
-                  <article className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden h-full">
+                  <article className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300 overflow-hidden h-full">
                     <div className="p-6 h-full flex flex-col">
-                      <div className="mb-3">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-[#2b7a78] text-white">
-                          📝 Article - {post.word_count} mots
+                      <div className="mb-4">
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20">
+                          <svg className="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          {post.word_count} mots
                         </span>
                       </div>
-                      <h3 className="text-lg font-semibold text-white group-hover:text-[#6bcfcf] transition-colors mb-3 flex-grow">
+                      <h3 className="text-lg font-bold text-white group-hover:text-[#6bcfcf] transition-colors mb-3 flex-grow">
                         {post.title}
                       </h3>
-                      <p className="text-white/80 text-sm mb-4 line-clamp-3">
+                      <p className="text-white/70 text-sm mb-4 line-clamp-3 leading-relaxed">
                         {post.meta_description}
                       </p>
-                      <div className="flex items-center justify-between text-xs text-white/60 mt-auto">
-                        <span>📅 {new Date(post.publish_date).toLocaleDateString('fr-FR')}</span>
-                        <span className="text-[#6bcfcf] group-hover:text-[#2b7a78]">
-                          Lire →
+                      <div className="flex items-center justify-between text-xs text-white/60 mt-auto pt-4 border-t border-white/10">
+                        <span className="flex items-center gap-1.5">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          {new Date(post.publish_date).toLocaleDateString('fr-FR')}
+                        </span>
+                        <span className="text-[#6bcfcf] group-hover:text-white flex items-center gap-1 font-medium">
+                          Lire
+                          <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
                         </span>
                       </div>
                     </div>
@@ -279,22 +279,25 @@ export default function CategoryPage({ params }: CategoryPageProps) {
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="section bg-white/5">
+      {/* CTA final - Fond clair */}
+      <section className="section section-light">
         <div className="container">
-          <div className="bg-gradient-to-r from-[#2b7a78] to-[#6bcfcf] rounded-2xl p-8 md:p-12 text-center text-white">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          <div className="text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#04163a] mb-6">
               Prêt à déménager à {city.nameCapitalized} ?
             </h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Notre équipe de déménageurs professionnels à {city.nameCapitalized} est à votre disposition 
-              pour vous accompagner dans votre projet.
+            <p className="text-[#4b5c6b] mb-8 max-w-2xl mx-auto text-lg">
+              Comparez 5+ devis de déménageurs certifiés sous 7 jours
             </p>
-            <Link 
-              href="/devis-gratuits" 
-              className="inline-flex items-center px-8 py-4 rounded-2xl bg-white text-[#04163a] font-semibold hover:bg-white/90 transition duration-300"
+            <Link
+              href="/devis-gratuits/"
+              className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-gradient-to-r from-[#6BCFCF] via-[#4FB8B8] to-[#3DA5A5] px-8 py-4 text-lg font-semibold text-[#04141f] shadow-[0_8px_30px_rgba(107,207,207,0.35)] hover:shadow-[0_12px_50px_rgba(107,207,207,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
             >
-              Obtenir un devis gratuit
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+              <span className="relative">Obtenez vos devis gratuitement</span>
+              <svg className="relative w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -302,4 +305,3 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     </main>
   );
 }
-

@@ -56,13 +56,6 @@ export default function StructuredData() {
         })),
         priceRange: '€€',
         openingHours: 'Mo-Fr 09:00-18:00',
-        aggregateRating: {
-          "@type": 'AggregateRating',
-          ratingValue: averageRating,
-          reviewCount: 1200,
-          bestRating: 5,
-          worstRating: 1
-        },
         ...(reviews.length
           ? {
               review: reviews.map((review) => ({

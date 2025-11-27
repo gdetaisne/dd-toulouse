@@ -1,16 +1,29 @@
 import type { Metadata } from "next";
-import { getCanonicalAlternates } from "@/lib/canonical-helper";
+import { getCityDataFromUrl } from "@/lib/cityData";
+import { env } from "@/lib/env";
+import { getCanonicalUrl } from "@/lib/canonical-helper";
 
-export const metadata: Metadata = {
-  title: "Devis Gratuits — Estimation Rapide de votre Déménagement",
-  description: "Obtenez 5+ devis gratuits et personnalisés pour votre déménagement. Estimation rapide en 30 minutes, sans engagement.",
-  ...getCanonicalAlternates('devis-gratuits'),
-};
+export const metadata: Metadata = (() => {
+  const city = getCityDataFromUrl(env.SITE_URL);
+  return {
+    title: `Devis Déménagement ${city.nameCapitalized} | 5+ Offres 48h | Gratuit`,
+    description: `280€ minimum. Formulaire 5 min → 5+ devis comparables en 48h à ${city.nameCapitalized}. Dossier anonyme, 0 harcèlement. Déménageurs contrôlés. Gratuit.`,
+    alternates: {
+      canonical: getCanonicalUrl("devis-gratuits"),
+    },
+    openGraph: {
+      title: `Devis Déménagement ${city.nameCapitalized} | 5+ Offres 48h | Gratuit`,
+      description: `280€ min. Formulaire 5 min → 5+ devis 48h. Anonyme, 0 spam. Gratuit.`,
+      url: getCanonicalUrl("devis-gratuits"),
+      type: "website",
+    },
+  };
+})();
 
 export default function DevisGratuitsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <>{children}</>;
 }

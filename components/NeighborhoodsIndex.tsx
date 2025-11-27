@@ -79,10 +79,10 @@ export default function NeighborhoodsIndex() {
           {/* Barre de recherche */}
           <div className="max-w-2xl mx-auto mb-12">
             <div className="relative">
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Rechercher un quartier ou une commune…"
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Rechercher un quartier ou une commune…"
                 className="w-full px-5 py-4 pl-12 rounded-2xl bg-white border border-[#E3E5E8] text-[#04163a] placeholder-[#4b5c6b]/50 focus:outline-none focus:ring-2 focus:ring-[#6bcfcf] focus:border-transparent transition-all shadow-sm"
               />
               <svg 
@@ -104,7 +104,7 @@ export default function NeighborhoodsIndex() {
                 </button>
               )}
             </div>
-          </div>
+        </div>
 
           {/* Quartiers */}
           <div className="mb-16">
@@ -117,14 +117,14 @@ export default function NeighborhoodsIndex() {
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {filteredQuartiers.map((q) => (
+            {filteredQuartiers.map((q) => (
                 <Card 
                   key={q.slug} 
                   href={urlForQuartier(q.slug)} 
                   title={q.title} 
                   subtitle="Prix indicatifs, conseils d'accès, devis comparables" 
                 />
-              ))}
+            ))}
               {filteredQuartiers.length === 0 && (
                 <p className="text-[#4b5c6b] col-span-full text-center py-8">
                   Aucun quartier ne correspond à votre recherche.
@@ -144,14 +144,14 @@ export default function NeighborhoodsIndex() {
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {filteredCommunes.map((c) => (
+            {filteredCommunes.map((c) => (
                 <Card 
                   key={c.slug} 
                   href={urlForCommune(c.slug)} 
                   title={c.title} 
                   subtitle="Fourchettes de prix et devis comparables" 
                 />
-              ))}
+            ))}
               {filteredCommunes.length === 0 && (
                 <p className="text-[#4b5c6b] col-span-full text-center py-8">
                   Aucune commune ne correspond à votre recherche.
@@ -159,8 +159,8 @@ export default function NeighborhoodsIndex() {
               )}
             </div>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
       {/* CTA Final - Fond sombre */}
       <section className="section section-contrast">
