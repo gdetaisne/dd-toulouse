@@ -58,6 +58,13 @@ export default function StructuredData() {
         openingHours: 'Mo-Fr 09:00-18:00',
         ...(reviews.length
           ? {
+              aggregateRating: {
+                "@type": 'AggregateRating',
+                ratingValue: averageRating,
+                reviewCount: reviews.length,
+                bestRating: 5,
+                worstRating: 1
+              },
               review: reviews.map((review) => ({
                 "@type": 'Review',
                 author: {

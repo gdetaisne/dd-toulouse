@@ -531,6 +531,24 @@ function InventaireIAPageInner() {
       const destCityParam = searchParams.get('destCity');
       const movingDateParam = searchParams.get('movingDate');
       const estimatedVolumeParam = searchParams.get('estimatedVolume');
+
+      // Champs "riches" du projet (logements, étages, ascenseur, etc.)
+      const originAddressParam = searchParams.get('originAddress');
+      const originHousingTypeParam = searchParams.get('originHousingType');
+      const originFloorParam = searchParams.get('originFloor');
+      const originElevatorParam = searchParams.get('originElevator');
+      const originFurnitureLiftParam = searchParams.get('originFurnitureLift');
+      const originCarryDistanceParam = searchParams.get('originCarryDistance');
+      const originParkingAuthParam = searchParams.get('originParkingAuth');
+
+      const destAddressParam = searchParams.get('destAddress');
+      const destHousingTypeParam = searchParams.get('destHousingType');
+      const destFloorParam = searchParams.get('destFloor');
+      const destElevatorParam = searchParams.get('destElevator');
+      const destFurnitureLiftParam = searchParams.get('destFurnitureLift');
+      const destCarryDistanceParam = searchParams.get('destCarryDistance');
+      const destParkingAuthParam = searchParams.get('destParkingAuth');
+
       const leadIdFromUrl = searchParams.get('leadId');
 
       // leadId : l'URL est la source de vérité
@@ -582,6 +600,65 @@ function InventaireIAPageInner() {
         const vol = parseFloat(estimatedVolumeParam);
         if (!Number.isNaN(vol) && baseState.surfaceM2 === INITIAL_FORM_STATE.surfaceM2) {
           nextState = { ...nextState, surfaceM2: Math.round(vol) };
+        }
+      }
+
+      // Appliquer les champs détaillés seulement s'ils sont présents
+      if (originAddressParam) {
+        nextState = { ...nextState, originAddress: originAddressParam };
+      }
+      if (originHousingTypeParam) {
+        nextState = { ...nextState, originHousingType: originHousingTypeParam as any };
+      }
+      if (originFloorParam) {
+        const f = parseInt(originFloorParam, 10);
+        if (!Number.isNaN(f)) {
+          nextState = { ...nextState, originFloor: f };
+        }
+      }
+      if (originElevatorParam) {
+        nextState = { ...nextState, originElevator: originElevatorParam as any };
+      }
+      if (originFurnitureLiftParam) {
+        nextState = { ...nextState, originFurnitureLift: originFurnitureLiftParam as any };
+      }
+      if (originCarryDistanceParam) {
+        nextState = { ...nextState, originCarryDistance: originCarryDistanceParam as any };
+      }
+      if (originParkingAuthParam != null) {
+        if (originParkingAuthParam === 'true' || originParkingAuthParam === '1') {
+          nextState = { ...nextState, originParkingAuth: true };
+        } else if (originParkingAuthParam === 'false' || originParkingAuthParam === '0') {
+          nextState = { ...nextState, originParkingAuth: false };
+        }
+      }
+
+      if (destAddressParam) {
+        nextState = { ...nextState, destinationAddress: destAddressParam };
+      }
+      if (destHousingTypeParam) {
+        nextState = { ...nextState, destinationHousingType: destHousingTypeParam as any };
+      }
+      if (destFloorParam) {
+        const f = parseInt(destFloorParam, 10);
+        if (!Number.isNaN(f)) {
+          nextState = { ...nextState, destinationFloor: f };
+        }
+      }
+      if (destElevatorParam) {
+        nextState = { ...nextState, destinationElevator: destElevatorParam as any };
+      }
+      if (destFurnitureLiftParam) {
+        nextState = { ...nextState, destinationFurnitureLift: destFurnitureLiftParam as any };
+      }
+      if (destCarryDistanceParam) {
+        nextState = { ...nextState, destinationCarryDistance: destCarryDistanceParam as any };
+      }
+      if (destParkingAuthParam != null) {
+        if (destParkingAuthParam === 'true' || destParkingAuthParam === '1') {
+          nextState = { ...nextState, destinationParkingAuth: true };
+        } else if (destParkingAuthParam === 'false' || destParkingAuthParam === '0') {
+          nextState = { ...nextState, destinationParkingAuth: false };
         }
       }
 
