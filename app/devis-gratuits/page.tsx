@@ -6,6 +6,7 @@ import { calculatePricing, calculateVolume, formatPrice, calculateDistance } fro
 import { CONSTANTS, type HousingType } from '@/lib/moverz-constants';
 import { createLead, updateLead, requestLeadConfirmation, getSource, mapElevatorToBackend, mapDensityToBackend, mapFurnitureLiftToBackend } from '@/lib/api-client';
 import { FRENCH_POSTCODES } from '@/lib/french-cities';
+import { useSearchParams } from 'next/navigation';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -472,6 +473,8 @@ export default function InventaireIAPage() {
   const [confirmationError, setConfirmationError] = useState<string | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const searchParams = useSearchParams();
+  const hasInitializedFromUrlRef = useRef(false);
 
   const originPostcode = formState.originPostalCode || '';
   const destinationPostcode = formState.destinationPostalCode || '';
@@ -481,35 +484,118 @@ export default function InventaireIAPage() {
   const isDestinationPostcodeValid =
     destinationPostcode.length === 5;
 
-  // Load from localStorage (only once on mount)
+  // Load from localStorage + URL query params (only once on mount)
   useEffect(() => {
-    const saved = localStorage.getItem('moverz_form_state');
-    if (saved) {
-      try {
+    if (hasInitializedFromUrlRef.current) return;
+    hasInitializedFromUrlRef.current = true;
+
+    let baseState: FormState = { ...INITIAL_FORM_STATE };
+    let baseCompletedSteps: number[] = [];
+
+    // 1) Restaurer une éventuelle session locale
+    try {
+      const saved = typeof window !== 'undefined' ? localStorage.getItem('moverz_form_state') : null;
+      if (saved) {
         const parsedRaw = JSON.parse(saved);
-        // Normaliser l'état restauré avec les nouveaux champs (CP/ville, etc.)
         const parsed: FormState = {
           ...INITIAL_FORM_STATE,
           ...parsedRaw,
         };
         // RÈGLE : Ne charger QUE si leadId existe ET step < 4
-        // Si session corrompue (step > 1 sans leadId) → ignorer
         if (parsed.leadId && parsed.currentStep < 4) {
-          setFormState(parsed);
-          setCompletedSteps(parsedRaw.completedSteps || []);
+          baseState = parsed;
+          baseCompletedSteps = parsedRaw.completedSteps || [];
           console.log('📦 Session restaurée:', parsed.leadId);
         } else {
-          // Session invalide → nettoyer
           console.log('🗑️ Session invalide supprimée');
-          localStorage.removeItem('moverz_form_state');
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('moverz_form_state');
+          }
         }
-      } catch (e) {
-        console.error('Error loading form state:', e);
+      }
+    } catch (e) {
+      console.error('Error loading form state:', e);
+      if (typeof window !== 'undefined') {
         localStorage.removeItem('moverz_form_state');
       }
     }
+
+    // 2) Appliquer les query params (prioritaires sur localStorage)
+    try {
+      const emailParam = searchParams.get('email');
+      const firstNameParam = searchParams.get('firstName');
+      const lastNameParam = searchParams.get('lastName');
+      const originPostalParam = searchParams.get('originPostalCode');
+      const originCityParam = searchParams.get('originCity');
+      const destPostalParam = searchParams.get('destPostalCode');
+      const destCityParam = searchParams.get('destCity');
+      const movingDateParam = searchParams.get('movingDate');
+      const estimatedVolumeParam = searchParams.get('estimatedVolume');
+      const leadIdFromUrl = searchParams.get('leadId');
+
+      // leadId : l'URL est la source de vérité
+      if (leadIdFromUrl) {
+        if (baseState.leadId && baseState.leadId !== leadIdFromUrl) {
+          // Nouveau lead → on repart d'un état propre et on nettoie l'ancienne session
+          baseState = { ...INITIAL_FORM_STATE, leadId: leadIdFromUrl };
+          baseCompletedSteps = [];
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('moverz_form_state');
+          }
+        } else {
+          baseState = { ...baseState, leadId: leadIdFromUrl };
+        }
+      }
+
+      let nextState: FormState = {
+        ...baseState,
+      };
+
+      if (emailParam) {
+        nextState = { ...nextState, email: emailParam };
+      }
+
+      if (firstNameParam || lastNameParam) {
+        const combinedName = `${firstNameParam || ''}${lastNameParam ? ` ${lastNameParam}` : ''}`.trim();
+        if (combinedName) {
+          nextState = { ...nextState, contactName: combinedName };
+        }
+      }
+
+      if (originPostalParam) {
+        nextState = { ...nextState, originPostalCode: originPostalParam };
+      }
+      if (originCityParam) {
+        nextState = { ...nextState, originCity: originCityParam };
+      }
+      if (destPostalParam) {
+        nextState = { ...nextState, destinationPostalCode: destPostalParam };
+      }
+      if (destCityParam) {
+        nextState = { ...nextState, destinationCity: destCityParam };
+      }
+      if (movingDateParam) {
+        nextState = { ...nextState, movingDate: movingDateParam };
+      }
+
+      if (estimatedVolumeParam) {
+        const vol = parseFloat(estimatedVolumeParam);
+        if (!Number.isNaN(vol) && baseState.surfaceM2 === INITIAL_FORM_STATE.surfaceM2) {
+          nextState = { ...nextState, surfaceM2: Math.round(vol) };
+        }
+      }
+
+      setFormState(nextState);
+      setCompletedSteps(baseCompletedSteps);
+    } catch (e) {
+      console.error('Error applying query params to form state:', e);
+      // En cas d'erreur, on retombe sur l'état de base (localStorage ou défaut)
+      setFormState(baseState);
+      setCompletedSteps(baseCompletedSteps);
+    }
+
     setIsLoaded(true);
-  }, []);
+  }, [searchParams]);
 
   // Save to localStorage - SEULEMENT quand on passe à l'étape suivante
   useEffect(() => {
