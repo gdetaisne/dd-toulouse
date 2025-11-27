@@ -28,6 +28,18 @@ export default function Header() {
     return getCityData(citySlug);
   }, []);
 
+  // Libellé affiché à côté du logo
+  // Cas spécial : domaine "devis-demenageur-toulousain.fr" → afficher "Toulousain"
+  const cityLabel = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname.toLowerCase();
+      if (hostname.includes('toulousain')) {
+        return 'Toulousain';
+      }
+    }
+    return city.nameCapitalized;
+  }, [city]);
+
   // Construire zonesItems dynamiquement depuis cityData
   const zonesItems = useMemo(() => {
     return [
@@ -97,7 +109,7 @@ export default function Header() {
           <div className="text-white font-semibold tracking-wide text-sm md:text-base leading-tight flex flex-col w-28 md:w-32">
             <span>Devis</span>
             <span>Déménageur</span>
-            <span>{city.nameCapitalized}</span>
+            <span>{cityLabel}</span>
           </div>
         </Link>
 
