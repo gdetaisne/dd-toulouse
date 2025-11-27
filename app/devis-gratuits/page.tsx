@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { Suspense, useState, useEffect, useCallback, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { FormState, INITIAL_FORM_STATE, PricingResult } from '@/lib/form-types';
 import { calculatePricing, calculateVolume, formatPrice, calculateDistance } from '@/lib/pricing';
 import { CONSTANTS, type HousingType } from '@/lib/moverz-constants';
 import { createLead, updateLead, requestLeadConfirmation, getSource, mapElevatorToBackend, mapDensityToBackend, mapFurnitureLiftToBackend } from '@/lib/api-client';
 import { FRENCH_POSTCODES } from '@/lib/french-cities';
-import { useSearchParams } from 'next/navigation';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -464,7 +464,7 @@ function FormuleCard({
   );
 }
 
-export default function InventaireIAPage() {
+function InventaireIAPageInner() {
   const [formState, setFormState] = useState<FormState>(INITIAL_FORM_STATE);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
   const [pricing, setPricing] = useState<PricingResult | null>(null);
@@ -1651,5 +1651,13 @@ export default function InventaireIAPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function InventaireIAPage() {
+  return (
+    <Suspense fallback={null}>
+      <InventaireIAPageInner />
+    </Suspense>
   );
 }
