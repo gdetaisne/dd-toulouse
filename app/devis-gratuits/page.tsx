@@ -49,6 +49,20 @@ function getHousingSurfaceLabel(housingType: string): string {
   return `~${surface}m²`;
 }
 
+// Petit composant d'aide contextuelle (icône + bulle au survol)
+function HelpTooltip({ text }: { text: string }) {
+  return (
+    <span className="relative inline-flex items-center ml-2 group" tabIndex={0}>
+      <span className="w-4 h-4 flex items-center justify-center rounded-full border border-[#E3E5E8] bg-white text-[10px] font-bold text-[#04163a] group-hover:border-[#6BCFCF] group-focus-visible:border-[#6BCFCF]">
+        ?
+      </span>
+      <div className="absolute z-20 hidden group-hover:block group-focus-within:block left-1/2 top-full mt-2 -translate-x-1/2 min-w-[220px] max-w-xs bg-white border border-[#E3E5E8] rounded-xl shadow-lg p-3 text-xs text-[#04163a]">
+        {text}
+      </div>
+    </span>
+  );
+}
+
 // Composant groupant Code postal + Ville + Adresse
 function PostalCityGroup({
   postalCode,
@@ -161,8 +175,9 @@ function PostalCityGroup({
 
       {/* Adresse détaillée (facultative) */}
       <div className="mb-4">
-        <label className="block text-sm font-semibold text-[#04163a] mb-2">
-          Adresse (facultatif)
+        <label className="block text-sm font-semibold text-[#04163a] mb-2 flex items-center">
+          <span>Adresse (facultatif)</span>
+          <HelpTooltip text="Nous n'avons pas besoin de votre adresse exacte pour obtenir des devis. Mais un dossier complet permet aux déménageurs de faire une estimation plus précise. À vous de décider." />
         </label>
         <input
           type="text"
@@ -304,12 +319,14 @@ function Input({
 // Select Component - Stripe-like
 function Select({
   label,
+  help,
   value,
   onChange,
   options,
   required = false,
 }: {
   label: string;
+  help?: string;
   value: string | number;
   onChange: (value: string) => void;
   options: { value: string | number; label: string }[];
@@ -317,9 +334,12 @@ function Select({
 }) {
   return (
     <div className="mb-6">
-      <label className="block text-sm font-semibold text-[#04163a] mb-2">
+      <label className="block text-sm font-semibold text-[#04163a] mb-2 flex items-center">
+        <span>
         {label}
         {required && <span className="text-[#6BCFCF] ml-1">*</span>}
+        </span>
+        {help && <HelpTooltip text={help} />}
       </label>
       <select
         value={value}
@@ -869,6 +889,7 @@ export default function InventaireIAPage() {
 
                     <Select
                       label="Type de logement"
+                      help="T1, T2, T3... correspondent au nombre de pièces principales (hors cuisine, salle de bain). Maison = logement individuel. Choisissez ce qui se rapproche le plus de votre logement."
                       value={formState.originHousingType}
                       onChange={(v) => updateField('originHousingType', v as any)}
                       options={[
@@ -904,6 +925,7 @@ export default function InventaireIAPage() {
                     />
                     <Select
                       label="Ascenseur"
+                      help="Nous devons savoir si le logement est facilement accessible (escaliers, ascenseur, petit ou grand). Cela impacte le temps et le matériel nécessaires."
                       value={formState.originElevator}
                       onChange={(v) => updateField('originElevator', v as any)}
                       options={[
@@ -970,6 +992,7 @@ export default function InventaireIAPage() {
 
                       <Select
                         label="Type de logement"
+                        help="T1, T2, T3... correspondent au nombre de pièces principales (hors cuisine, salle de bain). Maison = logement individuel. Choisissez ce qui se rapproche le plus de votre logement."
                         value={formState.destinationHousingType}
                         onChange={(v) => updateField('destinationHousingType', v as any)}
                         options={[
@@ -1005,6 +1028,7 @@ export default function InventaireIAPage() {
                         />
                         <Select
                           label="Ascenseur"
+                          help="Nous devons savoir si le logement est facilement accessible (escaliers, ascenseur, petit ou grand). Cela impacte le temps et le matériel nécessaires."
                           value={formState.destinationElevator}
                           onChange={(v) => updateField('destinationElevator', v as any)}
                           options={[
@@ -1409,18 +1433,18 @@ export default function InventaireIAPage() {
                     Je n&apos;ai pas reçu le mail de validation
                   </summary>
                   <div className="mt-4 p-4 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl max-w-xl mx-auto">
-                    <p className="text-sm text-[#4b5c6b] mb-3">
+                <p className="text-sm text-[#4b5c6b] mb-3">
                       Vérifiez ou corrigez votre adresse ci-dessous, puis renvoyez le mail de validation.
-                    </p>
+                </p>
                     <div className="grid md:grid-cols-[2fr,1fr] gap-4 items-end">
-                      <Input
-                        label=""
-                        type="email"
-                        value={formState.email}
-                        onChange={(v) => updateField('email', v)}
-                        placeholder="votre@email.com"
-                      />
-                      <button
+                <Input
+                  label=""
+                  type="email"
+                  value={formState.email}
+                  onChange={(v) => updateField('email', v)}
+                  placeholder="votre@email.com"
+                />
+                  <button 
                         type="button"
                         onClick={async () => {
                           if (!formState.leadId) {
@@ -1452,8 +1476,8 @@ export default function InventaireIAPage() {
                         disabled={isSaving}
                       >
                         {isSaving ? 'Envoi…' : 'Renvoyer le mail de validation'}
-                      </button>
-                    </div>
+                  </button>
+                </div>
                   </div>
                 </details>
               </div>
