@@ -444,24 +444,32 @@ export default function InventaireIAPage() {
   const [isLoaded, setIsLoaded] = useState(false);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const originPostcode = formState.originPostalCode || '';
+  const destinationPostcode = formState.destinationPostalCode || '';
+
   const isOriginPostcodeValid =
-    formState.originPostalCode.length === 5 &&
-    !!FRENCH_POSTCODES[formState.originPostalCode];
+    originPostcode.length === 5 &&
+    !!FRENCH_POSTCODES[originPostcode];
   const isDestinationPostcodeValid =
-    formState.destinationPostalCode.length === 5 &&
-    !!FRENCH_POSTCODES[formState.destinationPostalCode];
+    destinationPostcode.length === 5 &&
+    !!FRENCH_POSTCODES[destinationPostcode];
 
   // Load from localStorage (only once on mount)
   useEffect(() => {
     const saved = localStorage.getItem('moverz_form_state');
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
+        const parsedRaw = JSON.parse(saved);
+        // Normaliser l'état restauré avec les nouveaux champs (CP/ville, etc.)
+        const parsed: FormState = {
+          ...INITIAL_FORM_STATE,
+          ...parsedRaw,
+        };
         // RÈGLE : Ne charger QUE si leadId existe ET step < 4
         // Si session corrompue (step > 1 sans leadId) → ignorer
         if (parsed.leadId && parsed.currentStep < 4) {
           setFormState(parsed);
-          setCompletedSteps(parsed.completedSteps || []);
+          setCompletedSteps(parsedRaw.completedSteps || []);
           console.log('📦 Session restaurée:', parsed.leadId);
         } else {
           // Session invalide → nettoyer
