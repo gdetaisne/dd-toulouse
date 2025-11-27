@@ -1397,20 +1397,10 @@ export default function InventaireIAPage() {
                   {confirmationError}
                 </p>
               )}
-
-              {/* CTA principal */}
-              <div className="mt-8 mb-6 flex justify-center">
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  className="group relative w-full md:w-auto px-10 bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-4 rounded-xl font-bold text-lg overflow-hidden hover:shadow-[0_0_0_6px_rgba(107,207,207,0.2),0_12px_40px_rgba(107,207,207,0.5)] transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                  <span className="relative flex items-center gap-2">
-                    ✅ J&apos;ai cliqué sur le lien de validation
-                  </span>
-                </button>
-              </div>
+              <p className="text-center text-sm text-[#4b5c6b] mb-6">
+                Une fois que vous avez cliqué sur le lien dans votre mail, votre demande est validée.
+                Vous pouvez alors fermer cette page.
+              </p>
 
               {/* Lien secondaire : pas de mail reçu */}
               <div className="mb-6 text-center">
