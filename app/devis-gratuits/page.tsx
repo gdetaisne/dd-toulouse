@@ -190,7 +190,7 @@ function Stepper({
     { number: 1, label: 'Contact' },
     { number: 2, label: 'Projet' },
     { number: 3, label: 'Services' },
-    { number: 4, label: 'Récapitulatif' },
+    { number: 4, label: 'Validez votre dossier' },
   ];
 
   return (
@@ -1379,21 +1379,19 @@ export default function InventaireIAPage() {
             </div>
           )}
 
-          {/* ÉTAPE 4 : Récapitulatif & confirmation email */}
+          {/* ÉTAPE 4 : Validation & confirmation email */}
           {formState.currentStep === 4 && (
             <div>
               <h2 className="text-3xl font-bold mb-4 text-center text-[#04163a]">
-                Confirmez votre email pour valider votre demande
+                Validez votre dossier
               </h2>
               <p className="text-center text-[#4b5c6b] mb-2 text-lg">
-                Nous avons bien enregistré toutes les informations de votre déménagement.
-                Pour que nous puissions envoyer votre dossier aux déménageurs, vous devez d'abord confirmer votre adresse email.
+                Un mail de validation vous a été envoyé. Merci de cliquer sur le lien présent dans ce mail pour finaliser votre dossier.
               </p>
               {confirmationEmail && (
                 <p className="text-center text-sm text-[#04163a] mb-6">
                   Un email de confirmation vient d'être envoyé à{' '}
-                  <span className="font-bold">{confirmationEmail}</span>. Ouvrez-le et
-                  cliquez sur le bouton de confirmation pour valider définitivement votre demande.
+                  <span className="font-bold">{confirmationEmail}</span>. Ouvrez-le et cliquez sur le lien de validation pour finaliser votre demande.
                 </p>
               )}
               {confirmationError && (
@@ -1406,8 +1404,8 @@ export default function InventaireIAPage() {
               <div className="mb-8 p-6 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl">
                 <h3 className="font-bold mb-3 text-[#04163a]">Vérifiez votre email</h3>
                 <p className="text-sm text-[#4b5c6b] mb-3">
-                    Assurez-vous que votre adresse est correcte : c'est sur cet email que
-                    vous recevrez le lien de confirmation puis vos devis.
+                  Vous n'avez pas reçu le mail ? Vérifiez ou corrigez votre adresse ci-dessous,
+                  puis demandez un nouvel envoi. C'est sur cet email que vous recevrez le lien de confirmation puis vos devis.
                 </p>
                 <div className="grid md:grid-cols-[2fr,1fr] gap-4 items-end">
                 <Input
@@ -1417,7 +1415,7 @@ export default function InventaireIAPage() {
                   onChange={(v) => updateField('email', v)}
                   placeholder="votre@email.com"
                 />
-                  <button
+                  <button 
                     type="button"
                     onClick={async () => {
                       if (!formState.leadId) {
@@ -1448,39 +1446,8 @@ export default function InventaireIAPage() {
                     className="w-full bg-gradient-to-r from-[#6BCFCF] to-[#4FB8B8] text-[#04141f] py-3.5 rounded-xl font-semibold hover:shadow-[0_0_0_4px_rgba(107,207,207,0.15),0_8px_30px_rgba(107,207,207,0.4)] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
                     disabled={isSaving}
                   >
-                    {isSaving ? 'Envoi…' : 'Mettre à jour / renvoyer l’email de confirmation'}
+                    {isSaving ? 'Envoi…' : 'Mettre à jour / renvoyer le mail de validation'}
                   </button>
-                </div>
-              </div>
-
-              {/* Récapitulatif */}
-              <div className="mb-8 p-6 bg-[#F8F9FA] border border-[#E3E5E8] rounded-2xl">
-                <h3 className="font-bold mb-4 text-[#04163a] flex items-center justify-between">
-                  Récapitulatif de votre demande
-                  <button 
-                    onClick={() => goToStep(2)} 
-                    className="text-sm text-[#6BCFCF] hover:underline font-normal"
-                  >
-                    Modifier
-                  </button>
-                </h3>
-                <p className="text-[#04163a] text-base leading-relaxed">
-                  Vous déménagez un <span className="font-bold">{formState.housingType.toUpperCase()} de {formState.surfaceM2} m²</span> ({formState.density === 'light' ? 'sobre' : formState.density === 'normal' ? 'normalement meublé' : 'densément meublé'})
-                  {' '}de <span className="font-bold">{formState.originAddress || '[Point de départ]'}</span>
-                  {' '}à <span className="font-bold">{formState.destinationAddress || '[Point d\'arrivée]'}</span>
-                  {formState.movingDate && (
-                    <>
-                      {' '}le <span className="font-bold">{new Date(formState.movingDate).toLocaleDateString('fr-FR')}</span>
-                      {formState.dateFlexible && formState.movingDateEnd && (
-                        <> au <span className="font-bold">{new Date(formState.movingDateEnd).toLocaleDateString('fr-FR')}</span></>
-                      )}
-                    </>
-                  )}.
-                </p>
-                <div className="mt-4 pt-4 border-t border-[#E3E5E8]">
-                  <p className="text-[#04163a]">
-                    Vous souhaitez un accompagnement <span className="font-bold text-[#6BCFCF]">{formState.formule}</span>
-                  </p>
                 </div>
               </div>
 
@@ -1494,17 +1461,17 @@ export default function InventaireIAPage() {
                     {
                       num: 1,
                       title: 'Confirmez votre adresse email',
-                      desc: "Vous recevez un email de confirmation dans les 2 minutes. Cliquez sur le bouton de validation dans cet email pour que nous puissions lancer l'envoi de vos devis.",
+                      desc: "Vous recevez un email de confirmation dans les 2 minutes. Cliquez sur le lien de validation dans ce mail pour que nous puissions lancer l'envoi de vos devis.",
                     },
                     {
                       num: 2,
                       title: 'Transmission aux déménageurs',
-                      desc: 'Votre demande est envoyée à 3 à 6 déménageurs qualifiés.',
+                      desc: "Nous contactons une dizaine de déménageurs et vous tenons informé de l'évolution de votre dossier à chaque étape. Rassurez-vous, rien à faire de votre côté.",
                     },
                     {
                       num: 3,
                       title: 'Réception des devis',
-                      desc: 'Sous 24 à 48h, vous recevez vos devis détaillés par email.',
+                      desc: 'Dès que nous avons obtenu suffisamment de devis qualifiés, nous vous les présentons dans une grille de lecture simplifiée. Notre objectif : vous proposer entre 3 et 5 devis sous 5 à 7 jours.',
                     },
                     {
                       num: 4,
