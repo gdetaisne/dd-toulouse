@@ -1,0 +1,17 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": ["**/sites/*/", "../*/sites/*"],
+            "message": "❌ Imports cross-ville interdits ! Utiliser les composants locaux."
+          }
+        ]
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+
+/* Marketing theme colors based on the requested palette */
+:root {
+  --brand: 4, 22, 58; /* #04163a */
+  --brand-accent: 43, 122, 120; /* #2b7a78 */
+  --brand-secondary: 107, 207, 207; /* #6bcfcf */
+}
+
+/* Utilities for gradients / halos / glassmorphism */
+.bg-hero { 
+  background: radial-gradient(1200px 600px at 12% -10%, rgba(107,207,207,0.22), transparent), linear-gradient(180deg, #04163a 0%, #0b2e35 55%, #08333b 100%);
+}
+.glow {
+  filter: blur(60px);
+  background: radial-gradient(400px 200px at 80% 20%, rgba(107,207,207,0.25), transparent);
+}
+.card-glass {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base md:text-lg font-semibold tracking-wide shadow-lg transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2;
+  background: #ffffff;
+  color: #04163a;
+}
+.btn-primary:hover { background: rgba(255,255,255,0.9); }
+.btn { @apply inline-flex items-center justify-center rounded-2xl px-5 py-2.5 font-semibold tracking-wide transition; }
+.btn-accent { @apply text-white shadow-lg; background:#2b7a78; }
+.btn-accent:hover { filter: brightness(1.1); }
+.btn-secondary { @apply text-white/95 border; border-color: rgba(255,255,255,0.3); }
+.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+.btn-ghost { @apply text-white/90; }
+.btn-sm { @apply px-4 py-2 text-sm; }
+.btn-lg { @apply px-7 py-3.5 text-lg; }
+.btn-secondary {
+  @apply inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base md:text-lg font-semibold tracking-wide text-white/95 border transition duration-300;
+  border-color: rgba(255,255,255,0.3);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+.btn-accent {
+  @apply inline-flex items-center justify-center rounded-2xl px-6 py-3 text-base md:text-lg font-semibold tracking-wide text-white shadow-lg transition duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2;
+  background: #2b7a78;
+}
+.btn-accent:hover { filter: brightness(1.1); }
+
+/* Primary button utility */
+.btn-prime { 
+  background: #2b7a78; 
+  color: #fff; 
+}
+.btn-prime:hover { 
+  filter: brightness(1.05); 
+}
+
+/* Focus ring for accessibility */
+.focus-ring {
+  @apply outline-none ring-2 ring-offset-2 ring-offset-transparent;
+}
+
+@keyframes progress {
+  0% { transform: translateX(-66%); }
+  60% { transform: translateX(0%); }
+  100% { transform: translateX(0%); }
+}
+.animate-spin-slow { animation: spin 6s linear infinite; }
+
+@keyframes badge-pop {
+  0% { transform: translateY(8px) scale(0.96); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.animate-badge-pop { animation: badge-pop 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both; }
+
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.9; }
+}
+.animate-soft-pulse {
+  animation: soft-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes fade-up-soft {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up-soft {
+  animation: fade-up-soft 0.35s ease-out both;
+}
+
+/* Section spacing */
+.section {
+  @apply py-16 md:py-24;
+}
+
+.section-light {
+  @apply py-16 md:py-24;
+  background: linear-gradient(180deg, #f6fbfb 0%, #ffffff 100%);
+  color: #04163a;
+}
+
+.section-gray {
+  @apply py-16 md:py-24;
+  background: #eef3f4;
+  color: #04163a;
+}
+
+.section-contrast {
+  @apply py-16 md:py-24;
+  background: linear-gradient(160deg, #04163a 0%, #072d47 55%, #093b4b 100%);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 0 rgba(255,255,255,0.03);
+}
+
+.bg-texture {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0);
+  background-size: 30px 30px;
+}
+
+/* Container utility */
+.container {
+  @apply max-w-7xl mx-auto px-4 md:px-6;
+}
+
+
