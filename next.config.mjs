@@ -46,6 +46,10 @@ const nextConfig = {
   // Redirections 404
   async redirects() {
     const existing = [
+      // VAGUE 2 – Migration homepage domaine → page ville moverz.fr
+      { source: '/', destination: 'https://moverz.fr/demenagement/toulouse/', permanent: true },
+
+      // Redirections historiques
       // Fichiers BATCH/PILIER/PLACEHOLDER supprimés (cache Google)
       { source: '/blog/satellites/article-satellite-:number-placeholder', destination: '/blog', permanent: true },
       { source: '/blog/satellites/BATCH-:path*', destination: '/blog', permanent: true },
