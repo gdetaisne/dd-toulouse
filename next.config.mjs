@@ -49,6 +49,12 @@ const nextConfig = {
       // VAGUE 2 – Migration homepage domaine → page ville moverz.fr
       { source: '/', destination: 'https://moverz.fr/demenagement/toulouse/', permanent: true },
 
+      // MIGRATION BLOG → moverz.fr
+      { source: '/blog', destination: 'https://moverz.fr/blog/', permanent: true },
+      { source: '/blog/', destination: 'https://moverz.fr/blog/', permanent: true },
+      // Nouvelle structure /blog/demenagement-toulouse/{slug} → moverz.fr/blog/{slug}
+      { source: '/blog/demenagement-toulouse/:slug*', destination: 'https://moverz.fr/blog/:slug*', permanent: true },
+
       // Redirections historiques
       // Fichiers BATCH/PILIER/PLACEHOLDER supprimés (cache Google)
       { source: '/blog/satellites/article-satellite-:number-placeholder', destination: '/blog', permanent: true },
