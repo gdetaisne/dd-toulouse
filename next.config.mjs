@@ -56,10 +56,10 @@ const nextConfig = {
       { source: '/toulouse-vers-nantes/', destination: 'https://moverz.fr/toulouse-vers-nantes/', permanent: true },
       { source: '/toulouse-vers-paris/', destination: 'https://moverz.fr/toulouse-vers-paris/', permanent: true },
       // Services
-      { source: '/services/', destination: 'https://moverz.fr/services/', permanent: true },
-      { source: '/services/demenagement-economique-toulouse/', destination: 'https://moverz.fr/services/demenagement-economique/', permanent: true },
-      { source: '/services/demenagement-premium-toulouse/', destination: 'https://moverz.fr/services/demenagement-premium/', permanent: true },
-      { source: '/services/demenagement-standard-toulouse/', destination: 'https://moverz.fr/services/demenagement-standard/', permanent: true },
+      { source: '/services/', destination: 'https://moverz.fr/', permanent: true },
+      { source: '/services/demenagement-economique-toulouse/', destination: 'https://moverz.fr/', permanent: true },
+      { source: '/services/demenagement-premium-toulouse/', destination: 'https://moverz.fr/', permanent: true },
+      { source: '/services/demenagement-standard-toulouse/', destination: 'https://moverz.fr/', permanent: true },
       // Pages communes
       { source: '/cgu/', destination: 'https://moverz.fr/cgu/', permanent: true },
       { source: '/cgv/', destination: 'https://moverz.fr/cgv/', permanent: true },
