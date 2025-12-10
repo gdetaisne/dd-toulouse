@@ -2,16 +2,21 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Copie locale du helper de redirections blog -> moverz.fr
-// pour que le site Lyon (repo isolé dd-lyon) puisse fonctionner
-// sans dépendre du monorepo principal.
+// Module utilitaire pour charger les redirections blog -> moverz.fr
+// à partir du CSV scripts/moverz_301_redirects.csv.
 //
-// Voir aussi: scripts/blog-moverz-redirects.mjs dans le monorepo.
+// Utilisation dans un next.config.mjs :
+//   import { getMoverzBlogRedirectsForHost } from '../../scripts/blog-moverz-redirects.mjs';
+//   const HOST = 'devis-demenageur-lyon.fr';
+//   async redirects() {
+//     const existing = [ /* vos redirections actuelles */ ];
+//     const blogToMoverz = getMoverzBlogRedirectsForHost(HOST);
+//     return [...existing, ...blogToMoverz];
+//   }
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CSV local au repo dd-lyon (sites/lyon/scripts/moverz_301_redirects.csv dans le monorepo)
 const CSV_PATH = path.join(__dirname, 'moverz_301_redirects.csv');
 
 // On ne veut activer les 301 que pour les anciens sites historiques,
@@ -43,6 +48,7 @@ function loadRedirectsByHost() {
 
   const [header, ...rows] = lines;
   if (!header.startsWith('old_url,new_url')) {
+    // Format inattendu, on ne fait rien.
     return new Map();
   }
 
@@ -65,12 +71,13 @@ function loadRedirectsByHost() {
 
     if (!ALLOWED_HOSTS.has(host)) continue;
 
+    // Next.js attend un "source" de type chemin, avec slash final si pertinent.
     let sourcePath = pathname;
     if (!sourcePath.endsWith('/')) {
       sourcePath = `${sourcePath}/`;
     }
 
-    const destination = newUrl;
+    const destination = newUrl; // newUrl doit déjà être une URL absolue moverz.fr
 
     if (!map.has(host)) {
       map.set(host, []);
