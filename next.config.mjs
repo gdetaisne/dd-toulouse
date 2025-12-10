@@ -1,4 +1,4 @@
-import { getMoverzBlogRedirectsForHost } from './scripts/blog-moverz-redirects.mjs';
+import { getMoverzBlogRedirectsForHost } from '../../scripts/blog-moverz-redirects.mjs';
 
 const HOST = 'devis-demenageur-toulouse.fr';
 
@@ -39,8 +39,12 @@ const nextConfig = {
   async redirects() {
     const existing = [
       // Homepage → Page ville moverz.fr
+      { source: '/', destination: 'https://moverz.fr/demenagement/toulouse/', permanent: true },
       // Blog hub → moverz.fr
+      { source: '/blog', destination: 'https://moverz.fr/blog/', permanent: true },
+      { source: '/blog/', destination: 'https://moverz.fr/blog/', permanent: true },
       // Blog articles → moverz.fr
+      { source: '/blog/demenagement-toulouse/:slug*', destination: 'https://moverz.fr/blog/:slug*', permanent: true },
       // Quartiers toulouse (6 pages)
       { source: '/toulouse/', destination: 'https://moverz.fr/toulouse/', permanent: true },
       { source: '/toulouse/capitole/', destination: 'https://moverz.fr/toulouse/capitole/', permanent: true },
@@ -49,6 +53,7 @@ const nextConfig = {
       { source: '/toulouse/jean-jaures/', destination: 'https://moverz.fr/toulouse/jean-jaures/', permanent: true },
       { source: '/toulouse/saint-cyprien/', destination: 'https://moverz.fr/toulouse/saint-cyprien/', permanent: true },
       // Hub quartiers toulouse
+      { source: '/quartiers-toulouse/', destination: 'https://moverz.fr/quartiers-toulouse/', permanent: true },
       // Corridors depuis toulouse (5 pages)
       { source: '/toulouse-vers-espagne/', destination: 'https://moverz.fr/toulouse-vers-espagne/', permanent: true },
       { source: '/toulouse-vers-lyon/', destination: 'https://moverz.fr/toulouse-vers-lyon/', permanent: true },
