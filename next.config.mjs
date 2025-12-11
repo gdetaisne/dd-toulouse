@@ -1,4 +1,4 @@
-import { getMoverzBlogRedirectsForHost } from '../../scripts/blog-moverz-redirects.mjs';
+import { getMoverzBlogRedirectsForHost } from './scripts/blog-moverz-redirects.mjs';
 
 const HOST = 'devis-demenageur-toulouse.fr';
 
