@@ -77,7 +77,11 @@ function loadRedirectsByHost() {
       sourcePath = `${sourcePath}/`;
     }
 
-    const destination = newUrl; // newUrl doit déjà être une URL absolue moverz.fr
+    // S'assurer que la destination a aussi un trailing slash (moverz.fr l'exige)
+    let destination = newUrl;
+    if (!destination.endsWith('/')) {
+      destination = `${destination}/`;
+    }
 
     if (!map.has(host)) {
       map.set(host, []);
