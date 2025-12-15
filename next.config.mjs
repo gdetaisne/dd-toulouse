@@ -81,7 +81,35 @@ const nextConfig = {
 
     const blogToMoverz = getMoverzBlogRedirectsForHost(HOST);
 
-    return [...existing, ...blogToMoverz];
+          // Fix liens cassés (trailing slash + cross-city)
+      // Trailing slash: /a-propos
+      { source: '/a-propos', destination: '/a-propos/', permanent: true },
+      // Trailing slash: /pro
+      { source: '/pro', destination: '/pro/', permanent: true },
+      // Trailing slash: /villes
+      { source: '/villes', destination: '/villes/', permanent: true },
+      // Trailing slash: /partenaires
+      { source: '/partenaires', destination: '/partenaires/', permanent: true },
+      // Trailing slash: /devis-gratuits
+      { source: '/devis-gratuits', destination: '/devis-gratuits/', permanent: true },
+      // Trailing slash: /choisir-ville
+      { source: '/choisir-ville', destination: '/choisir-ville/', permanent: true },
+      // Trailing slash: /contact
+      { source: '/contact', destination: '/contact/', permanent: true },
+      { source: '/demenagement/nice', destination: 'https://moverz.fr/demenagement/nice/', permanent: true },
+      { source: '/demenagement/lyon', destination: 'https://moverz.fr/demenagement/lyon/', permanent: true },
+      { source: '/demenagement/marseille', destination: 'https://moverz.fr/demenagement/marseille/', permanent: true },
+      { source: '/demenagement/bordeaux', destination: 'https://moverz.fr/demenagement/bordeaux/', permanent: true },
+      { source: '/demenagement/lille', destination: 'https://moverz.fr/demenagement/lille/', permanent: true },
+      { source: '/demenagement/strasbourg', destination: 'https://moverz.fr/demenagement/strasbourg/', permanent: true },
+      { source: '/demenagement/nantes', destination: 'https://moverz.fr/demenagement/nantes/', permanent: true },
+      { source: '/demenagement/rennes', destination: 'https://moverz.fr/demenagement/rennes/', permanent: true },
+      { source: '/demenagement/rouen', destination: 'https://moverz.fr/demenagement/rouen/', permanent: true },
+      { source: '/demenagement/montpellier', destination: 'https://moverz.fr/demenagement/montpellier/', permanent: true },
+      { source: '/demenagement/paris', destination: 'https://moverz.fr/demenagement/paris/', permanent: true },
+      { source: '/demenagement/grenoble', destination: 'https://moverz.fr/demenagement/grenoble/', permanent: true },
+
+      return [...existing, ...blogToMoverz];
   }
 };
 
