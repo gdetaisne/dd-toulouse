@@ -45,6 +45,20 @@ const nextConfig = {
       { source: '/blog/', destination: 'https://moverz.fr/blog/', permanent: true },
       // Blog articles → moverz.fr
       { source: '/blog/demenagement-toulouse/:slug*', destination: 'https://moverz.fr/blog/:slug*', permanent: true },
+      // Catch-all blog articles (any slug) → moverz.fr
+      { source: '/blog/:slug*', destination: 'https://moverz.fr/blog/:slug*', permanent: true },
+      // Quartiers cross-ville → moverz.fr
+      { source: '/quartiers-nice', destination: 'https://moverz.fr/quartiers-nice/', permanent: true },
+      { source: '/quartiers-lyon', destination: 'https://moverz.fr/quartiers-lyon/', permanent: true },
+      { source: '/quartiers-marseille', destination: 'https://moverz.fr/quartiers-marseille/', permanent: true },
+      { source: '/quartiers-toulouse', destination: 'https://moverz.fr/quartiers-toulouse/', permanent: true },
+      { source: '/quartiers-bordeaux', destination: 'https://moverz.fr/quartiers-bordeaux/', permanent: true },
+      { source: '/quartiers-lille', destination: 'https://moverz.fr/quartiers-lille/', permanent: true },
+      { source: '/quartiers-strasbourg', destination: 'https://moverz.fr/quartiers-strasbourg/', permanent: true },
+      { source: '/quartiers-nantes', destination: 'https://moverz.fr/quartiers-nantes/', permanent: true },
+      { source: '/quartiers-rennes', destination: 'https://moverz.fr/quartiers-rennes/', permanent: true },
+      { source: '/quartiers-rouen', destination: 'https://moverz.fr/quartiers-rouen/', permanent: true },
+      { source: '/quartiers-montpellier', destination: 'https://moverz.fr/quartiers-montpellier/', permanent: true },
       // Quartiers toulouse (6 pages)
       { source: '/toulouse/', destination: 'https://moverz.fr/toulouse/', permanent: true },
       { source: '/toulouse/capitole/', destination: 'https://moverz.fr/toulouse/capitole/', permanent: true },
