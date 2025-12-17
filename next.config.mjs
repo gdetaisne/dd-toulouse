@@ -43,6 +43,30 @@ const nextConfig = {
       // Blog hub → moverz.fr
       { source: '/blog', destination: 'https://moverz.fr/blog/', permanent: true },
       { source: '/blog/', destination: 'https://moverz.fr/blog/', permanent: true },
+      // Corridors (canonique B: paris-vers-<ville>) → moverz.fr
+      { source: '/nice-vers-paris', destination: 'https://moverz.fr/paris-vers-nice/', permanent: true },
+      { source: '/nice-vers-paris/', destination: 'https://moverz.fr/paris-vers-nice/', permanent: true },
+      { source: '/lyon-vers-paris', destination: 'https://moverz.fr/paris-vers-lyon/', permanent: true },
+      { source: '/lyon-vers-paris/', destination: 'https://moverz.fr/paris-vers-lyon/', permanent: true },
+      { source: '/marseille-vers-paris', destination: 'https://moverz.fr/paris-vers-marseille/', permanent: true },
+      { source: '/marseille-vers-paris/', destination: 'https://moverz.fr/paris-vers-marseille/', permanent: true },
+      { source: '/toulouse-vers-paris', destination: 'https://moverz.fr/paris-vers-toulouse/', permanent: true },
+      { source: '/toulouse-vers-paris/', destination: 'https://moverz.fr/paris-vers-toulouse/', permanent: true },
+      { source: '/bordeaux-vers-paris', destination: 'https://moverz.fr/paris-vers-bordeaux/', permanent: true },
+      { source: '/bordeaux-vers-paris/', destination: 'https://moverz.fr/paris-vers-bordeaux/', permanent: true },
+      { source: '/lille-vers-paris', destination: 'https://moverz.fr/paris-vers-lille/', permanent: true },
+      { source: '/lille-vers-paris/', destination: 'https://moverz.fr/paris-vers-lille/', permanent: true },
+      { source: '/strasbourg-vers-paris', destination: 'https://moverz.fr/paris-vers-strasbourg/', permanent: true },
+      { source: '/strasbourg-vers-paris/', destination: 'https://moverz.fr/paris-vers-strasbourg/', permanent: true },
+      { source: '/nantes-vers-paris', destination: 'https://moverz.fr/paris-vers-nantes/', permanent: true },
+      { source: '/nantes-vers-paris/', destination: 'https://moverz.fr/paris-vers-nantes/', permanent: true },
+      { source: '/rennes-vers-paris', destination: 'https://moverz.fr/paris-vers-rennes/', permanent: true },
+      { source: '/rennes-vers-paris/', destination: 'https://moverz.fr/paris-vers-rennes/', permanent: true },
+      { source: '/rouen-vers-paris', destination: 'https://moverz.fr/paris-vers-rouen/', permanent: true },
+      { source: '/rouen-vers-paris/', destination: 'https://moverz.fr/paris-vers-rouen/', permanent: true },
+      { source: '/montpellier-vers-paris', destination: 'https://moverz.fr/paris-vers-montpellier/', permanent: true },
+      { source: '/montpellier-vers-paris/', destination: 'https://moverz.fr/paris-vers-montpellier/', permanent: true },
+
       // Blog articles → moverz.fr
       { source: '/blog/demenagement-toulouse/:slug*', destination: 'https://moverz.fr/blog/:slug*', permanent: true },
       // Anciens formats d'URL (legacy)
