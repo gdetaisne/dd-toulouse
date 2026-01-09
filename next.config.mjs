@@ -43,6 +43,11 @@ const nextConfig = {
       // Blog hub → moverz.fr
       { source: '/blog', destination: 'https://moverz.fr/blog/', permanent: true },
       { source: '/blog/', destination: 'https://moverz.fr/blog/', permanent: true },
+      // Catch families that generate most 404s on legacy sites (keep blog rules above)
+      { source: '/demenagement/:path*', destination: 'https://moverz.fr/demenagement/:path*', permanent: true },
+      { source: '/corridor/:path*', destination: 'https://moverz.fr/corridor/:path*', permanent: true },
+      { source: '/pourquoi-moverz', destination: 'https://moverz.fr/pourquoi-moverz/', permanent: true },
+      { source: '/pourquoi-moverz/', destination: 'https://moverz.fr/pourquoi-moverz/', permanent: true },
       // Corridors (canonique B: paris-vers-<ville>) → moverz.fr
       // Corridors (CSV 2025-12-17-2) → moverz.fr
       { source: '/bordeaux-vers-lille', destination: 'https://moverz.fr/bordeaux-vers-lille/', permanent: true },
